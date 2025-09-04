@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --brand: #0F3E8C; }
+html, body { min-height: 100%; background: #f7f7f8; color: #0A0A0A; }
+* { box-sizing: border-box; }
+
+.input-base { @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-700; }
+.input-invalid { @apply border-red-500 ring-2 ring-red-500; }
+.btn-primary { @apply rounded-xl bg-primary-700 text-white px-4 py-2 text-sm hover:bg-primary-800 transition-colors; }
+.btn-secondary { @apply rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-50; }
+.card { @apply rounded-2xl border bg-white shadow-card; }
+.progress { @apply h-2 w-full rounded-full bg-gray-200 overflow-hidden; }
+.progress-bar { @apply h-full bg-primary-700 transition-all; }
+.label-invalid { @apply text-red-700; }
+
+.date-wrap { @apply relative; }
+.date-btn { @apply absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-gray-50 border border-gray-200; }
