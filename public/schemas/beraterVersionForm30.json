@@ -8755,967 +8755,861 @@
                       "input": false,
                       "tableView": false
                     },
-                    {
-                      "label": "HYPOTEQ-Formular «Auskunftsermächtigung»",
-                      "tooltip": "Dieses Formular können sie über unsere Webseite unter Downloads > Vollmacht für eine Finanzierungsanfrage finden.",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "Vollmacht_Formular",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Pass, Identitätskarte, Aufenthaltsbewilligung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "Pass_Checkliste",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "EineNaturlicheOderJuristischePerson",
-                            "operator": "isEqual",
-                            "value": "naturlichePerson"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Pass oder Identitätskarte der zeichnungsberechtigten Person",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "passOderIdentitatskarte",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "EineNaturlicheOderJuristischePerson",
-                            "operator": "isEqual",
-                            "value": "juristischePerson"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Handelsregisterauszug (aktuell)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "handelsregisterauszug",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "EineNaturlicheOderJuristischePerson",
-                            "operator": "isEqual",
-                            "value": "juristischePerson"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bei unselbständiger Erwerbstätigkeit: Aktueller Lohnausweis (inkl. Nachweis Bonuszahlungen der letzten 3 Jahre)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "Unselbstandig_Erwerbstatig",
-                      "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.erwerbsart === 'angestellt') ;",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bei selbständiger Erwerbstätigkeit: Bilanz und Erfolgsrechnung (inkl. Revisionsbericht) der letzten 3 Jahre",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "Selbststandig_Checkliste",
-                      "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.erwerbsart === 'selbststandig') ;",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Alimentenbescheinigung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "alimentenbescheinigung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all"
-                      },
-                      "customConditional": "show = (\r\n  (data.income1 && data.income1.some(row =>\r\n    row.artDesSonstigenEinkommens === 'alimente' ||\r\n    row.artDesSonstigenEinkommens1 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens2 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens3 === 'alimente'\r\n  )) ||\r\n  (data.income2 && data.income2.some(row =>\r\n    row.artDesSonstigenEinkommens === 'alimente' ||\r\n    row.artDesSonstigenEinkommens1 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens2 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens3 === 'alimente'\r\n  )) ||\r\n  (data.income3 && data.income3.some(row =>\r\n    row.artDesSonstigenEinkommens === 'alimente' ||\r\n    row.artDesSonstigenEinkommens1 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens2 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens3 === 'alimente'\r\n  )) ||\r\n  (data.income4 && data.income4.some(row =>\r\n    row.artDesSonstigenEinkommens === 'alimente' ||\r\n    row.artDesSonstigenEinkommens1 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens2 === 'alimente' ||\r\n    row.artDesSonstigenEinkommens3 === 'alimente'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Nachweis der Mieteinnahmen",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "NachweisMieteinnahmen",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesSonstigenEinkommens",
-                            "operator": "isEqual",
-                            "value": "mieteinnahmen"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.income1 && data.income1.some(row =>\r\n    row.artDesSonstigenEinkommens === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'mieteinnahmen'\r\n  )) ||\r\n  (data.income2 && data.income2.some(row =>\r\n    row.artDesSonstigenEinkommens === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'mieteinnahmen'\r\n  )) ||\r\n  (data.income3 && data.income3.some(row =>\r\n    row.artDesSonstigenEinkommens === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'mieteinnahmen'\r\n  )) ||\r\n  (data.income4 && data.income4.some(row =>\r\n    row.artDesSonstigenEinkommens === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'mieteinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'mieteinnahmen'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Nachweis der sonstigen Einnahmen",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "NachweisSonstigEinnahmen",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesSonstigenEinkommens",
-                            "operator": "isEqual",
-                            "value": "andereEinnahmen"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.income1 && data.income1.some(row =>\r\n    row.artDesSonstigenEinkommens === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'andereEinnahmen'\r\n  )) ||\r\n  (data.income2 && data.income2.some(row =>\r\n    row.artDesSonstigenEinkommens === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'andereEinnahmen'\r\n  )) ||\r\n  (data.income3 && data.income3.some(row =>\r\n    row.artDesSonstigenEinkommens === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'andereEinnahmen'\r\n  )) ||\r\n  (data.income4 && data.income4.some(row =>\r\n    row.artDesSonstigenEinkommens === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens1 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens2 === 'andereEinnahmen' ||\r\n    row.artDesSonstigenEinkommens3 === 'andereEinnahmen'\r\n  ))\r\n);",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Bankkontoauszug",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerBankkontoauszug",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Bank",
-                            "operator": "isEqual",
-                            "value": "kontoguthaben"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Bank === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank1 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank2 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank3 === 'kontoguthaben'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Bank === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank1 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank2 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank3 === 'kontoguthaben'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Bank === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank1 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank2 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank3 === 'kontoguthaben'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Bank === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank1 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank2 === 'kontoguthaben' ||\r\n    row.artDesVermogens_Bank3 === 'kontoguthaben'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Wertschriften-Depotauszug",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerWertschriftenDepotauszug",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Bank",
-                            "operator": "isEqual",
-                            "value": "wertschriften"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Bank === 'wertschriften' ||\r\n    row.artDesVermogens_Bank1 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank2 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank3 === 'wertschriften'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Bank === 'wertschriften' ||\r\n    row.artDesVermogens_Bank1 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank2 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank3 === 'wertschriften'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Bank === 'wertschriften' ||\r\n    row.artDesVermogens_Bank1 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank2 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank3 === 'wertschriften'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Bank === 'wertschriften' ||\r\n    row.artDesVermogens_Bank1 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank2 === 'wertschriften' ||\r\n    row.artDesVermogens_Bank3 === 'wertschriften'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "3a Kontoauszug",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "AKontoauszug",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Bank",
-                            "operator": "isEqual",
-                            "value": "saule3A"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Bank === 'saule3A' ||\r\n    row.artDesVermogens_Bank1 === 'saule3A' ||\r\n    row.artDesVermogens_Bank2 === 'saule3A' ||\r\n    row.artDesVermogens_Bank3 === 'saule3A'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Bank === 'saule3A' ||\r\n    row.artDesVermogens_Bank1 === 'saule3A' ||\r\n    row.artDesVermogens_Bank2 === 'saule3A' ||\r\n    row.artDesVermogens_Bank3 === 'saule3A'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Bank === 'saule3A' ||\r\n    row.artDesVermogens_Bank1 === 'saule3A' ||\r\n    row.artDesVermogens_Bank2 === 'saule3A' ||\r\n    row.artDesVermogens_Bank3 === 'saule3A'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Bank === 'saule3A' ||\r\n    row.artDesVermogens_Bank1 === 'saule3A' ||\r\n    row.artDesVermogens_Bank2 === 'saule3A' ||\r\n    row.artDesVermogens_Bank3 === 'saule3A'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Saldonachweis des Freizügigkeitsguthabens",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "saldonachweisDesFreizugigkeitsguthabens",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "any",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Bank",
-                            "operator": "isEqual",
-                            "value": "freizugigkeitsgelder"
-                          },
-                          {
-                            "component": "artDesVermogens_Pensionskasse",
-                            "operator": "isEqual",
-                            "value": "freizugigkeitsguthaben"
-                          },
-                          {
-                            "component": "artDesVermogens_Versicherung",
-                            "operator": "isEqual",
-                            "value": "freizugigkeitspolice"
-                          }
-                        ]
-                      },
-                      "customConditional": "function matchesFreizuegigkeit(row) {\r\n  return ['artDesVermogens_Bank', 'artDesVermogens_Bank1', 'artDesVermogens_Bank2', 'artDesVermogens_Bank3'].some(k => row[k] === 'freizugigkeitsgelder') ||\r\n         ['artDesVermogens_Pensionskasse', 'artDesVermogens_Pensionskasse1', 'artDesVermogens_Pensionskasse2', 'artDesVermogens_Pensionskasse3'].some(k => row[k] === 'freizugigkeitsguthaben') ||\r\n         ['artDesVermogens_Versicherung', 'artDesVermogens_Versicherung1', 'artDesVermogens_Versicherung2', 'artDesVermogens_Versicherung3'].some(k => row[k] === 'freizugigkeitspolice');\r\n}\r\n\r\nfunction hasFreizuegigkeitIn(list) {\r\n  return list && list.some(matchesFreizuegigkeit);\r\n}\r\n\r\nshow = hasFreizuegigkeitIn(data.asset) || hasFreizuegigkeitIn(data.asset1) || hasFreizuegigkeitIn(data.asset2) || hasFreizuegigkeitIn(data.asset3);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Rückkaufswert der 3a Versicherung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerRuckkaufswertDer3AVersicherung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Versicherung",
-                            "operator": "isEqual",
-                            "value": "lebensversicherung"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\r\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Pensionskassenausweis für das aktuelle Jahr",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "prnsionskassenausweis",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Pensionskasse",
-                            "operator": "isEqual",
-                            "value": "bvgGuthaben"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\r\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Reservationsvertrag und Bankbeleg der Überweisung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "reservationsvertragUndBankbelegDerUberweisung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "bereitsGetatigteAnzahlung"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Sonstig === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig1 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig2 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig3 === 'bereitsGetatigteAnzahlung'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Sonstig === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig1 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig2 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig3 === 'bereitsGetatigteAnzahlung'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Sonstig === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig1 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig2 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig3 === 'bereitsGetatigteAnzahlung'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Sonstig === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig1 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig2 === 'bereitsGetatigteAnzahlung' ||\r\n    row.artDesVermogens_Sonstig3 === 'bereitsGetatigteAnzahlung'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Schenkungsvertrag",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "schenkungsvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "schenkungFurKaufDerLiegenschaft"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Sonstig === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig1 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig2 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig3 === 'schenkungFurKaufDerLiegenschaft'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Sonstig === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig1 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig2 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig3 === 'schenkungFurKaufDerLiegenschaft'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Sonstig === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig1 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig2 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig3 === 'schenkungFurKaufDerLiegenschaft'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Sonstig === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig1 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig2 === 'schenkungFurKaufDerLiegenschaft' ||\r\n    row.artDesVermogens_Sonstig3 === 'schenkungFurKaufDerLiegenschaft'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Darlehensvertrag",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "darlehensvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "darlehen"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Sonstig === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig1 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig2 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig3 === 'darlehen'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Sonstig === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig1 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig2 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig3 === 'darlehen'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Sonstig === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig1 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig2 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig3 === 'darlehen'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Sonstig === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig1 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig2 === 'darlehen' ||\r\n    row.artDesVermogens_Sonstig3 === 'darlehen'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Erbvorbezugsvereinbarung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "erbvorbezugsvereinbarung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "erbvorbezug"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Sonstig === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig1 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig2 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig3 === 'erbvorbezug'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Sonstig === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig1 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig2 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig3 === 'erbvorbezug'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Sonstig === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig1 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig2 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig3 === 'erbvorbezug'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Sonstig === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig1 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig2 === 'erbvorbezug' ||\r\n    row.artDesVermogens_Sonstig3 === 'erbvorbezug'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Nachweis der Firmenbeteiligung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "nachweisDerFirmenbeteiligung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "firmenbeteiligungen"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Sonstig === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig1 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig2 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig3 === 'firmenbeteiligungen'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Sonstig === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig1 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig2 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig3 === 'firmenbeteiligungen'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Sonstig === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig1 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig2 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig3 === 'firmenbeteiligungen'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Sonstig === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig1 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig2 === 'firmenbeteiligungen' ||\r\n    row.artDesVermogens_Sonstig3 === 'firmenbeteiligungen'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Nachweise für anderes Vermögen",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "nachweiseFurAnderesVermogen",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "anderesVermogen"
-                          }
-                        ]
-                      },
-                      "customConditional": "show = (\r\n  (data.asset && data.asset.some(row =>\r\n    row.artDesVermogens_Sonstig === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig1 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig2 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig3 === 'anderesVermogen'\r\n  )) ||\r\n  (data.asset1 && data.asset1.some(row =>\r\n    row.artDesVermogens_Sonstig === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig1 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig2 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig3 === 'anderesVermogen'\r\n  )) ||\r\n  (data.asset2 && data.asset2.some(row =>\r\n    row.artDesVermogens_Sonstig === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig1 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig2 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig3 === 'anderesVermogen'\r\n  )) ||\r\n  (data.asset3 && data.asset3.some(row =>\r\n    row.artDesVermogens_Sonstig === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig1 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig2 === 'anderesVermogen' ||\r\n    row.artDesVermogens_Sonstig3 === 'anderesVermogen'\r\n  ))\r\n);\r\n",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aufstellung und Nachweis der durchgeführten Renovationsarbeiten",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "DerDurchgefuhrtenRenovationsarbeiten",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "Haus_Saniert_Tabelle",
-                            "operator": "isEqual",
-                            "value": "nettowohnflache"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Mietvertrag",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "mietvertrag1",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "any",
-                        "conditions": [
-                          {
-                            "component": "RBT_Nutzung_der_Immo",
-                            "operator": "isEqual",
-                            "value": "RB_Rendite_Immo"
-                          },
-                          {
-                            "component": "RBT_Nutzung_der_Immo",
-                            "operator": "isEqual",
-                            "value": "RB_Vermietet_TB"
-                          },
-                          {
-                            "component": "RBT_Art_der_Liegenschaft",
-                            "operator": "isEqual",
-                            "value": "RB_Mehrfamilienhaus"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktuellste Steuererklärung (inkl. Schulden-, Wertschriften, Liegenschaftsverzeichnis)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellsteSteuererklarung",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Saldo des Konsumkredit und Kreditvertrag / Leasingvertrag",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerSaldoDesKonsumkreditUndKreditvertragLeasingvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Konsumkredite_Leasing",
-                            "operator": "isEqual",
-                            "value": "RB_Ja_Leasing"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Vorsorgeguthaben (aktueller Pensionskassenausweis und Rückkaufswerte von der 3. Säule)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "vorsorgeguthaben",
-                      "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.vermogenskategorieWahlen === 'vermogenBeiEinerVersicherung') ||\n        (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.vermogenskategorieWahlen === 'guthabenBeiPensionskasse') ;",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Rentenbescheinigung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "rentenbescheinigung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesEinkommens",
-                            "operator": "isEqual",
-                            "value": "renteneinkommen"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Jahresabschlüsse (Bilanzen und Erfolgsrechnungen der letzten 3 Jahre)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "jahresabschlusse",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "any",
-                        "conditions": [
-                          {
-                            "component": "EineNaturlicheOderJuristischePerson",
-                            "operator": "isEqual",
-                            "value": "juristischePerson"
-                          },
-                          {
-                            "component": "erwerbsart",
-                            "operator": "isEqual",
-                            "value": "selbststandig"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Kopie Arbeitsvertrag der neuen Arbeitsstelle",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "kopieArbeitsvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "Bereits_Neuer_Arbeitsvertrag",
-                            "operator": "isEqual",
-                            "value": "ja"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bestehende Finanzierungsangebote",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "bestehendeFinanzierungsangebote",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Finanzierungsangebot",
-                            "operator": "isEqual",
-                            "value": "RB_Ja_FinAngebot"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Verkaufsdokumentation (inkl. Fotos des Innen- und Aussenbereichs)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "verkaufsdokumentation",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bau-/Grundrisspläne inkl. Nettowohnfläche, Raumhöhe, Dachform, Bodenbeläge, Baubeschrieb",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "bauGrundrissplane",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Mieterspiegel inkl. Mietzinsaufstellung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerMieterspiegel",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "any",
-                        "conditions": [
-                          {
-                            "component": "RBT_Nutzung_der_Immo",
-                            "operator": "isEqual",
-                            "value": "RB_Rendite_Immo"
-                          },
-                          {
-                            "component": "RBT_Nutzung_der_Immo",
-                            "operator": "isEqual",
-                            "value": "RB_Vermietet_TB"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Mieterspiegel von zusätzlicher Immobilie",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "mieterspiegelVonZusatzlicherImmobilie",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "Zusatz_Immo_Mietobjekt",
-                            "operator": "isEqual",
-                            "value": "Zusatz_Immo_Mietobjekt_Ja"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Grundbuchauszug (nicht älter als 6 Monate)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerGrundbuchauszug",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktuelle Gebäudeversicherungspolice (inkl. Kubatur in m3)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuelleGebaudeversicherungspolice",
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Aktueller Hypothekenvertrag (bei Ablösung der Hypothek)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "aktuellerHypothekenvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Finanzierung",
-                            "operator": "isEqual",
-                            "value": "RB_Abloesung_Hypo"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Kopie Hypothekarvertrag für zusätzliche Immobilie oder Grundstück",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "kopieHypothekarvertrag1",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "Zusatz_Immo_Bestehende_Hypo",
-                            "operator": "isEqual",
-                            "value": "Zusatz_Immo_Ja"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bei Stockwerkeigentum: Stockwerkeigentum-Begründungsakt mit Wertquotenaufteilung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "StockwerkeigentumBegrundungsakt",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Art_der_Liegenschaft",
-                            "operator": "isEqual",
-                            "value": "RB_Wohnung"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Erbschafts-/Schenkungs-/Darlehensvertrag (falls vorhanden)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "erbschaftsSchenkungsDarlehensvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "any",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "schenkungFurKaufDerLiegenschaft"
-                          },
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "darlehen"
-                          },
-                          {
-                            "component": "artDesVermogens_Sonstig",
-                            "operator": "isEqual",
-                            "value": "erbvorbezug"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Betreibungsregisterauszug",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "betreibungsregisterauszug",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Betreibungen",
-                            "operator": "isEqual",
-                            "value": "RB_Ja_Betreibung"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Reservationszahlung, Kaufvertrag bzw. Kaufvertragsentwurf",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "reservationszahlung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "artDesVermogens_Sonstig1",
-                            "operator": "isEqual",
-                            "value": "bereitsGetatigteAnzahlung"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Baurechtsvertrag (falls Liegenschaft im Baurecht erstellt)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "baurechtsvertrag",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Immo_in_Baurecht",
-                            "operator": "isEqual",
-                            "value": "RB_Ja_Baurecht"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Nachweis Höhe des Baurechtzinses",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "nachweisHoheDesBaurechtzinses",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Immo_in_Baurecht",
-                            "operator": "isEqual",
-                            "value": "RB_Ja_Baurecht"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bei Stockwerkeigentum: Nutzungs- und Verwaltungsreglement der STWE-Gemeinschaft",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "NutzungsUndVerwaltungsreglement",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Art_der_Liegenschaft",
-                            "operator": "isEqual",
-                            "value": "RB_Wohnung"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Bei Stockwerkeigentum: Angaben über den Erneuerungsfonds",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "AngabenUberDenErneuerungsfonds",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Art_der_Liegenschaft",
-                            "operator": "isEqual",
-                            "value": "RB_Wohnung"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Projektplan, Baubeschrieb und Bauhandwerkerverzeichnis ( inkl. Kostenvoranschlag und Kubatur)",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "projektplanBaubeschrieb",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RenovationskostenZuFinanzieren",
-                            "operator": "isEqual",
-                            "value": "ja"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    },
-                    {
-                      "label": "Baubewilligung",
-                      "disabled": true,
-                      "tableView": false,
-                      "defaultValue": false,
-                      "validateWhenHidden": false,
-                      "key": "baubewilligung",
-                      "conditional": {
-                        "show": true,
-                        "conjunction": "all",
-                        "conditions": [
-                          {
-                            "component": "RBT_Neu_Bestehend",
-                            "operator": "isEqual",
-                            "value": "RB_Neubau"
-                          }
-                        ]
-                      },
-                      "type": "checkbox",
-                      "input": true
-                    }
+{
+  "label": "HYPOTEQ-Formular «Auskunftsermächtigung»",
+  "key": "Vollmacht_Check",
+  "type": "checkbox",
+  "input": true
+},
+{
+  "label": "Upload HYPOTEQ-Formular",
+  "key": "Vollmacht_File",
+  "type": "file",
+  "storage": "url",
+  "fileTypes": [],
+  "input": true,
+  "conditional": {
+    "show": true,
+    "when": "Vollmacht_Check",
+    "eq": "true"
+  }
+}
+,
+{
+  "label": "Pass, Identitätskarte, Aufenthaltsbewilligung",
+  "storage": "url",
+  "fileTypes": [],
+  "key": "Pass_Checkliste",
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      {
+        "component": "EineNaturlicheOderJuristischePerson",
+        "operator": "isEqual",
+        "value": "naturlichePerson"
+      }
+    ]
+  },
+  "type": "file",
+  "input": true
+},
+{
+  "label": "Pass oder Identitätskarte der zeichnungsberechtigten Person",
+  "storage": "url",
+  "fileTypes": [],
+  "key": "passOderIdentitatskarte",
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      {
+        "component": "EineNaturlicheOderJuristischePerson",
+        "operator": "isEqual",
+        "value": "juristischePerson"
+      }
+    ]
+  },
+  "type": "file",
+  "input": true
+},
+{
+  "label": "Handelsregisterauszug (aktuell)",
+  "storage": "url",
+  "fileTypes": [],
+  "key": "handelsregisterauszug",
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      {
+        "component": "EineNaturlicheOderJuristischePerson",
+        "operator": "isEqual",
+        "value": "juristischePerson"
+      }
+    ]
+  },
+  "type": "file",
+  "input": true
+},
+{
+  "label": "Bei unselbständiger Erwerbstätigkeit: Aktueller Lohnausweis (inkl. Nachweis Bonuszahlungen der letzten 3 Jahre)",
+  "storage": "url",
+  "fileTypes": [],
+  "key": "Unselbstandig_Erwerbstatig",
+  "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.erwerbsart === 'angestellt');",
+  "type": "file",
+  "input": true
+},
+{
+  "label": "Bei selbständiger Erwerbstätigkeit: Bilanz und Erfolgsrechnung (inkl. Revisionsbericht) der letzten 3 Jahre",
+  "storage": "url",
+  "fileTypes": [],
+  "key": "Selbststandig_Checkliste",
+  "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.erwerbsart === 'selbststandig');",
+  "type": "file",
+  "input": true
+}
+,
+                  {
+  "label": "Bei selbständiger Erwerbstätigkeit: Bilanz und Erfolgsrechnung (inkl. Revisionsbericht) der letzten 3 Jahre",
+  "key": "Selbststandig_Checkliste",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && data.erwerbsart === 'selbststandig');"
+},
+{
+  "label": "Upload Bilanz & Erfolgsrechnung",
+  "key": "Selbststandig_File",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "when": "Selbststandig_Checkliste",
+    "eq": "true"
+  }
+},
+
+{
+  "label": "Alimentenbescheinigung",
+  "key": "alimentenbescheinigung",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = ((data.income1 && data.income1.some(row => row.artDesSonstigenEinkommens === 'alimente' || row.artDesSonstigenEinkommens1 === 'alimente' || row.artDesSonstigenEinkommens2 === 'alimente' || row.artDesSonstigenEinkommens3 === 'alimente')) || (data.income2 && data.income2.some(row => row.artDesSonstigenEinkommens === 'alimente' || row.artDesSonstigenEinkommens1 === 'alimente' || row.artDesSonstigenEinkommens2 === 'alimente' || row.artDesSonstigenEinkommens3 === 'alimente')) || (data.income3 && data.income3.some(row => row.artDesSonstigenEinkommens === 'alimente' || row.artDesSonstigenEinkommens1 === 'alimente' || row.artDesSonstigenEinkommens2 === 'alimente' || row.artDesSonstigenEinkommens3 === 'alimente')) || (data.income4 && data.income4.some(row => row.artDesSonstigenEinkommens === 'alimente' || row.artDesSonstigenEinkommens1 === 'alimente' || row.artDesSonstigenEinkommens2 === 'alimente' || row.artDesSonstigenEinkommens3 === 'alimente')));"
+},
+{
+  "label": "Upload Alimentenbescheinigung",
+  "key": "alimenten_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "alimentenbescheinigung", "eq": "true" }
+},
+
+{
+  "label": "Nachweis der Mieteinnahmen",
+  "key": "NachweisMieteinnahmen",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = ((data.income1 && data.income1.some(row => row.artDesSonstigenEinkommens === 'mieteinnahmen' || row.artDesSonstigenEinkommens1 === 'mieteinnahmen' || row.artDesSonstigenEinkommens2 === 'mieteinnahmen' || row.artDesSonstigenEinkommens3 === 'mieteinnahmen')) || (data.income2 && data.income2.some(row => row.artDesSonstigenEinkommens === 'mieteinnahmen' || row.artDesSonstigenEinkommens1 === 'mieteinnahmen' || row.artDesSonstigenEinkommens2 === 'mieteinnahmen' || row.artDesSonstigenEinkommens3 === 'mieteinnahmen')) || (data.income3 && data.income3.some(row => row.artDesSonstigenEinkommens === 'mieteinnahmen' || row.artDesSonstigenEinkommens1 === 'mieteinnahmen' || row.artDesSonstigenEinkommens2 === 'mieteinnahmen' || row.artDesSonstigenEinkommens3 === 'mieteinnahmen')) || (data.income4 && data.income4.some(row => row.artDesSonstigenEinkommens === 'mieteinnahmen' || row.artDesSonstigenEinkommens1 === 'mieteinnahmen' || row.artDesSonstigenEinkommens2 === 'mieteinnahmen' || row.artDesSonstigenEinkommens3 === 'mieteinnahmen')));"
+},
+{
+  "label": "Upload Nachweis Mieteinnahmen",
+  "key": "miete_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "NachweisMieteinnahmen", "eq": "true" }
+},
+
+{
+  "label": "Nachweis der sonstigen Einnahmen",
+  "key": "NachweisSonstigEinnahmen",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = ((data.income1 && data.income1.some(row => row.artDesSonstigenEinkommens === 'andereEinnahmen' || row.artDesSonstigenEinkommens1 === 'andereEinnahmen' || row.artDesSonstigenEinkommens2 === 'andereEinnahmen' || row.artDesSonstigenEinkommens3 === 'andereEinnahmen')) || (data.income2 && data.income2.some(row => row.artDesSonstigenEinkommens === 'andereEinnahmen' || row.artDesSonstigenEinkommens1 === 'andereEinnahmen' || row.artDesSonstigenEinkommens2 === 'andereEinnahmen' || row.artDesSonstigenEinkommens3 === 'andereEinnahmen')) || (data.income3 && data.income3.some(row => row.artDesSonstigenEinkommens === 'andereEinnahmen' || row.artDesSonstigenEinkommens1 === 'andereEinnahmen' || row.artDesSonstigenEinkommens2 === 'andereEinnahmen' || row.artDesSonstigenEinkommens3 === 'andereEinnahmen')) || (data.income4 && data.income4.some(row => row.artDesSonstigenEinkommens === 'andereEinnahmen' || row.artDesSonstigenEinkommens1 === 'andereEinnahmen' || row.artDesSonstigenEinkommens2 === 'andereEinnahmen' || row.artDesSonstigenEinkommens3 === 'andereEinnahmen')));"
+},
+{
+  "label": "Upload Nachweis sonstige Einnahmen",
+  "key": "sonstig_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "NachweisSonstigEinnahmen", "eq": "true" }
+},
+
+{
+  "label": "Aktueller Bankkontoauszug",
+  "key": "aktuellerBankkontoauszug",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = ((data.asset && data.asset.some(row => row.artDesVermogens_Bank === 'kontoguthaben')));"
+},
+{
+  "label": "Upload Bankkontoauszug",
+  "key": "bank_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellerBankkontoauszug", "eq": "true" }
+},
+
+{
+  "label": "Aktueller Wertschriften-Depotauszug",
+  "key": "aktuellerWertschriftenDepotauszug",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = ((data.asset && data.asset.some(row => row.artDesVermogens_Bank === 'wertschriften')));"
+},
+{
+  "label": "Upload Depotauszug",
+  "key": "depot_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellerWertschriftenDepotauszug", "eq": "true" }
+},
+
+{
+  "label": "3a Kontoauszug",
+  "key": "AKontoauszug",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = ((data.asset && data.asset.some(row => row.artDesVermogens_Bank === 'saule3A')));"
+},
+{
+  "label": "Upload 3a Kontoauszug",
+  "key": "kontoauszug_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "AKontoauszug", "eq": "true" }
+}
+,
+                  [
+  {
+    "label": "Saldonachweis des Freizügigkeitsguthabens",
+    "disabled": true,
+    "tableView": false,
+    "defaultValue": false,
+    "validateWhenHidden": false,
+    "key": "saldonachweisDesFreizugigkeitsguthabens",
+    "conditional": {
+      "show": true,
+      "conjunction": "any",
+      "conditions": [
+        { "component": "artDesVermogens_Bank", "operator": "isEqual", "value": "freizugigkeitsgelder" },
+        { "component": "artDesVermogens_Pensionskasse", "operator": "isEqual", "value": "freizugigkeitsguthaben" },
+        { "component": "artDesVermogens_Versicherung", "operator": "isEqual", "value": "freizugigkeitspolice" }
+      ]
+    },
+    "customConditional": "function matchesFreizuegigkeit(row) {\n  return ['artDesVermogens_Bank', 'artDesVermogens_Bank1', 'artDesVermogens_Bank2', 'artDesVermogens_Bank3'].some(k => row[k] === 'freizugigkeitsgelder') ||\n         ['artDesVermogens_Pensionskasse', 'artDesVermogens_Pensionskasse1', 'artDesVermogens_Pensionskasse2', 'artDesVermogens_Pensionskasse3'].some(k => row[k] === 'freizugigkeitsguthaben') ||\n         ['artDesVermogens_Versicherung', 'artDesVermogens_Versicherung1', 'artDesVermogens_Versicherung2', 'artDesVermogens_Versicherung3'].some(k => row[k] === 'freizugigkeitspolice');\n}\n\nfunction hasFreizuegigkeitIn(list) {\n  return list && list.some(matchesFreizuegigkeit);\n}\n\nshow = hasFreizuegigkeitIn(data.asset) || hasFreizuegigkeitIn(data.asset1) || hasFreizuegigkeitIn(data.asset2) || hasFreizuegigkeitIn(data.asset3);\n",
+    "type": "checkbox",
+    "input": true
+  },
+  {
+    "label": "Upload - Saldonachweis des Freizügigkeitsguthabens",
+    "key": "uploadSaldonachweisDesFreizugigkeitsguthabens",
+    "type": "file",
+    "input": true,
+    "conditional": { "show": true, "when": "saldonachweisDesFreizugigkeitsguthabens", "eq": true }
+  },
+
+  {
+    "label": "Aktueller Rückkaufswert der 3a Versicherung",
+    "disabled": true,
+    "tableView": false,
+    "defaultValue": false,
+    "validateWhenHidden": false,
+    "key": "aktuellerRuckkaufswertDer3AVersicherung",
+    "conditional": {
+      "show": true,
+      "conjunction": "all",
+      "conditions": [
+        { "component": "artDesVermogens_Versicherung", "operator": "isEqual", "value": "lebensversicherung" }
+      ]
+    },
+    "customConditional": "show = (\n  (data.asset && data.asset.some(row =>\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\n  )) ||\n  (data.asset1 && data.asset1.some(row =>\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\n  )) ||\n  (data.asset2 && data.asset2.some(row =>\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\n  )) ||\n  (data.asset3 && data.asset3.some(row =>\n    row.artDesVermogens_Versicherung === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung1 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung2 === 'lebensversicherung' ||\n    row.artDesVermogens_Versicherung3 === 'lebensversicherung'\n  ))\n);\n",
+    "type": "checkbox",
+    "input": true
+  },
+  {
+    "label": "Upload - Aktueller Rückkaufswert der 3a Versicherung",
+    "key": "uploadAktuellerRuckkaufswertDer3AVersicherung",
+    "type": "file",
+    "input": true,
+    "conditional": { "show": true, "when": "aktuellerRuckkaufswertDer3AVersicherung", "eq": true }
+  },
+
+  {
+    "label": "Pensionskassenausweis für das aktuelle Jahr",
+    "disabled": true,
+    "tableView": false,
+    "defaultValue": false,
+    "validateWhenHidden": false,
+    "key": "prnsionskassenausweis",
+    "conditional": {
+      "show": true,
+      "conjunction": "all",
+      "conditions": [
+        { "component": "artDesVermogens_Pensionskasse", "operator": "isEqual", "value": "bvgGuthaben" }
+      ]
+    },
+    "customConditional": "show = (\n  (data.asset && data.asset.some(row =>\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\n  )) ||\n  (data.asset1 && data.asset1.some(row =>\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\n  )) ||\n  (data.asset2 && data.asset2.some(row =>\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\n  )) ||\n  (data.asset3 && data.asset3.some(row =>\n    row.artDesVermogens_Pensionskasse === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse1 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse2 === 'bvgGuthaben' ||\n    row.artDesVermogens_Pensionskasse3 === 'bvgGuthaben'\n  ))\n);\n",
+    "type": "checkbox",
+    "input": true
+  },
+  {
+    "label": "Upload - Pensionskassenausweis für das aktuelle Jahr",
+    "key": "uploadPrnsionskassenausweis",
+    "type": "file",
+    "input": true,
+    "conditional": { "show": true, "when": "prnsionskassenausweis", "eq": true }
+  },
+
+  {
+    "label": "Aufstellung und Nachweis der durchgeführten Renovationsarbeiten",
+    "disabled": true,
+    "tableView": false,
+    "defaultValue": false,
+    "validateWhenHidden": false,
+    "key": "DerDurchgefuhrtenRenovationsarbeiten",
+    "conditional": {
+      "show": true,
+      "conjunction": "all",
+      "conditions": [
+        { "component": "Haus_Saniert_Tabelle", "operator": "isEqual", "value": "nettowohnflache" }
+      ]
+    },
+    "type": "checkbox",
+    "input": true
+  },
+  {
+    "label": "Upload - Aufstellung und Nachweis der durchgeführten Renovationsarbeiten",
+    "key": "uploadDerDurchgefuhrtenRenovationsarbeiten",
+    "type": "file",
+    "input": true,
+    "conditional": { "show": true, "when": "DerDurchgefuhrtenRenovationsarbeiten", "eq": true }
+  }
+]
+,
+                {
+  "label": "Mietvertrag",
+  "key": "mietvertrag1",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "any",
+    "conditions": [
+      { "component": "RBT_Nutzung_der_Immo", "operator": "isEqual", "value": "RB_Rendite_Immo" },
+      { "component": "RBT_Nutzung_der_Immo", "operator": "isEqual", "value": "RB_Vermietet_TB" },
+      { "component": "RBT_Art_der_Liegenschaft", "operator": "isEqual", "value": "RB_Mehrfamilienhaus" }
+    ]
+  }
+},
+{
+  "label": "Upload Mietvertrag",
+  "key": "mietvertrag_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "mietvertrag1", "eq": "true" }
+},
+
+{
+  "label": "Aktuellste Steuererklärung (inkl. Schulden-, Wertschriften, Liegenschaftsverzeichnis)",
+  "key": "aktuellsteSteuererklarung",
+  "type": "checkbox",
+  "input": true
+},
+{
+  "label": "Upload Steuererklärung",
+  "key": "steuererklarung_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellsteSteuererklarung", "eq": "true" }
+},
+
+{
+  "label": "Aktueller Saldo des Konsumkredit und Kreditvertrag / Leasingvertrag",
+  "key": "aktuellerSaldoDesKonsumkreditUndKreditvertragLeasingvertrag",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Konsumkredite_Leasing", "operator": "isEqual", "value": "RB_Ja_Leasing" }
+    ]
+  }
+},
+{
+  "label": "Upload Konsumkredit/Leasing",
+  "key": "leasing_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellerSaldoDesKonsumkreditUndKreditvertragLeasingvertrag", "eq": "true" }
+},
+
+{
+  "label": "Vorsorgeguthaben (aktueller Pensionskassenausweis und Rückkaufswerte von der 3. Säule)",
+  "key": "vorsorgeguthaben",
+  "type": "checkbox",
+  "input": true,
+  "customConditional": "show = (data.EineNaturlicheOderJuristischePerson === 'naturlichePerson' && (data.vermogenskategorieWahlen === 'vermogenBeiEinerVersicherung' || data.vermogenskategorieWahlen === 'guthabenBeiPensionskasse'));"
+},
+{
+  "label": "Upload Vorsorgeguthaben",
+  "key": "vorsorge_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "vorsorgeguthaben", "eq": "true" }
+},
+
+{
+  "label": "Rentenbescheinigung",
+  "key": "rentenbescheinigung",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "artDesEinkommens", "operator": "isEqual", "value": "renteneinkommen" }
+    ]
+  }
+},
+{
+  "label": "Upload Rentenbescheinigung",
+  "key": "rente_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "rentenbescheinigung", "eq": "true" }
+},
+
+{
+  "label": "Jahresabschlüsse (Bilanzen und Erfolgsrechnungen der letzten 3 Jahre)",
+  "key": "jahresabschlusse",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "any",
+    "conditions": [
+      { "component": "EineNaturlicheOderJuristischePerson", "operator": "isEqual", "value": "juristischePerson" },
+      { "component": "erwerbsart", "operator": "isEqual", "value": "selbststandig" }
+    ]
+  }
+},
+{
+  "label": "Upload Jahresabschlüsse",
+  "key": "jahresabschluss_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "jahresabschlusse", "eq": "true" }
+},
+
+{
+  "label": "Kopie Arbeitsvertrag der neuen Arbeitsstelle",
+  "key": "kopieArbeitsvertrag",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "Bereits_Neuer_Arbeitsvertrag", "operator": "isEqual", "value": "ja" }
+    ]
+  }
+},
+{
+  "label": "Upload Arbeitsvertrag",
+  "key": "arbeitsvertrag_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "kopieArbeitsvertrag", "eq": "true" }
+},
+
+{
+  "label": "Bestehende Finanzierungsangebote",
+  "key": "bestehendeFinanzierungsangebote",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Finanzierungsangebot", "operator": "isEqual", "value": "RB_Ja_FinAngebot" }
+    ]
+  }
+},
+{
+  "label": "Upload Finanzierungsangebote",
+  "key": "finanzierungsangebot_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "bestehendeFinanzierungsangebote", "eq": "true" }
+},
+
+{
+  "label": "Verkaufsdokumentation (inkl. Fotos des Innen- und Aussenbereichs)",
+  "key": "verkaufsdokumentation",
+  "type": "checkbox",
+  "input": true
+},
+{
+  "label": "Upload Verkaufsdokumentation",
+  "key": "verkauf_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "verkaufsdokumentation", "eq": "true" }
+},
+
+{
+  "label": "Bau-/Grundrisspläne inkl. Nettowohnfläche, Raumhöhe, Dachform, Bodenbeläge, Baubeschrieb",
+  "key": "bauGrundrissplane",
+  "type": "checkbox",
+  "input": true
+},
+{
+  "label": "Upload Bau-/Grundrisspläne",
+  "key": "baugrundriss_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "bauGrundrissplane", "eq": "true" }
+},
+
+{
+  "label": "Aktueller Mieterspiegel inkl. Mietzinsaufstellung",
+  "key": "aktuellerMieterspiegel",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "any",
+    "conditions": [
+      { "component": "RBT_Nutzung_der_Immo", "operator": "isEqual", "value": "RB_Rendite_Immo" },
+      { "component": "RBT_Nutzung_der_Immo", "operator": "isEqual", "value": "RB_Vermietet_TB" }
+    ]
+  }
+},
+{
+  "label": "Upload Mieterspiegel",
+  "key": "mieterspiegel_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellerMieterspiegel", "eq": "true" }
+}
+,
+                 {
+  "label": "Mieterspiegel von zusätzlicher Immobilie",
+  "key": "mieterspiegelVonZusatzlicherImmobilie",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "Zusatz_Immo_Mietobjekt", "operator": "isEqual", "value": "Zusatz_Immo_Mietobjekt_Ja" }
+    ]
+  }
+},
+{
+  "label": "Upload Mieterspiegel",
+  "key": "mieterspiegelZusatz_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "mieterspiegelVonZusatzlicherImmobilie", "eq": "true" }
+},
+
+{
+  "label": "Aktueller Grundbuchauszug (nicht älter als 6 Monate)",
+  "key": "aktuellerGrundbuchauszug",
+  "type": "checkbox",
+  "input": true
+},
+{
+  "label": "Upload Grundbuchauszug",
+  "key": "grundbuchauszug_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellerGrundbuchauszug", "eq": "true" }
+},
+
+{
+  "label": "Aktuelle Gebäudeversicherungspolice (inkl. Kubatur in m3)",
+  "key": "aktuelleGebaudeversicherungspolice",
+  "type": "checkbox",
+  "input": true
+},
+{
+  "label": "Upload Gebäudeversicherungspolice",
+  "key": "gebaude_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuelleGebaudeversicherungspolice", "eq": "true" }
+},
+
+{
+  "label": "Aktueller Hypothekenvertrag (bei Ablösung der Hypothek)",
+  "key": "aktuellerHypothekenvertrag",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Finanzierung", "operator": "isEqual", "value": "RB_Abloesung_Hypo" }
+    ]
+  }
+},
+{
+  "label": "Upload Hypothekenvertrag",
+  "key": "hypotheken_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "aktuellerHypothekenvertrag", "eq": "true" }
+},
+
+{
+  "label": "Kopie Hypothekarvertrag für zusätzliche Immobilie oder Grundstück",
+  "key": "kopieHypothekarvertrag1",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "Zusatz_Immo_Bestehende_Hypo", "operator": "isEqual", "value": "Zusatz_Immo_Ja" }
+    ]
+  }
+},
+{
+  "label": "Upload Hypothekarvertrag",
+  "key": "hypothekarvertragZusatz_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "kopieHypothekarvertrag1", "eq": "true" }
+},
+
+{
+  "label": "Bei Stockwerkeigentum: Stockwerkeigentum-Begründungsakt mit Wertquotenaufteilung",
+  "key": "StockwerkeigentumBegrundungsakt",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Art_der_Liegenschaft", "operator": "isEqual", "value": "RB_Wohnung" }
+    ]
+  }
+},
+{
+  "label": "Upload Begründungsakt",
+  "key": "begrundungsakt_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "StockwerkeigentumBegrundungsakt", "eq": "true" }
+},
+
+{
+  "label": "Erbschafts-/Schenkungs-/Darlehensvertrag (falls vorhanden)",
+  "key": "erbschaftsSchenkungsDarlehensvertrag",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "any",
+    "conditions": [
+      { "component": "artDesVermogens_Sonstig", "operator": "isEqual", "value": "schenkungFurKaufDerLiegenschaft" },
+      { "component": "artDesVermogens_Sonstig", "operator": "isEqual", "value": "darlehen" },
+      { "component": "artDesVermogens_Sonstig", "operator": "isEqual", "value": "erbvorbezug" }
+    ]
+  }
+},
+{
+  "label": "Upload Erbschaft/Schenkung/Darlehen",
+  "key": "erbschaft_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "erbschaftsSchenkungsDarlehensvertrag", "eq": "true" }
+},
+
+{
+  "label": "Betreibungsregisterauszug",
+  "key": "betreibungsregisterauszug",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Betreibungen", "operator": "isEqual", "value": "RB_Ja_Betreibung" }
+    ]
+  }
+},
+{
+  "label": "Upload Betreibungsregisterauszug",
+  "key": "betreibung_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "betreibungsregisterauszug", "eq": "true" }
+},
+
+{
+  "label": "Reservationszahlung, Kaufvertrag bzw. Kaufvertragsentwurf",
+  "key": "reservationszahlung",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "artDesVermogens_Sonstig1", "operator": "isEqual", "value": "bereitsGetatigteAnzahlung" }
+    ]
+  }
+},
+{
+  "label": "Upload Kaufvertrag",
+  "key": "kaufvertrag_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "reservationszahlung", "eq": "true" }
+},
+
+{
+  "label": "Baurechtsvertrag (falls Liegenschaft im Baurecht erstellt)",
+  "key": "baurechtsvertrag",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Immo_in_Baurecht", "operator": "isEqual", "value": "RB_Ja_Baurecht" }
+    ]
+  }
+},
+{
+  "label": "Upload Baurechtsvertrag",
+  "key": "baurecht_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "baurechtsvertrag", "eq": "true" }
+},
+
+{
+  "label": "Nachweis Höhe des Baurechtzinses",
+  "key": "nachweisHoheDesBaurechtzinses",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Immo_in_Baurecht", "operator": "isEqual", "value": "RB_Ja_Baurecht" }
+    ]
+  }
+},
+{
+  "label": "Upload Baurechtzins",
+  "key": "baurechtzins_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "nachweisHoheDesBaurechtzinses", "eq": "true" }
+},
+
+{
+  "label": "Bei Stockwerkeigentum: Nutzungs- und Verwaltungsreglement der STWE-Gemeinschaft",
+  "key": "NutzungsUndVerwaltungsreglement",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Art_der_Liegenschaft", "operator": "isEqual", "value": "RB_Wohnung" }
+    ]
+  }
+},
+{
+  "label": "Upload Nutzungs-/Verwaltungsreglement",
+  "key": "verwaltungsreglement_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "NutzungsUndVerwaltungsreglement", "eq": "true" }
+}
+,                  {
+  "label": "Bei Stockwerkeigentum: Angaben über den Erneuerungsfonds",
+  "key": "AngabenUberDenErneuerungsfonds",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Art_der_Liegenschaft", "operator": "isEqual", "value": "RB_Wohnung" }
+    ]
+  }
+},
+{
+  "label": "Upload Erneuerungsfonds",
+  "key": "erneuerungsfonds_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "AngabenUberDenErneuerungsfonds", "eq": "true" }
+},
+
+{
+  "label": "Projektplan, Baubeschrieb und Bauhandwerkerverzeichnis (inkl. Kostenvoranschlag und Kubatur)",
+  "key": "projektplanBaubeschrieb",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RenovationskostenZuFinanzieren", "operator": "isEqual", "value": "ja" }
+    ]
+  }
+},
+{
+  "label": "Upload Projektplan/Baubeschrieb",
+  "key": "projektplan_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "projektplanBaubeschrieb", "eq": "true" }
+},
+
+{
+  "label": "Baubewilligung",
+  "key": "baubewilligung",
+  "type": "checkbox",
+  "input": true,
+  "conditional": {
+    "show": true,
+    "conjunction": "all",
+    "conditions": [
+      { "component": "RBT_Neu_Bestehend", "operator": "isEqual", "value": "RB_Neubau" }
+    ]
+  }
+},
+{
+  "label": "Upload Baubewilligung",
+  "key": "baubewilligung_file",
+  "type": "file",
+  "storage": "url",
+  "input": true,
+  "conditional": { "show": true, "when": "baubewilligung", "eq": "true" }
+}
+
                   ],
                   "width": 6,
                   "offset": 0,

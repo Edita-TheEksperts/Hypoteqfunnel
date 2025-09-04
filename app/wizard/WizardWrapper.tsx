@@ -5,8 +5,7 @@ import JsonWizard from "@/components/JsonWizard"
 
 export default function WizardWrapper() {
   const searchParams = useSearchParams()
-  const version = (searchParams.get("version") as "lite" | "full") || "lite"
-  const mandatory = (searchParams.get("mandatory") as "all" | "some") || "all"
+  const version = (searchParams.get("version") as "internal" | "external") || "internal"
 
-  return <JsonWizard version={version} mandatory={mandatory} />
+  return <JsonWizard version={version} />
 }
