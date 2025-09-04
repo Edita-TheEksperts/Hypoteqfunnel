@@ -19,7 +19,6 @@ export default function StepPanel({ panel, answers, onAnswer, showErrors }: any)
             field={f}
             value={answers[f.key]}
             setValue={(v: any) => onAnswer(f.key, v)}
-            showErrors={showErrors}
           />
         ))
       )}

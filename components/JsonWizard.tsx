@@ -44,7 +44,11 @@ export default function JsonWizard({
   const currentPanel = panels[step]
 
   const progress = useMemo(() => {
-    const reqAll = panels.flatMap(p => flattenAny(p.components || [])).filter(isReq)
+    type Panel = { components?: AnyObj[] }
+
+const reqAll = panels
+  .flatMap((p: Panel) => flattenAny(p.components || []))
+  .filter(isReq)
     const total = reqAll.length
     const filled = reqAll.filter((f: any) => answers[f.key]).length
     return total ? Math.round((filled / total) * 100) : 0
