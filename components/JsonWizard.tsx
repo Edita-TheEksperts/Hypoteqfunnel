@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import StepPanel from './StepPanel'
-import { flattenAny, isReq } from './utils'
+import { flattenAny } from './utils'
+import { useRouter } from 'next/navigation'
 
 type AnyObj = Record<string, any>
 
@@ -16,6 +17,8 @@ export default function JsonWizard({
   const [answers, setAnswers] = useState<AnyObj>({})
   const [submitted, setSubmitted] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
+
+  const router = useRouter()
 
   // Load schema JSON
   useEffect(() => {
@@ -32,7 +35,6 @@ export default function JsonWizard({
         const form = j.forms?.[formKey]
 
         if (form) {
-          // disable required për të gjitha fushat
           flattenAny(form.components).forEach((f: any) => {
             if (f.validate) f.validate.required = false
           })
@@ -46,16 +48,24 @@ export default function JsonWizard({
     version === 'internal' ? 'hypoteqmockform30' : 'beraterVersionForm30'
   ]
 
-  // Ruajmë të gjithë panels + sub-panels si listë e sheshtë
+  // Flatten panels (exclude summary & submit)
   const panels = useMemo(() => {
     if (!form) return []
     const all: AnyObj[] = []
     ;(form.components || []).forEach((c: AnyObj) => {
-      if (c?.type === 'panel') {
+      if (
+        c?.type === 'panel' &&
+        !c.key?.toLowerCase().includes('summary') &&
+        c.key !== 'submit'
+      ) {
         all.push(c)
         if (Array.isArray(c.components)) {
           c.components.forEach((sub: AnyObj) => {
-            if (sub?.type === 'panel') {
+            if (
+              sub?.type === 'panel' &&
+              !sub.key?.toLowerCase().includes('summary') &&
+              sub.key !== 'submit'
+            ) {
               all.push(sub)
             }
           })
@@ -65,17 +75,16 @@ export default function JsonWizard({
     return all
   }, [form])
 
-  const currentPanel = panels[step]
+  // total steps = panels + 1 summary step
+  const totalSteps = panels.length + 1
+  const currentPanel = step < panels.length ? panels[step] : null
 
+  // Progress bar logic
   const progress = useMemo(() => {
-    type Panel = { components?: AnyObj[] }
-    const reqAll = panels
-      .flatMap((p: Panel) => flattenAny(p.components || []))
-      .filter(isReq)
-    const total = reqAll.length
-    const filled = reqAll.filter((f: any) => answers[f.key]).length
-    return total ? Math.round((filled / total) * 100) : 0
-  }, [panels, answers])
+    if (totalSteps === 0) return 0
+    if (submitted) return 100
+    return Math.round((step / totalSteps) * 100)
+  }, [step, totalSteps, submitted])
 
   const handleAnswer = useCallback((key: string, value: any) => {
     setAnswers(prev => ({ ...prev, [key]: value }))
@@ -83,7 +92,7 @@ export default function JsonWizard({
 
   const next = () => {
     setShowErrors(true)
-    setStep(s => Math.min(panels.length - 1, s + 1))
+    setStep(s => Math.min(totalSteps - 1, s + 1))
   }
 
   const back = () => {
@@ -94,6 +103,20 @@ export default function JsonWizard({
     setSubmitted(true)
   }
 
+  // 🔹 10 fusha kryesore
+  const importantFields: { key: string; label: string }[] = [
+    { key: 'anrede', label: 'Anrede' },
+    { key: 'Vorname', label: 'Vorname' },
+    { key: 'Name', label: 'Nachname' },
+    { key: 'geburtsdatum', label: 'Geburtsdatum' },
+    { key: 'email', label: 'E-Mail' },
+    { key: 'phone', label: 'Telefon' },
+    { key: 'RBT_Finanzierung', label: 'Finanzierung' },
+    { key: 'RBT_Nutzung_der_Immo', label: 'Nutzung der Immobilie' },
+    { key: 'RBT_Art_der_Liegenschaft', label: 'Art der Liegenschaft' },
+    { key: 'loanAmount', label: 'Hypothek Betrag' }
+  ]
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       {/* Sidebar */}
@@ -101,7 +124,12 @@ export default function JsonWizard({
         <h3 className="text-lg font-semibold mb-4">Chapters</h3>
         <ul className="space-y-2">
           {(form?.components || [])
-            .filter((c: AnyObj) => c.type === 'panel')
+            .filter(
+              (c: AnyObj) =>
+                c.type === 'panel' &&
+                !c.key?.toLowerCase().includes('summary') &&
+                c.key !== 'submit'
+            )
             .map((p: AnyObj, i: number) => {
               const chapterIndex = panels.indexOf(p)
               return (
@@ -116,27 +144,6 @@ export default function JsonWizard({
                   >
                     {p.title || `Chapter ${i + 1}`}
                   </button>
-
-                  {/* Sub-chapters */}
-                  {Array.isArray(p.components) &&
-                    p.components
-                      .filter((sub: AnyObj) => sub.type === 'panel')
-                      .map((sub: AnyObj, j: number) => {
-                        const subIndex = panels.indexOf(sub)
-                        return (
-                          <button
-                            key={j}
-                            onClick={() => setStep(subIndex)}
-                            className={`ml-4 block w-full text-left px-2 py-1 rounded-md text-sm ${
-                              step === subIndex
-                                ? 'bg-blue-500 text-white font-medium'
-                                : 'text-gray-600 hover:bg-gray-100'
-                            }`}
-                          >
-                            ▸ {sub.title || `Sub-chapter ${j + 1}`}
-                          </button>
-                        )
-                      })}
                 </li>
               )
             })}
@@ -146,11 +153,20 @@ export default function JsonWizard({
       {/* Main Content */}
       <div className="md:col-span-3">
         <div className="flex justify-between text-sm mb-2">
-          <span>{currentPanel?.title}</span>
+          <span>
+            {submitted
+              ? 'Abgeschlossen'
+              : step === panels.length
+              ? 'Zusammenfassung'
+              : currentPanel?.title}
+          </span>
           <span>{progress}%</span>
         </div>
-        <div className="progress">
-          <div className="progress-bar" style={{ width: `${progress}%` }} />
+        <div className="w-full h-2 bg-gray-200 rounded mb-4 overflow-hidden">
+          <div
+            className="h-2 bg-blue-600 transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
         </div>
 
         <div className="card p-6">
@@ -163,11 +179,59 @@ export default function JsonWizard({
               transition={{ duration: 0.2 }}
             >
               {submitted ? (
+                // 🔹 Vielen Dank + fusha kryesore + buton back
                 <div className="text-center py-10">
                   <h2 className="text-2xl font-semibold mb-2">Vielen Dank!</h2>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 mb-6">
                     Wir melden uns in Kürze bei Ihnen.
                   </p>
+
+                  <div className="bg-gray-50 border rounded-lg p-4 text-left max-w-md mx-auto mb-6">
+                    <h3 className="text-lg font-semibold mb-3">
+                      Ihre wichtigsten Angaben:
+                    </h3>
+                    <ul className="space-y-2 text-sm">
+                      {importantFields.map(item => (
+                        <li
+                          key={item.key}
+                          className="flex justify-between border-b pb-1"
+                        >
+                          <span className="font-medium">{item.label}:</span>
+                          <span>
+                            {answers[item.key] && answers[item.key] !== ''
+                              ? String(answers[item.key])
+                              : '(nicht ausgefüllt)'}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* 🔹 Button back to homepage */}
+                  <button
+                    type="button"
+                    onClick={() => router.push('/')}
+                    className="btn-primary"
+                  >
+                    Zur Startseite
+                  </button>
+                </div>
+              ) : step === panels.length ? (
+                // 🔹 Custom Summary screen
+                <div>
+                  <h2 className="text-xl font-semibold mb-4">
+                    Zusammenfassung
+                  </h2>
+                  <ul className="space-y-2 text-sm">
+                    {importantFields.map(item => (
+                      <li key={item.key} className="border-b pb-1">
+                        <strong>{item.label}:</strong>{' '}
+                        {answers[item.key] && answers[item.key] !== ''
+                          ? String(answers[item.key])
+                          : '(nicht ausgefüllt)'}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ) : (
                 <StepPanel
@@ -190,7 +254,7 @@ export default function JsonWizard({
               >
                 Zurück
               </button>
-              {step === panels.length - 1 ? (
+              {step === panels.length ? (
                 <button type="button" onClick={submit} className="btn-primary">
                   Senden
                 </button>

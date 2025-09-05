@@ -7,7 +7,6 @@ import PersonAccordion from "./PersonAccordion"
 export default function StepPanel({ panel, answers, onAnswer, showErrors }: any) {
   if (!panel) return null
 
-  // Marrim sub-panels dhe fusha të tjera
   const subPanels = (panel.components || []).filter((c: any) => c.type === "panel")
   const otherFields = (panel.components || []).filter((c: any) => c.type !== "panel")
 
@@ -44,7 +43,6 @@ export default function StepPanel({ panel, answers, onAnswer, showErrors }: any)
           )
         })}
 
-      {/* Fusha që nuk janë sub-panels */}
       {otherFields.length > 0 &&
         flattenAny(otherFields).map((f: any) => (
           <FieldRow
@@ -56,7 +54,6 @@ export default function StepPanel({ panel, answers, onAnswer, showErrors }: any)
           />
         ))}
 
-      {/* Nëse nuk ka fare */}
       {subPanels.length === 0 && otherFields.length === 0 && (
         <p className="text-gray-600 text-sm">
           Keine Eingabefelder in diesem Schritt.
