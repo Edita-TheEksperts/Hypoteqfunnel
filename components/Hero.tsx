@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[845px] flex items-center justify-center">
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <Image
         src="/images/hero.png"
@@ -16,7 +16,7 @@ export default function Hero() {
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-black/30"></div>
 
-      {/* Content (teksti kryesor) */}
+      {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center gap-10 px-6">
         {/* Title */}
         <div className="w-[639px] h-[240px] text-center text-white text-[80px] font-normal font-['SF_Pro_Display'] leading-[80px]">
@@ -29,7 +29,6 @@ export default function Hero() {
           <span className="text-white text-[14px] font-semibold font-['Inter']">
             Send Request
           </span>
-          {/* SVG arrow nga Figma */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="8"
@@ -50,36 +49,38 @@ export default function Hero() {
 
       {/* Logos & text */}
       <div className="absolute bottom-10 right-10 flex items-center gap-6 text-white">
-        {/* Teksti */}
         <span className="text-[24px] font-normal leading-[100%] text-right">
           Collaborating <br /> with:
         </span>
 
-        {/* Logos wrapped në rreth */}
-        <div className="flex items-center gap-4">
-          {/* R Bank */}
-          <div className="w-[81px] h-[81px] rounded-full border-[1.35px] border-white/40 bg-white/20 backdrop-blur-[8.7px] flex items-center justify-center">
-            <Image src="/images/rb.png" alt="R Bank" width={40} height={40} />
-          </div>
-
-          {/* KB Bank */}
-          <div className="w-[81px] h-[81px] rounded-full border-[1.35px] border-white/40 bg-white/20 backdrop-blur-[8.7px] flex items-center justify-center">
-            <Image src="/images/kb.png" alt="KB Bank" width={40} height={40} />
-          </div>
-
-          {/* Generali */}
-          <div className="w-[81px] h-[81px] rounded-full border-[1.35px] border-white/40 bg-white/20 backdrop-blur-[8.7px] flex items-center justify-center">
-            <Image src="/images/gen.png" alt="Generali" width={40} height={40} />
-          </div>
-
-          {/* UBS */}
-          <div className="w-[81px] h-[81px] rounded-full border-[1.35px] border-white/40 bg-white/20 backdrop-blur-[8.7px] flex items-center justify-center">
-            <Image src="/images/ubs.png" alt="UBS" width={40} height={40} />
-          </div>
+        {/* Logos overlapped */}
+        <div className="flex items-center">
+          {[
+            { src: "/images/rb.png", alt: "R Bank" },
+            { src: "/images/banca.png", alt: "Banca Migros" }, // new
+            { src: "/images/kb.png", alt: "KB Bank" },
+            { src: "/images/gen.png", alt: "Generali" },
+            { src: "/images/ubs.png", alt: "UBS" },
+          ].map((logo, i) => (
+            <div
+              key={i}
+              className={`w-[81px] h-[81px] rounded-full border border-white/40 bg-white/20 backdrop-blur-[8.7px] flex items-center justify-center overflow-hidden ${
+                i !== 0 ? "-ml-6" : ""
+              }`}
+            >
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={54}
+                height={54}
+                className="object-contain"
+              />
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Offer (absolute bottom-left) */}
+      {/* Offer */}
       <div className="absolute bottom-10 left-10 text-left text-white">
         <p className="text-[18px] font-light">Todays best offer:</p>
         <p className="text-[40px] font-normal leading-[100%]">0.19%</p>

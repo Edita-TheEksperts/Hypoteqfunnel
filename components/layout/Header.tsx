@@ -57,10 +57,7 @@ export default function Header() {
         </button>
 
    <button
-  className="flex items-center justify-center 
-             w-[99px] h-[34px] px-[21px] py-[7px] gap-[10px]
-             rounded-[20px] bg-[#CAF476] 
-             text-[#132219] text-[14px] font-semibold"
+className="flex items-center justify-center w-[99px] h-[34px] px-[21px] py-[7px] gap-[10px] rounded-[20px] bg-[#CAF476] text-[#132219] text-[14px] font-semibold"
 >
   Calculate
 </button>
