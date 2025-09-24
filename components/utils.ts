@@ -1,9 +1,6 @@
-export type AnyObj = Record<string, any>
+/*export type AnyObj = Record<string, any>
 
-/**
- * Flattens deeply nested form components (panels, rows, columns)
- * into a single-level array of input fields.
- */
+
 export function flattenAny(comps: AnyObj[]): AnyObj[] {
   const acc: AnyObj[] = []
   const walk = (nodes?: AnyObj[]) => {
@@ -26,26 +23,18 @@ export function flattenAny(comps: AnyObj[]): AnyObj[] {
   return acc
 }
 
-/**
- * Returns options for select, radio, selectboxes.
- */
 export const readOptions = (c: any) => {
   if (Array.isArray(c.values)) return c.values
   if (c.data && Array.isArray(c.data.values)) return c.data.values
   return []
 }
 
-/**
- * Checks if a field is required.
- */
+
 export const isReq = (f: any) => {
   const v = f.validate
   return !!(v && (v.required || v.unique || v.minLength > 0))
 }
 
-/**
- * Sanitizes numeric input (only digits, commas, dots, dash at start).
- */
 export const sanitizeNumber = (raw: string) => {
   if (raw == null) return ''
   let v = raw.replace(/[^0-9.,-]/g, '')
@@ -56,9 +45,6 @@ export const sanitizeNumber = (raw: string) => {
   return v
 }
 
-/**
- * Allowed keys for numeric inputs.
- */
 export const numericAllowedKeys = new Set([
   'Backspace',
   'Delete',
@@ -68,3 +54,4 @@ export const numericAllowedKeys = new Set([
   'Home',
   'End',
 ])
+*/

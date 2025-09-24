@@ -1,7 +1,7 @@
-"use client"
+/* "use client"
 import React, { useMemo } from "react"
 import FieldRow from "./FieldRow"
-import { flattenAny } from "./utils"
+import { flattenAny } from "../utils"
 import PersonAccordion from "./PersonAccordion"
 
 export default function StepPanel({ panel, answers, onAnswer, showErrors }: any) {
@@ -12,7 +12,6 @@ export default function StepPanel({ panel, answers, onAnswer, showErrors }: any)
 
   return (
     <div className="space-y-4">
-      {/* Accordion për persona */}
       {subPanels.length > 0 &&
         subPanels.map((sub: any, i: number) => {
           const isPersonPanel =
@@ -61,4 +60,4 @@ export default function StepPanel({ panel, answers, onAnswer, showErrors }: any)
       )}
     </div>
   )
-}
+}*/

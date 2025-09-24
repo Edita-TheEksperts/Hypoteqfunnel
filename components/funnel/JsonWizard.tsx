@@ -1,8 +1,8 @@
-'use client'
+/*'use client'
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import StepPanel from './StepPanel'
-import { flattenAny } from './utils'
+import { flattenAny } from '../utils'
 import { useRouter } from 'next/navigation'
 
 type AnyObj = Record<string, any>
@@ -119,7 +119,7 @@ export default function JsonWizard({
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-      {/* Sidebar */}
+
       <div className="md:col-span-1 bg-white border border-gray-200 rounded-xl shadow-sm p-4">
         <h3 className="text-lg font-semibold mb-4">Chapters</h3>
         <ul className="space-y-2">
@@ -150,7 +150,6 @@ export default function JsonWizard({
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="md:col-span-3">
         <div className="flex justify-between text-sm mb-2">
           <span>
@@ -207,7 +206,6 @@ export default function JsonWizard({
                     </ul>
                   </div>
 
-                  {/* 🔹 Button back to homepage */}
                   <button
                     type="button"
                     onClick={() => router.push('/')}
@@ -269,4 +267,4 @@ export default function JsonWizard({
       </div>
     </div>
   )
-}
+}*/

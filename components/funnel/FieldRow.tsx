@@ -1,5 +1,5 @@
-import InputControl from './InputControl'
-import { isReq } from './utils'
+/*import InputControl from './InputControl'
+import { isReq } from '../utils'
 
 export default function FieldRow({ field, value, setValue }: { field: any; value: any; setValue: (v: any) => void }) {
   const invalid = isReq(field) && (value === undefined || value === null || value === '')
@@ -21,4 +21,4 @@ export default function FieldRow({ field, value, setValue }: { field: any; value
       <InputControl field={field} value={value} setValue={setValue} />
     </label>
   )
-}
+// } */
