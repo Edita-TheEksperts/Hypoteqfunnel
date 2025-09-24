@@ -5,5 +5,5 @@ export default function Footer() {
         © {new Date().getFullYear()} Hypoteq. All rights reserved.
       </div>
     </footer>
-  );
+  )
 }

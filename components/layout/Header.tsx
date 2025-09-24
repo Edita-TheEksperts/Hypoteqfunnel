@@ -17,9 +17,6 @@ export default function Header() {
           <Link href="/about" className="text-gray-700 hover:text-blue-600">
             About
           </Link>
-          <Link href="/wizard" className="text-gray-700 hover:text-blue-600">
-            Funnel
-          </Link>
         </nav>
       </div>
     </header>
