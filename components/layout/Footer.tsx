@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="max-w-[1380px] mx-auto px-[60px] py-[70px] flex justify-between items-start">
         
         {/* Left Side: Logo + Copyright */}
-        <div className="flex flex-col justify-between h-[460px] ml-[-120px]">
+        <div className="flex flex-col justify-between h-[460px] ml-[-70px]">
           {/* Logo */}
           <img
             src="/images/logo.png"
