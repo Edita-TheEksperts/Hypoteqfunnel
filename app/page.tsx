@@ -2,7 +2,7 @@ import Header from "../components/layout/Header";
 import Hero from "../components/Hero";
 import MortgageCalculator from "../components/MortgageCalculator";
 import BestChoices from "@/components/BestChoices";
-import Advantages from "@/components/Advantages";
+import Advantages from "@/components/AdvantagesSection";
 import FinanceForm from "@/components/ui/FinanceForm";
 import Footer from "@/components/layout/Footer";
 import MortgageGuide from "@/components/ui/MortgageGuide";
