@@ -128,31 +128,33 @@ export default function MortgageOffers() {
             </div>
 
             {/* Right Content - takes rest of space */}
-            <div className="flex flex-col justify-center gap-5 flex-1">
+            <div className="flex flex-col justify-between gap-5 flex-1">
               <h3 className="text-[#3D3D3D] font-sfpro text-[49px] font-bold leading-[60px]">
                 {card.title}
               </h3>
               <p className="text-[#3D3D3D] font-sfpro text-[16px] leading-[22px] font-medium">
                 {card.text}
               </p>
-              <button className="flex items-center gap-2 px-[21px] py-[7px] h-[34px] bg-[#CAF476] rounded-[19px] text-black font-sfpro font-semibold text-[14px] leading-[20px]" style={{ width: '135px', marginTop: '60px'}}>
-                Learn More
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="7"
-                  height="4"
-                  viewBox="0 0 7 4"
-                  fill="none"
-                >
-                  <path
-                    d="M4 0L6.5 2L4 4"
-                    stroke="black"
-                    strokeWidth="1.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
+              <div className="flex justify-start mt-8">
+                <button className="flex items-center gap-2 px-[21px] py-[7px] h-[34px] bg-[#CAF476] rounded-[19px] text-black font-sfpro font-semibold text-[14px] leading-[20px]" style={{ width: '133px'}}>
+                  Learn More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="7"
+                    height="4"
+                    viewBox="0 0 7 4"
+                    fill="none"
+                  >
+                    <path
+                      d="M4 0L6.5 2L4 4"
+                      stroke="black"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         ))}
