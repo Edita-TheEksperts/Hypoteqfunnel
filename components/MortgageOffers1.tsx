@@ -95,7 +95,7 @@ export default function MortgageOffers() {
       </div>
 
       {/* Product Cards Section */}
-      <div className="w-full flex flex-col gap-[60px] py-[100px] px-[116px] items-center">
+      <div className="w-full flex flex-col gap-[60px] py-[100px] px-[16px] md:px-[116px] items-center">
         {[ 
           {
             img: "/images/F1.png",
@@ -115,10 +115,10 @@ export default function MortgageOffers() {
         ].map((card, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-[130px] max-w-[1200px] w-full"
+            className="flex flex-col md:flex-row items-center gap-[60px] max-w-[1200px] w-full"
           >
             {/* Left Image */}
-            <div className="w-[750px] h-[350px] relative flex-shrink-0 rounded-[10px] ml-[-180px] overflow-hidden">
+            <div className="w-full md:w-[750px] h-[350px] relative flex-shrink-0 rounded-[10px] overflow-hidden">
               <Image
                 src={card.img}
                 alt={card.title}
