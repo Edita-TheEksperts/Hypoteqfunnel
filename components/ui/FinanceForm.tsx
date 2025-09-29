@@ -5,7 +5,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 const FinanceForm: React.FC = () => {
   return (
     <section className="w-full bg-white font-sfpro">
-      <div className="max-w-[1504px] mx-auto px-[80px] py-[116px]">
+ <div className="w-full max-w-[1820px] mx-auto px-[116px] py-[116px]">
+
         {/* Header */}
         <div className="flex items-start gap-[164px] mb-[75px]">
           {/* Title */}
@@ -21,7 +22,7 @@ const FinanceForm: React.FC = () => {
 
           {/* Description */}
           <p
-            className="w-[626px] font-sfpro text-[#656565]  ml-[35px]"
+            className="w-[626px] font-sfpro text-[#656565]  ml-[165px]"
             style={{
               fontSize: "16px",
               fontWeight: 500,
@@ -41,7 +42,7 @@ const FinanceForm: React.FC = () => {
         </div>
 
   {/* Form */}
-<form className="mt-[75px] grid grid-cols-2 font-sfpro gap-x-[16px]">
+<form className="mt-[75px] grid grid-cols-2 font-sfpro gap-x-[16px] w-[1550px]">
   {/* Left column (3 inputs) */}
   <div className="flex flex-col gap-[23px]">
     {Array.from({ length: 3 }).map((_, i) => (
@@ -117,8 +118,8 @@ const FinanceForm: React.FC = () => {
 <div
   className="flex flex-col justify-between items-start rounded-[10px] bg-[#F6F6F6]"
   style={{
-    width: "810px",
-    height: "286px",
+    width: "970px",
+    height: "296px",
     padding: "18px 24px",
     gap: "10px",
   }}
@@ -155,8 +156,8 @@ const FinanceForm: React.FC = () => {
   <div
     className="flex justify-center items-center rounded-[10px] bg-[#F6F6F6]"
     style={{
-      width: "490px",
-      height: "286px",
+      width: "550px",
+      height: "296px",
       padding: "24px 16px",
       gap: "10px",
     }}
@@ -179,8 +180,8 @@ const FinanceForm: React.FC = () => {
 <div
   className="flex flex-col font-sfpro justify-between items-start rounded-[10px] bg-[#F6F6F6]"
   style={{
-    width: "740px",
-    height: "286px",
+    width: "914px",
+    height: "296px",
     padding: "18px 24px",
     gap: "10px",
   }}
@@ -200,8 +201,8 @@ const FinanceForm: React.FC = () => {
 <div
   className="relative rounded-[10px] font-sfpro overflow-hidden"
   style={{
-    width: "560px",
-    height: "286px",
+    width: "610px",
+    height: "296px",
   }}
 >
 <img

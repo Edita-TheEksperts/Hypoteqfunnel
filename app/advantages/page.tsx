@@ -1,7 +1,9 @@
+
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Benefits from "@/components/Benefits";
 import YourBenefits from "@/components/YourBenefits";
+import Strategie from "@/components/Strategie";
 
 export default function AdvantagesPage() {
   return (
@@ -9,6 +11,7 @@ export default function AdvantagesPage() {
       <Header />
       <Benefits />
       <YourBenefits />
+      <Strategie />
       <Footer />
     </main>
   );
