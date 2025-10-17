@@ -14,9 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="font-sfpro bg-white text-[#132219]">
         <Header />
-      <main className="pt-0">{children}</main>
+        <main className="pt-0">{children}</main>
       </body>
     </html>
   )

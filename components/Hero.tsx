@@ -3,100 +3,100 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with zoom and position */}
-      <Image
-        src="/images/hero.png"
-        alt="Hero background"
-        fill
-        priority
-        className="object-cover object-[50%_30%] scale-[1.42] translate-x-[6%] translate-y-[12%]"
-      />
-
-      {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-black/20"></div>
+    <section className="relative w-full min-h-screen overflow-x-hidden font-sfpro">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-no-repeat bg-cover"
+        style={{
+          backgroundImage: "url('/images/Hero1.jpg')",
+          backgroundPosition: "-631px -2370px",
+          backgroundSize: "266.561% 549.731%",
+        }}
+      ></div>
 
       {/* Content */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center text-center gap-[32px] px-6">
-        {/* Title */}
-        <div className="w-[639px] h-[240px] text-center text-white text-[80px] font-sfpro leading-[80px]">
-          Send a financing <br />
-          request quickly <br /> & easily
-        </div>
+      <div className="relative z-10 flex flex-col justify-start h-full max-w-[1579px] w-full mx-auto px-[120px] pt-[150px] gap-[10px]">
+        {/* Heading */}
+        <h1 className="text-[#132219] text-[128px] leading-[100%] font-medium tracking-[-1.28px] max-w-[880px]">
+          In drei <br /> Schritten zur <br /> Ihrer Hypothek
+        </h1>
+
+        {/* Description */}
+        <p className="text-[#132219]/80 text-[20px] leading-snug max-w-[580px] mt-[24px] font-normal">
+          Erhalten Sie Ihr persönliches Hypothekarangebot online – schnell,
+          sicher und transparent. In nur{" "}
+          <strong className="font-semibold">drei Klicks</strong> vergleichen Sie
+          Optionen, berechnen Ihre monatlichen Kosten und starten Ihren
+          Finanzierungsprozess mit Vertrauen.
+        </p>
 
         {/* Button */}
-     {/* Button */}
-<div className="h-10 px-5 bg-white/20 rounded-[70px] outline outline-1 outline-offset-[-1px] outline-white/40 backdrop-blur-[6.5px] inline-flex justify-center items-center gap-[10px] cursor-pointer hover:bg-white/30 transition">
-  <span className="text-white font-['Inter'] text-[14px] font-semibold font-sfpro leading-normal">
-    Send Request
-  </span>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="8"
-    height="8"
-    viewBox="0 0 12 12"
-    fill="none"
-  >
-    <path
-      d="M4.5 2L8 6L4.5 10"
-      stroke="white"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-</div>
+        <button
+          className="mt-[32px] bg-[#132219] text-[#CAF476] 
+                     text-[20px] font-[600] leading-normal
+                     px-[24px] py-[8px] rounded-full
+                     hover:opacity-90 transition-all 
+                     w-fit h-[40px] flex items-center justify-center"
+        >
+          Finanzierung starten
+        </button>
 
-      </div>
+        {/* Partner section */}
+        <div className="flex flex-col mt-[80px] gap-[24px]">
+          <p className="text-[#132219]/70 text-[16px] font-normal whitespace-nowrap">
+            In Zusammenarbeit mit:
+          </p>
 
-      {/* Bottom section with same structure as Figma */}
-      <div className="absolute bottom-[32px] left-0 right-0 flex justify-between items-end px-[116px] text-white">
-    {/* Offer */}
-<div className="flex flex-col w-[177px] items-start gap-[8px] flex-shrink-0">
- <p className="text-white font-['SF_Pro_Display'] text-[18px] font-light leading-[100%] self-stretch">
-  Todays best offer:
-</p>
+          <div className="flex items-center justify-between flex-wrap gap-x-[24px] gap-y-[20px] w-full max-w-[1400px] mx-auto translate-y-[2px] pb-[40px]">
+            {/* UBS */}
+            <Image
+              src="/images/UBS-LogoBlack.svg"
+              alt="UBS"
+              width={213}
+              height={52}
+              className="translate-y-[2px] object-contain"
+              unoptimized
+            />
 
+            {/* Zürcher Kantonalbank */}
+            <Image
+              src="/images/24.png"
+              alt="Zürcher Kantonalbank"
+              width={213}
+              height={52}
+              className="translate-y-[2px] object-contain"
+            />
 
-  <p className="text-white font-['SF_Pro_Display'] text-[40px] font-normal leading-[100%]">
-    0.19%
-  </p>
+            {/* Bank Cler */}
+            <Image
+              src="/images/Bank_Cler_logo.png"
+              alt="Bank Cler"
+              width={222}
+              height={44}
+              className="translate-y-[2px] object-contain"
+            />
 
-  <p className="text-white font-['SF_Pro_Display'] text-[20.139px] font-light leading-[100%]">
-    Our loans compared <br /> to other banks
-  </p>
-</div>
+            {/* Raiffeisen Schweiz */}
+            <div className="flex items-center h-[35.572px]">
+              <Image
+                src="/images/Raiffeisen_Schweiz_Logo.png"
+                alt="Raiffeisen Schweiz"
+                width={242.19}
+                height={35.572}
+                className="object-contain"
+                priority
+              />
+            </div>
 
-
-        {/* Logos & text */}
-        <div className="flex items-center gap-6">
-          <span className="text-[24px] font-normal leading-[100%] text-right">
-            Collaborating <br /> with:
-          </span>
-
-          <div className="flex items-center">
-            {[
-              { src: "/images/rb.png", alt: "R Bank" },
-              { src: "/images/banca.png", alt: "Banca Migros" },
-              { src: "/images/kb.png", alt: "KB Bank" },
-              { src: "/images/gen.png", alt: "Generali" },
-              { src: "/images/ubs.png", alt: "UBS" },
-            ].map((logo, i) => (
-              <div
-                key={i}
-                className={`w-[81px] h-[81px] rounded-full border border-white/40 bg-white/20 backdrop-blur-[8.7px] flex items-center justify-center overflow-hidden ${
-                  i !== 0 ? "-ml-6" : ""
-                }`}
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  width={54}
-                  height={54}
-                  className="object-contain"
-                />
-              </div>
-            ))}
+            {/* Swiss National Bank */}
+            <Image
+              src="/images/67.svg"
+              alt="Swiss National Bank"
+              width={223}
+              height={36}
+              className="translate-y-[2px] object-contain"
+              unoptimized
+            />
           </div>
         </div>
       </div>

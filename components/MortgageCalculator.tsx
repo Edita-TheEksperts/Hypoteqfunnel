@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-// ✅ SliderBlock props
 interface SliderBlockProps {
   label: string;
   value: number;
@@ -16,20 +15,19 @@ function SliderBlock({ label, value, setValue, min, max, step }: SliderBlockProp
   const percentage = ((value - min) / (max - min)) * 100;
 
   return (
-    <div className="flex flex-col gap-[24px]">
-      {/* Label + Value box */}
-      <div
-        className="
-          flex justify-between items-center
-          h-[66.354px] px-[24.5px]
-          bg-[#F6F6F6]
-          border border-[rgba(0,0,0,0.3)]
-          rounded-[81.667px]
-          text-[18.375px] font-medium text-[#7E7E7E]
-        "
-      >
-        <span>{label}</span>
-        <span>CHF {value.toLocaleString()}</span>
+    <div className="flex flex-col gap-[10px] w-full">
+      {/* Label */}
+      <label className="text-[#132219] text-[16px] font-medium">{label}</label>
+
+      {/* Input row */}
+      <div className="flex items-center justify-between border border-[#A8A8A8] rounded-[50px] px-[20px] py-[10px]">
+        <input
+          type="text"
+          value={value.toLocaleString()}
+          readOnly
+          className="bg-transparent outline-none text-[#132219] text-[18px] font-medium w-[150px]"
+        />
+        <span className="text-[#132219] text-[18px] font-semibold">CHF</span>
       </div>
 
       {/* Slider */}
@@ -41,270 +39,201 @@ function SliderBlock({ label, value, setValue, min, max, step }: SliderBlockProp
         value={value}
         onChange={(e) => setValue(Number(e.target.value))}
         style={{
-          background: `linear-gradient(to right, #132219 ${percentage}%, rgba(168,168,168,0.40) ${percentage}%)`,
+          background: `linear-gradient(to right, #132219 ${percentage}%, rgba(217,217,217,1) ${percentage}%)`,
         }}
-        className="
-        cursor-pointer appearance-none h-[3.063px] rounded-full
-           ml-auto 
-              w-[95%] 
+        className="w-full h-[4px] rounded-full appearance-none cursor-pointer
           [&::-webkit-slider-thumb]:appearance-none
-          [&::-webkit-slider-thumb]:w-[16px]
-          [&::-webkit-slider-thumb]:h-[16px]
-          [&::-webkit-slider-thumb]:rounded-full
+          [&::-webkit-slider-thumb]:w-[18px]
+          [&::-webkit-slider-thumb]:h-[18px]
           [&::-webkit-slider-thumb]:bg-[#132219]
-          [&::-webkit-slider-thumb]:mt-[-6px]
-          [&::-moz-range-thumb]:w-[16px]
-          [&::-moz-range-thumb]:h-[16px]
-          [&::-moz-range-thumb]:rounded-full
-          [&::-moz-range-thumb]:bg-[#132219]
-          [&::-moz-range-thumb]:border-0
-        "
+          [&::-webkit-slider-thumb]:rounded-full
+          [&::-webkit-slider-thumb]:shadow-[0_0_2px_rgba(0,0,0,0.3)]
+          [&::-webkit-slider-thumb]:mt-[-7px]"
       />
+
+      {/* Range values */}
+      <div className="flex justify-between text-[14px] text-[#474849]">
+        <span>{min.toLocaleString()} CHF</span>
+        <span>{max.toLocaleString()} CHF</span>
+      </div>
     </div>
   );
 }
 
+function CheckIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="10"
+      height="8"
+      viewBox="0 0 10 8"
+      fill="none"
+    >
+      <path
+        d="M0.5 3.78129L3.31254 6.59383L9.50012 0.40625"
+        stroke="#132219"
+        strokeWidth="0.9"
+      />
+    </svg>
+  );
+}
+
 export default function MortgageCalculator() {
-  const [purchasePrice, setPurchasePrice] = useState(500000);
-  const [income, setIncome] = useState(120000);
+  const [purchasePrice, setPurchasePrice] = useState(324000);
   const [funds, setFunds] = useState(100000);
-  const [fees, setFees] = useState("2.5%"); // dropdown
+  const [income, setIncome] = useState(50000);
+
+  const [residenceType, setResidenceType] = useState<"haupt" | "zweit">("haupt");
 
   return (
-    <section className="w-full bg-white flex justify-center font-[SF Pro Display]">
-      <div className="w-[1504px] h-[812px] flex flex-row items-start gap-[129px] px-[86px] py-[80px] bg-[#FFF]">
-        {/* Left Side - Calculator */}
-        <div className="flex flex-col w-[641px] gap-[43.896px]">
-          <h2 className="text-[48px] font-medium text-[#474849]">
+    <section className="flex justify-center bg-white py-[60px] px-[40px] font-sans">
+      <div className="flex w-[1272px] justify-between items-start gap-[108px]">
+        {/* LEFT SIDE */}
+        <div className="flex flex-col w-[600px] gap-[36px]">
+          <h1 className="text-[48px] font-semibold text-[#132219]">
             Mortgage Calculator
-          </h2>
+          </h1>
 
           {/* Tabs */}
-          <div className="flex items-center gap-[16px]">
-            <button className="flex-1 h-[46px] flex items-center justify-center rounded-full bg-[#474849] text-white text-[14px] font-medium">
+          <div className="flex gap-[12px]">
+            <button className="flex-1 h-[40px] bg-[#CAF47E] border border-[#132219] rounded-[50px] text-[18px] font-medium">
               Purchase
             </button>
-            <button className="flex-1 h-[46px] flex items-center justify-center rounded-full border border-black bg-white text-[14px] font-medium text-black">
+            <button className="flex-1 h-[40px] bg-white border border-[#132219] rounded-[50px] text-[18px] font-medium">
               Refinancing
             </button>
           </div>
 
-          {/* Inputs */}
-          <div className="flex flex-col gap-[43.896px]">
-            <SliderBlock
-              label="Purchase price"
-              value={purchasePrice}
-              setValue={setPurchasePrice}
-              min={50000}
-              max={2000000}
-              step={1000}
-            />
-            <SliderBlock
-              label="Gross annual income"
-              value={income}
-              setValue={setIncome}
-              min={20000}
-              max={500000}
-              step={1000}
-            />
-            <SliderBlock
-              label="Own Funds"
-              value={funds}
-              setValue={setFunds}
-              min={10000}
-              max={1000000}
-              step={1000}
-            />
-
-            {/* Notary Fees Dropdown */}
-            <div
-              className="
-                flex justify-between items-center
-                h-[66.354px] px-[24.5px]
-                bg-[#F6F6F6]
-                border border-[rgba(0,0,0,0.3)]
-                rounded-[81.667px]
-                text-[18.375px] font-medium text-[#7E7E7E]
-              "
+          {/* Segmented Button Group */}
+          <div className="flex w-full border border-[#132219] rounded-full p-[3px]">
+            <button
+              onClick={() => setResidenceType("haupt")}
+              className={`flex-1 h-[45px] text-[18px] font-semibold rounded-full transition-all duration-300 ${
+                residenceType === "haupt"
+                  ? "bg-[#132219] text-[#CAF47E]"
+                  : "bg-transparent text-[#474849]"
+              }`}
             >
-              <span>Notary Fees</span>
-              <select
-                value={fees}
-                onChange={(e) => setFees(e.target.value)}
-                className="
-                  bg-transparent outline-none text-black font-medium
-                  cursor-pointer
-                "
-              >
-              </select>
-            </div>
+              Hauptwohnsitz
+            </button>
+            <button
+              onClick={() => setResidenceType("zweit")}
+              className={`flex-1 h-[45px] text-[18px] font-semibold rounded-full transition-all duration-300 ${
+                residenceType === "zweit"
+                  ? "bg-[#132219] text-[#CAF47E]"
+                  : "bg-transparent text-[#474849]"
+              }`}
+            >
+              Zweitwohnsitz
+            </button>
+          </div>
+
+          {/* Slider fields */}
+          <SliderBlock
+            label="Property Price"
+            value={purchasePrice}
+            setValue={setPurchasePrice}
+            min={100000}
+            max={1000000}
+            step={1000}
+          />
+          <SliderBlock
+            label="Equity / Own Funds"
+            value={funds}
+            setValue={setFunds}
+            min={100000}
+            max={1000000}
+            step={1000}
+          />
+          <SliderBlock
+            label="Annual Gross Income (NET)"
+            value={income}
+            setValue={setIncome}
+            min={20000}
+            max={200000}
+            step={1000}
+          />
+
+          {/* ZIP / City field */}
+          <div className="flex flex-col gap-[10px]">
+            <label className="text-[#132219] text-[16px] font-medium">ZIP / City</label>
+            <input
+              type="text"
+              placeholder="Enter your zip/city"
+              className="border border-[#A8A8A8] rounded-[50px] px-[20px] py-[10px] text-[16px] text-[#132219] outline-none placeholder:text-[#A8A8A8]"
+            />
           </div>
         </div>
 
-        {/* Right Side - Project Details */}
-        <div className="flex flex-col items-center w-[521px]">
-          {/* Box */}
-          <div
-            className="
-              flex flex-col
-              w-full
-              bg-[#FFF]
-              border border-black
-              rounded-[9.854px]
-              justify-between
-            "
-          >
-            {/* Top Content */}
-            <div className="w-full flex flex-col gap-[10px] p-[20px]">
-              {/* Header row */}
-              <div className="flex items-center justify-between w-full mb-[8px]">
-                <p className="text-black font-sfpro font-semibold text-[25.62px] leading-normal">
-                  Project Details
-                </p>
-                <button
-                  className="
-                    text-[15px] font-sfpro font-normal text-[#7E7E7E]
-                    hover:text-black transition
-                  "
-                >
-                  Reset
-                </button>
-              </div>
-
-              {/* Project details */}
-              <div className="flex flex-col w-full">
-                <div className="flex justify-between py-[8px]">
-                  <span className="text-[#7E7E7E] text-[16px] leading-normal">
-                    Purchase Price
-                  </span>
-                  <span className="text-[#7E7E7E] font-sfpro font-medium text-[15.766px] leading-normal">
-                    {purchasePrice.toLocaleString()}
-                  </span>
-                </div>
-                <div className="flex justify-between py-[8px]">
-                  <span className="text-[#7E7E7E] text-[16px]">Notary Fees</span>
-                  <span className="text-[#7E7E7E] font-sfpro font-medium text-[15.766px] leading-normal">
-                    {fees}
-                  </span>
-                </div>
-                {/* Separator + Total Cost */}
-                <div className="flex flex-col">
-                  <div
-                    className="w-full border-t border-[rgba(0,0,0,0.40)] mt-[8px]"
-                    style={{ borderTopWidth: "0.985px" }}
-                  />
-                  <div className="flex justify-between items-center self-stretch pt-[9.854px]">
-                    <span className="text-black font-sfpro font-medium text-[19.707px] leading-normal">
-                      Total Cost
-                    </span>
-                    <span className="text-black font-sfpro font-medium text-[19.707px] leading-normal">
-                      {(purchasePrice + funds).toLocaleString()} $
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Financing */}
-              <div className="w-full pt-[12px]">
-                <h3 className="text-black font-sfpro font-semibold text-[25.62px] leading-normal mb-[8px]">
-                  Financing
-                </h3>
-                <div className="flex justify-between py-[4px]">
-                  <span className="text-[#7E7E7E] text-[16px] leading-normal">
-                    Own Funds
-                  </span>
-                  <span className="text-[#7E7E7E] font-sfpro font-normal text-[15.766px] leading-normal">
-                    {funds.toLocaleString()} $
-                  </span>
-                </div>
-                <div className="flex justify-between text-[16px] py-[4px]">
-                  <span className="text-[#7E7E7E]">Mortgage loans</span>
-                  <span className="text-[#7E7E7E] font-sfpro font-normal text-[15.766px] leading-normal">
-                    {(purchasePrice - funds).toLocaleString()} $
-                  </span>
-                </div>
-                {/* ✅ Separator only above Total Financing */}
-                <div
-                  className="w-full border-t border-[rgba(0,0,0,0.40)] mt-[8px]"
-                  style={{ borderTopWidth: "0.985px" }}
-                />
-                <div className="flex justify-between py-[4px]">
-                  <span className="text-black font-sfpro font-medium text-[19.707px] leading-normal">
-                    Total financing
-                  </span>
-                  <span className="text-black font-sfpro font-medium text-[19.707px] leading-normal">
-                    {purchasePrice.toLocaleString()} $
-                  </span>
-                </div>
-              </div>
-
-              {/* Finma Guidelines */}
-              <div className="w-full pt-[12px]">
-                <h3 className="text-black font-sfpro font-semibold text-[25.62px] leading-normal mb-[8px]">
-                  Finma Guidelines
-                </h3>
-                <div className="flex justify-between text-[16px] py-[4px]">
-                  <span className="text-[#7E7E7E]">Loan/Purchase price</span>
-                  <span className="text-[#7E7E7E]">95,75%</span>
-                </div>
-                <div className="flex justify-between text-[16px] py-[4px]">
-                  <span className="text-[#7E7E7E]">Expenses/Income</span>
-                  <span className="text-[#7E7E7E]">28,17%</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Warning box */}
-            <div
-              className="
-                flex w-full items-center gap-[40px]
-                h-[72.918px] px-[22.664px] py-[16.751px]
-                bg-[#F6F6F6]
-                border-t border-black
-                rounded-b-[9.854px]
-              "
-            >
-              <div className="relative w-[37.444px] h-[37.444px] flex items-center justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="37.444"
-                  height="37.444"
-                  viewBox="0 0 37.444 37.444"
-                  className="absolute"
-                >
-                  <rect
-                    width="37.444"
-                    height="37.444"
-                    rx="4.801"
-                    fill="#474849"
-                    stroke="#FFF"
-                    strokeWidth="1.928"
-                  />
-                </svg>
-                <span className="text-white font-bold text-[20px] relative z-10">
-                  !
-                </span>
-              </div>
-              <p className="text-[#474849] font-sfpro font-normal text-[15.766px] leading-normal flex-1">
-                You don’t seem to have enough own funds for your project. Continue
-                and we’ll find solutions together.
+        {/* RIGHT SIDE */}
+        <div className="flex flex-col gap-[24px] w-[628px]">
+          {/* Mortgage Need */}
+          <div className="flex flex-col gap-[8px] p-[20px] rounded-[8px] bg-[#E9E9E9]">
+            <div className="flex justify-between items-center">
+              <p className="text-[16px] text-[#132219]">
+                Eligibility confirmed. Estimated mortgage need:
               </p>
+              <div className="w-[20px] h-[20px] bg-[#CAF47E] rounded-full flex items-center justify-center">
+                <CheckIcon />
+              </div>
+            </div>
+            <div className="w-full h-[1px] bg-[#A8A8A8]/40" />
+            <h2 className="text-[40px] font-semibold text-[#132219] leading-none">
+              CHF 900’000
+            </h2>
+          </div>
+
+          {/* Tragbarkeit */}
+          <div className="flex flex-col p-[24px] gap-[12px] rounded-[8px] bg-[#E9E9E9]">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[22px] text-[#132219]">Tragbarkeit</h3>
+              <div className="w-[20px] h-[20px] bg-[#CAF47E] rounded-full flex items-center justify-center">
+                <CheckIcon />
+              </div>
+            </div>
+            <h2 className="text-[36px] font-semibold text-[#132219]">CHF 165,000</h2>
+
+            <div className="w-full flex flex-col gap-[8px]">
+              <div className="h-[14px] rounded-[69px] bg-[#132219] relative overflow-hidden">
+                <div
+                  className="absolute left-0 top-0 h-full bg-[#CAF47E]"
+                  style={{ width: "65%" }}
+                ></div>
+              </div>
+              <div className="flex justify-between text-[14px] text-[#132219]">
+                <span>0$</span>
+                <span>165,000$</span>
+              </div>
             </div>
           </div>
 
-          {/* Continue button (flush under box) */}
-          <div className="w-full mt-[24px]">
-            <button
-              className="
-                w-full py-[12px]
-                bg-[#474849] text-white
-                rounded-full
-                text-[16px] font-medium
-              "
-            >
-              Continue my project
-            </button>
+          {/* Eigenmittel */}
+          <div className="flex flex-col p-[24px] gap-[12px] rounded-[8px] bg-[#E9E9E9]">
+            <div className="flex justify-between items-center">
+              <h3 className="text-[22px] text-[#132219]">Eigenmittel</h3>
+              <div className="w-[20px] h-[20px] bg-[#CAF47E] rounded-full flex items-center justify-center">
+                <CheckIcon />
+              </div>
+            </div>
+            <h2 className="text-[36px] font-semibold text-[#132219]">CHF 80,000</h2>
+
+            <div className="w-full flex flex-col gap-[8px]">
+              <div className="h-[14px] rounded-[69px] bg-[#132219] relative overflow-hidden">
+                <div
+                  className="absolute left-0 top-0 h-full bg-[#CAF47E]"
+                  style={{ width: "25%" }}
+                ></div>
+              </div>
+              <div className="flex justify-between text-[14px] text-[#132219]">
+                <span>0$</span>
+                <span>80,000$</span>
+              </div>
+            </div>
           </div>
+
+          <button className="mt-[10px] w-full h-[50px] rounded-[50px] bg-[#132219] text-white text-[18px] font-medium">
+            Continue my project
+          </button>
         </div>
       </div>
     </section>
