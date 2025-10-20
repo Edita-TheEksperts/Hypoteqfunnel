@@ -1,7 +1,6 @@
 import { readOptions, sanitizeNumber, numericAllowedKeys } from './utils'
 import React from 'react'
 
-// 📅 Date picker helper
 const DateBox = ({
   value,
   setValue,

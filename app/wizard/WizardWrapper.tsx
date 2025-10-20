@@ -7,5 +7,6 @@ export default function WizardWrapper() {
   const searchParams = useSearchParams()
   const version = (searchParams.get("version") as "internal" | "external") || "internal"
 
+  
   return <JsonWizard version={version} />
 }
