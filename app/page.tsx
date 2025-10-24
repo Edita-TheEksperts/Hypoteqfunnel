@@ -6,6 +6,9 @@ import Advantages from "@/components/AdvantagesSection";
 import FinanceForm from "@/components/ui/FinanceForm";
 import Footer from "@/components/layout/Footer";
 import MortgageGuide from "@/components/ui/MortgageGuide";
+import HomeEvaluation from "../components/HomeEvaluation";
+
+
 
 export default function Home() {
   return (
@@ -13,6 +16,7 @@ export default function Home() {
       <Header />
       <Hero />
       <MortgageCalculator />
+      <HomeEvaluation />
       <BestChoices />
       <Advantages />
       <FinanceForm />
