@@ -8,30 +8,28 @@ export default function HomeEvaluation() {
       style={{
         backgroundImage: "url('/images/vV_.png')",
         backgroundSize: "115%",
-       backgroundPosition: "30% center",
-
+        backgroundPosition: "30% center",
       }}
     >
       {/* Text content */}
       <div className="max-w-[700px]">
- <h1 className="font-sfpro text-[#132219] font-[500] text-[40px] md:text-[56px] leading-[140%] tracking-[-0.4px] mb-3">
-  Home Evaluation
-</h1>
-<p
-  className="font-sfpro text-[#132219] text-[20px] font-[300] leading-[140%] mb-8 self-stretch"
-  style={{
-    fontStyle: "normal",
-    WebkitFontSmoothing: "antialiased",
-    MozOsxFontSmoothing: "grayscale",
-  }}
->
-  Find out what your home could be worth today. Our smart valuation tool compares
-  local listings and market data to give you an instant estimate.
-</p>
+        <h1 className="font-sfpro text-[#132219] font-[500] text-[40px] md:text-[56px] leading-[140%] tracking-[-0.4px] mb-3">
+          Home Evaluation
+        </h1>
+        <p
+          className="font-sfpro text-[#132219] text-[20px] font-[300] leading-[140%] mb-8 self-stretch"
+          style={{
+            fontStyle: "normal",
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale",
+          }}
+        >
+          Find out what your home could be worth today. Our smart valuation tool
+          compares local listings and market data to give you an instant
+          estimate.
+        </p>
 
-
-
-        <button className="bg-[#132219] hover:bg-[#1C2B1F] text-white text-[20px] font-semibold rounded-full px-[24px] py-[8px] w-[328px] h-[40px] flex items-center justify-center transition">
+        <button className="bg-[#132219] hover:bg-[#1C2B1F] text-white text-[20px] font-normal rounded-full px-[24px] py-[8px] w-[328px] h-[40px] flex items-center justify-center transition">
           Enter your address
         </button>
       </div>
@@ -130,19 +128,34 @@ export default function HomeEvaluation() {
   );
 }
 
-function Step({ icon, title, text }) {
+// ✅ FIXED: Add proper TypeScript types for the props
+interface StepProps {
+  icon: React.ReactNode;
+  title: string;
+  text: string;
+}
+function Step({ icon, title, text }: StepProps) {
   return (
     <div className="flex flex-col items-start text-left p-4 max-w-[250px]">
-      {/* Ikona sipër */}
       <div className="mb-[19px]">{icon}</div>
 
-      {/* Titulli */}
-      <h3 className="text-[20px] font-medium leading-[140%] mb-[30px]">
-        {title}
-      </h3>
+<h3
+  className="font-sfpro text-[20px] font-[500] leading-[140%] mb-[30px] text-[#132219]"
+>
+  {title}
+</h3>
 
-      {/* Teksti */}
-      <p className="text-[16px] font-light leading-[140%] tracking-[-0.2px]">
+      <p
+        style={{
+          color: "var(--Secondary-Color, #132219)",
+          fontFamily: '"SF Pro Display"',
+          fontSize: "16px",
+          fontStyle: "normal",
+          fontWeight: 300,
+          lineHeight: "140%",
+        }}
+        className="tracking-[-0.2px]"
+      >
         {text}
       </p>
     </div>

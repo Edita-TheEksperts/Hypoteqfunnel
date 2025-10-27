@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="relative z-10 flex flex-col justify-start h-full max-w-[1579px] w-full mx-auto px-[120px] pt-[150px] gap-[10px]">
         {/* Heading */}
         <h1 className="text-[#132219] text-[128px] leading-[100%] font-medium tracking-[-1.28px] max-w-[880px]">
-          In drei <br /> Schritten zur <br /> Ihrer Hypothek
+          In drei <br /> Schritten zur Ihrer Hypothek
         </h1>
 
         {/* Description */}
