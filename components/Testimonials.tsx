@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Clara Wagner",
     date: "09.12.2025",
-    image: "/images/testimonial.-3.svg",
+    image: "/images/testimonial-3.svg",
     text: "Thanks to their support, I finally understood the full costs and felt confident moving forward with my purchase. Highly recommended.",
   },
   {
@@ -60,24 +60,19 @@ const Testimonials: React.FC = () => {
   const visibleCount = 3;
 
   const nextSlide = () => {
-    if (currentIndex + visibleCount < testimonials.length) {
-      setCurrentIndex((prev) => prev + visibleCount);
+    if (currentIndex < testimonials.length - visibleCount) {
+      setCurrentIndex((prev) => prev + 1);
     }
   };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - visibleCount);
+      setCurrentIndex((prev) => prev - 1);
     }
   };
 
-  const visibleTestimonials = testimonials.slice(
-    currentIndex,
-    currentIndex + visibleCount
-  );
-
   return (
-    <section className="w-full flex flex-col items-center bg-white py-[100px] font-[var(--font-sfpro)]">
+    <section className="w-full flex flex-col items-center bg-white py-[100px] font-[var(--font-sfpro)] overflow-hidden">
       {/* Title */}
       <div className="w-[1274px] flex justify-between items-start mb-[56px]">
         <div>
@@ -85,7 +80,7 @@ const Testimonials: React.FC = () => {
             Testimonials
           </h2>
           <p className="text-[#132219] text-[24px] font-[300] leading-[140%] font-['SF Pro Display'] max-w-[1154px] mt-[8px]">
-            Real experiences from people who found clarity,  confidence <br /> and
+            Real experiences from people who found clarity, confidence <br /> and
             better decisions with our mortgage and property tools.
           </p>
         </div>
@@ -105,9 +100,9 @@ const Testimonials: React.FC = () => {
           </button>
           <button
             onClick={nextSlide}
-            disabled={currentIndex + visibleCount >= testimonials.length}
+            disabled={currentIndex >= testimonials.length - visibleCount}
             className={`w-[36px] h-[36px] rounded-full bg-[#132219] flex items-center justify-center transition ${
-              currentIndex + visibleCount >= testimonials.length
+              currentIndex >= testimonials.length - visibleCount
                 ? "opacity-40 cursor-not-allowed"
                 : "hover:opacity-80"
             }`}
@@ -117,37 +112,44 @@ const Testimonials: React.FC = () => {
         </div>
       </div>
 
-      {/* Cards */}
-<div className="w-[1274px] flex justify-between gap-[20px] transition-all duration-500 ease-in-out">
-        {visibleTestimonials.map((t) => (
-          <div
-            key={t.id}
-            className="flex flex-col items-start gap-[66.55px] w-[409px] rounded-[9.933px] bg-[#E2E2E2] 
-                       p-[23.839px_19.866px] shadow-[4px_6px_8.4px_0_rgba(0,0,0,0.25)]"
-          >
-            {/* Header */}
-            <div className="flex items-center gap-[12px]">
-              <img
-                src={t.image}
-                alt={t.name}
-                className="w-[48px] h-[48px] rounded-full object-cover"
-              />
-              <h3 className="text-[20px] font-[600] text-[#000] font-['SF Pro Display']">
-                {t.name}
-              </h3>
+      {/* Slider container */}
+      <div className="w-[1274px] overflow-hidden">
+        <div
+          className="flex gap-[20px] transition-transform duration-500 ease-in-out"
+          style={{
+            transform: `translateX(-${currentIndex * (409 + 20)}px)`, // 409px width + 20px gap
+          }}
+        >
+          {testimonials.map((t) => (
+            <div
+              key={t.id}
+              className="flex flex-col items-start gap-[66.55px] w-[409px] rounded-[9.933px] bg-[#E2E2E2] 
+                         p-[23.839px_19.866px] shadow-[4px_6px_8.4px_0_rgba(0,0,0,0.25)] flex-shrink-0"
+            >
+              {/* Header */}
+              <div className="flex items-center gap-[12px]">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-[48px] h-[48px] rounded-full object-cover"
+                />
+                <h3 className="text-[20px] font-[600] text-[#000] font-['SF Pro Display']">
+                  {t.name}
+                </h3>
+              </div>
+
+              {/* Text */}
+              <p className="text-[20.18px] font-[400] leading-[140%] text-[#000] opacity-80 font-['SF Pro Rounded']">
+                {t.text}
+              </p>
+
+              {/* Date */}
+              <p className="text-[17.65px] font-[300] leading-[140%] text-[#000] opacity-80 font-['SF Pro Rounded']">
+                {t.date}
+              </p>
             </div>
-
-            {/* Text */}
-            <p className="text-[20.18px] font-[400] leading-[140%] text-[#000] opacity-80 font-['SF Pro Rounded']">
-              {t.text}
-            </p>
-
-            {/* Date */}
-            <p className="text-[17.65px] font-[300] leading-[140%] text-[#000] opacity-80 font-['SF Pro Rounded']">
-              {t.date}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -253,21 +253,22 @@ export default function MortgageCalculator() {
                 : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
             }`}
           >
-            <h3
-              className="font-sfpro text-[#132219]"
-              style={{
-                fontSize: "85.022px",
-                fontStyle: "normal",
-                fontWeight: "500",
-                lineHeight: "100%",
-                letterSpacing: "-0.85px",
-              }}
-            >
-              {Math.round(actualMortgage).toLocaleString("de-CH")}
-            </h3>
-            <p className="text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
-           Total expenses
-            </p>
+ <h3
+  className="font-sfpro text-[#132219]"
+  style={{
+    fontSize: "85.022px",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "100%",
+    letterSpacing: "-0.85px",
+  }}
+>
+  {Math.round(interestYearEffective + amortizationYear + maintenanceYear).toLocaleString("de-CH")}
+</h3>
+<p className="text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
+  Total yearly expenses
+</p>
+
           </div>
         </div>
       </div>

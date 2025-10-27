@@ -29,14 +29,14 @@ const MortgageGuide: React.FC = () => {
           </p>
         </div>
 
-        {/* Arrow Only (no background) */}
+        {/* Bigger Arrow Only */}
         <button
           className="relative z-10 flex items-center justify-center transition-transform hover:translate-x-[4px]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="33.086"
-            height="19.3"
+            width="55"
+            height="32"
             viewBox="0 0 20 34"
             fill="none"
           >
