@@ -6,6 +6,9 @@ import Footer from "@/components/layout/Footer";
 import MortgageGuide from "@/components/ui/MortgageGuide";
 import HomeEvaluation from "../components/HomeEvaluation";
 import HowItWorks from "@/components/HowItWorks";
+import YourAdvantages from "@/components/YourAdvantages";
+import Testimonials from "@/components/Testimonials";
+import ConsultationBanner from "@/components/ConsultationBanner";
 
 
 
@@ -18,7 +21,10 @@ export default function Home() {
       <HomeEvaluation />
       <BestChoices />
       <HowItWorks />
+      <YourAdvantages />
+      <Testimonials />
       <MortgageGuide />
+      <ConsultationBanner />
       <Footer />
     </main>
   );

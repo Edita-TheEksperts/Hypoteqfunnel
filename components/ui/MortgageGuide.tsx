@@ -1,67 +1,50 @@
-// components/MortgageGuide.tsx
 "use client";
 import React from "react";
-import { ArrowRight } from "lucide-react";
 
 const MortgageGuide: React.FC = () => {
   return (
     <section
-      className="relative w-full h-[600px] font-sfpro text-white"
+      className="relative w-full h-[384px] flex items-center justify-center"
       style={{
-        background: "url('/images/2.jpg') lightgray -39px -239.614px / 145.335% 237.73% no-repeat",
+        background: "url('/images/foto12345.png') center/cover no-repeat",
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 bg-black/25" />
 
       {/* Content */}
       <div
-        className="relative max-w-[1504px] mx-auto px-[80px] py-[116px] 
-                   flex flex-col items-start gap-[42px]"
+        className="relative flex justify-between items-center w-[1506px] 
+                   px-[116px] py-[48px] text-white"
       >
-        {/* Title */}
-        <h2
-          className="font-bold"
-          style={{
-            fontSize: "48px",
-            lineHeight: "50px",
-          }}
-        >
-          Mortgage Guide
-        </h2>
+        {/* Left Text */}
+        <div className="flex flex-col items-start justify-center gap-[16px] max-w-[560px]">
+          <h2 className="font-['SF Pro Display'] text-[36px] font-[600] leading-[44px]">
+            Mortgage Guide
+          </h2>
 
-        {/* Paragraph */}
-        <p
-          className="max-w-[626px] font-sfpro"
-          style={{
-            fontSize: "16px",
-            fontWeight: 500,
-            lineHeight: "22px",
-          }}
-        >
-          If you are planning to buy residential property or renew your existing
-          mortgage, you may find yourself facing many uncertainties and important
-          questions. From choosing the right financing model to understanding
-          interest rates and repayment options, the process can seem complex.
-          <br />
-          <br />
-          Our comprehensive guide is designed to support you along the way,
-          offering practical tips, clear explanations, and easy-to-understand
-          answers to the most common questions. This way, you can make
-          well-informed decisions with confidence and peace of mind.
-        </p>
+          <p className="font-['SF Pro Display'] text-[20px] font-[400] leading-[140%] opacity-90">
+            Learn everything you need to know about mortgages — from key terms
+            and rates to smart tips for financing your home.
+          </p>
+        </div>
 
-        {/* Button */}
+        {/* Arrow Only (no background) */}
         <button
-          className="flex items-center justify-center gap-[10px] 
-                     px-[20px] py-[10px]
-                     rounded-[70px] border border-white/40 
-                     bg-white/20 backdrop-blur-[6.5px] 
-                     text-white text-[16px] font-medium 
-                     hover:bg-white/30 transition"
+          className="relative z-10 flex items-center justify-center transition-transform hover:translate-x-[4px]"
         >
-          Mortgage Guide
-          <ArrowRight size={18} />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="33.086"
+            height="19.3"
+            viewBox="0 0 20 34"
+            fill="none"
+          >
+            <path
+              d="M19.3146 16.5258C19.3154 17.2725 19.0576 17.9334 18.5412 18.5083L4.76965 32.3085C4.19578 32.8261 3.53547 33.0852 2.78874 33.086C2.042 33.0868 1.38116 32.829 0.806212 32.3126C0.288644 31.7387 0.0294751 31.0784 0.0287 30.3317C0.027925 29.585 0.285723 28.9241 0.802098 28.3492L12.6802 16.5327L0.777595 4.74087C0.260028 4.167 0.000858384 3.50669 8.33495e-05 2.75996C-0.000691685 2.01322 0.257106 1.35238 0.773482 0.777434C1.34736 0.259867 2.00766 0.000697485 2.7544 -7.75502e-05C3.50113 -0.000852586 4.16197 0.256946 4.73692 0.773321L18.5371 14.5449C19.0547 15.1188 19.3138 15.7791 19.3146 16.5258Z"
+              fill="white"
+            />
+          </svg>
         </button>
       </div>
     </section>

@@ -11,7 +11,7 @@ interface StepProps {
 
 const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) => {
   return (
-    <div className="flex justify-between items-start w-[1272px] mb-[115px] font-[var(--font-sfpro)]">
+<div className="flex justify-between items-start w-[1272px] mb-[80px] font-[var(--font-sfpro)]">
       {/* Left Text Section */}
       <div className="w-[536px] text-left text-[var(--Secondary-Color,#132219)]">
         {/* Step Label (optional) */}
@@ -43,7 +43,7 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
   >
     {/* Text */}
  <p
-  className="w-[35px] text-center text-[var(--Secondary-Color,#132219)] 
+  className="w-[385px] text-center text-[var(--Secondary-Color,#132219)] 
              font-[var(--font-sfpro)] text-[32px] font-[400] 
              leading-[140%] tracking-[-0.32px] break-keep"
 >
@@ -66,14 +66,15 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
   </div>
 ) : (
   image && (
-    <div className="flex-shrink-0 w-[533px] h-[359px] aspect-[533/359] rounded-[10px] overflow-hidden">
-      <Image
-        src={image}
-        alt={`${title} illustration`}
-        width={533}
-        height={359}
-        className="w-full h-full object-cover rounded-[10px]"
-      />
+<div className="flex-shrink-0 w-[533px] h-[450px] rounded-[10px] overflow-hidden">
+    <Image
+  src={image}
+  alt={`${title} illustration`}
+  width={533}
+  height={359}
+  className="w-full h-full object-cover object-bottom rounded-[10px]"
+/>
+
     </div>
   )
 )}
@@ -103,7 +104,7 @@ const HowItWorks: React.FC = () => {
         step="Step 2"
         title="Analysis"
         text="Once we have your details, our team gets to work. We evaluate affordability, credit profile, and property documentation to determine eligibility. Using advanced comparison tools, we review offers from partner banks and outline clear scenarios for you. Every rate, fee, and term is explained—transparent, accurate, and tailored to your needs."
-        image="/images/how-it-works-2.png"
+        image="/images/oooo.png"
       />
 
       {/* Step 3 */}
@@ -111,7 +112,7 @@ const HowItWorks: React.FC = () => {
         step="Step 3"
         title="Offer"
         text="Once we’ve completed the analysis, we present tailored mortgage offers based on your financial profile and property details. You’ll receive side-by-side comparisons of interest rates, terms, and monthly payments from our network of trusted banks. Each option is explained clearly—so you understand the benefits, trade-offs, and total costs before making a decision. Transparent, data-driven, and fully personalized."
-        image="/images/how-it-works-3.png"
+        image="/images/offer.png"
       />
 
       {/* ✅ Step 4 */}

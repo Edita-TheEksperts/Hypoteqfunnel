@@ -266,7 +266,7 @@ export default function MortgageCalculator() {
               {Math.round(actualMortgage).toLocaleString("de-CH")}
             </h3>
             <p className="text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
-              Required mortgage in CHF
+           Total expenses
             </p>
           </div>
         </div>

@@ -1,77 +1,142 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
+  const firstRow = [
+    {
+      title: "Home Page",
+      links: ["Quick Calculator", "Financing Request", "Mortgage Guide"],
+    },
+    {
+      title: "Mortgage Calculator",
+      links: [],
+    },
+    {
+      title: "Mortgages",
+      links: ["New Mortgage", "Refinancing", "New Construction"],
+    },
+    {
+      title: "Guide",
+      links: ["Interest Rate Trends", "Property Market", "Homeownership"],
+    },
+  ];
+
+  const secondRow = [
+    {
+      title: "About Us",
+      links: ["Mission", "Team", "Partners"],
+      extra: "Imprint & Data Protection",
+    },
+    {
+      title: "Partners & White Label",
+      links: ["API", "Platform Integration"],
+    },
+    {
+      title: "Contact & Consolation",
+      links: ["Consultation Form", "Locations"],
+    },
+    {
+      title: "Downloads & Checklists",
+      links: ["Interest Rate Trends", "Property Market", "Homeownership"],
+    },
+  ];
+
   return (
-    <footer className="bg-[#111111] text-white font-inter w-full">
-      <div className="max-w-[1380px] mx-auto px-[60px] py-[70px] flex justify-between items-start">
-        
-        {/* Left Side: Logo + Copyright */}
-        <div className="flex flex-col justify-between h-[460px] ml-[-70px]">
-          {/* Logo */}
-          <img
+    <footer className="bg-white text-[#132219] font-['SF Pro Display'] border-t border-[#E5E5E5] w-full">
+      <div className="max-w-[1273px] mx-auto grid grid-cols-[168px_repeat(4,minmax(0,1fr))] gap-x-[108px] gap-y-[43px] px-[60px] pt-[70px] pb-[50px]">
+
+        {/* === Column 1: Logo + Address === */}
+        <div className="flex flex-col gap-[35px]">
+          <Image
             src="/images/logo.png"
             alt="Hypoteq Logo"
-            className="w-[300px] h-[75px] object-contain"
-            style={{ filter: "brightness(0) invert(1)" }}
+            width={145}
+            height={38}
+            className="object-contain"
           />
-
-          {/* Copyright */}
-          <p className="text-[#CAF476] text-[18px] font-semibold leading-[26px] mt-[20px]">
-            © 2025 HYPOTEQ Alle Rechte vorbehalten
-          </p>
+          <p className="text-[14px] text-[#132219]/80">Address</p>
         </div>
 
-        {/* Right Side: Newsletter + Info + Links */}
-        <div className="flex flex-col gap-[50px]">
-          {/* Newsletter */}
-          <div className="flex flex-col gap-[14px]">
-            <p className="text-[16px] leading-[150%] text-white/70">
-              Subscribe to our newsletter:
-            </p>
-            <div className="flex flex-col gap-[14px]">
-              <input
-                type="email"
-                placeholder="Write your email"
-                className="w-[520px] h-[52px] bg-white/10 border border-white/10 rounded-[10px] px-[22px] text-white text-[16px] placeholder-white/50 focus:outline-none"
-              />
-              <button className="flex items-center mb-5 justify-center gap-[10px] px-[24px] py-[12px] rounded-full bg-[#CAF476] text-black text-[15px] font-medium w-fit">
-                Send
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
+        {/* === First Row === */}
+        {firstRow.map((col, i) => (
+          <div key={i} className="flex flex-col gap-[5px]">
+            <h4 className="text-[18px] font-semibold mb-[48px]">{col.title}</h4>
+            {col.links.length > 0 && (
+              <ul className="flex flex-col gap-[2px]">
+                {col.links.map((link, j) => (
+                  <li key={j}>
+                    <a
+                      href="#"
+                      className="text-[15px] font-normal text-[#132219] hover:underline"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+
+        {/* === Second Row === */}
+        <div></div> {/* bosh poshtë logos */}
+        {secondRow.map((col, i) => (
+          <div key={i} className="flex flex-col gap-[5px]">
+            <h4 className="text-[18px] font-semibold mb-[56px] leading-[1.1]">
+              {col.title}
+            </h4>
+            <ul className="flex flex-col gap-[1px] mt-[2px]">
+              {col.links.map((link, j) => (
+                <li key={j}>
+                  <a
+                    href="#"
+                    className="text-[15px] font-normal text-[#132219] hover:underline"
+                  >
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Vetëm për About Us */}
+            {col.extra && (
+              <h4 className="text-[18px] font-semibold mt-[48px] whitespace-nowrap">
+                {col.extra}
+              </h4>
+            )}
+          </div>
+        ))}
+
+        {/* === NEWSLETTER SECTION (Input box + Button poshtë) === */}
+        <div className="col-start-2 col-span-4 flex flex-col gap-[10px] mt-[120px] mb-[120px]">
+          <h4 className="text-[18px] font-semibold">
+            Subscribe to our Newsletter
+          </h4>
+
+          {/* Input frame */}
+          <div className="flex items-center h-[48px] w-full border border-[rgba(0,0,0,0.3)] bg-[rgba(0,0,0,0.1)] rounded-[10px] px-[17px]">
+            <input
+              type="email"
+              placeholder="Write your email"
+              className="flex-1 bg-transparent text-[14px] placeholder:text-[#9A9A9A] focus:outline-none"
+            />
           </div>
 
-          {/* Info + Links */}
-          <div className="flex gap-[100px] text-[18px] leading-[160%] font-semibold">
-            {/* Company Info */}
-            <div className="flex flex-col gap-[10px] text-white/70">
-              <p className="text-white mb-12">HYPOTEQ AG</p>
-              <p>Löwenstrasse 29</p>
-              <p className="mb-5">8001 Zürich</p>
-              <p>044 554 41 00</p>
-              <p>info@hypoteq.ch</p>
-            </div>
-
-            {/* Navigation */}
-            <div className="flex flex-col text-white/70">
-              <a href="#" className="text-[#CAF476] mb-3">Home</a>
-              <a href="#" className="hover:text-white mb-3">Ihre Vorteile</a>
-              <a href="#" className="hover:text-white mb-3">Hypothekenrechner</a>
-              <a href="#" className="hover:text-white mb-8">Über uns</a>
-              <a href="#" className="hover:text-white mb-3">Impressum</a>
-              <a href="#" className="hover:text-white">Datenschutzerklärung</a>
-            </div>
-          </div>
+          {/* Button jashtë kutisë gri */}
+          <button className="flex items-center justify-center gap-[6px] self-end px-[20px] py-[9px] w-[120px] rounded-full bg-[#CAF476] hover:bg-[#b9eb67] text-[#132219] text-[14px] font-medium transition mt-[8px]">
+            Send
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-[13px] h-[13px]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </footer>
