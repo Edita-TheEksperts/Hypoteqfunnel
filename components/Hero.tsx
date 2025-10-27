@@ -3,16 +3,17 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full min-h-screen overflow-x-hidden font-sfpro">
+<section className="relative w-full min-h-[100vh] overflow-x-hidden overflow-y-hidden font-sfpro">
       {/* Background image */}
-      <div
-        className="absolute inset-0 bg-no-repeat bg-cover"
-        style={{
-          backgroundImage: "url('/images/Hero1.jpg')",
-          backgroundPosition: "-631px -2370px",
-          backgroundSize: "266.561% 549.731%",
-        }}
-      ></div>
+<div
+  className="absolute inset-0 bg-no-repeat bg-cover -z-10"
+  style={{
+    backgroundImage: "url('/images/Hero1.jpg')",
+    backgroundPosition: "-631px -2370px",
+    backgroundSize: "266.561% 549.731%",
+  }}
+></div>
+
 
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-start h-full max-w-[1579px] w-full mx-auto px-[120px] pt-[150px] gap-[10px]">

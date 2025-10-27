@@ -14,7 +14,7 @@ import ConsultationBanner from "@/components/ConsultationBanner";
 
 export default function Home() {
   return (
-        <main className="min-h-screen">
+       <main className="overflow-visible">
       <Header />
       <Hero />
       <MortgageCalculator />

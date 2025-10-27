@@ -1,5 +1,7 @@
 "use client";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
 
 interface StepProps {
   step?: string;
@@ -9,129 +11,147 @@ interface StepProps {
   highlightBox?: boolean;
 }
 
-const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) => {
-  return (
-<div className="flex justify-between items-start w-[1272px] mb-[80px] font-[var(--font-sfpro)]">
-      {/* Left Text Section */}
-      <div className="w-[536px] text-left text-[var(--Secondary-Color,#132219)]">
-        {/* Step Label (optional) */}
-        {step && (
-          <p className="text-[16px] font-[500] leading-[140%] tracking-[-0.16px] mb-[4px] text-[var(--Secondary-Color,#132219)]">
-            {step}
-          </p>
-        )}
-
-        {/* Step Title */}
-        <h3 className="text-[28px] font-[600] leading-[140%] mb-[16px] text-[var(--Secondary-Color,#132219)]">
-          {title}
-        </h3>
-
-        {/* Step Paragraph */}
-    <p
-  className="text-[24px] font-[300] leading-[140%] text-[var(--Secondary-Color,#132219)] font-['SF Pro Display'] not-italic antialiased"
-  style={{
-    fontStyle: "normal",
-    WebkitFontSmoothing: "antialiased",
-    MozOsxFontSmoothing: "grayscale",
-  }}
->
-  {text}
-</p>
-
-      </div>
-
-      {/* Space between text and image */}
-      <div className="w-[199px]" />
-
-{highlightBox ? (
+const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) => (
   <div
-    className="flex flex-col justify-between items-center 
-               w-[535px] h-[293px] px-[105px] py-[40px] 
-               bg-[var(--Main-Color,#CAF476)] rounded-[10px] flex-shrink-0"
+    className={`flex justify-between items-start ${
+      highlightBox ? "w-[1272px] p-14" : "w-[1272px] p-10"
+    } font-[var(--font-sfpro)] bg-[#f8f9fa] rounded-2xl shadow-lg border border-[#e5e7eb] transition-all duration-500`}
   >
-    {/* Text */}
- <p
-  className="w-[385px] text-center text-[var(--Secondary-Color,#132219)] 
-             font-[var(--font-sfpro)] text-[32px] font-[400] 
-             leading-[140%] tracking-[-0.32px] break-keep"
->
-  Start now in just 3 clicks.
-  <br />
-  We’ll guide you, step by step.
-</p>
-
-
-    {/* Button */}
-    <button
-      className="flex items-center justify-center gap-[10px]
-                 border border-[var(--Secondary-Color,#132219)] 
-                 rounded-[58px] px-[24px] py-[8px]
-                 text-[20px] font-[600] text-[var(--Secondary-Color,#132219)]
-                 bg-[var(--Main-Color,#CAF476)] hover:opacity-90 transition-all"
+    <div
+      className={`text-left text-[#132219] ${
+        highlightBox ? "w-[600px]" : "w-[536px]"
+      }`}
     >
-      Find my best offer
-    </button>
-  </div>
-) : (
-  image && (
-<div className="flex-shrink-0 w-[513px] rounded-[10px] overflow-hidden flex justify-center items-center">
-  <Image
-    src={image}
-    alt={`${title} illustration`}
-    width={513}
-    height={400}
-    className="max-w-full h-auto object-contain rounded-[10px]"
-    priority
-  />
-</div>
-
-  )
-)}
-
+      {step && <p className="text-[16px] font-[500] mb-[4px]">{step}</p>}
+      <h3
+        className={`${
+          highlightBox ? "text-[34px]" : "text-[28px]"
+        } font-[600] mb-[16px]`}
+      >
+        {title}
+      </h3>
+      <p
+        className={`${
+          highlightBox ? "text-[26px]" : "text-[24px]"
+        } font-[300] leading-[140%]`}
+      >
+        {text}
+      </p>
     </div>
-  );
-};
 
-const HowItWorks: React.FC = () => {
+    <div className="w-[199px]" />
+
+    {highlightBox ? (
+      <div className="flex flex-col justify-between items-center w-[600px] h-[350px] px-[80px] py-[40px] bg-[#CAF476] rounded-[14px] shadow-md">
+        <p className="text-center text-[#132219] text-[30px] font-[400] leading-[130%]">
+          Start now in just 3 clicks.
+          <br />
+          We’ll guide you step by step.
+        </p>
+        <button className="flex items-center justify-center gap-[10px] border border-[#132219] rounded-[58px] px-[32px] py-[10px] text-[22px] font-[600] text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all">
+          Find my best offer
+        </button>
+      </div>
+    ) : (
+      image && (
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0, rotate: -10 }}      // start small, invisible, rotated
+          whileInView={{ scale: 1, opacity: 1, rotate: 0 }}     // pop to normal, rotate to 0
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            type: "spring",                                    
+            stiffness: 500,
+            damping: 20,
+          }}
+          className="flex-shrink-0 w-[513px] rounded-[10px] overflow-hidden flex justify-center items-center"
+        >
+          <Image
+            src={image}
+            alt={title}
+            width={513}
+            height={400}
+            className="object-contain rounded-[10px]"
+          />
+        </motion.div>
+      )
+    )}
+  </div>
+);
+
+export default function HowItWorks() {
+  const steps = [
+    {
+      step: "Step 1",
+      title: "Inquiry",
+      text: "Start with a quick, no-obligation inquiry. Tell us about your property, budget, income, and timeline—either via our secure online form or a short call with an advisor. We’ll listen, clarify your goals, and capture only what’s needed to assess options. No fees, no pressure—just a clear first step.",
+      image: "/images/h1.png",
+    },
+    {
+      step: "Step 2",
+      title: "Analysis",
+      text: "Once we have your details, our team gets to work. We evaluate affordability, credit profile, and property documentation to determine eligibility. Using advanced comparison tools, we review offers from partner banks and outline clear scenarios for you. Every rate, fee, and term is explained—transparent, accurate, and tailored to your needs.",
+      image: "/images/oooo.png",
+    },
+    {
+      step: "Step 3",
+      title: "Offer",
+      text: "Once we’ve completed the analysis, we present tailored mortgage offers based on your financial profile and property details. You’ll receive side-by-side comparisons of interest rates, terms, and monthly payments from our network of trusted banks. Each option is explained clearly—so you understand the benefits, trade-offs, and total costs before making a decision. Transparent, data-driven, and fully personalized.",
+      image: "/images/offer.png",
+    },
+    {
+      title: "Congratulations on Your Mortgage",
+      text: "After we complete our review, we share a tailored set of mortgage offers matched to your profile and property. You’ll see side-by-side comparisons of rates, terms, fees, and projected monthly payments. We highlight the pros, trade-offs, and total cost over time. You choose with confidence—no jargon, no pressure",
+      highlightBox: true,
+    },
+  ];
+
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
   return (
-    <section className="flex flex-col items-center w-full bg-[#FFF] pt-[100px] pb-[120px] font-[var(--font-sfpro)]">
-      {/* Section Title */}
-      <h2 className="w-[1272px] text-left text-[40px] font-[500] leading-[140%] tracking-[-0.4px] text-[var(--Secondary-Color,#132219)] mb-[80px]">
-        How it works
-      </h2>
+    <section ref={ref} className="relative bg-white h-[500vh]">
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        {steps.map((step, index) => {
+          const start = index / steps.length;
+          const end = (index + 0.9) / steps.length;
 
-      {/* Step 1 */}
-      <Step
-        step="Step 1"
-        title="Inquiry"
-        text="Start with a quick, no-obligation inquiry. Tell us about your property, budget, income, and timeline—either via our secure online form or a short call with an advisor. We’ll listen, clarify your goals, and capture only what’s needed to assess options. No fees, no pressure—just a clear first step."
-        image="/images/h1.png"
-      />
+          const opacity = useTransform(
+            scrollYProgress,
+            [start, end],
+            [index === 0 ? 1 : 0, 1]
+          );
 
-      {/* Step 2 */}
-      <Step
-        step="Step 2"
-        title="Analysis"
-        text="Once we have your details, our team gets to work. We evaluate affordability, credit profile, and property documentation to determine eligibility. Using advanced comparison tools, we review offers from partner banks and outline clear scenarios for you. Every rate, fee, and term is explained—transparent, accurate, and tailored to your needs."
-        image="/images/oooo.png"
-      />
+          const incrementalOffset = 60;
 
-      {/* Step 3 */}
-      <Step
-        step="Step 3"
-        title="Offer"
-        text="Once we’ve completed the analysis, we present tailored mortgage offers based on your financial profile and property details. You’ll receive side-by-side comparisons of interest rates, terms, and monthly payments from our network of trusted banks. Each option is explained clearly—so you understand the benefits, trade-offs, and total costs before making a decision. Transparent, data-driven, and fully personalized."
-        image="/images/offer.png"
-      />
+          const y = useTransform(scrollYProgress, [start, end], [
+            index === 0 ? 20 : 200 + index * incrementalOffset,
+            index * incrementalOffset - index * 20,
+          ]);
 
-      {/* ✅ Step 4 */}
-      <Step
-        title="Congratulations on Your Mortgage"
-        text="After we complete our review, we share a tailored set of mortgage offers matched to your profile and property. You’ll see side-by-side comparisons of rates, terms, fees, and projected monthly payments. We highlight the pros, trade-offs, and total cost over time. You choose with confidence—no jargon, no pressure."
-        highlightBox
-      />
+          const scale = useTransform(scrollYProgress, [start, end], [0.95, 1]);
+          const zIndex = index + 1;
+
+          return (
+            <motion.div
+              key={index}
+              style={{
+                opacity,
+                scale,
+                y,
+                position: "absolute",
+                zIndex,
+              }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="w-full flex flex-col items-center justify-center"
+            >
+              <Step {...step} />
+            </motion.div>
+          );
+        })}
+      </div>
     </section>
   );
-};
-
-export default HowItWorks;
+}
