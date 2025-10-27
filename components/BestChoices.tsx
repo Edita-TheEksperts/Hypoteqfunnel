@@ -14,7 +14,14 @@ export default function BestChoices() {
         <h2 className="font-sfpro text-[36px] font-[500] leading-[120%] text-[var(--White,#FFF)] mb-[24px] not-italic">
           HYPOTEQ’s <br /> best choices
         </h2>
-<p className="font-sfpro text-[20px] font-[300] leading-[140%] text-[var(--White,#FFF)] w-[511px]">
+<p
+  className="font-['SF Pro Display'] text-[20px] font-[200] leading-[140%] text-[var(--White,#FFF)] w-[511px]"
+  style={{
+    fontStyle: "normal",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  }}
+>
   Find out what your home could be worth today. Our smart valuation tool
   compares local listings and market data to give you an instant estimate.
 </p>

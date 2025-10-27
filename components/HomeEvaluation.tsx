@@ -14,7 +14,7 @@ export default function HomeEvaluation() {
       {/* Text content */}
       <div className="max-w-[700px]">
 <h1
-  className="font-sfpro text-[#132219] text-[40px] md:text-[56px] font-[500] leading-[140%] tracking-[-0.4px] mb-3"
+  className="font-['SF Pro Display'] text-[#132219] text-[40px] md:text-[56px] font-[500] leading-[140%] tracking-[-0.4px] mb-3"
   style={{
     fontStyle: "normal",
     WebkitFontSmoothing: "antialiased",
@@ -25,18 +25,18 @@ export default function HomeEvaluation() {
 </h1>
 
 
-        <p
-          className="font-sfpro text-[#132219] text-[20px] font-[300] leading-[140%] mb-8 self-stretch"
-          style={{
-            fontStyle: "normal",
-            WebkitFontSmoothing: "antialiased",
-            MozOsxFontSmoothing: "grayscale",
-          }}
-        >
-          Find out what your home could be worth today. Our smart valuation tool
-          compares local listings and market data to give you an instant
-          estimate.
-        </p>
+   <p
+  className="font-['SF Pro Display'] text-[#132219] text-[20px] font-[200] leading-[140%] mb-8 self-stretch"
+  style={{
+    fontStyle: "normal",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  }}
+>
+  Find out what your home could be worth today. Our smart valuation tool
+  compares local listings and market data to give you an instant estimate.
+</p>
+
 
         <button className="bg-[#132219] hover:bg-[#1C2B1F] text-white text-[20px] font-normal rounded-full px-[24px] py-[8px] w-[328px] h-[40px] flex items-center justify-center transition">
           Enter your address
@@ -82,7 +82,7 @@ export default function HomeEvaluation() {
                 <img
       src="/images/ShpiPare.svg"
       alt="Location Icon"
-      width={59}
+      width={54}
       height={68}
       style={{ flexShrink: 0 }}
     />
@@ -119,29 +119,25 @@ interface StepProps {
 function Step({ icon, title, text }: StepProps) {
   return (
     <div className="flex flex-col items-start text-left p-4 max-w-[250px]">
-      <div className="mb-[19px]">{icon}</div>
+<div className="mb-[19px] min-h-[68px] flex items-center">{icon}</div>
 
-      {/* Titulli */}
-      <h3
-        className="text-[#132219] font-sfpro text-[20px] font-[500] leading-[140%] mb-[30px]"
-        style={{
-          fontStyle: "normal",
-          WebkitFontSmoothing: "antialiased",
-          MozOsxFontSmoothing: "grayscale",
-        }}
-      >
-        {title}
-      </h3>
- <p
-        className="font-sfpro text-[16px] font-[200] leading-[140%] text-[#132219] tracking-[-0.2px]"
-        style={{
-          fontStyle: "normal",
-          WebkitFontSmoothing: "antialiased",
-          MozOsxFontSmoothing: "grayscale",
-        }}
-      >
-        {text}
-      </p>
+<h3
+  className="font-['SF Pro Display'] text-[#132219] font-[600] text-[20px] leading-[140%] tracking-[-0.4px] mb-[30px]"
+  style={{
+    fontStyle: "normal",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  }}
+>
+  {title}
+</h3>
+
+
+
+<p className="font-['SF Pro Display'] text-[16px] font-[300] leading-[140%] text-[#132219]">
+  {text}
+</p>
+
     </div>
   );
 }

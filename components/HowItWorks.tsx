@@ -27,9 +27,17 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
         </h3>
 
         {/* Step Paragraph */}
-        <p className="text-[24px] font-[200] leading-[140%] text-[var(--Secondary-Color,#132219)]/90 antialiased">
-          {text}
-        </p>
+    <p
+  className="text-[24px] font-[300] leading-[140%] text-[var(--Secondary-Color,#132219)] font-['SF Pro Display'] not-italic antialiased"
+  style={{
+    fontStyle: "normal",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  }}
+>
+  {text}
+</p>
+
       </div>
 
       {/* Space between text and image */}
@@ -66,16 +74,17 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
   </div>
 ) : (
   image && (
-<div className="flex-shrink-0 w-[533px] h-[450px] rounded-[10px] overflow-hidden">
-    <Image
-  src={image}
-  alt={`${title} illustration`}
-  width={533}
-  height={359}
-  className="w-full h-full object-cover object-bottom rounded-[10px]"
-/>
+<div className="flex-shrink-0 w-[513px] rounded-[10px] overflow-hidden flex justify-center items-center">
+  <Image
+    src={image}
+    alt={`${title} illustration`}
+    width={513}
+    height={400}
+    className="max-w-full h-auto object-contain rounded-[10px]"
+    priority
+  />
+</div>
 
-    </div>
   )
 )}
 

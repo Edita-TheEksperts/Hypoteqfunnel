@@ -19,11 +19,21 @@ const AdvantageCard = ({
             : "bg-[#F6F6F6] h-[286px]"
         } p-[24px]`}
     >
-      <h3 className="text-[40px] font-[500] text-[#3D3D3D] leading-normal font-['SF Pro Display']">
+      {/* Title */}
+      <h3 className="text-[36px] font-[400] text-[#3D3D3D] leading-[130%] font-['SF Pro Display']">
         {title}
       </h3>
+
+      {/* Text */}
       {text && (
-        <p className="text-[14px] font-[400] text-[#3D3D3D] leading-normal font-['SF Pro Rounded'] max-w-[757px]">
+        <p
+          className="text-[20px] font-[300] text-[#3D3D3D] leading-[140%] font-['SF Pro Display'] max-w-[757px]"
+          style={{
+            fontStyle: "normal",
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale",
+          }}
+        >
           {text}
         </p>
       )}
