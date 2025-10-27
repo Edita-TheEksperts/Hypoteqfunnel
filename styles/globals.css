@@ -4,7 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-
 html, body {
   overflow-x: hidden !important;
   width: 100% !important;
@@ -27,6 +26,8 @@ body {
 * { 
   box-sizing: border-box; 
 }
+
+/* ✅ Fontet SF Pro vendosen në public/fonts */
 @font-face {
   font-family: 'SF Pro Display';
   src: url('/fonts/SFPRODISPLAYREGULAR.otf') format('opentype');
@@ -54,6 +55,7 @@ body {
   font-weight: 700;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'SF Pro Display';
   src: url('/fonts/SFPRODISPLAYTHINITALIC.otf') format('opentype');
@@ -61,54 +63,60 @@ body {
   font-style: normal;
 }
 
-
-/* ✅ Optional: import Inter for better cross-platform look (close to SF Pro) */
+/* ✅ Import opsional për fallback font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
+/* ---------------------------------------------
+   ✅ Tailwind custom utilities & components
+   --------------------------------------------- */
+@layer components {
+  .input-base {
+    @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-2 
+           focus:outline-none focus:ring-2 focus:ring-primary-700 
+           transition-all duration-200;
+  }
 
-/* --------- Tailwind custom classes (unchanged) --------- */
+  .input-invalid { 
+    @apply border-red-500 ring-2 ring-red-500; 
+  }
 
-.input-base {
-  @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-700;
+  .btn-primary { 
+    @apply rounded-xl bg-primary-700 text-white px-4 py-2 text-sm 
+           hover:bg-primary-800 transition-colors; 
+  }
+
+  .btn-secondary { 
+    @apply rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm 
+           hover:bg-gray-50; 
+  }
+
+  .card { 
+    @apply rounded-2xl border bg-white shadow-card; 
+  }
+
+  .progress { 
+    @apply h-2 w-full rounded-full bg-gray-200 overflow-hidden; 
+  }
+
+  .progress-bar { 
+    @apply h-full bg-primary-700 transition-all; 
+  }
+
+  .label-invalid { 
+    @apply text-red-700; 
+  }
+
+  .date-wrap { 
+    @apply relative; 
+  }
+
+  .date-btn { 
+    @apply absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md 
+           hover:bg-gray-50 border border-gray-200; 
+  }
 }
 
-.input-invalid { 
-  @apply border-red-500 ring-2 ring-red-500; 
-}
-
-.btn-primary { 
-  @apply rounded-xl bg-primary-700 text-white px-4 py-2 text-sm hover:bg-primary-800 transition-colors; 
-}
-
-.btn-secondary { 
-  @apply rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm hover:bg-gray-50; 
-}
-
-.card { 
-  @apply rounded-2xl border bg-white shadow-card; 
-}
-
-.progress { 
-  @apply h-2 w-full rounded-full bg-gray-200 overflow-hidden; 
-}
-
-.progress-bar { 
-  @apply h-full bg-primary-700 transition-all; 
-}
-
-.label-invalid { 
-  @apply text-red-700; 
-}
-
-.date-wrap { 
-  @apply relative; 
-}
-
-.date-btn { 
-  @apply absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-md hover:bg-gray-50 border border-gray-200; 
-}
-
-/* Largo efektin blu dhe vendos gradient jeshil për opsionin e zgjedhur ose hover */
+/* ✅ Stile ekstra për select elementët */
 select option:hover,
 select option:checked,
 select option:focus,
@@ -117,7 +125,7 @@ select option:active {
   color: #ddebe3 !important;
 }
 
-/* Heq komplet border ose highlight në vetë butonin */
+/* ✅ Heq highlight-in blu në select */
 select:focus {
   outline: none !important;
   box-shadow: none !important;

@@ -13,9 +13,18 @@ export default function HomeEvaluation() {
     >
       {/* Text content */}
       <div className="max-w-[700px]">
-        <h1 className="font-sfpro text-[#132219] font-[500] text-[40px] md:text-[56px] leading-[140%] tracking-[-0.4px] mb-3">
-          Home Evaluation
-        </h1>
+<h1
+  className="font-sfpro text-[#132219] text-[40px] md:text-[56px] font-[500] leading-[140%] tracking-[-0.4px] mb-3"
+  style={{
+    fontStyle: "normal",
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
+  }}
+>
+  Home Evaluation
+</h1>
+
+
         <p
           className="font-sfpro text-[#132219] text-[20px] font-[300] leading-[140%] mb-8 self-stretch"
           style={{
@@ -112,22 +121,24 @@ function Step({ icon, title, text }: StepProps) {
     <div className="flex flex-col items-start text-left p-4 max-w-[250px]">
       <div className="mb-[19px]">{icon}</div>
 
-<h3
-  className="font-sfpro text-[20px] font-[500] leading-[140%] mb-[30px] text-[#132219]"
->
-  {title}
-</h3>
-
-      <p
+      {/* Titulli */}
+      <h3
+        className="text-[#132219] font-sfpro text-[20px] font-[500] leading-[140%] mb-[30px]"
         style={{
-          color: "var(--Secondary-Color, #132219)",
-          fontFamily: '"SF Pro Display"',
-          fontSize: "16px",
           fontStyle: "normal",
-          fontWeight: 300,
-          lineHeight: "140%",
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
         }}
-        className="tracking-[-0.2px]"
+      >
+        {title}
+      </h3>
+ <p
+        className="font-sfpro text-[16px] font-[200] leading-[140%] text-[#132219] tracking-[-0.2px]"
+        style={{
+          fontStyle: "normal",
+          WebkitFontSmoothing: "antialiased",
+          MozOsxFontSmoothing: "grayscale",
+        }}
       >
         {text}
       </p>
