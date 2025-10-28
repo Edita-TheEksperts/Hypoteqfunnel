@@ -23,9 +23,7 @@ export default function Home() {
       <HowItWorks />
       <YourAdvantages />
       <Testimonials />
-      <MortgageGuide />
-      <ConsultationBanner />
-      <Footer />
+ 
     </main>
   );
 }
