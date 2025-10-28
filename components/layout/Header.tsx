@@ -18,7 +18,6 @@ export default function Header() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // për të kontrolluar gjendjen në ngarkim
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
