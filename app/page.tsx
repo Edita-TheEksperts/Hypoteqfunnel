@@ -23,6 +23,7 @@ export default function Home() {
       <HowItWorks />
       <YourAdvantages />
       <Testimonials />
+      <Footer />
  
     </main>
   );

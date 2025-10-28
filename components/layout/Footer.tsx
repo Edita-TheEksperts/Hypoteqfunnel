@@ -44,16 +44,20 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-white text-[#132219] font-['SF Pro Display'] border-t border-[#E5E5E5] w-full">
-      <div className="max-w-[1273px] mx-auto grid grid-cols-[168px_repeat(4,minmax(0,1fr))] gap-x-[108px] gap-y-[43px] px-[60px] pt-[70px] pb-[50px]">
-
+      <div
+        className="max-w-[1273px] mx-auto 
+                   grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[168px_repeat(4,minmax(0,1fr))] 
+                   gap-y-[40px] md:gap-y-[60px] gap-x-[40px] md:gap-x-[60px] lg:gap-x-[108px] 
+                   px-[20px] sm:px-[40px] md:px-[60px] pt-[50px] md:pt-[70px] pb-[60px]"
+      >
         {/* === Column 1: Logo + Address === */}
-        <div className="flex flex-col gap-[35px]">
+        <div className="flex flex-col gap-[25px] md:gap-[35px] items-start">
           <Image
             src="/images/logo.png"
             alt="Hypoteq Logo"
             width={145}
             height={38}
-            className="object-contain"
+            className="object-contain w-[120px] sm:w-[145px]"
           />
           <p className="text-[14px] text-[#132219]/80">Address</p>
         </div>
@@ -61,14 +65,16 @@ const Footer: React.FC = () => {
         {/* === First Row === */}
         {firstRow.map((col, i) => (
           <div key={i} className="flex flex-col gap-[5px]">
-            <h4 className="text-[18px] font-semibold mb-[48px]">{col.title}</h4>
+            <h4 className="text-[16px] sm:text-[18px] font-semibold mb-[20px] sm:mb-[48px]">
+              {col.title}
+            </h4>
             {col.links.length > 0 && (
               <ul className="flex flex-col gap-[2px]">
                 {col.links.map((link, j) => (
                   <li key={j}>
                     <a
                       href="#"
-                      className="text-[15px] font-normal text-[#132219] hover:underline"
+                      className="text-[14px] sm:text-[15px] font-normal text-[#132219] hover:underline"
                     >
                       {link}
                     </a>
@@ -80,10 +86,10 @@ const Footer: React.FC = () => {
         ))}
 
         {/* === Second Row === */}
-        <div></div> {/* bosh poshtë logos */}
+        <div className="hidden lg:block"></div> {/* bosh poshtë logos */}
         {secondRow.map((col, i) => (
           <div key={i} className="flex flex-col gap-[5px]">
-            <h4 className="text-[18px] font-semibold mb-[56px] leading-[1.1]">
+            <h4 className="text-[16px] sm:text-[18px] font-semibold mb-[20px] sm:mb-[56px] leading-[1.1]">
               {col.title}
             </h4>
             <ul className="flex flex-col gap-[1px] mt-[2px]">
@@ -91,7 +97,7 @@ const Footer: React.FC = () => {
                 <li key={j}>
                   <a
                     href="#"
-                    className="text-[15px] font-normal text-[#132219] hover:underline"
+                    className="text-[14px] sm:text-[15px] font-normal text-[#132219] hover:underline"
                   >
                     {link}
                   </a>
@@ -99,32 +105,36 @@ const Footer: React.FC = () => {
               ))}
             </ul>
 
-            {/* Vetëm për About Us */}
             {col.extra && (
-              <h4 className="text-[18px] font-semibold mt-[48px] whitespace-nowrap">
+              <h4 className="text-[16px] sm:text-[18px] font-semibold mt-[30px] sm:mt-[48px] whitespace-nowrap">
                 {col.extra}
               </h4>
             )}
           </div>
         ))}
 
-        {/* === NEWSLETTER SECTION (Input box + Button poshtë) === */}
-        <div className="col-start-2 col-span-4 flex flex-col gap-[10px] mt-[120px] mb-[120px]">
-          <h4 className="text-[18px] font-semibold">
+        {/* === NEWSLETTER SECTION === */}
+        <div className="col-span-full flex flex-col gap-[10px] mt-[60px] md:mt-[100px] mb-[80px] md:mb-[120px]">
+          <h4 className="text-[16px] sm:text-[18px] font-semibold text-center md:text-left">
             Subscribe to our Newsletter
           </h4>
 
           {/* Input frame */}
-          <div className="flex items-center h-[48px] w-full border border-[rgba(0,0,0,0.3)] bg-[rgba(0,0,0,0.1)] rounded-[10px] px-[17px]">
+          <div className="flex items-center h-[45px] sm:h-[48px] w-full border border-[rgba(0,0,0,0.3)] bg-[rgba(0,0,0,0.05)] rounded-[10px] px-[14px] sm:px-[17px]">
             <input
               type="email"
               placeholder="Write your email"
-              className="flex-1 bg-transparent text-[14px] placeholder:text-[#9A9A9A] focus:outline-none"
+              className="flex-1 bg-transparent text-[13px] sm:text-[14px] placeholder:text-[#9A9A9A] focus:outline-none"
             />
           </div>
 
-          {/* Button jashtë kutisë gri */}
-          <button className="flex items-center justify-center gap-[6px] self-end px-[20px] py-[9px] w-[120px] rounded-full bg-[#CAF476] hover:bg-[#b9eb67] text-[#132219] text-[14px] font-medium transition mt-[8px]">
+          {/* Button */}
+          <button
+            className="flex items-center justify-center gap-[6px] self-center md:self-end 
+                       px-[20px] py-[9px] w-[110px] sm:w-[120px] rounded-full 
+                       bg-[#CAF476] hover:bg-[#b9eb67] text-[#132219] text-[13px] sm:text-[14px] font-medium 
+                       transition mt-[8px]"
+          >
             Send
             <svg
               xmlns="http://www.w3.org/2000/svg"

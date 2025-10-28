@@ -6,6 +6,7 @@ import Link from "next/link";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,18 +24,19 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 z-50 w-full font-sfpro transition-all duration-300 ${
+      className={`fixed top-0 left-0 z-50 w-full font-sfpro transition-all duration-300 overflow-x-hidden ${
         isScrolled
           ? "backdrop-blur-lg bg-white/60 shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div
-        className="w-full max-w-[1600px] mx-auto h-[90px] 
-                   px-[130px] flex items-center justify-between"
+        className="w-full max-w-[1600px] mx-auto h-[80px] md:h-[90px] 
+                   px-[16px] sm:px-[32px] md:px-[60px] lg:px-[130px]
+                   flex items-center justify-between overflow-hidden"
       >
-        {/* Logo + Navigation group */}
-        <div className="flex items-center gap-[64px]">
+        {/* ====== Logo + Navigation group ====== */}
+        <div className="flex items-center gap-[20px] sm:gap-[32px] md:gap-[64px] overflow-hidden">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
@@ -43,35 +45,37 @@ export default function Header() {
               width={168}
               height={42}
               priority
+              className="w-[110px] sm:w-[130px] md:w-[168px] h-auto"
             />
           </Link>
 
-          {/* Navigation */}
-          <nav className="flex items-center gap-[48px]">
+          {/* Navigation (desktop only) */}
+          <nav className="hidden lg:flex items-center gap-[32px] xl:gap-[48px]">
             <Link
               href="#"
-              className="text-[#132219] text-[19px] font-semibold leading-none hover:opacity-70 transition"
+              className="text-[#132219] text-[17px] xl:text-[19px] font-semibold leading-none hover:opacity-70 transition"
             >
               Immobilie bewerten
             </Link>
             <Link
               href="#"
-              className="text-[#132219] text-[19px] font-semibold leading-none hover:opacity-70 transition"
+              className="text-[#132219] text-[17px] xl:text-[19px] font-semibold leading-none hover:opacity-70 transition"
             >
               Partner werden
             </Link>
           </nav>
         </div>
 
-        {/* Right side: icon + button */}
-        <div className="flex items-center gap-[23px]">
-          {/* SVG icon */}
+        {/* ====== Right side ====== */}
+        <div className="flex items-center gap-[12px] sm:gap-[18px] md:gap-[23px]">
+          {/* SVG icon (hidden on small screens) */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="22"
             viewBox="0 0 18 24"
             fill="none"
+            className="hidden md:block"
           >
             <path
               fillRule="evenodd"
@@ -83,15 +87,57 @@ export default function Header() {
 
           {/* Button */}
           <button
-            className="h-[40px] px-[24px] rounded-full
+            className="h-[36px] sm:h-[40px] px-[18px] sm:px-[22px] md:px-[24px] rounded-full
                        bg-[#CAF476] text-[#132219]
-                       text-[16px] font-semibold leading-none
-                       hover:opacity-80 transition"
+                       text-[14px] sm:text-[15px] md:text-[16px] font-semibold leading-none
+                       hover:opacity-80 transition whitespace-nowrap"
           >
             Hypothek anfragen
           </button>
+
+          {/* Hamburger menu (visible on mobile) */}
+          <button
+            className="flex flex-col justify-center items-center w-[34px] h-[34px] lg:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span
+              className={`block w-[22px] h-[2px] bg-[#132219] transition-all duration-300 ${
+                menuOpen ? "rotate-45 translate-y-[6px]" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-[22px] h-[2px] bg-[#132219] my-[5px] transition-all duration-300 ${
+                menuOpen ? "opacity-0" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-[22px] h-[2px] bg-[#132219] transition-all duration-300 ${
+                menuOpen ? "-rotate-45 -translate-y-[6px]" : ""
+              }`}
+            ></span>
+          </button>
         </div>
       </div>
+
+      {/* ====== Mobile Menu ====== */}
+      {menuOpen && (
+        <div className="lg:hidden absolute top-[80px] left-0 w-full bg-white/95 backdrop-blur-lg shadow-md py-[24px] flex flex-col items-center gap-[24px] text-center transition-all overflow-hidden">
+          <Link
+            href="#"
+            className="text-[#132219] text-[18px] font-semibold leading-none hover:opacity-70 transition"
+            onClick={() => setMenuOpen(false)}
+          >
+            Immobilie bewerten
+          </Link>
+          <Link
+            href="#"
+            className="text-[#132219] text-[18px] font-semibold leading-none hover:opacity-70 transition"
+            onClick={() => setMenuOpen(false)}
+          >
+            Partner werden
+          </Link>
+        </div>
+      )}
     </header>
   );
 }
