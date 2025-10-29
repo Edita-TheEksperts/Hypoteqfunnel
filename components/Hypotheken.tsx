@@ -23,12 +23,20 @@ export default function neueHypotheken() {
             </div>
 
             <div className="mt-[60px] md:mt-[95px]">
-              <p className="text-[18px] md:text-[24px] font-light leading-[1.5] text-[#fff]">
-                Buying, refinancing, or building a home shouldn’t feel complicated.
-                Our smart platform compares lenders, rates, and terms in real time—so
-                you see only what matters. Whether you’re getting your first mortgage,
-                optimizing an existing one, or financing new construction, we bring
-                clarity, transparency, and human expertise to every step.
+              <p
+                className="text-[18px] md:text-[24px] font-light leading-[1.5] text-[#fff]"
+                style={{
+                  fontFamily: '"SF Pro Display", sans-serif',
+                  fontWeight: 100,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                Buying, refinancing, or building a home shouldn’t feel
+                complicated. Our smart platform compares lenders, rates, and
+                terms in real time—so you see only what matters. Whether you’re
+                getting your first mortgage, optimizing an existing one, or
+                financing new construction, we bring clarity, transparency, and
+                human expertise to every step.
               </p>
             </div>
           </div>
@@ -37,7 +45,6 @@ export default function neueHypotheken() {
 
       {/* ====== SECTION 2–4: Details Sections ====== */}
       <section className="w-full bg-white flex flex-col items-center py-[80px] md:py-[120px] px-[24px] md:px-[100px] text-[#132219] font-['SF Pro Display']">
-        
         {/* ====== New Mortgage Section ====== */}
         <div className="flex flex-col md:flex-row justify-between items-start w-full max-w-[1504px] mb-[80px] md:mb-[120px] gap-[40px]">
           {/* Text Left */}
@@ -47,10 +54,10 @@ export default function neueHypotheken() {
             </h2>
             <p className="text-[18px] md:text-[24px] font-light leading-[140%] tracking-[-0.24px]">
               Start with a quick, no-obligation inquiry. Tell us about your
-              property, budget, income, and timeline—either via our secure online
-              form or a short call with an advisor. We’ll listen, clarify your
-              goals, and capture only what’s needed to assess options. No fees, no
-              pressure—just a clear first step.
+              property, budget, income, and timeline—either via our secure
+              online form or a short call with an advisor. We’ll listen, clarify
+              your goals, and capture only what’s needed to assess options. No
+              fees, no pressure—just a clear first step.
             </p>
           </div>
 
@@ -75,9 +82,9 @@ export default function neueHypotheken() {
               Once we have your details, our team gets to work. We evaluate
               affordability, credit profile, and property documentation to
               determine eligibility. Using advanced comparison tools, we review
-              offers from partner banks and outline clear scenarios for you. Every
-              rate, fee, and term is explained—transparent, accurate, and tailored
-              to your needs.
+              offers from partner banks and outline clear scenarios for you.
+              Every rate, fee, and term is explained—transparent, accurate, and
+              tailored to your needs.
             </p>
           </div>
 
@@ -100,12 +107,12 @@ export default function neueHypotheken() {
             </h2>
             <p className="text-[18px] md:text-[24px] font-light leading-[140%] tracking-[-0.24px]">
               Once we’ve completed the analysis, we present tailored mortgage
-              offers based on your financial profile and property details. You’ll
-              receive side-by-side comparisons of interest rates, terms, and
-              monthly payments from our network of trusted banks. Each option is
-              explained clearly—so you understand the benefits, trade-offs, and
-              total costs before making a decision. Transparent, data-driven, and
-              fully personalized.
+              offers based on your financial profile and property details.
+              You’ll receive side-by-side comparisons of interest rates, terms,
+              and monthly payments from our network of trusted banks. Each
+              option is explained clearly—so you understand the benefits,
+              trade-offs, and total costs before making a decision. Transparent,
+              data-driven, and fully personalized.
             </p>
           </div>
 
@@ -124,7 +131,8 @@ export default function neueHypotheken() {
           className="relative mt-[100px] w-full h-auto md:h-[228px] rounded-[10px] overflow-hidden 
                      flex flex-col md:flex-row items-center justify-between gap-[24px] md:gap-0 px-[24px] md:px-[60px] py-[40px] md:py-0 text-white"
           style={{
-            background: "url('/images/0101.png') center/cover no-repeat, #132219",
+            background:
+              "url('/images/0101.png') center/cover no-repeat, #132219",
           }}
         >
           <div className="absolute inset-0 bg-black/10" />

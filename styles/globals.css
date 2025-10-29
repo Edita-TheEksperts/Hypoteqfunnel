@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Google font fallback */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
 html, body {
   height: auto;
   overflow-y: auto;
@@ -18,10 +20,11 @@ section {
   scroll-behavior: smooth;
 }
 
-
-
+/* -------------------------------
+   ✅ Font Defaults
+-------------------------------- */
 body {
-  font-family: 'SF Pro Display',  sans-serif;
+  font-family: 'SF Pro Display', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -30,55 +33,63 @@ body {
   font-family: 'SF Pro Display', 'Inter', sans-serif;
 }
 
-* { 
-  box-sizing: border-box; 
+* {
+  box-sizing: border-box;
 }
+
 body, p {
   font-family: 'SF Pro Display', sans-serif;
   font-weight: 200;
 }
+
+/* -------------------------------
+   ✅ Correct @font-face paths
+-------------------------------- */
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('/images/fonts/SF-Pro-Display-Thin.otf') format('opentype');
+  src: url('/fonts/SF-Pro-Display-Thin.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('/images/fonts/SF-Pro-Display-Light.otf') format('opentype');
-  font-weight: 300;
+  src: url('/fonts/SF-Pro-Display-Light.otf') format('opentype');
   font-style: normal;
+    font-weight: 300;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('/images/fonts/SF-Pro-Display-Regular.otf') format('opentype');
+  src: url('/fonts/SF-Pro-Display-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('/images/fonts/SF-Pro-Display-Medium.otf') format('opentype');
+  src: url('/fonts/SF-Pro-Display-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('/images/fonts/SF-Pro-Display-Bold.otf') format('opentype');
+  src: url('/fonts/SF-Pro-Display-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 
-/* ✅ Import opsional për fallback font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-/* ---------------------------------------------
-   ✅ Tailwind custom utilities & components
-   --------------------------------------------- */
+/* -------------------------------
+   ✅ Tailwind Custom Utilities
+-------------------------------- */
 @layer components {
   .input-base {
     @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-2 
@@ -126,16 +137,15 @@ body, p {
   }
 }
 
-/* ✅ Stile ekstra për select elementët */
+/* ✅ Select styling */
 select option:hover,
 select option:checked,
 select option:focus,
 select option:active {
   background: linear-gradient(270deg, #CAF476 0%, #E3F4BF 100%) !important;
-  color: #ddebe3 !important;
+  color: #132219 !important;
 }
 
-/* ✅ Heq highlight-in blu në select */
 select:focus {
   outline: none !important;
   box-shadow: none !important;

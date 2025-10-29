@@ -30,7 +30,7 @@ const config: Config = {
         card: "0 6px 18px rgba(0,0,0,0.06)",
       },
       fontFamily: {
-        sfpro: ['"SF Pro Display"', "sans-serif"], 
+        sfpro: ['"SF Pro Display"','Inter',  "sans-serif"], 
       },
     },
   },
