@@ -1,88 +1,104 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 
+interface Card {
+  title: string;
+  text: string;
+}
+
 export default function Advisory() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const cards: Card[] = [
+    {
+      title: "Financing in Retirement",
+      text: "Accessing property financing shouldn’t stop once you retire. With changing income structures and long-term financial planning needs, we help design flexible solutions that work even after your active working years. Whether you’re looking to refinance an existing mortgage, purchase a new residence, or unlock equity from your current home, our advisors evaluate your pension income, assets, and future plans to build a sustainable financing model. The goal: financial independence and stability—without compromising your lifestyle or long-term security.",
+    },
+    {
+      title: "Large & Complex Investment Properties",
+      text: "High-value or multi-unit income properties require more than standard financing—they demand expertise and structured planning. We specialize in securing financing for complex portfolios, mixed-use developments, or large-scale rental buildings with layered ownership or revenue streams. From precise valuation and yield analysis to negotiation with lenders, we coordinate every step to ensure favorable conditions.",
+    },
+    {
+      title: "Support After Multiple Bank Rejections",
+      text: "A “no” from traditional banks doesn’t have to be the end of your financing journey. Many clients come to us after several rejections due to rigid criteria, unconventional income sources, or project-specific complexities. We analyze your case thoroughly to identify the root cause of the rejection and match you with lenders who think beyond standard credit frameworks. Through our partner network and flexible mezzanine financing, we open new paths to approval.",
+    },
+    {
+      title: "Complex Borrower Structures",
+      text: "When a transaction involves multiple shareholders, holding companies, or cross-border investors, traditional lending becomes challenging. We simplify this complexity. Our team structures financing solutions that clearly define borrower responsibilities, guarantee arrangements, and repayment flows—making them understandable and acceptable for lenders. Whether managing a joint venture, family office, or multi-entity partnership, we align legal and financial aspects.",
+    },
+  ];
+
   return (
     <>
       {/* =======================
           SECTION 1: ADVISORY
       ======================= */}
-  <section
-  className="relative w-full min-h-screen text-[#132219] font-sfpro overflow-hidden flex items-center py-[60px] sm:py-[80px] md:py-[100px]"
-  style={{
-    backgroundImage: "url('/images/098.png')",
-    backgroundSize: "cover",
-    backgroundPosition: "center right",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  {/* Background blu si overlay për ngjyrë shtesë */}
-  <div className="absolute inset-0" />
-
-  {/* Përmbajtja */}
-  <div className="relative z-10 w-full max-w-[1300px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 sm:px-8 md:px-10 gap-[40px] lg:gap-[80px]">
-    {/* Teksti majtas */}
-    <div className="w-full lg:w-[50%] flex flex-col text-left">
-      <h1 className="font-[500] text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px] leading-[100%] tracking-[-0.72px]">
-        Advisory
-      </h1>
-
-      <p
-        className="mt-[40px] sm:mt-[70px] md:mt-[95px] text-[18px] sm:text-[20px] md:text-[24px] text-[#132219] leading-[150%] max-w-[900px]"
+      <section
+        className="relative w-full min-h-screen text-[#132219] font-sfpro overflow-hidden flex items-center py-[60px] sm:py-[80px] md:py-[100px]"
         style={{
-          fontFamily: '"SF Pro Display", sans-serif',
-          fontWeight: 100,
-          letterSpacing: "0.01em",
+          backgroundImage: "url('/images/098.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center right",
+          backgroundRepeat: "no-repeat",
         }}
       >
-        Buying, refinancing, or building a home shouldn’t feel complicated.
-        Our smart platform compares lenders, rates, and terms in real
-        time—so you see only what matters. Whether you’re getting your
-        first mortgage, optimizing an existing one, or financing new
-        construction, we bring clarity, transparency, and human expertise
-        to every step.
-      </p>
-    </div>
-  </div>
-</section>
+        <div className="absolute inset-0" />
+
+        <div className="relative z-10 w-full max-w-[1300px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 sm:px-8 md:px-10 gap-[40px] lg:gap-[80px]">
+          <div className="w-full lg:w-[50%] flex flex-col text-left">
+            <h1 className="font-[500] text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px] leading-[100%] tracking-[-0.72px]">
+              Advisory
+            </h1>
+            <p
+              className="mt-[40px] sm:mt-[70px] md:mt-[95px] text-[18px] sm:text-[20px] md:text-[24px] text-[#132219] leading-[150%] max-w-[900px] font-[300] tracking-[0.01em]"
+              style={{
+                fontFamily: '"SF Pro Display", sans-serif',
+              }}
+            >
+              Buying, refinancing, or building a home shouldn’t feel complicated.
+              Our smart platform compares lenders, rates, and terms in real
+              time—so you see only what matters. Whether you’re getting your
+              first mortgage, optimizing an existing one, or financing new
+              construction, we bring clarity, transparency, and human expertise
+              to every step.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* =======================
           SECTION 2: CARDS
       ======================= */}
       <section className="w-full bg-white py-[60px] sm:py-[80px] px-4 sm:px-6 md:px-10 font-sfpro flex flex-col items-center justify-center">
         <div className="w-full max-w-[1300px] grid grid-cols-1 sm:grid-cols-2 gap-[24px] sm:gap-[40px] lg:gap-[48px]">
-          {[
-            {
-              bg: "#CAF476",
-              title: "Financing in Retirement",
-              text: "Accessing property financing shouldn’t stop once you retire. With changing income structures and long-term financial planning needs, we help design flexible solutions that work even after your active working years. Whether you’re looking to refinance an existing mortgage, purchase a new residence, or unlock equity from your current home, our advisors evaluate your pension income, assets, and future plans to build a sustainable financing model. The goal: financial independence and stability—without compromising your lifestyle or long-term security.",
-            },
-            {
-              bg: "#FFFFFF",
-              title: "Large & Complex Investment Properties",
-              text: "High-value or multi-unit income properties require more than standard financing—they demand expertise and structured planning. We specialize in securing financing for complex portfolios, mixed-use developments, or large-scale rental buildings with layered ownership or revenue streams. From precise valuation and yield analysis to negotiation with lenders, we coordinate every step to ensure favorable conditions.",
-            },
-            {
-              bg: "#FFFFFF",
-              title: "Support After Multiple Bank Rejections",
-              text: "A “no” from traditional banks doesn’t have to be the end of your financing journey. Many clients come to us after several rejections due to rigid criteria, unconventional income sources, or project-specific complexities. We analyze your case thoroughly to identify the root cause of the rejection and match you with lenders who think beyond standard credit frameworks. Through our partner network and flexible mezzanine financing, we open new paths to approval.",
-            },
-            {
-              bg: "#FFFFFF",
-              title: "Complex Borrower Structures",
-              text: "When a transaction involves multiple shareholders, holding companies, or cross-border investors, traditional lending becomes challenging. We simplify this complexity. Our team structures financing solutions that clearly define borrower responsibilities, guarantee arrangements, and repayment flows—making them understandable and acceptable for lenders. Whether managing a joint venture, family office, or multi-entity partnership, we align legal and financial aspects.",
-            },
-          ].map((card, index) => (
+          {cards.map((card, index) => (
             <div
               key={index}
-              className={`border border-black rounded-[10px] flex flex-col items-start p-[20px] sm:p-[28px_32px_36px_32px] gap-[18px] sm:gap-[24px] md:gap-[32px] h-auto ${
-                card.bg === "#CAF476" ? "bg-[#CAF476]" : "bg-white"
+              onClick={() =>
+                setActiveIndex(activeIndex === index ? null : index)
+              }
+              className={`border border-black rounded-[10px] flex flex-col items-start 
+              p-[20px] sm:p-[28px_32px_36px_32px] gap-[18px] sm:gap-[24px] md:gap-[32px] 
+              h-auto cursor-pointer transition-all duration-300
+              ${
+                activeIndex === index
+                  ? "bg-[#CAF476]"
+                  : "bg-white hover:bg-[#CAF476]/50"
               }`}
             >
-              <h3 className="text-[#132219] text-[26px] sm:text-[32px] md:text-[40px] font-[500] leading-[130%]">
+              <h3
+                className="text-[#132219] font-[500] text-[36px] sm:text-[40px] md:text-[48px] 
+                leading-[140%] tracking-[-0.02em]"
+                style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+              >
                 {card.title}
               </h3>
-              <p className="text-[#132219] text-[16px] sm:text-[18px] md:text-[20px] font-[300] leading-[150%] tracking-[-0.01em]">
+              <p
+                className="text-[#132219] font-[300] text-[18px] sm:text-[20px] md:text-[24px] 
+                leading-[140%] tracking-[0.01em]"
+                style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+              >
                 {card.text}
               </p>
             </div>

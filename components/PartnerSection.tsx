@@ -20,7 +20,7 @@ export default function PartnerSection() {
 
         <div className="relative z-10 w-full max-w-[1300px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 md:px-10 gap-10 lg:gap-[60px]">
           <div className="w-full lg:w-[50%] flex flex-col gap-6 text-left">
-            <h1 className="text-white font-[500] text-[36px] sm:text-[52px] md:text-[64px] lg:text-[72px] leading-[100%] tracking-[-0.72px]">
+      <h1 className="font-[500] text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px] leading-[100%] tracking-[-0.72px]">
               Become a partner
             </h1>
 

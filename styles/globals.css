@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Google font fallback */
+/* -------------------------------
+   ✅ Google Font Fallback
+-------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
+/* -------------------------------
+   ✅ Base Layout
+-------------------------------- */
 html, body {
   height: auto;
   overflow-y: auto;
@@ -24,31 +29,43 @@ section {
    ✅ Font Defaults
 -------------------------------- */
 body {
-  font-family: 'SF Pro Display', sans-serif;
+  font-family: 'SF Pro Display', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #132219;
+  font-weight: 400;
 }
 
+/* Optional class to force SF font */
 .font-sfpro {
   font-family: 'SF Pro Display', 'Inter', sans-serif;
 }
 
+/* Reset */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body, p {
-  font-family: 'SF Pro Display', sans-serif;
-  font-weight: 200;
+/* Paragraph defaults */
+p {
+  font-family: 'SF Pro Display', 'Inter', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #132219;
+  letter-spacing: 0.01em;
 }
 
 /* -------------------------------
-   ✅ Correct @font-face paths
+   ✅ Corrected SF Pro Display mapping
+   Make sure file names match exactly in /public/fonts
 -------------------------------- */
 @font-face {
   font-family: 'SF Pro Display';
   src: url('/fonts/SF-Pro-Display-Thin.otf') format('opentype');
-  font-weight: 200;
+  font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
@@ -56,8 +73,8 @@ body, p {
 @font-face {
   font-family: 'SF Pro Display';
   src: url('/fonts/SF-Pro-Display-Light.otf') format('opentype');
+  font-weight: 300;
   font-style: normal;
-    font-weight: 300;
   font-display: swap;
 }
 
@@ -85,10 +102,8 @@ body, p {
   font-display: swap;
 }
 
-
-
 /* -------------------------------
-   ✅ Tailwind Custom Utilities
+   ✅ Tailwind Custom Components
 -------------------------------- */
 @layer components {
   .input-base {
@@ -137,7 +152,9 @@ body, p {
   }
 }
 
-/* ✅ Select styling */
+/* -------------------------------
+   ✅ Select Styling
+-------------------------------- */
 select option:hover,
 select option:checked,
 select option:focus,
