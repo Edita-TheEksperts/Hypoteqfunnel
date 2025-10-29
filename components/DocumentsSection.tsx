@@ -22,7 +22,7 @@ const Section = ({ title, docs }: SectionProps) => (
     <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-[40px] md:gap-[80px] lg:gap-[120px]">
       {/* LEFT SIDE - TITLE */}
       <div className="w-full lg:w-[45%]">
-        <h2 className="text-[#132219] font-sfpro text-[30px] sm:text-[36px] md:text-[42px] lg:text-[48px] font-medium leading-[120%]">
+        <h2 className="text-[#132219] font-sfpro text-[30px] sm:text-[36px] md:text-[42px] lg:text-[48px]  font-medium leading-[120%]">
           {title}
         </h2>
       </div>

@@ -31,13 +31,17 @@ export default function ContactPage() {
       {/* ===== FORM + BOOK CALL ===== */}
       <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[60px] md:gap-[108px] mx-auto mt-[100px] md:mt-[160px]">
         {/* LEFT SIDE - FORM */}
-        <div className="flex flex-col w-full max-w-[536px] gap-[24px]">
+        <div className="flex flex-col w-full max-w-[700px] gap-[24px]">
           <div className="relative">
-            <span className="block md:absolute md:-top-[80px] left-0 text-[32px] md:text-[40px] font-semibold leading-none mb-2 md:mb-0">
+            <span
+              className="block md:absolute md:-top-[80px] left-0 text-[#132219] font-['SF Pro Display'] 
+                         text-[32px] md:text-[48px] font-[500] leading-[100%] tracking-[-0.48px] mb-2 md:mb-0"
+            >
               Questions?
             </span>
+
             <h3 className="text-[28px] md:text-[36px] font-normal leading-[40px] md:leading-[50px] text-[#132219] font-sfpro">
-              Text us
+              Text us...
             </h3>
           </div>
 
@@ -99,17 +103,21 @@ export default function ContactPage() {
         </div>
 
         {/* RIGHT SIDE - BOOK CALL */}
-        <div className="flex flex-col w-full max-w-[629px] gap-[20px] md:gap-[24px] mt-[80px] lg:mt-0">
-          <h3 className="text-[28px] md:text-[36px] font-normal leading-[40px] md:leading-[50px] text-[#132219] font-sfpro">
-            Or book a call
-          </h3>
+        {/* RIGHT SIDE - BOOK CALL */}
+<div className="flex flex-col w-full max-w-[629px] gap-[20px] md:gap-[24px] mt-[80px] lg:mt-0">
+  <h3 className="text-[28px] md:text-[36px] font-normal leading-[40px] md:leading-[50px] text-[#132219] font-sfpro">
+    Or Book a Call!
+  </h3>
 
-          <div className="w-full h-[420px] md:h-[480px] border border-[#132219] rounded-[10px] flex items-center justify-center">
-            <p className="text-[15px] md:text-[16px] opacity-70 text-center px-4">
-              [Calendly integration here]
-            </p>
-          </div>
-        </div>
+  <div className="w-full h-[420px] md:h-[480px] border border-[#132219] rounded-[10px] flex items-center justify-center overflow-hidden">
+    <img
+      src="/images/kalendly.png"
+      alt="Calendly preview"
+      className="w-full h-full  object-contain"
+    />
+  </div>
+</div>
+
       </div>
 
       {/* ===== MAP SECTION ===== */}

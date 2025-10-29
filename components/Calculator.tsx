@@ -7,15 +7,20 @@ import Image from "next/image";
   alt="House background"
   fill
   className="object-cover rounded-[10px]"
-/>
-
+/>;
 
 export default function Calculator() {
-  const [propertyPrice, setPropertyPrice] = useState(900000);
-  const [ownFunds, setOwnFunds] = useState(200000);
-  const [income, setIncome] = useState(140000);
-  const [residenceType, setResidenceType] = useState<"haupt" | "zweit">("haupt");
-  const [loanType, setLoanType] = useState<"purchase" | "refinancing">("refinancing");
+const [propertyPrice, setPropertyPrice] = useState(0);
+const [ownFunds, setOwnFunds] = useState(0);
+const [income, setIncome] = useState(0);
+
+
+  const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(null);
+
+  const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>(
+    null
+  );
+
   const [interestOption, setInterestOption] = useState("10Y 1.40%");
 
   // ------------------- Excel Parameter Mapping -------------------
@@ -49,7 +54,9 @@ export default function Calculator() {
   // ------------------- Core Excel Logic -------------------
   // Mortgage need (purchase or refi)
   const mortgageNeed =
-    loanType === "purchase" ? Math.max(0, propertyPrice - ownFunds) : propertyPrice * 0.78;
+    loanType === "purchase"
+      ? Math.max(0, propertyPrice - ownFunds)
+      : propertyPrice * 0.78;
 
   const maxMortgage = propertyPrice * params.maxBelehnung;
   const actualMortgage = Math.min(mortgageNeed, maxMortgage);
@@ -63,12 +70,15 @@ export default function Calculator() {
   const interestYearStress = actualMortgage * params.stressRate;
   const maintenanceYear = propertyPrice * params.maintenanceRate;
   const amortizationYear =
-    residenceType === "haupt" && secondMortgage > 0 && params.amortizationYears > 0
+    residenceType === "haupt" &&
+    secondMortgage > 0 &&
+    params.amortizationYears > 0
       ? secondMortgage / params.amortizationYears
       : 0;
 
   // Total annual “Tragbarkeit” and %
-  const tragbarkeitCHF = interestYearStress + maintenanceYear + amortizationYear;
+  const tragbarkeitCHF =
+    interestYearStress + maintenanceYear + amortizationYear;
   const tragbarkeitPercent = income > 0 ? tragbarkeitCHF / income : 0;
 
   // Realistic monthly cost (using selected interest, not stress rate)
@@ -105,43 +115,49 @@ export default function Calculator() {
       <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[108px] mx-auto">
         {/* LEFT SIDE */}
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-      {/* Title + Description Section */}
-<div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
-  <h1
-    className="text-[72px] font-[500] leading-[100%] tracking-[-0.72px] text-[#132219] max-w-[536px]"
-    style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-  >
-    Mortgage<br />Calculator
-  </h1>
-</div>
-
+          {/* Title + Description Section */}
+          <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
+            <h1
+              className="text-[72px] font-[500] leading-[100%] tracking-[-0.72px] text-[#132219] max-w-[536px]"
+              style={{ fontFamily: "'SF Pro Display', sans-serif" }}
+            >
+              Mortgage
+              <br />
+              Calculator
+            </h1>
+          </div>
 
           <div className="mt-[16px] flex flex-col gap-[24px]">
             <div className="flex gap-3">
               <ToggleButton
                 label="Purchase"
                 active={loanType === "purchase"}
-                onClick={() => setLoanType("purchase")}
+                onClick={() =>
+                  setLoanType(loanType === "purchase" ? null : "purchase")
+                }
               />
               <ToggleButton
                 label="Refinancing"
                 active={loanType === "refinancing"}
-                onClick={() => setLoanType("refinancing")}
+                onClick={() =>
+                  setLoanType(loanType === "refinancing" ? null : "refinancing")
+                }
               />
             </div>
-
-            <div className="flex w-full border border-[#132219] rounded-full p-[3px]">
-              <SubToggle
-                label="Hauptwohnsitz"
-                active={residenceType === "haupt"}
-                onClick={() => setResidenceType("haupt")}
-              />
-              <SubToggle
-                label="Zweitwohnsitz"
-                active={residenceType === "zweit"}
-                onClick={() => setResidenceType("zweit")}
-              />
-            </div>
+            {loanType && (
+              <div className="flex w-full border border-[#132219] rounded-full p-[3px] animate-fadeIn">
+                <SubToggle
+                  label="Hauptwohnsitz"
+                  active={residenceType === "haupt"}
+                  onClick={() => setResidenceType("haupt")}
+                />
+                <SubToggle
+                  label="Zweitwohnsitz"
+                  active={residenceType === "zweit"}
+                  onClick={() => setResidenceType("zweit")}
+                />
+              </div>
+            )}
 
             <div className="flex flex-col gap-[24px] mt-2">
               <SliderInput
@@ -152,7 +168,11 @@ export default function Calculator() {
                 max={2000000}
               />
               <SliderInput
-                label={loanType === "purchase" ? "Equity / Own Funds" : "Existing Equity"}
+                label={
+                  loanType === "purchase"
+                    ? "Equity / Own Funds"
+                    : "Existing Equity"
+                }
                 value={ownFunds}
                 setValue={setOwnFunds}
                 min={0}
@@ -179,37 +199,45 @@ export default function Calculator() {
         </div>
 
         {/* RIGHT SIDE */}
-    {/* RIGHT SIDE */}
-<div className="flex flex-col items-start w-full max-w-[628px] mt-[19px] gap-[34px]">
-  <p
-    className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"
-    style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-  >
-    Real-time mortgage math. Slide your price, deposit, rate, and term to compare
-    scenarios instantly—monthly cost, total interest, and payoff timeline at a glance.
-  </p>
+        {/* RIGHT SIDE */}
+        <div className="flex flex-col items-start w-full max-w-[628px] mt-[19px] gap-[34px]">
+          <p
+            className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"
+            style={{ fontFamily: "'SF Pro Display', sans-serif" }}
+          >
+            Real-time mortgage math. Slide your price, deposit, rate, and term
+            to compare scenarios instantly—monthly cost, total interest, and
+            payoff timeline at a glance.
+          </p>
 
-  <InfoBox title={infoTitle} value={formatCHF(actualMortgage)} red={!isEligible} />
+      <InfoBox
+  title={infoTitle}
+  value={formatCHF(actualMortgage)}
+  red={!isEligible}
+  loanType={loanType}
+/>
 
-  <ProgressBox
-    title="Tragbarkeit"
-    value={formatPercent(tragbarkeitPercent)}
-    current={formatCHF(tragbarkeitCHF)}
-    total={formatCHF(income)}
-  />
+<ProgressBox
+  title="Tragbarkeit"
+  value={formatPercent(tragbarkeitPercent)}
+  current={formatCHF(tragbarkeitCHF)}
+  total={formatCHF(income)}
+  loanType={loanType}
+/>
 
-  <ProgressBox
-    title="Eigenmittel"
-    value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
-    current={formatCHF(ownFunds)}
-    total={formatCHF(propertyPrice)}
-  />
+<ProgressBox
+  title="Eigenmittel"
+  value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
+  current={formatCHF(ownFunds)}
+  total={formatCHF(propertyPrice)}
+  loanType={loanType}
+/>
 
-  <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-    Continue my project
-  </button>
-</div>
 
+          <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
+            Continue my project
+          </button>
+        </div>
       </div>
 
       {/* COST SECTION */}
@@ -219,40 +247,39 @@ export default function Calculator() {
             Estimated Costs in detail
           </h2>
 
-      <div className="relative">
-  <select
-    value={interestOption}
-    onChange={(e) => setInterestOption(e.target.value)}
-    className="flex justify-between items-center appearance-none w-[444px] h-[40px] px-6 
+          <div className="relative">
+            <select
+              value={interestOption}
+              onChange={(e) => setInterestOption(e.target.value)}
+              className="flex justify-between items-center appearance-none w-[444px] h-[40px] px-6 
                bg-[#132219] text-white text-[20px] font-semibold rounded-[58px] 
                cursor-pointer outline-none border-none focus:outline-none"
-  >
-    {interestOptions.map((option) => (
-      <option
-        key={option}
-        value={option}
-        className="bg-[#132219] text-white cursor-pointer"
-      >
-        {option}
-      </option>
-    ))}
-  </select>
+            >
+              {interestOptions.map((option) => (
+                <option
+                  key={option}
+                  value={option}
+                  className="bg-[#132219] text-white cursor-pointer"
+                >
+                  {option}
+                </option>
+              ))}
+            </select>
 
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="12"
-    height="7"
-    viewBox="0 0 12 7"
-    fill="none"
-    className="absolute right-6 top-[14px] pointer-events-none"
-  >
-    <path
-      d="M6 7C5.72917 7 5.48958 6.90625 5.28125 6.71875L0.28125 1.71875C0.09375 1.51042 0 1.27083 0 1C0 0.729167 0.09375 0.489583 0.28125 0.28125C0.489583 0.09375 0.729167 0 1 0C1.27083 0 1.51042 0.09375 1.71875 0.28125L6 4.59375L10.2812 0.28125C10.4896 0.09375 10.7292 0 11 0C11.2708 0 11.5104 0.09375 11.7188 0.28125C11.9062 0.489583 12 0.729167 12 1C12 1.27083 11.9062 1.51042 11.7188 1.71875L6.71875 6.71875C6.51042 6.90625 6.27083 7 6 7Z"
-      fill="white"
-    />
-  </svg>
-</div>
-
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="7"
+              viewBox="0 0 12 7"
+              fill="none"
+              className="absolute right-6 top-[14px] pointer-events-none"
+            >
+              <path
+                d="M6 7C5.72917 7 5.48958 6.90625 5.28125 6.71875L0.28125 1.71875C0.09375 1.51042 0 1.27083 0 1C0 0.729167 0.09375 0.489583 0.28125 0.28125C0.489583 0.09375 0.729167 0 1 0C1.27083 0 1.51042 0.09375 1.71875 0.28125L6 4.59375L10.2812 0.28125C10.4896 0.09375 10.7292 0 11 0C11.2708 0 11.5104 0.09375 11.7188 0.28125C11.9062 0.489583 12 0.729167 12 1C12 1.27083 11.9062 1.51042 11.7188 1.71875L6.71875 6.71875C6.51042 6.90625 6.27083 7 6 7Z"
+                fill="white"
+              />
+            </svg>
+          </div>
         </div>
 
         <div className="flex flex-col md:flex-row gap-[16px]">
@@ -269,94 +296,93 @@ export default function Calculator() {
               title="Incidental expenses "
               value={formatCHF(maintenanceYear / 12)}
             />
-            <SmallBox title="Monthly costs" value={formatCHF(monthlyCost)} highlight />
+            <SmallBox
+              title="Monthly costs"
+              value={formatCHF(monthlyCost)}
+              highlight
+            />
           </div>
-
-          <div
-            className={`flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219] w-[628px] h-[444px] text-center px-[40px] py-[60px] ${
-              isEligible
-                ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
-                : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
-            }`}
-          >
- <h3
-  className="font-sfpro text-[#132219]"
-  style={{
-    fontSize: "85.022px",
-    fontStyle: "normal",
-    fontWeight: "500",
-    lineHeight: "100%",
-    letterSpacing: "-0.85px",
-  }}
+      <div
+  className={`flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219] w-[628px] h-[444px] text-center px-[40px] py-[60px] ${
+    !loanType
+      ? "bg-[#E5E5E5]"
+      : isEligible
+      ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
+      : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
+  }`}
 >
-  {Math.round(interestYearEffective + amortizationYear + maintenanceYear).toLocaleString("de-CH")}
-</h3>
-<p className="text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
-  Total yearly expenses
-</p>
-
+            <h3
+              className="font-sfpro text-[#132219]"
+              style={{
+                fontSize: "85.022px",
+                fontStyle: "normal",
+                fontWeight: "500",
+                lineHeight: "100%",
+                letterSpacing: "-0.85px",
+              }}
+            >
+              {Math.round(
+                interestYearEffective + amortizationYear + maintenanceYear
+              ).toLocaleString("de-CH")}
+            </h3>
+            <p className="text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
+              Total yearly expenses
+            </p>
           </div>
         </div>
       </div>
       {/* Bottom Continue Button */}
-<div className="flex justify-center w-full mt-[40px]">
-  <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-    Continue my project
-  </button>
-</div>
-<section className="flex flex-col md:flex-row justify-between items-start gap-[24px] w-full max-w-[1280px] mx-auto mt-[100px] mb-[100px]">
+      <div className="flex justify-center w-full mt-[40px]">
+        <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
+          Continue my project
+        </button>
+      </div>
+      <section className="flex flex-col md:flex-row justify-between items-start gap-[24px] w-full max-w-[1280px] mx-auto mt-[100px] mb-[100px]">
+        <div className="relative flex flex-col justify-between items-start w-full md:w-[628px] h-[293px] p-[24px] rounded-[10px] border border-[#132219] overflow-hidden bg-[linear-gradient(90deg,#FFF4DE_0%,#FCEAC5_100%)]">
+          <div className="relative z-10 flex flex-col gap-[16px] w-full max-w-[536px]">
+            <h3 className="text-[#132219] text-[40px] font-[500] leading-[140%] font-['SF Pro Display'] tracking-[-0.4px]">
+              Start your process now!
+            </h3>
+            <p className="text-[#132219] text-[20px] font-[300] leading-[140%] font-['SF Pro Display'] max-w-[536px]">
+              Compare lenders, rates, and terms in a guided three-click flow.{" "}
+              <br />
+              See your monthly cost upfront and choose the offer that fits.
+            </p>
+          </div>
 
-<div className="relative flex flex-col justify-between items-start w-full md:w-[628px] h-[293px] p-[24px] rounded-[10px] border border-[#132219] overflow-hidden bg-[linear-gradient(90deg,#FFF4DE_0%,#FCEAC5_100%)]">
+          <button className="relative z-10 bg-white border border-[#132219] rounded-full px-[24px] py-[8px] text-[16px] font-[600] text-[#132219] font-['SF Pro Display'] hover:scale-[1.03] transition-transform">
+            Start now
+          </button>
 
-  <div className="relative z-10 flex flex-col gap-[16px] w-full max-w-[536px]">
-    <h3 className="text-[#132219] text-[40px] font-[500] leading-[140%] font-['SF Pro Display'] tracking-[-0.4px]">
-      Start your process now!
-    </h3>
-    <p className="text-[#132219] text-[20px] font-[300] leading-[140%] font-['SF Pro Display'] max-w-[536px]">
-      Compare lenders, rates, and terms in a guided three-click flow. <br />
-      See your monthly cost upfront and choose the offer that fits.
-    </p>
-  </div>
+          {/* Background image */}
+          <Image
+            src="/images/00.jpg"
+            alt="House background"
+            fill
+            className="object-cover rounded-[10px] z-0"
+            priority
+          />
+        </div>
+        {/* RIGHT CARD */}
+        <div
+          className="relative flex flex-col justify-center items-center w-full md:w-[629px] h-[293px] p-[59px_48px] gap-[60px] rounded-[10px] border border-[#132219] text-center overflow-hidden"
+          style={{
+            background:
+              "url('/images/0101.png') center/cover no-repeat, #132219",
+          }}
+        >
+          <p className="text-[#CAF476] text-[32px] font-['SF Pro Display'] font-normal leading-[140%] tracking-[-0.32px] max-w-[557px] text-center">
+            Talk to a Hypoteq expert for a{" "}
+            <span className="font-[600]">15-minute consultation</span> to get
+            personalized guidance on financing options.
+          </p>
 
-  <button className="relative z-10 bg-white border border-[#132219] rounded-full px-[24px] py-[8px] text-[16px] font-[600] text-[#132219] font-['SF Pro Display'] hover:scale-[1.03] transition-transform">
-    Start now
-  </button>
-
-  {/* Background image */}
-  <Image
-    src="/images/00.jpg"
-    alt="House background"
-    fill
-    className="object-cover rounded-[10px] z-0"
-    priority
-  />
-</div>
-{/* RIGHT CARD */}
-<div
-  className="relative flex flex-col justify-center items-center w-full md:w-[629px] h-[293px] p-[59px_48px] gap-[60px] rounded-[10px] border border-[#132219] text-center overflow-hidden"
-  style={{
-    background: "url('/images/0101.png') center/cover no-repeat, #132219",
-  }}
->
-  <p
-    className="text-[#CAF476] text-[32px] font-['SF Pro Display'] font-normal leading-[140%] tracking-[-0.32px] max-w-[557px] text-center"
-  >
-    Talk to a Hypoteq expert for a{" "}
-    <span className="font-[600]">15-minute consultation</span>{" "}
-    to get personalized guidance on financing options.
-  </p>
-
-  <button className="px-[24px] py-[10px] bg-[#CAF476] text-[#132219] text-[16px] font-['SF Pro Display'] font-[500] rounded-full hover:bg-[#D6FA8A] transition-all">
-    Book your call
-  </button>
-</div>
-
-
-</section>
-
-
+          <button className="px-[24px] py-[10px] bg-[#CAF476] text-[#132219] text-[16px] font-['SF Pro Display'] font-[500] rounded-full hover:bg-[#D6FA8A] transition-all">
+            Book your call
+          </button>
+        </div>
+      </section>
     </section>
-    
   );
 }
 
@@ -429,26 +455,33 @@ function SliderInput({ label, value, setValue, min, max }: any) {
     </div>
   );
 }
+function InfoBox({ title, value, red = false, loanType }: any) {
+  // ✅ Background color logic (keeps your structure)
+  const bgColor = !loanType
+    ? "bg-[#E5E5E5]" // neutral gray when no selection
+    : red
+    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]" // red when not eligible
+    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; // green when eligible
 
-function InfoBox({ title, value, red = false }: any) {
+  // ✅ Circle background color (also gray when no selection)
+  const circleColor = !loanType
+    ? "bg-[#BDBDBD]" // gray circle
+    : red
+    ? "bg-[#FCA5A5]" // red circle
+    : "bg-[#CAF47E]"; // green circle
+
   return (
     <div
-      className={`flex flex-col justify-center p-[15px_24px] rounded-[10px] border border-[#132219] w-full ${
-        red
-          ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
-          : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
-      }`}
+      className={`flex flex-col justify-center p-[15px_24px] rounded-[10px] border border-[#132219] w-full ${bgColor}`}
     >
       <div className="flex justify-between items-start">
         <p className="text-[14px] font-medium text-[#132219] leading-tight">
           {title}
         </p>
         <div
-          className={`w-[20px] h-[20px] rounded-full flex items-center justify-center border border-[#132219] ${
-            red ? "bg-[#FCA5A5]" : "bg-[#CAF47E]"
-          }`}
+          className={`w-[20px] h-[20px] rounded-full flex items-center justify-center border border-[#132219] ${circleColor}`}
         >
-          <CheckIcon red={red} />
+          <CheckIcon red={red} loanType={loanType} />
         </div>
       </div>
 
@@ -460,17 +493,28 @@ function InfoBox({ title, value, red = false }: any) {
   );
 }
 
+function ProgressBox({ title, value, current, total, loanType }: any) {
+  const percent = parseFloat(value.replace("%", "").replace(",", ".")) || 0;
 
-function ProgressBox({ title, value, current, total }: any) {
-  const percent =
-    parseFloat(value.replace("%", "").replace(",", ".")) || 0;
+  // ✅ Background (gray when no selection)
+  const bgColor = !loanType
+    ? "bg-[#E5E5E5]"
+    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]";
+
+  // ✅ Circle background (gray when no selection)
+  const circleColor = !loanType ? "bg-[#BDBDBD]" : "bg-[#CAF47E]";
 
   return (
-    <div className="flex flex-col justify-center rounded-[10px] border border-[#132219] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)] w-full p-[18px_24px] gap-[18px]">
+    <div
+      className={`flex flex-col justify-center rounded-[10px] border border-[#132219] w-full p-[18px_24px] gap-[18px] ${bgColor}`}
+    >
       <div className="flex justify-between items-start">
         <h3 className="text-[24px] font-normal text-[#132219]">{title}</h3>
-        <div className="w-[22px] h-[22px] rounded-full border border-[#132219] bg-[#CAF47E] flex items-center justify-center">
-          <CheckIcon />
+
+        <div
+          className={`w-[22px] h-[22px] rounded-full border border-[#132219] flex items-center justify-center ${circleColor}`}
+        >
+          <CheckIcon loanType={loanType} />
         </div>
       </div>
 
@@ -493,6 +537,7 @@ function ProgressBox({ title, value, current, total }: any) {
     </div>
   );
 }
+
 function SmallBox({ title, value, highlight = false }: any) {
   const isMonthlyCosts = title === "Monthly costs";
   const [currency, amount] = value.split(" ");
@@ -542,13 +587,24 @@ function SmallBox({ title, value, highlight = false }: any) {
   );
 }
 
+function CheckIcon({ red = false, loanType }: any) {
+  const strokeColor = !loanType
+    ? "#6E6E6E" // gri kur nuk është zgjedhur asgjë
+    : red
+    ? "#7F1D1D" // e kuqe kur nuk është eligible
+    : "#132219"; // e zezë për normale / jeshile
 
-function CheckIcon({ red = false }: any) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 10 8" fill="none">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="6"
+      viewBox="0 0 10 8"
+      fill="none"
+    >
       <path
         d="M0.5 3.78129L3.31254 6.59383L9.50012 0.40625"
-        stroke={red ? "#7F1D1D" : "#132219"} /* darker red stroke when not eligible */
+        stroke={strokeColor}
         strokeWidth="1"
       />
     </svg>
