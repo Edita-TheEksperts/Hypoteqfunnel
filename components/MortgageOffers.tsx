@@ -34,7 +34,7 @@ const MortgageGuide: React.FC = () => {
 
           <p
             className="
-              font-['SF Pro Display'] text-white text-[20px] font-[400] leading-[140%] opacity-90
+              font-['SF Pro Display'] text-[20px] font-[400] leading-[140%] opacity-90
               max-w-[560px]
 
               max-sm:text-[14px]      /* ✅ smaller text on mobile */

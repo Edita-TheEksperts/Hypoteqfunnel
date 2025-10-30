@@ -264,7 +264,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   <div className="flex flex-col md:flex-row gap-[16px] w-full">
 
     {/* Small boxes grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-[10px] w-full md:max-w-[628px]">
+<div className="grid grid-cols-2 sm:grid-cols-2 gap-[10px] w-full md:max-w-[628px]">
       <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
       <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
       <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />

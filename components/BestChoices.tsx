@@ -15,9 +15,24 @@ export default function BestChoices() {
     >
       {/* Left Column */}
       <div className="flex flex-col font-sfpro gap-[24px] text-white max-w-[100%] md:max-w-[500px]">
-        <h2 className="font-sfpro text-[28px] md:text-[36px] font-[500] leading-[120%] text-white">
-          HYPOTEQ’s <br className="hidden md:block" /> best choices
-        </h2>
+     <h2
+  className="
+    font-sfpro text-[28px] md:text-[36px]
+    font-[500]
+    leading-[120%] md:leading-[140%]
+    tracking-[-0.3px] md:tracking-[-0.36px]
+    text-white
+  "
+>
+  <span className="block md:hidden">
+    HYPOTEQ’s <br /> best choices
+  </span>
+
+  <span className="hidden md:block">
+    HYPOTEQ’s <br />best choices
+  </span>
+</h2>
+
 
         <p className="font-['SF Pro Display'] text-[16px] md:text-[20px] font-[200] leading-[150%] text-white">
           Find out what your home could be worth today. Our smart valuation tool

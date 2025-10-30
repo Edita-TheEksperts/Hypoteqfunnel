@@ -1,6 +1,6 @@
 import Header from "../components/layout/Header";
 import Hero from "../components/Hero";
-import MortgageCalculator from "../components/MortgageCalculator";
+import MortgageCalculator from "@/components/MortgageCalculator";
 import BestChoices from "@/components/BestChoices";
 import Footer from "@/components/layout/Footer";
 import MortgageGuide from "@/components/ui/MortgageGuide";
@@ -23,6 +23,9 @@ export default function Home() {
       <HowItWorks />
       <YourAdvantages />
       <Testimonials />
+      <MortgageGuide/>
+      <ConsultationBanner />
+      
       <Footer />
  
     </main>
