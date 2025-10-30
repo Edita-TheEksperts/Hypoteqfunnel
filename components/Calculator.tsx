@@ -199,7 +199,6 @@ const [income, setIncome] = useState(0);
         </div>
 
         {/* RIGHT SIDE */}
-        {/* RIGHT SIDE */}
         <div className="flex flex-col items-start w-full max-w-[628px] mt-[19px] gap-[34px]">
           <p
             className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"

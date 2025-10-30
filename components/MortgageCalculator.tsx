@@ -105,10 +105,9 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   // -------------- UI --------------
   return (
 <section
-  className={`flex flex-col items-center py-16 px-8 font-sans text-[#132219] ${
-    loanType ? "bg-white" : "bg-[#F5F5F5]"
-  }`}
+  className="flex flex-col items-center py-16 px-8 font-sans text-[#132219] bg-white"
 >
+
 
 <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[40px] lg:gap-[108px] mx-auto px-4">
         {/* LEFT SIDE */}
