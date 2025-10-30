@@ -221,98 +221,84 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
       </div>
 
       {/* COST SECTION */}
-      <div className="flex flex-col gap-[63px] mt-[80px] items-stretch">
-        <div className="flex justify-between items-center w-full">
-          <h2 className="text-[40px] font-sfpro font-medium text-[#132219] tracking-[-0.4px]">
-            Estimated Costs in detail
-          </h2>
+{/* COST SECTION */}
+<div className="flex flex-col gap-[63px] mt-[80px] items-stretch">
 
-          <div className="relative">
-            <select
-              value={interestOption}
-              onChange={(e) => setInterestOption(e.target.value)}
-              className="flex justify-between items-center appearance-none w-[444px] h-[40px] px-6 
-               bg-[#132219] text-white text-[20px] font-semibold rounded-[58px] 
-               cursor-pointer outline-none border-none focus:outline-none"
-            >
-              {interestOptions.map((option) => (
-                <option
-                  key={option}
-                  value={option}
-                  className="bg-[#132219] text-white cursor-pointer"
-                >
-                  {option}
-                </option>
-              ))}
-            </select>
+  {/* Top Row: Title + Select */}
+  <div className="flex flex-col md:flex-row justify-between md:items-center w-full gap-4">
+    <h2 className="text-[28px] md:text-[40px] font-sfpro font-medium text-[#132219] tracking-[-0.4px]">
+      Estimated Costs in detail
+    </h2>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="12"
-              height="7"
-              viewBox="0 0 12 7"
-              fill="none"
-              className="absolute right-6 top-[14px] pointer-events-none"
-            >
-              <path
-                d="M6 7C5.72917 7 5.48958 6.90625 5.28125 6.71875L0.28125 1.71875C0.09375 1.51042 0 1.27083 0 1C0 0.729167 0.09375 0.489583 0.28125 0.28125C0.489583 0.09375 0.729167 0 1 0C1.27083 0 1.51042 0.09375 1.71875 0.28125L6 4.59375L10.2812 0.28125C10.4896 0.09375 10.7292 0 11 0C11.2708 0 11.5104 0.09375 11.7188 0.28125C11.9062 0.489583 12 0.729167 12 1C12 1.27083 11.9062 1.51042 11.7188 1.71875L6.71875 6.71875C6.51042 6.90625 6.27083 7 6 7Z"
-                fill="white"
-              />
-            </svg>
-          </div>
-        </div>
+    <div className="relative w-full md:w-[444px]">
+      <select
+        value={interestOption}
+        onChange={(e) => setInterestOption(e.target.value)}
+        className="appearance-none w-full h-[44px] px-6 
+         bg-[#132219] text-white text-[16px] md:text-[20px] font-semibold rounded-[58px]
+         cursor-pointer outline-none border-none"
+      >
+        {interestOptions.map((option) => (
+          <option key={option} value={option} className="bg-[#132219] text-white">
+            {option}
+          </option>
+        ))}
+      </select>
 
-        <div className="flex flex-col md:flex-row gap-[16px]">
-          <div className="grid grid-cols-2 gap-[10px] w-full max-w-[628px]">
-            <SmallBox
-              title="Interest"
-              value={formatCHF(interestYearEffective / 12)}
-            />
-            <SmallBox
-              title="Amortisation"
-              value={formatCHF(amortizationYear / 12)}
-            />
-            <SmallBox
-              title="Incidental expenses "
-              value={formatCHF(maintenanceYear / 12)}
-            />
-            <SmallBox
-              title="Monthly costs"
-              value={formatCHF(monthlyCost)}
-              highlight
-            />
-          </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="7"
+        viewBox="0 0 12 7"
+        fill="none"
+        className="absolute right-6 top-[50%] -translate-y-1/2 pointer-events-none"
+      >
+        <path
+          d="M6 7C5.72917 7 5.48958 6.90625 5.28125 6.71875L0.28125 1.71875C0.09375 1.51042 0 1.27083 0 1C0 0.729167 0.09375 0.489583 0.28125 0.28125C0.489583 0.09375 0.729167 0 1 0C1.27083 0 1.51042 0.09375 1.71875 0.28125L6 4.59375L10.2812 0.28125C10.4896 0.09375 10.7292 0 11 0C11.2708 0 11.5104 0.09375 11.7188 0.28125C11.9062 0.489583 12 0.729167 12 1C12 1.27083 11.9062 1.51042 11.7188 1.71875L6.71875 6.71875C6.51042 6.90625 6.27083 7 6 7Z"
+          fill="white"
+        />
+      </svg>
+    </div>
+  </div>
 
-      <div
-  className={`flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219] w-[628px] h-[444px] text-center px-[40px] py-[60px] ${
-    !loanType
-      ? "bg-[#E5E5E5]"
-      : isEligible
-      ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
-      : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
-  }`}
->
+  {/* Boxes + Result */}
+  <div className="flex flex-col md:flex-row gap-[16px] w-full">
 
-            <h3
-              className="font-sfpro text-[#132219]"
-              style={{
-                fontSize: "85.022px",
-                fontStyle: "normal",
-                fontWeight: "500",
-                lineHeight: "100%",
-                letterSpacing: "-0.85px",
-              }}
-            >
-              {Math.round(
-                interestYearEffective + amortizationYear + maintenanceYear
-              ).toLocaleString("de-CH")}
-            </h3>
-            <p className="text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
-              Total yearly expenses
-            </p>
-          </div>
-        </div>
-      </div>
+    {/* Small boxes grid */}
+    <div className="grid grid-cols-2 gap-[10px] w-full md:max-w-[628px]">
+      <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
+      <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
+      <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />
+      <SmallBox title="Monthly costs" value={formatCHF(monthlyCost)} highlight />
+    </div>
+
+    {/* Total Box */}
+    <div
+      className={`
+        flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219]
+        w-full md:w-[628px] 
+        h-auto md:h-[444px]
+        text-center px-[24px] md:px-[40px] py-[40px] md:py-[60px]
+        ${
+          !loanType
+            ? "bg-[#E5E5E5]"
+            : isEligible
+            ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
+            : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
+        }
+      `}
+    >
+      <h3 className="font-sfpro text-[#132219] text-[40px] md:text-[85px] font-medium leading-none">
+        {Math.round(interestYearEffective + amortizationYear + maintenanceYear).toLocaleString("de-CH")}
+      </h3>
+
+      <p className="text-[16px] md:text-[20px] font-sfpro font-normal text-[#132219] opacity-80 mt-3">
+        Total yearly expenses
+      </p>
+    </div>
+  </div>
+</div>
+
     </section>
   );
 }

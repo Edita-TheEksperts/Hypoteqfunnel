@@ -1,7 +1,7 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 interface StepProps {
   step?: string;
@@ -13,57 +13,75 @@ interface StepProps {
 
 const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) => (
   <div
-    className={`flex justify-between items-start ${
-      highlightBox ? "w-[1272px] p-14" : "w-[1272px] p-10"
-    } font-[var(--font-sfpro)] bg-[#f8f9fa] rounded-2xl shadow-lg border border-[#e5e7eb] transition-all duration-500`}
+    className={`
+      flex flex-col lg:flex-row justify-between items-start
+      w-[90%] md:w-[85%] lg:w-[1272px]
+      ${highlightBox ? "p-6 md:p-10 lg:p-14" : "p-6 md:p-8 lg:p-10"}
+      font-[var(--font-sfpro)]
+      bg-[#f8f9fa] rounded-2xl shadow-lg border border-[#e5e7eb]
+      transition-all duration-500
+    `}
   >
+    {/* Left Section */}
     <div
-      className={`text-left text-[#132219] ${
-        highlightBox ? "w-[600px]" : "w-[536px]"
-      }`}
+      className={`
+        text-left text-[#132219]
+        w-full lg:w-[60%]
+      `}
     >
-      {step && <p className="text-[16px] font-[500] mb-[4px]">{step}</p>}
+      {step && <p className="text-[14px] md:text-[16px] font-[500] mb-[4px]">{step}</p>}
+      
       <h3
-        className={`${
-          highlightBox ? "text-[34px]" : "text-[28px]"
-        } font-[600] mb-[16px]`}
+        className={`
+          ${highlightBox ? "text-[26px] md:text-[30px] lg:text-[34px]" : "text-[22px] md:text-[26px] lg:text-[28px]"}
+          font-[600] mb-[12px] md:mb-[16px]
+        `}
       >
         {title}
       </h3>
+
       <p
-        className={`${
-          highlightBox ? "text-[26px]" : "text-[24px]"
-        } font-[300] leading-[140%]`}
+        className={`
+          ${highlightBox ? "text-[20px] md:text-[22px] lg:text-[26px]" : "text-[18px] md:text-[20px] lg:text-[24px]"}
+          font-[300] leading-[150%]
+        `}
       >
         {text}
       </p>
     </div>
 
-    <div className="w-[199px]" />
+    {/* Spacer for Desktop */}
+    <div className="hidden lg:block w-[199px]" />
 
+    {/* Right Section */}
     {highlightBox ? (
-      <div className="flex flex-col justify-between items-center w-[600px] h-[350px] px-[80px] py-[40px] bg-[#CAF476] rounded-[14px] shadow-md">
-        <p className="text-center text-[#132219] text-[30px] font-[400] leading-[130%]">
+      <div
+        className="
+          flex flex-col justify-between items-center
+          w-full lg:w-[550px]
+          h-[260px] md:h-[300px] lg:h-[350px]
+          px-[30px] md:px-[60px] lg:px-[80px]
+          py-[30px] bg-[#CAF476] rounded-[14px] shadow-md mt-6 lg:mt-0
+        "
+      >
+        <p className="text-center text-[#132219] text-[20px] md:text-[26px] lg:text-[30px] font-[400] leading-[130%]">
           Start now in just 3 clicks.
-          <br />
-          We’ll guide you step by step.
+          <br /> We’ll guide you step by step.
         </p>
-        <button className="flex items-center justify-center gap-[10px] border border-[#132219] rounded-[58px] px-[32px] py-[10px] text-[22px] font-[600] text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all">
+
+        <button className="flex items-center justify-center gap-[10px] border border-[#132219] rounded-[50px] px-[24px] py-[10px]
+          text-[18px] md:text-[20px] lg:text-[22px] font-[600] text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all">
           Find my best offer
         </button>
       </div>
     ) : (
       image && (
         <motion.div
-          initial={{ scale: 0.5, opacity: 0, rotate: -10 }}      // start small, invisible, rotated
-          whileInView={{ scale: 1, opacity: 1, rotate: 0 }}     // pop to normal, rotate to 0
+          initial={{ scale: 0.5, opacity: 0, rotate: -10 }}
+          whileInView={{ scale: 1, opacity: 1, rotate: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{
-            type: "spring",                                    
-            stiffness: 500,
-            damping: 20,
-          }}
-          className="flex-shrink-0 w-[513px] rounded-[10px] overflow-hidden flex justify-center items-center"
+          transition={{ type: "spring", stiffness: 500, damping: 20 }}
+          className="flex-shrink-0 w-full md:w-[450px] lg:w-[513px] rounded-[10px] overflow-hidden flex justify-center items-center mt-6 lg:mt-0"
         >
           <Image
             src={image}
@@ -113,39 +131,39 @@ export default function HowItWorks() {
 
   return (
     <section ref={ref} className="relative bg-white h-[500vh]">
+
+      <motion.h2
+        className="text-[38px] md:text-[48px] lg:text-[54px] font-bold text-[#132219] text-center mb-6"
+        initial={{ opacity: 1, y: -10 }}
+        style={{
+          opacity: useTransform(scrollYProgress, [0, 0.08], [1, 0]),
+          y: useTransform(scrollYProgress, [0, 0.08], [-10, -60]),
+        }}
+      >
+        How It Works
+      </motion.h2>
+
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {steps.map((step, index) => {
-          const start = index / steps.length;
-          const end = (index + 0.9) / steps.length;
+          const start = (index - 0.35) / steps.length;
+          const end = (index + 0.35) / steps.length;
 
-          const opacity = useTransform(
-            scrollYProgress,
-            [start, end],
-            [index === 0 ? 1 : 0, 1]
-          );
-
-          const incrementalOffset = 60;
-
-          const y = useTransform(scrollYProgress, [start, end], [
-            index === 0 ? 20 : 200 + index * incrementalOffset,
-            index * incrementalOffset - index * 20,
-          ]);
-
-          const scale = useTransform(scrollYProgress, [start, end], [0.95, 1]);
+          const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+          const y = useTransform(scrollYProgress, [start, end], [200 + index * 60, index * -10]);
+          const scale = useTransform(scrollYProgress, [start, end], [0.96, 1]);
           const zIndex = index + 1;
+
+          const [visible, setVisible] = useState(false);
+          useMotionValueEvent(opacity, "change", (latest) => setVisible(latest > 0.15));
 
           return (
             <motion.div
               key={index}
-              style={{
-                opacity,
-                scale,
-                y,
-                position: "absolute",
-                zIndex,
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="w-full flex flex-col items-center justify-center"
+              style={{ opacity, scale, y, position: "absolute", zIndex }}
+              transition={{ duration: 1.1, ease: "easeOut" }}
+              className={`w-full flex flex-col items-center justify-center ${
+                visible ? "visible pointer-events-auto" : "invisible pointer-events-none"
+              }`}
             >
               <Step {...step} />
             </motion.div>
