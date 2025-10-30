@@ -59,7 +59,9 @@ const Footer: React.FC = () => {
             height={38}
             className="object-contain w-[120px] sm:w-[145px]"
           />
-          <p className="text-[14px] text-[#132219]/80">Address</p>
+<h4 className="text-[#132219] text-[16px] font-[400] leading-normal font-['SF Pro Display']">
+  Address
+</h4>
         </div>
 
         {/* === First Row === */}
