@@ -33,58 +33,49 @@ const TeamSection: React.FC = () => {
       <div className="w-full max-w-[1320px] px-8">
         <h2 className="text-[40px] font-medium text-[#132219] mb-10">Team</h2>
 
-        <div className="grid grid-cols-4 gap-x-8 gap-y-20 justify-items-center">
+        {/* ✅ Responsive grid */}
+        <div className="
+          grid grid-cols-4 gap-x-8 gap-y-20 justify-items-center
+          max-xl:grid-cols-3
+          max-lg:grid-cols-2
+          max-md:grid-cols-1
+        ">
           {teamMembers.map((member, index) => (
-            <div key={index} className="flex flex-col items-start w-[304px]">
+            <div key={index} className="flex flex-col items-start 
+              w-[304px] 
+              max-lg:w-[260px]
+              max-md:w-full
+            ">
               
-              <div
-                className={`rounded-[10px] overflow-hidden ${
-                  member.bgColor ? "border-2 border-[#132219]" : "bg-gray-100"
-                }`}
-                style={{
-                  width: member.bgColor ? "627px" : "304px",
-                  height: "283px",
-                  backgroundColor: member.bgColor,
-                  backgroundImage: member.image ? `url(${member.image})` : undefined,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  display: member.bgColor ? "flex" : undefined,
-                  flexDirection: member.bgColor ? "column" : undefined,
-                  alignItems: member.bgColor ? "flex-start" : undefined,
-                  padding: member.bgColor ? "23.552px 24px" : undefined, 
-                  gap: member.bgColor ? "7.36px" : undefined,
-                  flexShrink: member.bgColor ? "0" : undefined,
-                }}
-              >
+              {/* ✅ Box responsive width */}
+<div
+  className={`
+    rounded-[10px] overflow-hidden
+    ${member.bgColor ? "border-2 border-[#132219]" : "bg-gray-100"}
+    ${member.bgColor ? "w-full md:w-[627px]" : "w-full md:w-[304px]"}
+  `}
+  style={{
+    height: "283px",
+    backgroundColor: member.bgColor,
+    backgroundImage: member.image ? `url(${member.image})` : undefined,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    display: member.bgColor ? "flex" : undefined,
+    flexDirection: member.bgColor ? "column" : undefined,
+    alignItems: member.bgColor ? "flex-start" : undefined,
+    padding: member.bgColor ? "23.552px 24px" : undefined,
+    gap: member.bgColor ? "7.36px" : undefined,
+  }}
+>
+
                 {member.bgColor && (
                   <>
-                    <h3
-                      style={{
-                        color: "var(--Secondary-Color, #132219)",
-                        fontFamily: '"SF Pro Display"',
-                        fontSize: "20px",
-                        fontStyle: "normal",
-                        fontWeight: 600,
-                        lineHeight: "normal",
-                        marginBottom: "75px",
-                      }}
-                    >
+                    <h3 className="text-[#132219] font-semibold text-[20px] mb-6">
                       {member.name}
                     </h3>
 
-                    <p
-                      style={{
-                        color: "var(--Secondary-Color, #132219)",
-                        fontFamily: '"SF Pro Display"',
-                        fontSize: "22px",
-                        fontStyle: "normal",
-                        fontWeight: 300,
-                        lineHeight: "120%",
-                        width: "100%",
-                        textAlign: "justify",
-                      }}
-                    >
+                    <p className="text-[#132219] text-[18px] font-light leading-[150%] text-justify">
                       {member.description}
                     </p>
                   </>

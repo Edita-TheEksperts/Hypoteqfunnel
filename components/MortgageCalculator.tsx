@@ -110,7 +110,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   }`}
 >
 
-      <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[108px] mx-auto">
+<div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[40px] lg:gap-[108px] mx-auto px-4">
         {/* LEFT SIDE */}
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
           <h1 className="text-[40px] font-semibold leading-none mb-6">
@@ -149,7 +149,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
               </div>
             )}
 
-            <div className="flex flex-col gap-[24px] mt-2">
+<div className="flex flex-col gap-[20px] mt-2 w-full">
               <SliderInput
                 label="Property Price"
                 value={propertyPrice}
@@ -189,7 +189,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex flex-col items-start w-full max-w-[628px] mt-[96px] gap-[34px]">
+<div className="flex flex-col items-start w-full lg:max-w-[628px] mt-[40px] lg:mt-[96px] gap-[24px] px-2">
      <InfoBox
   title={infoTitle}
   value={formatCHF(actualMortgage)}
@@ -265,7 +265,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   <div className="flex flex-col md:flex-row gap-[16px] w-full">
 
     {/* Small boxes grid */}
-    <div className="grid grid-cols-2 gap-[10px] w-full md:max-w-[628px]">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-[10px] w-full md:max-w-[628px]">
       <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
       <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
       <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />
@@ -276,8 +276,9 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
     <div
       className={`
         flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219]
-        w-full md:w-[628px] 
-        h-auto md:h-[444px]
+    w-full lg:w-[628px] 
+min-h-[300px] lg:h-[444px]
+
         text-center px-[24px] md:px-[40px] py-[40px] md:py-[60px]
         ${
           !loanType
@@ -461,7 +462,8 @@ function SmallBox({ title, value, highlight = false }: any) {
 
   return (
     <div
-      className={`relative flex flex-col justify-between p-[15px_16px] rounded-[10px] border border-[#132219] w-[308px] h-[216px] bg-white overflow-hidden`}
+      className={`relative flex flex-col justify-between p-[15px_16px] rounded-[10px] border border-[#132219] w-full sm:w-[308px] min-h-[180px]
+ bg-white overflow-hidden`}
     >
       {/* Gradient line only at the bottom when highlight = true */}
       {highlight && (

@@ -57,7 +57,7 @@ const testimonials: Testimonial[] = [
 
 const Testimonials: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 3;
+  const visibleCount = 3; // desktop stays same
 
   const nextSlide = () => {
     if (currentIndex < testimonials.length - visibleCount) {
@@ -72,32 +72,33 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="w-full flex flex-col items-center bg-white py-[100px] font-[var(--font-sfpro)] overflow-hidden">
+    <section className="w-full flex flex-col items-center bg-white py-[100px] overflow-hidden">
+
       {/* Title */}
-      <div className="w-[1274px] flex justify-between items-start mb-[56px]">
+      <div className="w-[1274px] max-w-full px-4 flex flex-col md:flex-row justify-between items-start mb-[56px]">
+
         <div>
-          <h2 className="text-[#132219] text-[40px] font-[500] leading-[56px] tracking-[-0.4px] font-['SF Pro Display']">
+          <h2 className="text-[#132219] text-[32px] md:text-[40px] font-[500]">
             Testimonials
           </h2>
-          <p className="text-[#132219] text-[24px] font-[300] leading-[140%] font-['SF Pro Display'] max-w-[1154px] mt-[8px]">
-            Real experiences from people who found clarity, confidence <br /> and
-            better decisions with our mortgage and property tools.
+          <p className="text-[#132219] text-[18px] md:text-[24px] font-[300] leading-[140%] mt-[8px] max-w-[1154px]">
+            Real experiences from people who found clarity, confidence 
+            and better decisions with our mortgage and property tools.
           </p>
         </div>
 
         {/* Arrows */}
-        <div className="flex gap-[16px] mt-[8px]">
+        <div className="flex gap-[12px] mt-[20px] md:mt-[8px] self-start md:self-auto">
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
             className={`w-[36px] h-[36px] rounded-full bg-[#132219] flex items-center justify-center transition ${
-              currentIndex === 0
-                ? "opacity-40 cursor-not-allowed"
-                : "hover:opacity-80"
+              currentIndex === 0 ? "opacity-40 cursor-not-allowed" : "hover:opacity-80"
             }`}
           >
             <ChevronLeft size={20} color="#fff" />
           </button>
+
           <button
             onClick={nextSlide}
             disabled={currentIndex >= testimonials.length - visibleCount}
@@ -112,19 +113,22 @@ const Testimonials: React.FC = () => {
         </div>
       </div>
 
-      {/* Slider container */}
-      <div className="w-[1274px] overflow-hidden">
+      {/* Slider */}
+      <div className="w-[1274px] max-w-full overflow-hidden px-2">
         <div
           className="flex gap-[20px] transition-transform duration-500 ease-in-out"
+
           style={{
-            transform: `translateX(-${currentIndex * (409 + 20)}px)`, // 409px width + 20px gap
+            transform: `translateX(-${
+              currentIndex * (409 + 20)
+            }px)`,
           }}
         >
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="flex flex-col items-start gap-[66.55px] w-[409px] rounded-[9.933px] bg-[#E2E2E2] 
-                         p-[23.839px_19.866px] shadow-[4px_6px_8.4px_0_rgba(0,0,0,0.25)] flex-shrink-0"
+              className="flex flex-col items-start gap-[30px] w-[409px] min-w-[280px] rounded-[10px] bg-[#E2E2E2]
+              p-[24px] shadow-lg flex-shrink-0"
             >
               {/* Header */}
               <div className="flex items-center gap-[12px]">
@@ -133,18 +137,18 @@ const Testimonials: React.FC = () => {
                   alt={t.name}
                   className="w-[48px] h-[48px] rounded-full object-cover"
                 />
-                <h3 className="text-[20px] font-[600] text-[#000] font-['SF Pro Display']">
+                <h3 className="text-[18px] md:text-[20px] font-[600] text-[#000]">
                   {t.name}
                 </h3>
               </div>
 
               {/* Text */}
-              <p className="text-[20.18px] font-[400] leading-[140%] text-[#000] opacity-80 font-['SF Pro Rounded']">
+              <p className="text-[16px] md:text-[20px] leading-[150%] text-[#000]/80">
                 {t.text}
               </p>
 
               {/* Date */}
-              <p className="text-[17.65px] font-[300] leading-[140%] text-[#000] opacity-80 font-['SF Pro Rounded']">
+              <p className="text-[14px] md:text-[17px] text-[#000]/70 font-light">
                 {t.date}
               </p>
             </div>
