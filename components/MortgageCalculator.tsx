@@ -213,7 +213,19 @@ min={0}
   max={2000000}
   slidersTouched={slidersTouched}
 />
+<SliderInput
+  label="Annual Gross Income (CHF)"
+  value={income}
+  setValue={(v: number) => {
+    setIncome(v);
+    setSlidersTouched(true);
+  }}
+min={0}
 
+  max={500000}
+  requiredValue={requiredIncome}
+  slidersTouched={slidersTouched}
+/>
 <SliderInput
   label={loanType === "purchase" ? "Equity / Own Funds" : "Existing Equity"}
   value={ownFunds}
@@ -231,19 +243,7 @@ max={Math.max(propertyPrice, 2000000)}
   slidersTouched={slidersTouched} 
 />
 
-<SliderInput
-  label="Annual Gross Income (CHF)"
-  value={income}
-  setValue={(v: number) => {
-    setIncome(v);
-    setSlidersTouched(true);
-  }}
-min={0}
 
-  max={500000}
-  requiredValue={requiredIncome}
-  slidersTouched={slidersTouched}
-/>
 
 
 </div>
