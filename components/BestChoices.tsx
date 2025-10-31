@@ -5,11 +5,14 @@ export default function BestChoices() {
   return (
     <section
       className="
-        flex flex-col md:flex-row justify-between items-start 
-        w-full max-w-[1272px] mx-auto 
-        p-[24px] md:p-[32px] 
-        gap-[40px] md:gap-[80px]
-        rounded-[10px] mt-[120px] mb-[120px] border border-black
+       flex flex-col md:flex-row justify-between items-start 
+    w-full max-w-[1272px] mx-auto 
+    p-[24px] md:p-[32px] 
+    gap-[40px] md:gap-[80px]
+    rounded-[10px] 
+    mt-[48px] md:mt-[120px] 
+    mb-[120px]
+    border border-black
       "
       style={{ background: "var(--Secondary-Color, #132219)" }}
     >

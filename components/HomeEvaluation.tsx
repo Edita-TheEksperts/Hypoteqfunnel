@@ -7,7 +7,7 @@ export default function HomeEvaluation() {
       className="
         relative bg-no-repeat text-white 
         px-4 sm:px-8 md:px-[118px]
-        py-[60px] md:py-[80px]
+        py-[48px] md:py-[120px]
         overflow-hidden
 
         bg-[url('/images/999.png')]
@@ -87,7 +87,7 @@ export default function HomeEvaluation() {
         <Step
           icon={<img src="/images/Shpia.svg" className="w-[49px] h-[68px]" />}
           title="Property match"
-          text="We confirm parcel, unit, and living area from official records and maps."
+          text="We confirm parcel, unit, and living area      from official records and maps."
         />
         <Step
           icon={<img src="/images/ShpiPare.svg" className="w-[54px] h-[68px]" />}
@@ -117,7 +117,8 @@ function Step({ icon, title, text }: StepProps) {
         flex flex-col
         sm:items-start items-center
         text-center sm:text-left
-        max-w-[167px]
+w-full max-w-none
+
       "
     >
       <div className="mb-4">{icon}</div>

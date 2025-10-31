@@ -4,7 +4,7 @@ import React from "react";
 const MortgageGuide: React.FC = () => {
   return (
     <section
-      className="relative w-full h-[384px] flex items-center justify-center max-sm:h-[260px]"
+      className="relative w-full   mt-[48px] md:mt-[120px] h-[384px] flex items-center justify-center max-sm:h-[260px]"
       style={{
         background: "url('/images/foto12345.png') center/cover no-repeat",
       }}

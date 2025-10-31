@@ -107,11 +107,18 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   // -------------- UI --------------
   return (
 <section
-  className="flex flex-col items-center py-16 px-8 font-sans text-[#132219] bg-white"
+  className="
+    flex flex-col items-center 
+    py-[48px] md:py-[120px]
+    px-[20px] md:px-[118px]
+    font-sans text-[#132219] bg-white
+  "
 >
 
 
-<div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[40px] lg:gap-[108px] mx-auto px-4">
+<div className="flex flex-col lg:flex-row justify-between items-start 
+w-full max-w-[1440px] mx-auto 
+gap-[40px] lg:gap-[108px]">
         {/* LEFT SIDE */}
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
           <h1 className="text-[40px] font-semibold leading-none mb-6">
@@ -491,38 +498,39 @@ function SmallBox({ title, value, highlight = false }: any) {
         <div className="absolute bottom-0 left-0 w-full h-[6px] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" />
       )}
 
-      {/* Title */}
-      <p
-        className={`text-[#132219] font-['SF Pro Display'] ${
-          isMonthlyCosts
-            ? "text-[32px] font-[500] tracking-[-0.32px]"
-            : "text-[20px] font-[400] tracking-[-0.2px]"
-        } leading-[100%]`}
-      >
-        {title}
-      </p>
+ {/* Title */}
+<p
+  className={`text-[#132219] font-['SF Pro Display'] ${
+    isMonthlyCosts
+      ? "text-[20px] sm:text-[32px] font-[500] tracking-[-0.32px]" // 20px mobile, 32px desktop
+      : "text-[20px] font-[400] tracking-[-0.2px]"
+  } leading-[100%]`}
+>
+  {title}
+</p>
 
-      {/* Value */}
-      <div className="flex items-end gap-[4px]">
-        <span
-          className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
-            isMonthlyCosts
-              ? "text-[40px] font-[600] tracking-[-0.4px]"
-              : "text-[24px] font-[500] tracking-[-0.24px]"
-          }`}
-        >
-          {currency}
-        </span>
-        <span
-          className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
-            isMonthlyCosts
-              ? "text-[40px] font-[600] tracking-[-0.4px]"
-              : "text-[32px] font-[500] tracking-[-0.32px]"
-          }`}
-        >
-          {amount}
-        </span>
-      </div>
+{/* Value */}
+<div className="flex items-end gap-[4px]">
+  <span
+    className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
+      isMonthlyCosts
+        ? "text-[28px] sm:text-[40px] font-[600] tracking-[-0.4px]" // 28px mobile, 40px desktop
+        : "text-[24px] font-[500] tracking-[-0.24px]"
+    }`}
+  >
+    {currency}
+  </span>
+  <span
+    className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
+      isMonthlyCosts
+        ? "text-[28px] sm:text-[40px] font-[600] tracking-[-0.4px]"
+        : "text-[32px] font-[500] tracking-[-0.32px]"
+    }`}
+  >
+    {amount}
+  </span>
+</div>
+
     </div>
   );
 }

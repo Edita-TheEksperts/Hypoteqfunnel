@@ -9,15 +9,15 @@ const StartProcessBanner = () => {
     relative w-full max-w-[1275px]
     h-[260px] md:h-[197px]
     rounded-[10px] overflow-hidden mx-auto
-    my-[40px] md:my-[80px]
+    mt-[48px] md:mt-[120px]
     flex flex-col md:flex-row
     items-start md:items-center
     justify-start md:justify-between
     px-[16px] md:px-[24px]
     py-[20px] md:py-0
-    pb-[80px] md:pb-0
   "
 >
+
 
   <Image
     src="/images/mg-mobile.png"

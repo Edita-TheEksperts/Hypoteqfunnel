@@ -71,7 +71,14 @@ const YourAdvantages: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full flex flex-col items-center bg-white pt-[80px] pb-[100px] font-[var(--font-sfpro)] px-[16px]">
+  <section
+  className="
+    w-full flex flex-col items-center bg-white 
+    pt-[80px]
+    font-[var(--font-sfpro)] px-[16px]
+    mt-[48px] md:mt-[120px]
+  "
+>
 
       <h2 className="w-full lg:w-[1274px] text-left text-[32px] lg:text-[40px] font-[500] leading-[56px] text-[#132219] mb-[40px] font-[SF Pro Display]">
         Your Advantages

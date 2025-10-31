@@ -16,8 +16,6 @@ export default function Home() {
     <main className="overflow-visible">
       <Header />
 
-      {/* ✅ Spacing mes seksioneve */}
-      <div className="flex flex-col space-y-[48px] md:space-y-[120px]">
         <Hero />
         <MortgageCalculator />
         <HomeEvaluation />
@@ -28,7 +26,7 @@ export default function Home() {
         <Testimonials />
         <MortgageGuide/>
         <ConsultationBanner />
-      </div>
+
 
       {/* ✅ Spacing para Footer: 100 mobile / 200 desktop */}
       <div className="mt-[100px] md:mt-[200px]">

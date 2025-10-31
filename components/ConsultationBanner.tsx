@@ -5,7 +5,7 @@ const ConsultationBanner: React.FC = () => {
   return (
     <section
       className="
-        relative w-[1273px] h-[278px] rounded-[10px] mt-[100px] mb-[100px] overflow-hidden mx-auto 
+        relative w-[1273px] h-[278px] rounded-[10px]   mt-[48px] md:mt-[120px] overflow-hidden mx-auto 
         flex items-center px-[60px] text-white
 
         /* MOBILE FIXES */

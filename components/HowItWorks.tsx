@@ -141,7 +141,16 @@ export default function HowItWorks() {
   });
 
   return (
-<section ref={ref} className="relative bg-white h-[500vh] px-4 sm:px-8 md:px-[118px]">
+<section
+  ref={ref}
+  className="
+    relative bg-white 
+    h-[500vh] 
+    px-4 sm:px-8 md:px-[118px]
+    mt-[48px] md:mt-[120px]
+  "
+>
+
 
   <motion.h2
   className="

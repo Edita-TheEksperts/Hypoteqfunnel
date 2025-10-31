@@ -125,7 +125,7 @@ export default function Hero() {
     <Image src="/images/Bank_Cler_logo.png" width={120} height={30} alt="CLER" />
 
     {/* Row 3 ✅ SNB appearing */}
-    <Image src="/images/67.svg" width={120} height={30} alt="SNB BNS" unoptimized />
+    <Image src="/images/Bank_Cler_logo.png" width={120} height={30} alt="SNB BNS" unoptimized />
     
   </div>
 </div>
