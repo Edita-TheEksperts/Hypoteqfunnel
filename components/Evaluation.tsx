@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 
+
 export default function Evaluation() {
   return (
     <>
@@ -19,7 +20,7 @@ export default function Evaluation() {
         {/* Përmbajtja */}
         <div className="relative z-10 flex flex-col items-start text-left max-w-[880px] gap-[28px]">
           <h1 className="font-['SF Pro Display'] text-[#132219] text-[100px] font-[500] leading-[100%] tracking-[-1px]">
-            Home Evaluation
+            Home <br/>Evaluation
           </h1>
 
           <p className="font-['SF Pro Display'] text-[#132219] text-[20px] font-[300] leading-[140%] max-w-[692px]">
