@@ -3,19 +3,24 @@ import React from "react";
 
 export default function BestChoices() {
   return (
-    <section
-      className="
-       flex flex-col md:flex-row justify-between items-start 
-    w-full max-w-[1272px] mx-auto 
-    p-[24px] md:p-[32px] 
+ <section
+  className="
+    w-full max-w-[1272px] mx-auto
+  
+  flex flex-col md:flex-row justify-start items-start 
+w-full max-w-[1272px] mx-auto 
+py-[24px] md:py-[32px]
+px-[20px] md:px-[40px]
+gap-[40px] md:gap-[80px]
+
     gap-[40px] md:gap-[80px]
-    rounded-[10px] 
-    mt-[48px] md:mt-[120px] 
-    mb-[120px]
+    rounded-[10px]
+    mt-[120px] mb-[120px] 
     border border-black
-      "
-      style={{ background: "var(--Secondary-Color, #132219)" }}
-    >
+  "
+  style={{ background: "var(--Secondary-Color, #132219)" }}
+>
+
       {/* Left Column */}
       <div className="flex flex-col font-sfpro gap-[24px] text-white max-w-[100%] md:max-w-[500px]">
      <h2

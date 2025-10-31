@@ -31,7 +31,7 @@ export default function Header() {
         className="
         w-full max-w-[1600px] mx-auto 
         h-[70px] sm:h-[80px] md:h-[90px]
-        px-4 sm:px-6 md:px-12 lg:px-[130px]
+        px-4 sm:px-6 md:px-12 lg:px-[118px]
         flex items-center justify-between
       "
       >

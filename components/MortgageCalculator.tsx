@@ -1,12 +1,15 @@
 "use client";
 import { useState, useMemo } from "react";
+import { useEffect } from "react";
+
 
 export default function MortgageCalculator() {
 const [propertyPrice, setPropertyPrice] = useState(0);
 const [ownFunds, setOwnFunds] = useState(0);
 const [income, setIncome] = useState(0);
 const [slidersTouched, setSlidersTouched] = useState(false);
-
+const [requiredOwnFunds, setRequiredOwnFunds] = useState(0);
+const [requiredIncome, setRequiredIncome] = useState(0);
 
 
 const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(null);
@@ -17,6 +20,10 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   );
 
   const [interestOption, setInterestOption] = useState("10Y 1.40%");
+
+
+
+
 
   // ------------------- Excel Parameter Mapping -------------------
   const params =
@@ -37,6 +44,42 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
           amortizationYears: 0,
           tragbarkeitThreshold: 0.35,
         };
+        // Auto-adjust slider values if below required minimums
+useEffect(() => {
+  if (requiredOwnFunds > 0 && ownFunds < requiredOwnFunds) {
+    setOwnFunds(requiredOwnFunds);
+  }
+
+  if (requiredIncome > 0 && income < requiredIncome) {
+    setIncome(requiredIncome);
+  }
+}, [requiredOwnFunds, requiredIncome]);
+
+
+useEffect(() => {
+  if (!loanType || !residenceType || propertyPrice <= 0) return;
+
+  const minOwnFunds = propertyPrice * 0.2;
+  const loanPart = propertyPrice * params.maxBelehnung;
+
+  const amortSecond =
+    residenceType === "haupt"
+      ? Math.max(0, loanPart - propertyPrice * params.firstMortgageLimit) /
+        params.amortizationYears
+      : 0;
+
+  const estMinIncome =
+    (loanPart * params.stressRate +
+      propertyPrice * params.maintenanceRate +
+      amortSecond) /
+    params.tragbarkeitThreshold;
+
+  setRequiredOwnFunds(minOwnFunds);
+  setRequiredIncome(Math.round(estMinIncome));
+
+
+}, [propertyPrice, residenceType, loanType]);
+
 
   // Effective rate by product (for real interest display)
   const effectiveRate = useMemo(() => {
@@ -102,7 +145,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   const formatPercent = (num: number) =>
     (num * 100).toFixed(1).replace(".", ",") + "%";
 
-  const interestOptions = ["SARON 0.85%", "5Y 1.03%", "10Y 1.40%"];
+  const interestOptions = ["SARON 0.85%", "5 Year Fixed-rate mortgage - 1,03%", "10 Year Fixed-rate mortgage 1.40%"];
 
   // -------------- UI --------------
   return (
@@ -158,38 +201,51 @@ gap-[40px] lg:gap-[108px]">
             )}
 
 <div className="flex flex-col gap-[20px] mt-2 w-full">
-  <SliderInput
-    label="Property Price"
-    value={propertyPrice}
-    setValue={(v: number) => {
-      setPropertyPrice(v);
-      setSlidersTouched(true);
-    }}
-    min={100000}
-    max={2000000}
-  />
+<SliderInput
+  label="Property Price"
+  value={propertyPrice}
+  setValue={(v: number) => {
+    setPropertyPrice(v);
+    setSlidersTouched(true);
+  }}
+min={0}
 
-  <SliderInput
-    label={loanType === "purchase" ? "Equity / Own Funds" : "Existing Equity"}
-    value={ownFunds}
-    setValue={(v: number) => {
-      setOwnFunds(v);
-      setSlidersTouched(true);
-    }}
-    min={0}
-    max={propertyPrice}
-  />
+  max={2000000}
+  slidersTouched={slidersTouched}
+/>
 
-  <SliderInput
-    label="Annual Gross Income (CHF)"
-    value={income}
-    setValue={(v: number) => {
-      setIncome(v);
-      setSlidersTouched(true);
-    }}
-    min={50000}
-    max={500000}
-  />
+<SliderInput
+  label={loanType === "purchase" ? "Equity / Own Funds" : "Existing Equity"}
+  value={ownFunds}
+  setValue={(v: number) => {
+    setOwnFunds(v);
+    setSlidersTouched(true);
+  }}
+min={0}
+
+
+max={Math.max(propertyPrice, 2000000)}
+
+
+  requiredValue={requiredOwnFunds}
+  slidersTouched={slidersTouched} 
+/>
+
+<SliderInput
+  label="Annual Gross Income (CHF)"
+  value={income}
+  setValue={(v: number) => {
+    setIncome(v);
+    setSlidersTouched(true);
+  }}
+min={0}
+
+  max={500000}
+  requiredValue={requiredIncome}
+  slidersTouched={slidersTouched}
+/>
+
+
 </div>
 
           </div>
@@ -245,7 +301,7 @@ gap-[40px] lg:gap-[108px]">
 
       {/* COST SECTION */}
 {/* COST SECTION */}
-<div className="flex flex-col gap-[63px] mt-[80px] items-stretch">
+<div className="flex flex-col gap-[63px] mt-[80px] items-stretch w-full max-w-[1440px] mx-auto px-[20px] md:px-0">
 
   {/* Top Row: Title + Select */}
   <div className="flex flex-col md:flex-row justify-between md:items-center w-full gap-4">
@@ -359,9 +415,11 @@ function SubToggle({ label, active, onClick }: any) {
     </button>
   );
 }
+function SliderInput({ label, value, setValue, min, max, requiredValue, slidersTouched }: any)
+{
 
-function SliderInput({ label, value, setValue, min, max }: any) {
   const percentage = ((value - min) / (max - min)) * 100;
+
   return (
     <div className="flex flex-col gap-2 relative">
       <div className="flex justify-between items-center">
@@ -370,6 +428,7 @@ function SliderInput({ label, value, setValue, min, max }: any) {
           <span className="text-white text-[10px] font-medium">?</span>
         </div>
       </div>
+
       <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-5 py-2">
         <input
           type="text"
@@ -379,6 +438,7 @@ function SliderInput({ label, value, setValue, min, max }: any) {
         />
         <span className="text-[18px] font-semibold">CHF</span>
       </div>
+
       <input
         type="range"
         min={min}
@@ -390,13 +450,31 @@ function SliderInput({ label, value, setValue, min, max }: any) {
           background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
         }}
       />
-      <div className="flex justify-between text-[14px] text-[#474849]">
-        <span>{min.toLocaleString("de-CH")} CHF</span>
-        <span>{max.toLocaleString("de-CH")} CHF</span>
-      </div>
+{/* REMOVE min/max labels */}
+
+
+{/* Minimum Required on right side */}
+{slidersTouched && requiredValue > 0 && (
+  <div className="flex justify-end w-full mt-[-2px]">
+    <p
+      style={{
+        color: "var(--Secondary-Color, #132219)",
+        fontFamily: "SF Pro Display",
+        fontSize: "14px",
+        fontWeight: 400,
+      }}
+    >
+      Minimum required: {requiredValue.toLocaleString("de-CH")} CHF
+    </p>
+  </div>
+)}
+
+
+
     </div>
   );
 }
+
 function InfoBox({ title, value, red = false, loanType, isEligible, slidersTouched }: any) {
   // ✅ Background color logic (keeps your structure)
 

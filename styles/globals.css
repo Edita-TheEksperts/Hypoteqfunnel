@@ -167,7 +167,7 @@ select option:checked,
 select option:focus,
 select option:active {
   background: linear-gradient(270deg, #CAF476 0%, #E3F4BF 100%) !important;
-  color: #132219 !important;
+  color: #dfeee5 !important;
 }
 
 select:focus {
