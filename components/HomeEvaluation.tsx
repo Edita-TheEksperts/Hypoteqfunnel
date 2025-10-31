@@ -9,62 +9,63 @@ export default function HomeEvaluation() {
         px-4 sm:px-8 md:px-[118px]
         py-[60px] md:py-[80px]
         overflow-hidden
+
+        bg-[url('/images/999.png')]
+        md:bg-[url('/images/vV_.png')]
+        bg-cover bg-center
       "
-      style={{
-        backgroundImage: "url('/images/vV_.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
     >
       {/* Content */}
       <div className="max-w-[720px]">
         <h1
           className="
-            font-['SF Pro Display'] text-[#132219]
-            text-[32px] sm:text-[42px] md:text-[56px]
-            font-[600]
-            leading-[120%] md:leading-[130%]
-            tracking-[-0.6px]
+            font-['SF Pro Display']
+            text-[#132219]
+            font-[500]
+            text-[40px] sm:text-[48px] md:text-[56px]
+            leading-[140%]
+            tracking-[-0.4px]
             mb-4 sm:mb-5
           "
         >
           Home Evaluation
         </h1>
 
-        <p
-          className="
-            font-['SF Pro Display'] text-[#132219]
-            text-[16px] sm:text-[18px] md:text-[20px]
-            leading-[150%] font-[300]
-            max-w-[92%] md:max-w-none
-            mb-6 sm:mb-8
-          "
-        >
-          Find out what your home could be worth today. Our smart valuation tool
-          compares local listings and market data to give you an instant estimate.
-        </p>
+    <p
+  className="
+    font-['SF Pro Display']
+    text-[#132219]
+    font-[300]
+    text-[22px] sm:text-[20px]
+    leading-[140%]
+    max-w-[92%] md:max-w-none
+    mb-6 sm:mb-8
+  "
+>
+  Find out what your home could be worth today. Our smart valuation tool
+  compares local listings and market data to give you an instant estimate.
+</p>
+
 
 <button
   className="
-    bg-[#132219] hover:bg-[#1C2B1F] text-white
-    rounded-[58px] font-medium
+    bg-[#132219] text-white
+    font-['SF Pro Display']
+    rounded-[58px]
+    flex items-center justify-center
+    px-[24px] py-[8px]
+    text-[14px] font-[600]
+    h-[30px]
 
-    text-[14px]           /* MOBILE FONT */
-    sm:text-[18px]        /* DESKTOP FONT */
+    /* Desktop unchanged */
+    md:w-[328px] md:h-[40px]
+    md:text-[20px] md:font-[500]
 
-    px-[24px] py-[8px]    /* MOBILE PADDING: (8px top/bottom, 24px left/right) */
-    sm:px-6 sm:py-3       /* DESKTOP PADDING */
-
-    w-auto                /* MOBILE WIDTH: not full */
-    sm:w-[300px] md:w-[328px]  /* DESKTOP WIDTH */
-
-    duration-200 shadow-[0_6px_20px_rgba(0,0,0,0.15)]
-    flex items-center justify-center gap-[10px]
+    hover:opacity-90 transition
   "
 >
   Enter your address
 </button>
-
 
       </div>
 
@@ -123,11 +124,12 @@ function Step({ icon, title, text }: StepProps) {
 
       <h3
         className="
-          font-['SF Pro Display'] text-[#132219]
-          font-[600]
-          text-[16px] sm:text-[20px]
-          leading-[130%]
-          mb-2
+          font-['SF Pro Display']
+          text-[20px]
+          font-[500]
+          leading-[140%]
+          text-[#132219]
+          mb-5
         "
       >
         {title}

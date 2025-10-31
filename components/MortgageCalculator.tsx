@@ -5,6 +5,8 @@ export default function MortgageCalculator() {
 const [propertyPrice, setPropertyPrice] = useState(0);
 const [ownFunds, setOwnFunds] = useState(0);
 const [income, setIncome] = useState(0);
+const [slidersTouched, setSlidersTouched] = useState(false);
+
 
 
 const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(null);
@@ -149,32 +151,40 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
             )}
 
 <div className="flex flex-col gap-[20px] mt-2 w-full">
-              <SliderInput
-                label="Property Price"
-                value={propertyPrice}
-                setValue={setPropertyPrice}
-                min={100000}
-                max={2000000}
-              />
-              <SliderInput
-                label={
-                  loanType === "purchase"
-                    ? "Equity / Own Funds"
-                    : "Existing Equity"
-                }
-                value={ownFunds}
-                setValue={setOwnFunds}
-                min={0}
-                max={propertyPrice}
-              />
-              <SliderInput
-                label="Annual Gross Income (CHF)"
-                value={income}
-                setValue={setIncome}
-                min={50000}
-                max={500000}
-              />
-            </div>
+  <SliderInput
+    label="Property Price"
+    value={propertyPrice}
+    setValue={(v: number) => {
+      setPropertyPrice(v);
+      setSlidersTouched(true);
+    }}
+    min={100000}
+    max={2000000}
+  />
+
+  <SliderInput
+    label={loanType === "purchase" ? "Equity / Own Funds" : "Existing Equity"}
+    value={ownFunds}
+    setValue={(v: number) => {
+      setOwnFunds(v);
+      setSlidersTouched(true);
+    }}
+    min={0}
+    max={propertyPrice}
+  />
+
+  <SliderInput
+    label="Annual Gross Income (CHF)"
+    value={income}
+    setValue={(v: number) => {
+      setIncome(v);
+      setSlidersTouched(true);
+    }}
+    min={50000}
+    max={500000}
+  />
+</div>
+
           </div>
 
           <div className="flex flex-col gap-2 mt-[-7px] w-full">
@@ -189,11 +199,13 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
 
         {/* RIGHT SIDE */}
 <div className="flex flex-col items-start w-full lg:max-w-[628px] mt-[40px] lg:mt-[96px] gap-[24px] px-2">
-     <InfoBox
+<InfoBox
   title={infoTitle}
   value={formatCHF(actualMortgage)}
   red={!isEligible}
   loanType={loanType}
+  isEligible={isEligible}
+  slidersTouched={slidersTouched}
 />
 
 <ProgressBox
@@ -202,6 +214,8 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   current={formatCHF(tragbarkeitCHF)}
   total={formatCHF(income)}
   loanType={loanType}
+  isEligible={isEligible}
+  slidersTouched={slidersTouched}
 />
 
 <ProgressBox
@@ -210,7 +224,10 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
   current={formatCHF(ownFunds)}
   total={formatCHF(propertyPrice)}
   loanType={loanType}
+  isEligible={isEligible}
+  slidersTouched={slidersTouched}
 />
+
 
 
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
@@ -279,13 +296,14 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(nul
 min-h-[300px] lg:h-[444px]
 
         text-center px-[24px] md:px-[40px] py-[40px] md:py-[60px]
-        ${
-          !loanType
-            ? "bg-[#E5E5E5]"
-            : isEligible
-            ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
-            : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
-        }
+${
+  !slidersTouched
+    ? "bg-[#E5E5E5]" 
+    : isEligible
+    ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" 
+    : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
+}
+
       `}
     >
       <h3 className="font-sfpro text-[#132219] text-[40px] md:text-[85px] font-medium leading-none">
@@ -372,20 +390,20 @@ function SliderInput({ label, value, setValue, min, max }: any) {
     </div>
   );
 }
-function InfoBox({ title, value, red = false, loanType }: any) {
+function InfoBox({ title, value, red = false, loanType, isEligible, slidersTouched }: any) {
   // ✅ Background color logic (keeps your structure)
-  const bgColor = !loanType
-    ? "bg-[#E5E5E5]" // neutral gray when no selection
-    : red
-    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]" // red when not eligible
-    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; // green when eligible
 
-  // ✅ Circle background color (also gray when no selection)
-  const circleColor = !loanType
-    ? "bg-[#BDBDBD]" // gray circle
-    : red
-    ? "bg-[#FCA5A5]" // red circle
-    : "bg-[#CAF47E]"; // green circle
+const bgColor = !slidersTouched
+  ? "bg-[#E5E5E5]" // gray before touching sliders
+  : isEligible
+  ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" // green when eligible
+  : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"; // red when NOT eligible
+
+const circleColor = !slidersTouched
+  ? "bg-[#BDBDBD]" // gray circle before slider move
+  : isEligible
+  ? "bg-[#CAF47E]" // green circle
+  : "bg-[#FCA5A5]"; // red circle
 
   return (
     <div
@@ -410,16 +428,20 @@ function InfoBox({ title, value, red = false, loanType }: any) {
   );
 }
 
-function ProgressBox({ title, value, current, total, loanType }: any) {
+function ProgressBox({ title, value, current, total, loanType, isEligible, slidersTouched }: any) {
   const percent = parseFloat(value.replace("%", "").replace(",", ".")) || 0;
+const bgColor = !slidersTouched
+  ? "bg-[#E5E5E5]"
+  : isEligible
+  ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
+  : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]";
 
-  // ✅ Background (gray when no selection)
-  const bgColor = !loanType
-    ? "bg-[#E5E5E5]"
-    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]";
+const circleColor = !slidersTouched
+  ? "bg-[#BDBDBD]"
+  : isEligible
+  ? "bg-[#CAF47E]"
+  : "bg-[#FCA5A5]";
 
-  // ✅ Circle background (gray when no selection)
-  const circleColor = !loanType ? "bg-[#BDBDBD]" : "bg-[#CAF47E]";
 
   return (
     <div

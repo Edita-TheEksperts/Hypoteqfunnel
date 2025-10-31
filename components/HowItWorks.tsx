@@ -64,10 +64,21 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
           py-[30px] bg-[#CAF476] rounded-[14px] shadow-md mt-6 lg:mt-0
         "
       >
-        <p className="text-center text-[#132219] text-[20px] md:text-[26px] lg:text-[30px] font-[400] leading-[130%]">
-          Start now in just 3 clicks.
-          <br /> We’ll guide you step by step.
-        </p>
+<p
+  className="
+    text-center text-[#132219]
+    text-[20px] md:text-[26px] lg:text-[32px]
+    font-[400] leading-[140%]
+    mx-auto
+    max-w-[330px] sm:max-w-[420px] md:max-w-[520px] lg:max-w-[860px]
+    tracking-[-0.32px]
+  "
+>
+  Start now in just 3 clicks.  
+  We’ll guide you, step by step.
+</p>
+
+
 
         <button className="flex items-center justify-center gap-[10px] border border-[#132219] rounded-[50px] px-[24px] py-[10px]
           text-[18px] md:text-[20px] lg:text-[22px] font-[600] text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all">
@@ -102,7 +113,7 @@ export default function HowItWorks() {
       step: "Step 1",
       title: "Inquiry",
       text: "Start with a quick, no-obligation inquiry. Tell us about your property, budget, income, and timeline—either via our secure online form or a short call with an advisor. We’ll listen, clarify your goals, and capture only what’s needed to assess options. No fees, no pressure—just a clear first step.",
-      image: "/images/h1.png",
+      image: "/images/sda.png",
     },
     {
       step: "Step 2",
@@ -130,18 +141,28 @@ export default function HowItWorks() {
   });
 
   return (
-    <section ref={ref} className="relative bg-white h-[500vh]">
+<section ref={ref} className="relative bg-white h-[500vh] px-4 sm:px-8 md:px-[118px]">
 
-      <motion.h2
-        className="text-[38px] md:text-[48px] lg:text-[54px] font-bold text-[#132219] text-center mb-6"
-        initial={{ opacity: 1, y: -10 }}
-        style={{
-          opacity: useTransform(scrollYProgress, [0, 0.08], [1, 0]),
-          y: useTransform(scrollYProgress, [0, 0.08], [-10, -60]),
-        }}
-      >
-        How It Works
-      </motion.h2>
+  <motion.h2
+  className="
+    font-['SF Pro Display']
+    text-[#132219]
+    font-[500]
+    text-[40px] sm:text-[48px] md:text-[56px]
+    leading-[140%]
+    tracking-[-0.4px]
+    mb-[-7px]
+    text-left
+  "
+  initial={{ opacity: 1, y: -10 }}
+  style={{
+    opacity: useTransform(scrollYProgress, [0, 0.08], [1, 0]),
+    y: useTransform(scrollYProgress, [0, 0.08], [-10, -60]),
+  }}
+>
+  How It Works
+</motion.h2>
+
 
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {steps.map((step, index) => {
@@ -149,7 +170,11 @@ export default function HowItWorks() {
           const end = (index + 0.35) / steps.length;
 
           const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-          const y = useTransform(scrollYProgress, [start, end], [200 + index * 60, index * -10]);
+const y = useTransform(
+  scrollYProgress,
+  [start, end],
+  [200 + index * 10, index * 20]
+);
           const scale = useTransform(scrollYProgress, [start, end], [0.96, 1]);
           const zIndex = index + 1;
 

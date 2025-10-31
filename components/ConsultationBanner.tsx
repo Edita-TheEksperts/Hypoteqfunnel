@@ -23,32 +23,56 @@ const ConsultationBanner: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-start justify-between gap-[20px] w-full">
         
-        <p
-          className="
-            text-[#CAF476] text-[20px] leading-[140%] font-[400] font-['SF Pro Display'] max-w-[640px]
+<p
+  className="
+    text-[#CAF476]
+    font-['SF Pro Display']
+    font-[400]
+    text-[32px]
+    leading-[140%]
+    tracking-[-0.32px]
+    w-[717px]
 
-            /* MOBILE — vetëm e bëjmë më të madh, ngjyra & fonti njëjtë */
-            max-lg:text-[32px] max-lg:leading-[140%]
-          "
-        >
-          Talk to a Hypoteq expert for a{" "}
-          <span className="font-[600]">15-minute consultation</span>
-          <br />
-          to get personalized guidance on financing options.
-        </p>
+    /* MOBILE */
+    max-lg:w-full
+    max-lg:text-[28px]
+    max-lg:leading-[140%]
+  "
+>
+  Talk to a Hypoteq expert for a{" "}
+  <span className="font-[600] tracking-[-0.32px]">15-minute consultation</span>
+  <br />
+  to get personalized guidance on financing options.
+</p>
+<button
+  className="
+    bg-[#CAF476]
+    text-[#132219]
+    font-['SF Pro Display']
+    font-[600]
+    text-[20px]
+    leading-[normal]
+    tracking-[-0.2px]
 
-        <button
-          className="
-            px-[22px] py-[10px] bg-[#CAF476] text-[#132219] text-[14px] font-[500] 
-            rounded-full hover:bg-[#D6FA8A] transition-all
+    px-[20px] 
+    py-[8px]
+    rounded-full
+    border border-black
 
-            /* MOBILE — thjesht më i madh, ngjyra/teksti nuk preken */
-            max-lg:px-[26px] max-lg:py-[14px] max-lg:text-[16px]
-            max-lg:rounded-[58px]
-          "
-        >
-          Book your call
-        </button>
+    hover:bg-[#D6FA8A]
+    transition-all
+    flex items-center justify-center
+
+    /* Mobile — e bëjmë pak më të vogël */
+    max-lg:text-[18px]
+    max-lg:px-[18px]
+    max-lg:py-[7px]
+  "
+>
+  Book your call
+</button>
+
+
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <>
-      <section className="relative w-full overflow-x-hidden overflow-y-hidden font-sfpro
+      <section className="relative w-full overflow-x-hidden  font-sfpro
         min-h-[500px] sm:min-h-[100vh]">
 
    {/* ✅ Mobile Background */}
@@ -79,39 +79,55 @@ export default function Hero() {
             <p className="text-[#132219]/70 text-[16px] font-normal">
               In Zusammenarbeit mit:
             </p>
+<div className="flex items-center justify-between w-full max-w-[1579px] mx-auto gap-[32px]
+  whitespace-nowrap overflow-x-auto overflow-y-visible mb-[42px] pt-[4px]">
 
-            <div className="flex items-center justify-between flex-wrap gap-x-[24px] gap-y-[20px] 
-              w-full max-w-[1400px] mx-auto pb-[40px]">
+  <div className="flex-shrink min-w-0 flex">
+    <Image src="/images/UBS-LogoBlack.svg" alt="UBS" width={213} height={52} unoptimized />
+  </div>
 
-              <Image src="/images/UBS-LogoBlack.svg" alt="UBS" width={213} height={52} unoptimized />
-              <Image src="/images/24.png" alt="ZKB" width={213} height={52} />
-              <Image src="/images/Bank_Cler_logo.png" alt="Cler" width={222} height={44} />
-              <Image src="/images/Raiffeisen_Schweiz_Logo.png" alt="Raiffeisen" width={242} height={36} priority />
-              <Image src="/images/67.svg" alt="SNB" width={223} height={36} unoptimized />
-            </div>
+  <div className="flex-shrink min-w-0 flex">
+    <Image src="/images/24.png" alt="ZKB" width={213} height={52} />
+  </div>
+
+  <div className="flex-shrink min-w-0 flex">
+    <Image src="/images/Bank_Cler_logo.png" alt="Cler" width={222} height={44} />
+  </div>
+
+  <div className="flex-shrink min-w-0 flex">
+    <Image src="/images/Raiffeisen_Schweiz_Logo.png" alt="Raiffeisen" width={242} height={36} priority />
+  </div>
+
+  <div className="flex-shrink min-w-0 flex">
+    <Image src="/images/67.svg" alt="SNB" width={223} height={36} unoptimized />
+  </div>
+
+</div>
+
           </div>
         </div>
       </section>
 {/* ✅ MOBILE logos section */}
-<div className="sm:hidden bg-white w-full px-6 py-10">
+{/* ✅ MOBILE logos section */}
+<div className="sm:hidden bg-white w-full px-6 pt-10 pb-10">
   <p className="text-[#132219]/70 text-[14px] mb-6">
     In Zusammenarbeit mit:
   </p>
 
-  <div className="grid grid-cols-2 gap-x-[35px] gap-y-[58px] place-items-center">
-  {/* Row 1 */}
-  <Image src="/images/Raiffeisen_Schweiz_Logo.png" width={120} height={30} alt="Raiffeisen" />
-  <Image src="/images/UBS-LogoBlack.svg" width={110} height={30} alt="UBS" />
+  <div className="grid grid-cols-2 gap-x-[35px] gap-y-[40px] place-items-center">
+    
+    {/* Row 1 */}
+    <Image src="/images/Raiffeisen_Schweiz_Logo.png" width={120} height={30} alt="Raiffeisen" />
+    <Image src="/images/UBS-LogoBlack.svg" width={110} height={30} alt="UBS" />
 
-  {/* Row 2 */}
-  <Image src="/images/24.png" width={120} height={30} alt="ZKB" />
-  <Image src="/images/Bank_Cler_logo.png" width={120} height={30} alt="CLER" />
+    {/* Row 2 */}
+    <Image src="/images/24.png" width={120} height={30} alt="ZKB" />
+    <Image src="/images/Bank_Cler_logo.png" width={120} height={30} alt="CLER" />
 
-  {/* Row 3 ✅ SNB */}
-<Image src="/images/67.svg" width={120} height={30} alt="SNB BNS" unoptimized />
-
-</div>
-
+    {/* Row 3 ✅ SNB appearing */}
+    <Image src="/images/67.svg" width={120} height={30} alt="SNB BNS" unoptimized />
+    
+  </div>
 </div>
 
 

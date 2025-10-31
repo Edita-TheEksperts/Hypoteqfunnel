@@ -9,25 +9,31 @@ import HowItWorks from "@/components/HowItWorks";
 import YourAdvantages from "@/components/YourAdvantages";
 import Testimonials from "@/components/Testimonials";
 import ConsultationBanner from "@/components/ConsultationBanner";
-
-
+import StartProcessBanner from "@/components/StartProcessBanner";
 
 export default function Home() {
   return (
-       <main className="overflow-visible">
+    <main className="overflow-visible">
       <Header />
-      <Hero />
-      <MortgageCalculator />
-      <HomeEvaluation />
-      <BestChoices />
-      <HowItWorks />
-      <YourAdvantages />
-      <Testimonials />
-      <MortgageGuide/>
-      <ConsultationBanner />
-      
-      <Footer />
- 
+
+      {/* ✅ Spacing mes seksioneve */}
+      <div className="flex flex-col space-y-[48px] md:space-y-[120px]">
+        <Hero />
+        <MortgageCalculator />
+        <HomeEvaluation />
+        <BestChoices />
+        <HowItWorks />
+        <YourAdvantages />
+        <StartProcessBanner/>
+        <Testimonials />
+        <MortgageGuide/>
+        <ConsultationBanner />
+      </div>
+
+      {/* ✅ Spacing para Footer: 100 mobile / 200 desktop */}
+      <div className="mt-[100px] md:mt-[200px]">
+        <Footer />
+      </div>
     </main>
   );
 }

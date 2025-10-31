@@ -82,7 +82,7 @@ const Testimonials: React.FC = () => {
             Testimonials
           </h2>
           <p className="text-[#132219] text-[18px] md:text-[24px] font-[300] leading-[140%] mt-[8px] max-w-[1154px]">
-            Real experiences from people who found clarity, confidence 
+            Real experiences from people who found clarity, confidence <br />
             and better decisions with our mortgage and property tools.
           </p>
         </div>
