@@ -350,6 +350,7 @@ function SliderInput({
   setValue,
   min,
   max,
+  setSlidersTouched,
   requiredValue,
   slidersTouched,
 }: any) {
@@ -365,12 +366,38 @@ function SliderInput({
       </div>
 
       <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-5 py-2">
-        <input
-          type="text"
-          value={value.toLocaleString("de-CH")}
-          readOnly
-          className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
-        />
+<input
+  type="text"
+  value={value.toLocaleString("de-CH")}
+  onChange={(e) => {
+    // 1️⃣ Lejo vetëm numra
+    let raw = e.target.value.replace(/[^0-9]/g, "");
+
+    // 2️⃣ Convert to number
+    const numericValue = raw === "" ? 0 : Number(raw);
+
+    // 3️⃣ Respekto max = slider max
+    const finalValue = Math.min(numericValue, max);
+
+    setValue(finalValue);
+    setSlidersTouched(true);
+  }}
+  onKeyDown={(e) => {
+    // 4️⃣ Stop shkencor notation & minus
+    if (["e", "E", "+", "-", "."].includes(e.key)) {
+      e.preventDefault();
+    }
+  }}
+  onBlur={(e) => {
+    // 5️⃣ Re-format when leaving input
+    const raw = e.target.value.replace(/[^0-9]/g, "");
+    const numericValue = raw === "" ? 0 : Number(raw);
+    e.target.value = numericValue.toLocaleString("de-CH");
+  }}
+  className="bg-transparent text-[18px] font-medium w-[140px] outline-none"
+/>
+
+
         <span className="text-[18px] font-semibold">CHF</span>
       </div>
 
