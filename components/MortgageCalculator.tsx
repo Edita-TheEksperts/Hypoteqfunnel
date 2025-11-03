@@ -1,145 +1,22 @@
 "use client";
-import { useState, useMemo } from "react";
-import { useEffect } from "react";
+import useMortgageCalculator from "@/src/hooks/useMortgageCalculator";
+
+
 
 export default function MortgageCalculator() {
-  const [propertyPrice, setPropertyPrice] = useState(0);
-  const [ownFunds, setOwnFunds] = useState(0);
-  const [income, setIncome] = useState(0);
-  const [slidersTouched, setSlidersTouched] = useState(false);
-  const [requiredOwnFunds, setRequiredOwnFunds] = useState(0);
-  const [requiredIncome, setRequiredIncome] = useState(0);
+  const calc = useMortgageCalculator(); // ⬅️ thirrja
 
-  const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(
-    null
-  );
+  const {
+    propertyPrice, ownFunds, income, existingMortgage, newMortgage, cashOut,
+    residenceType, loanType, interestOption, slidersTouched,
+    requiredOwnFunds, requiredIncome, actualMortgage, mortgageNeed,
+    tragbarkeitCHF, tragbarkeitPercent, maintenanceYear, amortizationYear,
+    interestYearEffective, monthlyCost, belehnung, isEligible, infoTitle, interestOptions,
+    setPropertyPrice, setOwnFunds, setIncome, setExistingMortgage, setNewMortgage,
+    setCashOut, setResidenceType, setLoanType, setInterestOption, setSlidersTouched,
+    formatCHF, formatPercent
+  } = calc;
 
-  const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>(
-    null
-  );
-
-  const [interestOption, setInterestOption] = useState("10Y 1.40%");
-
-  const params =
-    residenceType === "haupt"
-      ? {
-          maxBelehnung: 0.8, // 80%
-          firstMortgageLimit: 0.6667, // 66.67%
-          stressRate: 0.05, // 5% stress
-          maintenanceRate: 0.008, // 0.8% p.a.
-          amortizationYears: 15, // amortize 2nd hyp over 15y
-          tragbarkeitThreshold: 0.35,
-        }
-      : {
-          maxBelehnung: 0.65, // 65%
-          firstMortgageLimit: 0, // no 2nd hyp concept
-          stressRate: 0.05,
-          maintenanceRate: 0.008,
-          amortizationYears: 0,
-          tragbarkeitThreshold: 0.35,
-        };
-  // Auto-adjust slider values if below required minimums
-  useEffect(() => {
-    if (requiredOwnFunds > 0 && ownFunds < requiredOwnFunds) {
-      setOwnFunds(requiredOwnFunds);
-    }
-
-    if (requiredIncome > 0 && income < requiredIncome) {
-      setIncome(requiredIncome);
-    }
-  }, [requiredOwnFunds, requiredIncome]);
-
-  useEffect(() => {
-    if (!loanType || !residenceType || propertyPrice <= 0) return;
-
-    const minOwnFunds = propertyPrice * 0.2;
-    const loanPart = propertyPrice * params.maxBelehnung;
-
-    const amortSecond =
-      residenceType === "haupt"
-        ? Math.max(0, loanPart - propertyPrice * params.firstMortgageLimit) /
-          params.amortizationYears
-        : 0;
-
-    const estMinIncome =
-      (loanPart * params.stressRate +
-        propertyPrice * params.maintenanceRate +
-        amortSecond) /
-      params.tragbarkeitThreshold;
-
-    setRequiredOwnFunds(minOwnFunds);
-    setRequiredIncome(Math.round(estMinIncome));
-  }, [propertyPrice, residenceType, loanType]);
-
-  // Effective rate by product (for real interest display)
-  const effectiveRate = useMemo(() => {
-    if (interestOption.startsWith("SARON")) return 0.0085;
-    if (interestOption.startsWith("5Y")) return 0.0103;
-    if (interestOption.startsWith("10Y")) return 0.014;
-    return 0.0103;
-  }, [interestOption]);
-
-  // ------------------- Core Excel Logic -------------------
-  // Mortgage need (purchase or refi)
-  const mortgageNeed =
-    loanType === "purchase"
-      ? Math.max(0, propertyPrice - ownFunds)
-      : propertyPrice * 0.78;
-
-  const maxMortgage = propertyPrice * params.maxBelehnung;
-  const actualMortgage = Math.min(mortgageNeed, maxMortgage);
-
-  // Split into 1st / 2nd hyp
-  const firstMortgage = propertyPrice * params.firstMortgageLimit;
-  const secondMortgage =
-    residenceType === "haupt" ? Math.max(0, actualMortgage - firstMortgage) : 0;
-
-  // Annualized Excel-style costs
-  const interestYearStress = actualMortgage * params.stressRate;
-  const maintenanceYear = propertyPrice * params.maintenanceRate;
-  const amortizationYear =
-    residenceType === "haupt" &&
-    secondMortgage > 0 &&
-    params.amortizationYears > 0
-      ? secondMortgage / params.amortizationYears
-      : 0;
-
-  // Total annual “Tragbarkeit” and %
-  const tragbarkeitCHF =
-    interestYearStress + maintenanceYear + amortizationYear;
-  const tragbarkeitPercent = income > 0 ? tragbarkeitCHF / income : 0;
-
-  // Realistic monthly cost (using selected interest, not stress rate)
-  const interestYearEffective = actualMortgage * effectiveRate;
-  const monthlyCost =
-    interestYearEffective / 12 + maintenanceYear / 12 + amortizationYear / 12;
-
-  // Loan-to-value
-  const belehnung = propertyPrice > 0 ? actualMortgage / propertyPrice : 0;
-
-  // Eligibility (Excel logic)
-  const isBelehnungOK = belehnung <= params.maxBelehnung;
-  const isTragbarkeitOK = tragbarkeitPercent <= params.tragbarkeitThreshold;
-  const isEligible = isBelehnungOK && isTragbarkeitOK;
-
-  // Dynamic info title (matches Excel text logic)
-  const infoTitle = isEligible
-    ? loanType === "purchase"
-      ? "Eligibility confirmed. Estimated mortgage need:"
-      : "Eligibility confirmed. New mortgage possible up to:"
-    : "Not eligible. Maximum possible mortgage:";
-
-  // -------------- Formatting --------------
-  const formatCHF = (num: number) =>
-    "CHF " + Math.round(num).toLocaleString("de-CH");
-  const formatPercent = (num: number) =>
-    (num * 100).toFixed(1).replace(".", ",") + "%";
-
-  const interestOptions = [
-    "SARON 0.85%",
-    "5 Year Fixed-rate mortgage - 1,03%",
-    "10 Year Fixed-rate mortgage 1.40%",
-  ];
 
   // -------------- UI --------------
   return (
@@ -218,22 +95,54 @@ gap-[40px] lg:gap-[108px]"
                 requiredValue={requiredIncome}
                 slidersTouched={slidersTouched}
               />
-              <SliderInput
-                label={
-                  loanType === "purchase"
-                    ? "Equity / Own Funds"
-                    : "Existing Equity"
-                }
-                value={ownFunds}
-                setValue={(v: number) => {
-                  setOwnFunds(v);
-                  setSlidersTouched(true);
-                }}
-                min={0}
-                max={Math.max(propertyPrice, 2000000)}
-                requiredValue={requiredOwnFunds}
-                slidersTouched={slidersTouched}
-              />
+           {loanType === "refinancing" ? (
+  <>
+    <SliderInput
+      label="Existing Mortgage"
+      value={existingMortgage}
+      setValue={(v: number) => {
+        setExistingMortgage(v);
+        setSlidersTouched(true);
+      }}
+      min={0}
+      max={propertyPrice}
+      slidersTouched={slidersTouched}
+    />
+    <SliderInput
+      label="New Mortgage"
+      value={newMortgage}
+      setValue={(v: number) => {
+        setNewMortgage(v);
+        setSlidersTouched(true);
+      }}
+      min={0}
+      max={propertyPrice}
+      slidersTouched={slidersTouched}
+    />
+    <div className="flex items-center gap-2 mt-[-10px]">
+      <input
+        type="checkbox"
+        checked={cashOut}
+        onChange={() => setCashOut(!cashOut)}
+      />
+      <span className="text-[14px] font-medium text-[#132219]">Cash-out equity</span>
+    </div>
+  </>
+) : (
+  <SliderInput
+    label="Equity / Own Funds"
+    value={ownFunds}
+    setValue={(v: number) => {
+      setOwnFunds(v);
+      setSlidersTouched(true);
+    }}
+    min={0}
+    max={Math.max(propertyPrice, 2000000)}
+    requiredValue={requiredOwnFunds}
+    slidersTouched={slidersTouched}
+  />
+)}
+
             </div>
           </div>
 
@@ -249,14 +158,27 @@ gap-[40px] lg:gap-[108px]"
 
         {/* RIGHT SIDE */}
         <div className="flex flex-col items-start w-full lg:max-w-[628px] mt-[40px] lg:mt-[96px] gap-[24px] px-2">
-          <InfoBox
-            title={infoTitle}
-            value={formatCHF(actualMortgage)}
-            red={!isEligible}
-            loanType={loanType}
-            isEligible={isEligible}
-            slidersTouched={slidersTouched}
-          />
+<InfoBox
+title={
+  loanType === "refinancing"
+    ? cashOut
+      ? "Refinance + Cash-out enabled"
+      : "Refinancing eligibility"
+    : infoTitle
+}
+
+
+value={
+  loanType === "refinancing"
+   ? formatCHF(actualMortgage)  // ✅ maksimumi i lejuar sipas rregullave
+      : formatCHF(mortgageNeed)
+}
+
+  loanType={loanType}
+  isEligible={isEligible}
+  slidersTouched={slidersTouched}
+/>
+
 
           <ProgressBox
             title="Tragbarkeit"
@@ -267,18 +189,23 @@ gap-[40px] lg:gap-[108px]"
             isEligible={isEligible}
             slidersTouched={slidersTouched}
           />
-
-          <ProgressBox
-            title="Eigenmittel"
-            value={formatPercent(
-              propertyPrice > 0 ? ownFunds / propertyPrice : 0
-            )}
-            current={formatCHF(ownFunds)}
-            total={formatCHF(propertyPrice)}
-            loanType={loanType}
-            isEligible={isEligible}
-            slidersTouched={slidersTouched}
-          />
+<ProgressBox
+  title="Eigenmittel"
+  value={
+    loanType === "refinancing"
+      ? formatPercent(existingMortgage > 0 ? 1 - existingMortgage / propertyPrice : 0)
+      : formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)
+  }
+  current={
+    loanType === "refinancing"
+      ? formatCHF(propertyPrice - existingMortgage)
+      : formatCHF(ownFunds)
+  }
+  total={formatCHF(propertyPrice)}
+  loanType={loanType}
+  isEligible={isEligible}
+  slidersTouched={slidersTouched}
+/>
 
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
             Continue my project
