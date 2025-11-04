@@ -1,3 +1,5 @@
+
+
 "use client";
 import { useState, useMemo } from "react";
 import Image from "next/image";
@@ -13,6 +15,9 @@ export default function Calculator() {
 const [propertyPrice, setPropertyPrice] = useState(0);
 const [ownFunds, setOwnFunds] = useState(0);
 const [income, setIncome] = useState(0);
+const [existingMortgage, setExistingMortgage] = useState(0);  // Bisherige
+const [newMortgage, setNewMortgage] = useState(0);            // Neue
+
 
 
   const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(null);
@@ -42,57 +47,119 @@ const [income, setIncome] = useState(0);
           amortizationYears: 0,
           tragbarkeitThreshold: 0.35,
         };
+// Dynamic allowed loan depending on residence + price
+const dynamicMaxMortgage = residenceType
+  ? propertyPrice * params.maxBelehnung // 80% or 65%
+  : propertyPrice * 0.8; // default if no selection yet
 
-  // Effective rate by product (for real interest display)
-  const effectiveRate = useMemo(() => {
-    if (interestOption.startsWith("SARON")) return 0.0085;
-    if (interestOption.startsWith("5Y")) return 0.0103;
-    if (interestOption.startsWith("10Y")) return 0.014;
-    return 0.0103;
-  }, [interestOption]);
+
+
+  // --- Effective rate by product (for real interest display)
+const effectiveRate = useMemo(() => {
+  if (interestOption.startsWith("SARON")) return 0.0085; // 0.85%
+  if (interestOption.startsWith("5Y"))   return 0.0105;  // 1.05%  ✅ was 1.03
+  if (interestOption.startsWith("10Y"))  return 0.0140;  // 1.40%
+  return 0.0105;
+}, [interestOption]);
+
+const interestOptions = ["SARON 0.85%", "5Y 1.05%", "10Y 1.40%"]; // ✅
 
   // ------------------- Core Excel Logic -------------------
-  // Mortgage need (purchase or refi)
-  const mortgageNeed =
-    loanType === "purchase"
-      ? Math.max(0, propertyPrice - ownFunds)
-      : propertyPrice * 0.78;
+// --- Need vs cap
+const mortgageNeed =
+  loanType === "purchase"
+    ? Math.max(0, propertyPrice - ownFunds)
+    : Math.max(0, newMortgage);
 
-  const maxMortgage = propertyPrice * params.maxBelehnung;
-  const actualMortgage = Math.min(mortgageNeed, maxMortgage);
+// max allowed by Belehnung
+const maxMortgageAllowed = (params?.maxBelehnung ?? 0) * propertyPrice;
 
-  // Split into 1st / 2nd hyp
-  const firstMortgage = propertyPrice * params.firstMortgageLimit;
-  const secondMortgage =
-    residenceType === "haupt" ? Math.max(0, actualMortgage - firstMortgage) : 0;
+// Excel: total hypothek is need but capped by max Belehnung
+const totalMortgage = Math.min(mortgageNeed, maxMortgageAllowed);
 
-  // Annualized Excel-style costs
-  const interestYearStress = actualMortgage * params.stressRate;
-  const maintenanceYear = propertyPrice * params.maintenanceRate;
-  const amortizationYear =
-    residenceType === "haupt" &&
-    secondMortgage > 0 &&
-    params.amortizationYears > 0
-      ? secondMortgage / params.amortizationYears
+// Excel split rules
+const firstLimitAbs =
+  residenceType === "haupt" ? params.firstMortgageLimit * propertyPrice : Infinity;
+
+const firstMortgage = Math.min(totalMortgage, firstLimitAbs);
+const secondMortgage =
+  residenceType === "haupt" ? Math.max(0, totalMortgage - firstMortgage) : 0;
+
+// Use this everywhere below instead of "actualMortgage"
+const actualMortgage = totalMortgage;
+
+const maxMortgage = propertyPrice * (params?.maxBelehnung ?? 0);
+
+  // Old mortgage cost (existing)
+const interestOld = existingMortgage * effectiveRate;
+const maintenanceOld = propertyPrice * params.maintenanceRate;
+const amortizationOld =
+  residenceType === "haupt" &&
+  existingMortgage > propertyPrice * params.firstMortgageLimit
+    ? (existingMortgage - propertyPrice * params.firstMortgageLimit) / params.amortizationYears
+    : 0;
+
+let monthlyOld = 0;
+if (loanType === "refinancing") {
+  const oldInterestYear = existingMortgage * effectiveRate;
+  const oldAmortYear =
+    residenceType === "haupt" && existingMortgage > firstLimitAbs && params.amortizationYears > 0
+      ? (existingMortgage - firstLimitAbs) / params.amortizationYears
       : 0;
 
-  // Total annual “Tragbarkeit” and %
-  const tragbarkeitCHF =
-    interestYearStress + maintenanceYear + amortizationYear;
-  const tragbarkeitPercent = income > 0 ? tragbarkeitCHF / income : 0;
+  // Excel screenshots: old maintenance shown as 0.8% of Immobilienwert
+  const oldMaintenanceYear = propertyPrice * params.maintenanceRate;
 
-  // Realistic monthly cost (using selected interest, not stress rate)
-  const interestYearEffective = actualMortgage * effectiveRate;
-  const monthlyCost =
-    interestYearEffective / 12 + maintenanceYear / 12 + amortizationYear / 12;
+  monthlyOld = (oldInterestYear + oldAmortYear + oldMaintenanceYear) / 12;
+}
 
-  // Loan-to-value
-  const belehnung = propertyPrice > 0 ? actualMortgage / propertyPrice : 0;
 
-  // Eligibility (Excel logic)
-  const isBelehnungOK = belehnung <= params.maxBelehnung;
-  const isTragbarkeitOK = tragbarkeitPercent <= params.tragbarkeitThreshold;
-  const isEligible = isBelehnungOK && isTragbarkeitOK;
+const maxBelehnungAllowed = params.maxBelehnung; // 0.8 or 0.65 from params
+
+
+
+// Annual amounts for TRAGBARKEIT (Excel stress calc)
+const interestYearStress   = actualMortgage * params.stressRate;   // 5%
+const maintenanceYear = propertyPrice * params.maintenanceRate;
+
+
+
+// LTV for purchase uses actualMortgage; for refinancing uses requested newMortgage
+const belehnungPurchase = propertyPrice > 0 ? actualMortgage / propertyPrice : 0;
+const belehnungRefi     = propertyPrice > 0 ? newMortgage / propertyPrice   : 0;
+const belehnung         = loanType === "refinancing" ? belehnungRefi : belehnungPurchase;
+const amortizationYear =
+  loanType === "purchase" &&
+  residenceType === "haupt" &&
+  belehnung > 0.6667 &&
+  secondMortgage > 0
+    ? secondMortgage / params.amortizationYears
+    : 0;
+
+const tragbarkeitCHF       = interestYearStress + maintenanceYear + amortizationYear;
+// ✅ Minimum required income according to Swiss affordability rule (Excel logic)
+const minIncomeRequired =
+  tragbarkeitCHF > 0 ? tragbarkeitCHF / params.tragbarkeitThreshold : 0;
+
+const tragbarkeitPercent   = income > 0 ? tragbarkeitCHF / income : 0;
+
+const interestYearEffective = actualMortgage * effectiveRate;
+const monthlyCost = (interestYearEffective + amortizationYear + maintenanceYear) / 12;
+
+const minOwnFunds = loanType === "purchase" ? propertyPrice * 0.20 : 0; 
+const isBelehnungOK     = belehnung <= params.maxBelehnung; // 80% or 65%
+const isTragbarkeitOK   = tragbarkeitPercent <= params.tragbarkeitThreshold; // 35%
+// ✅ Check equity condition (like Excel)
+const isEquityOK = ownFunds >= minOwnFunds;
+const isEligible = isBelehnungOK && isTragbarkeitOK && isEquityOK;
+
+
+
+// Fix: avoid broken sliders when property price = 0
+const minVisualMax = 100000; // CHF 100K visual base
+const sliderMaxExisting = Math.max(propertyPrice, minVisualMax);
+const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
+
 
   // Dynamic info title (matches Excel text logic)
   const infoTitle = isEligible
@@ -106,8 +173,14 @@ const [income, setIncome] = useState(0);
     "CHF " + Math.round(num).toLocaleString("de-CH");
   const formatPercent = (num: number) =>
     (num * 100).toFixed(1).replace(".", ",") + "%";
+  // Refinance Belehnung (LTV)
+  // Refinance LTV and allowed cap
 
-  const interestOptions = ["SARON 0.85%", "5Y 1.03%", "10Y 1.40%"];
+// ✅ Dynamic minimum logic for sliders
+// ✅ Excel minimum equity rules
+          // 20% rule
+const minRefinanceMortgage = existingMortgage;       // can't refinance for less
+
 
   // -------------- UI --------------
   return (
@@ -159,33 +232,60 @@ const [income, setIncome] = useState(0);
               </div>
             )}
 
-            <div className="flex flex-col gap-[24px] mt-2">
-              <SliderInput
-                label="Property Price"
-                value={propertyPrice}
-                setValue={setPropertyPrice}
-                min={100000}
-                max={2000000}
-              />
-              <SliderInput
-                label={
-                  loanType === "purchase"
-                    ? "Equity / Own Funds"
-                    : "Existing Equity"
-                }
-                value={ownFunds}
-                setValue={setOwnFunds}
-                min={0}
-                max={propertyPrice}
-              />
-              <SliderInput
-                label="Annual Gross Income (CHF)"
-                value={income}
-                setValue={setIncome}
-                min={50000}
-                max={500000}
-              />
-            </div>
+<div className="flex flex-col gap-[24px] mt-2">
+  {/* 1) Property Price */}
+  <SliderInput
+    label="Property Price"
+    value={propertyPrice}
+    setValue={setPropertyPrice}
+    min={0}
+    max={2000000}
+  />
+
+  {/* 2 + 3) Refinancing fields */}
+  {loanType === "refinancing" && (
+    <>
+      <SliderInput
+        label="Existing Mortgage"
+        value={existingMortgage}
+        setValue={(v: number) => setExistingMortgage(Math.min(v, propertyPrice))}
+        min={0}
+        max={sliderMaxExisting}
+      />
+
+      <SliderInput
+        label="New Mortgage"
+        value={newMortgage}
+        setValue={(v: number) => setNewMortgage(Math.min(v, dynamicMaxMortgage))}
+        min={0}
+        max={sliderMaxNew}
+      />
+    </>
+  )}
+
+  {/* Only for Purchase */}
+{loanType === "purchase" && (
+  <SliderInput
+    label="Equity / Own Funds"
+    value={ownFunds}
+    setValue={setOwnFunds}
+    min={0}
+    max={propertyPrice}
+    minRequired={minOwnFunds}  
+  />
+)}
+
+ <SliderInput
+  label="Annual Gross Income (CHF)"
+  value={income}
+  setValue={setIncome}
+  min={0} 
+  max={500000}
+  minRequired={minIncomeRequired} 
+/>
+
+</div>
+
           </div>
 
           <div className="flex flex-col gap-2 mt-[-7px] w-full">
@@ -209,9 +309,9 @@ const [income, setIncome] = useState(0);
             payoff timeline at a glance.
           </p>
 
-      <InfoBox
+<InfoBox
   title={infoTitle}
-  value={formatCHF(actualMortgage)}
+  value={formatCHF(actualMortgage)} // shows capped total hypothek like Excel
   red={!isEligible}
   loanType={loanType}
 />
@@ -223,14 +323,25 @@ const [income, setIncome] = useState(0);
   total={formatCHF(income)}
   loanType={loanType}
 />
-
-<ProgressBox
-  title="Eigenmittel"
-  value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
-  current={formatCHF(ownFunds)}
-  total={formatCHF(propertyPrice)}
-  loanType={loanType}
-/>
+{loanType === "purchase" && (
+  <ProgressBox
+    title="Eigenmittel"
+    value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
+    current={formatCHF(ownFunds)}
+    total={formatCHF(propertyPrice)}
+    loanType={loanType}
+  />
+)}
+{/* Belehnung only for refinancing */}
+{loanType === "refinancing" && (
+  <ProgressBox
+    title="Belehnung"
+    value={formatPercent(belehnungRefi)}
+    current={formatCHF(newMortgage)}
+    total={formatCHF(propertyPrice)}
+    loanType={loanType}
+  />
+)}
 
 
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
@@ -285,13 +396,25 @@ const [income, setIncome] = useState(0);
 
   <div className="flex flex-col md:flex-row gap-[16px]">
     
-    {/* 4 small boxes */}
-    <div className="grid grid-cols-2 gap-[10px] w-full max-w-full md:max-w-[628px]">
+<div className="grid grid-cols-2 gap-[10px] w-full max-w-full md:max-w-[628px]">
+  {loanType === "refinancing" ? (
+    <>
+      <SmallBox title="Old Monthly Cost" value={formatCHF(monthlyOld)} />
+      <SmallBox title="Monthly costs" value={formatCHF(monthlyCost)} highlight />
+
+      <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
+      <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />
+    </>
+  ) : (
+    <>
       <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
       <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
       <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />
       <SmallBox title="Monthly costs" value={formatCHF(monthlyCost)} highlight />
-    </div>
+    </>
+  )}
+</div>
+
 
     {/* Big yearly box */}
     <div
@@ -323,6 +446,7 @@ const [income, setIncome] = useState(0);
     Continue my project
   </button>
 </div>
+
 
 {/* TWO CTA CARDS */}
 <section className="flex flex-col md:flex-row justify-between items-start gap-[24px] w-full max-w-[1280px] mx-auto mt-[60px] md:mt-[100px] mb-[80px] md:mb-[100px] px-4">
@@ -398,7 +522,7 @@ function SubToggle({ label, active, onClick }: any) {
   );
 }
 
-function SliderInput({ label, value, setValue, min, max }: any) {
+function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   const percentage = ((value - min) / (max - min)) * 100;
   return (
     <div className="flex flex-col gap-2 relative">
@@ -409,29 +533,48 @@ function SliderInput({ label, value, setValue, min, max }: any) {
         </div>
       </div>
       <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-5 py-2">
-        <input
-          type="text"
-          value={value.toLocaleString("de-CH")}
-          readOnly
-          className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
-        />
+   <input
+  type="text"
+  value={value.toLocaleString("de-CH")}
+  onChange={(e) => {
+    // Heq presje dhe apostrof
+    const raw = e.target.value.replace(/[^0-9]/g, "");
+
+    // Kthejmë në numër
+    const parsed = Number(raw);
+
+    // Ruajmë vetëm numra valid
+    if (!isNaN(parsed)) {
+      const bounded = Math.max(min, Math.min(parsed, max));
+      setValue(bounded);
+    }
+  }}
+  className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
+/>
+
         <span className="text-[18px] font-semibold">CHF</span>
       </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={value}
-        onChange={(e) => setValue(Number(e.target.value))}
-        className="w-full h-[4px] rounded-full appearance-none cursor-pointer"
-        style={{
-          background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
-        }}
-      />
-      <div className="flex justify-between text-[14px] text-[#474849]">
-        <span>{min.toLocaleString("de-CH")} CHF</span>
-        <span>{max.toLocaleString("de-CH")} CHF</span>
-      </div>
+<input
+  type="range"
+  min={min}
+  max={max}
+  value={value}
+  onChange={(e) => {
+    const val = Number(e.target.value);
+    const bounded = Math.max(min, Math.min(val, max));
+    setValue(bounded);
+  }}
+  className="w-full h-[4px] rounded-full appearance-none cursor-pointer"
+  style={{
+    background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
+  }}
+/>
+{minRequired !== undefined && (
+  <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
+    Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
+  </div>
+)}
+
     </div>
   );
 }
