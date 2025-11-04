@@ -37,11 +37,13 @@ export default function useMortgageCalculator() {
           tragbarkeitThreshold: 0.35,
         };
 
+  // Auto adjust min values
   useEffect(() => {
     if (requiredOwnFunds > 0 && ownFunds < requiredOwnFunds) setOwnFunds(requiredOwnFunds);
     if (requiredIncome > 0 && income < requiredIncome) setIncome(requiredIncome);
   }, [requiredOwnFunds, requiredIncome]);
 
+  // Required funds/income calculation
   useEffect(() => {
     if (!loanType || !residenceType || propertyPrice <= 0) return;
 
@@ -61,11 +63,9 @@ export default function useMortgageCalculator() {
     setRequiredIncome(Math.round(estMinIncome));
   }, [propertyPrice, residenceType, loanType]);
 
-const interestOptions = [
-  "SARON 0.85%",
-  "5Y 1.03%",
-  "10Y 1.40%"
-];
+
+  // Interest options
+  const interestOptions = ["SARON 0.85%", "5Y 1.03%", "10Y 1.40%"];
 
   const effectiveRate = useMemo(() => {
     if (interestOption.startsWith("SARON")) return 0.0085;
@@ -74,12 +74,37 @@ const interestOptions = [
     return 0.0103;
   }, [interestOption]);
 
-  const mortgageNeed = loanType === "purchase"
-    ? Math.max(0, propertyPrice - ownFunds)
-    : newMortgage;
+  /* ----------------------------
+     ✅ MORTGAGE CALCULATION
+  -----------------------------*/
 
   const maxMortgage = propertyPrice * params.maxBelehnung;
-  const actualMortgage = Math.min(mortgageNeed, maxMortgage);
+
+  let mortgageNeed = 0;
+
+  if (loanType === "purchase") {
+    mortgageNeed = Math.max(0, propertyPrice - ownFunds);
+  } else if (loanType === "refinancing") {
+    mortgageNeed = newMortgage;
+  }
+
+  // Swiss rule: Cash-out only if equity ≥ 35%
+  let refiLimit = maxMortgage;
+
+  if (loanType === "refinancing") {
+    const equityAfterRefi = propertyPrice - newMortgage;
+    const equityRatio = equityAfterRefi / (propertyPrice || 1);
+
+    // If cash-out would drop equity below 35%, block it
+    if (cashOut && equityRatio < 0.35) {
+      refiLimit = propertyPrice * 0.65;
+    }
+  }
+
+  const actualMortgage =
+    loanType === "refinancing"
+      ? Math.min(newMortgage, refiLimit)
+      : Math.min(mortgageNeed, maxMortgage);
 
   const firstMortgage = propertyPrice * params.firstMortgageLimit;
   const secondMortgage =
@@ -105,10 +130,10 @@ const interestOptions = [
   const isTragbarkeitOK = tragbarkeitPercent <= params.tragbarkeitThreshold;
   const isEligible = isBelehnungOK && isTragbarkeitOK;
 
-const equityRefi = loanType === "refinancing"
-  ? 1 - (actualMortgage / (propertyPrice || 1))
-  : (propertyPrice ? ownFunds / propertyPrice : 0);
-
+  const equityRefi =
+    loanType === "refinancing"
+      ? 1 - actualMortgage / (propertyPrice || 1)
+      : (propertyPrice ? ownFunds / propertyPrice : 0);
 
   const infoTitle = isEligible
     ? loanType === "purchase"
@@ -117,21 +142,18 @@ const equityRefi = loanType === "refinancing"
     : "Not eligible. Maximum possible mortgage:";
 
   const formatCHF = (num: number) => "CHF " + Math.round(num).toLocaleString("de-CH");
-  const formatPercent = (num: number) =>
-    (num * 100).toFixed(1).replace(".", ",") + "%";
+  const formatPercent = (num: number) => (num * 100).toFixed(1).replace(".", ",") + "%";
 
   return {
     propertyPrice, ownFunds, income, existingMortgage, newMortgage, cashOut,
     residenceType, loanType, interestOption, slidersTouched,
     requiredOwnFunds, requiredIncome, mortgageNeed, actualMortgage,
     tragbarkeitCHF, tragbarkeitPercent, maintenanceYear, amortizationYear,
-    interestYearEffective, monthlyCost, belehnung, isEligible, infoTitle,interestOptions,equityRefi,
-
+    interestYearEffective, monthlyCost, belehnung, isEligible, infoTitle, interestOptions, equityRefi,
 
     setPropertyPrice, setOwnFunds, setIncome, setExistingMortgage, setNewMortgage,
     setCashOut, setResidenceType, setLoanType, setInterestOption, setSlidersTouched,
 
     formatCHF, formatPercent
-
   };
 }
