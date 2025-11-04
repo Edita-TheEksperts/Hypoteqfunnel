@@ -135,20 +135,28 @@ const amortizationYear =
     : 0;
 
 const tragbarkeitCHF       = interestYearStress + maintenanceYear + amortizationYear;
+// ✅ Minimum required income according to Swiss affordability rule (Excel logic)
+const minIncomeRequired =
+  tragbarkeitCHF > 0 ? tragbarkeitCHF / params.tragbarkeitThreshold : 0;
+
 const tragbarkeitPercent   = income > 0 ? tragbarkeitCHF / income : 0;
 
 const interestYearEffective = actualMortgage * effectiveRate;
 const monthlyCost = (interestYearEffective + amortizationYear + maintenanceYear) / 12;
 
+const minOwnFunds = loanType === "purchase" ? propertyPrice * 0.20 : 0; 
 const isBelehnungOK     = belehnung <= params.maxBelehnung; // 80% or 65%
 const isTragbarkeitOK   = tragbarkeitPercent <= params.tragbarkeitThreshold; // 35%
-const isEligible        = isBelehnungOK && isTragbarkeitOK;
+// ✅ Check equity condition (like Excel)
+const isEquityOK = ownFunds >= minOwnFunds;
+const isEligible = isBelehnungOK && isTragbarkeitOK && isEquityOK;
+
+
 
 // Fix: avoid broken sliders when property price = 0
 const minVisualMax = 100000; // CHF 100K visual base
 const sliderMaxExisting = Math.max(propertyPrice, minVisualMax);
 const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
-
 
 
   // Dynamic info title (matches Excel text logic)
@@ -166,6 +174,10 @@ const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
   // Refinance Belehnung (LTV)
   // Refinance LTV and allowed cap
 
+// ✅ Dynamic minimum logic for sliders
+// ✅ Excel minimum equity rules
+          // 20% rule
+const minRefinanceMortgage = existingMortgage;       // can't refinance for less
 
 
   // -------------- UI --------------
@@ -224,7 +236,7 @@ const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
     label="Property Price"
     value={propertyPrice}
     setValue={setPropertyPrice}
-    min={100000}
+    min={0}
     max={2000000}
   />
 
@@ -250,24 +262,26 @@ const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
   )}
 
   {/* Only for Purchase */}
-  {loanType === "purchase" && (
-    <SliderInput
-      label="Equity / Own Funds"
-      value={ownFunds}
-      setValue={setOwnFunds}
-      min={0}
-      max={propertyPrice}
-    />
-  )}
-
-  {/* 4) Always last: Income */}
+{loanType === "purchase" && (
   <SliderInput
-    label="Annual Gross Income (CHF)"
-    value={income}
-    setValue={setIncome}
-    min={50000}
-    max={500000}
+    label="Equity / Own Funds"
+    value={ownFunds}
+    setValue={setOwnFunds}
+    min={0}
+    max={propertyPrice}
+    minRequired={minOwnFunds}  
   />
+)}
+
+ <SliderInput
+  label="Annual Gross Income (CHF)"
+  value={income}
+  setValue={setIncome}
+  min={0} 
+  max={500000}
+  minRequired={minIncomeRequired} 
+/>
+
 </div>
 
           </div>
@@ -467,7 +481,7 @@ function SubToggle({ label, active, onClick }: any) {
   );
 }
 
-function SliderInput({ label, value, setValue, min, max }: any) {
+function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   const percentage = ((value - min) / (max - min)) * 100;
   return (
     <div className="flex flex-col gap-2 relative">
@@ -478,33 +492,48 @@ function SliderInput({ label, value, setValue, min, max }: any) {
         </div>
       </div>
       <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-5 py-2">
-        <input
-          type="text"
-          value={value.toLocaleString("de-CH")}
-          readOnly
-          className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
-        />
+   <input
+  type="text"
+  value={value.toLocaleString("de-CH")}
+  onChange={(e) => {
+    // Heq presje dhe apostrof
+    const raw = e.target.value.replace(/[^0-9]/g, "");
+
+    // Kthejmë në numër
+    const parsed = Number(raw);
+
+    // Ruajmë vetëm numra valid
+    if (!isNaN(parsed)) {
+      const bounded = Math.max(min, Math.min(parsed, max));
+      setValue(bounded);
+    }
+  }}
+  className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
+/>
+
         <span className="text-[18px] font-semibold">CHF</span>
       </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={value}
-      onChange={(e) => {
-  const val = Number(e.target.value);
-  setValue(Math.min(val, max));
-}}
+<input
+  type="range"
+  min={min}
+  max={max}
+  value={value}
+  onChange={(e) => {
+    const val = Number(e.target.value);
+    const bounded = Math.max(min, Math.min(val, max));
+    setValue(bounded);
+  }}
+  className="w-full h-[4px] rounded-full appearance-none cursor-pointer"
+  style={{
+    background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
+  }}
+/>
+{minRequired !== undefined && (
+  <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
+    Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
+  </div>
+)}
 
-        className="w-full h-[4px] rounded-full appearance-none cursor-pointer"
-        style={{
-          background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
-        }}
-      />
-      <div className="flex justify-between text-[14px] text-[#474849]">
-        <span>{min.toLocaleString("de-CH")} CHF</span>
-        <span>{max.toLocaleString("de-CH")} CHF</span>
-      </div>
     </div>
   );
 }
