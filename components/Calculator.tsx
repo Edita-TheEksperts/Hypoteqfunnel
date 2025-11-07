@@ -1,7 +1,5 @@
-
-
 "use client";
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 
 <Image
@@ -15,8 +13,8 @@ export default function Calculator() {
 const [propertyPrice, setPropertyPrice] = useState(0);
 const [ownFunds, setOwnFunds] = useState(0);
 const [income, setIncome] = useState(0);
-const [existingMortgage, setExistingMortgage] = useState(0);  // Bisherige
-const [newMortgage, setNewMortgage] = useState(0);            // Neue
+const [existingMortgage, setExistingMortgage] = useState(0);  
+const [newMortgage, setNewMortgage] = useState(0);      
 
 
 
@@ -27,70 +25,51 @@ const [newMortgage, setNewMortgage] = useState(0);            // Neue
   );
 
   const [interestOption, setInterestOption] = useState("10Y 1.40%");
-
-  // ------------------- Excel Parameter Mapping -------------------
   const params =
     residenceType === "haupt"
       ? {
-          maxBelehnung: 0.8, // 80%
-          firstMortgageLimit: 0.6667, // 66.67%
-          stressRate: 0.05, // 5% stress
-          maintenanceRate: 0.008, // 0.8% p.a.
-          amortizationYears: 15, // amortize 2nd hyp over 15y
+          maxBelehnung: 0.8, 
+          firstMortgageLimit: 0.6667,
+          stressRate: 0.05, 
+          maintenanceRate: 0.008, 
+          amortizationYears: 15, 
           tragbarkeitThreshold: 0.35,
         }
       : {
-          maxBelehnung: 0.65, // 65%
-          firstMortgageLimit: 0, // no 2nd hyp concept
+          maxBelehnung: 0.65, 
+          firstMortgageLimit: 0, 
           stressRate: 0.05,
           maintenanceRate: 0.008,
           amortizationYears: 0,
           tragbarkeitThreshold: 0.35,
         };
-// Dynamic allowed loan depending on residence + price
 const dynamicMaxMortgage = residenceType
-  ? propertyPrice * params.maxBelehnung // 80% or 65%
-  : propertyPrice * 0.8; // default if no selection yet
+  ? propertyPrice * params.maxBelehnung 
+  : propertyPrice * 0.8; 
 
-
-
-  // --- Effective rate by product (for real interest display)
 const effectiveRate = useMemo(() => {
-  if (interestOption.startsWith("SARON")) return 0.0085; // 0.85%
-  if (interestOption.startsWith("5Y"))   return 0.0105;  // 1.05%  ✅ was 1.03
-  if (interestOption.startsWith("10Y"))  return 0.0140;  // 1.40%
+  if (interestOption.startsWith("SARON")) return 0.0085; 
+  if (interestOption.startsWith("5Y"))   return 0.0105;  
+  if (interestOption.startsWith("10Y"))  return 0.0140;  
   return 0.0105;
 }, [interestOption]);
 
-const interestOptions = ["SARON 0.85%", "5Y 1.05%", "10Y 1.40%"]; // ✅
-
-  // ------------------- Core Excel Logic -------------------
-// --- Need vs cap
+const interestOptions = ["SARON 0.85%", "5Y 1.05%", "10Y 1.40%"]; 
 const mortgageNeed =
   loanType === "purchase"
     ? Math.max(0, propertyPrice - ownFunds)
     : Math.max(0, newMortgage);
 
-// max allowed by Belehnung
 const maxMortgageAllowed = (params?.maxBelehnung ?? 0) * propertyPrice;
-
-// Excel: total hypothek is need but capped by max Belehnung
 const totalMortgage = Math.min(mortgageNeed, maxMortgageAllowed);
-
-// Excel split rules
 const firstLimitAbs =
   residenceType === "haupt" ? params.firstMortgageLimit * propertyPrice : Infinity;
 
 const firstMortgage = Math.min(totalMortgage, firstLimitAbs);
 const secondMortgage =
   residenceType === "haupt" ? Math.max(0, totalMortgage - firstMortgage) : 0;
-
-// Use this everywhere below instead of "actualMortgage"
 const actualMortgage = totalMortgage;
-
 const maxMortgage = propertyPrice * (params?.maxBelehnung ?? 0);
-
-  // Old mortgage cost (existing)
 const interestOld = existingMortgage * effectiveRate;
 const maintenanceOld = propertyPrice * params.maintenanceRate;
 const amortizationOld =
@@ -107,24 +86,13 @@ if (loanType === "refinancing") {
       ? (existingMortgage - firstLimitAbs) / params.amortizationYears
       : 0;
 
-  // Excel screenshots: old maintenance shown as 0.8% of Immobilienwert
   const oldMaintenanceYear = propertyPrice * params.maintenanceRate;
 
   monthlyOld = (oldInterestYear + oldAmortYear + oldMaintenanceYear) / 12;
 }
-
-
-const maxBelehnungAllowed = params.maxBelehnung; // 0.8 or 0.65 from params
-
-
-
-// Annual amounts for TRAGBARKEIT (Excel stress calc)
-const interestYearStress   = actualMortgage * params.stressRate;   // 5%
+const maxBelehnungAllowed = params.maxBelehnung; 
+const interestYearStress   = actualMortgage * params.stressRate;  
 const maintenanceYear = propertyPrice * params.maintenanceRate;
-
-
-
-// LTV for purchase uses actualMortgage; for refinancing uses requested newMortgage
 const belehnungPurchase = propertyPrice > 0 ? actualMortgage / propertyPrice : 0;
 const belehnungRefi     = propertyPrice > 0 ? newMortgage / propertyPrice   : 0;
 const belehnung         = loanType === "refinancing" ? belehnungRefi : belehnungPurchase;
@@ -137,58 +105,40 @@ const amortizationYear =
     : 0;
 
 const tragbarkeitCHF       = interestYearStress + maintenanceYear + amortizationYear;
-// ✅ Minimum required income according to Swiss affordability rule (Excel logic)
-const minIncomeRequired =
-  tragbarkeitCHF > 0 ? tragbarkeitCHF / params.tragbarkeitThreshold : 0;
-
+const minIncomeRequired = tragbarkeitCHF > 0 ? tragbarkeitCHF / params.tragbarkeitThreshold : 0;
 const tragbarkeitPercent   = income > 0 ? tragbarkeitCHF / income : 0;
-
 const interestYearEffective = actualMortgage * effectiveRate;
 const monthlyCost = (interestYearEffective + amortizationYear + maintenanceYear) / 12;
-
 const minOwnFunds = loanType === "purchase" ? propertyPrice * 0.20 : 0; 
-const isBelehnungOK     = belehnung <= params.maxBelehnung; // 80% or 65%
-const isTragbarkeitOK   = tragbarkeitPercent <= params.tragbarkeitThreshold; // 35%
-// ✅ Check equity condition (like Excel)
+const isBelehnungOK     = belehnung <= params.maxBelehnung; 
+const isTragbarkeitOK   = tragbarkeitPercent <= params.tragbarkeitThreshold; 
 const isEquityOK = ownFunds >= minOwnFunds;
 const isEligible = isBelehnungOK && isTragbarkeitOK && isEquityOK;
-
-
-
-// Fix: avoid broken sliders when property price = 0
-const minVisualMax = 100000; // CHF 100K visual base
+const minVisualMax = 100000; 
 const sliderMaxExisting = Math.max(propertyPrice, minVisualMax);
 const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
 
 
-  // Dynamic info title (matches Excel text logic)
-  const infoTitle = isEligible
-    ? loanType === "purchase"
-      ? "Eligibility confirmed. Estimated mortgage need:"
-      : "Eligibility confirmed. New mortgage possible up to:"
-    : "Not eligible. Maximum possible mortgage:";
+const infoTitle = isEligible
+  ? loanType === "purchase"
+    ? "Finanzierung möglich. Geschätzter Hypothekbedarf:"    
+    : "Finanzierung möglich. Neue Hypothek bis:"           
+  : "Finanzierung nicht möglich. Maximale Hypothek:";       
+
 
   // -------------- Formatting --------------
   const formatCHF = (num: number) =>
     "CHF " + Math.round(num).toLocaleString("de-CH");
   const formatPercent = (num: number) =>
     (num * 100).toFixed(1).replace(".", ",") + "%";
-  // Refinance Belehnung (LTV)
-  // Refinance LTV and allowed cap
-
-// ✅ Dynamic minimum logic for sliders
-// ✅ Excel minimum equity rules
-          // 20% rule
-const minRefinanceMortgage = existingMortgage;       // can't refinance for less
+const minRefinanceMortgage = existingMortgage;   
 
 
   // -------------- UI --------------
   return (
     <section className="flex flex-col items-center mt-[120px] bg-white py-16 px-8 font-sans text-[#132219]">
       <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[108px] mx-auto">
-        {/* LEFT SIDE */}
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-          {/* Title + Description Section */}
           <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
             <h1
               className="text-[72px] font-[500] leading-[100%] tracking-[-0.72px] text-[#132219] max-w-[536px]"
@@ -233,20 +183,18 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
             )}
 
 <div className="flex flex-col gap-[24px] mt-2">
-  {/* 1) Property Price */}
   <SliderInput
-    label="Property Price"
+    label="Kaufpreis"
     value={propertyPrice}
     setValue={setPropertyPrice}
     min={0}
     max={2000000}
   />
 
-  {/* 2 + 3) Refinancing fields */}
   {loanType === "refinancing" && (
     <>
       <SliderInput
-        label="Existing Mortgage"
+        label="Bisherige Hypothek"
         value={existingMortgage}
         setValue={(v: number) => setExistingMortgage(Math.min(v, propertyPrice))}
         min={0}
@@ -254,7 +202,7 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
       />
 
       <SliderInput
-        label="New Mortgage"
+        label="Neue Hypothek"
         value={newMortgage}
         setValue={(v: number) => setNewMortgage(Math.min(v, dynamicMaxMortgage))}
         min={0}
@@ -263,10 +211,9 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
     </>
   )}
 
-  {/* Only for Purchase */}
 {loanType === "purchase" && (
   <SliderInput
-    label="Equity / Own Funds"
+    label="Eigenmittel"
     value={ownFunds}
     setValue={setOwnFunds}
     min={0}
@@ -276,7 +223,8 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
 )}
 
  <SliderInput
-  label="Annual Gross Income (CHF)"
+
+  label="Brutto-Haushaltseinkommen"
   value={income}
   setValue={setIncome}
   min={0} 
@@ -285,11 +233,10 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
 />
 
 </div>
-
           </div>
 
           <div className="flex flex-col gap-2 mt-[-7px] w-full">
-            <label className="text-[16px] font-medium">ZIP / City</label>
+            <label className="text-[16px] font-medium">Postleitzahl / Ort</label>
             <input
               type="text"
               placeholder="Enter your zip/city"
@@ -297,8 +244,6 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
             />
           </div>
         </div>
-
-        {/* RIGHT SIDE */}
         <div className="flex flex-col items-start w-full max-w-[628px] mt-[19px] gap-[34px]">
           <p
             className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"
@@ -308,14 +253,14 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
             to compare scenarios instantly—monthly cost, total interest, and
             payoff timeline at a glance.
           </p>
+
 <InfoBox
   title={infoTitle}
-  value={formatCHF(actualMortgage)} // shows capped total hypothek like Excel
+  value={formatCHF(actualMortgage)} 
   red={!isEligible}
   loanType={loanType}
 />
 
-{/* Purchase → Eigenmittel */}
 {loanType === "purchase" && (
   <ProgressBox
     title="Eigenmittel"
@@ -326,7 +271,6 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
   />
 )}
 
-{/* Refinancing → Belehnung */}
 {loanType === "refinancing" && (
   <ProgressBox
     title="Belehnung"
@@ -337,7 +281,6 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
   />
 )}
 
-{/* Tragbarkeit gjithmonë në fund */}
 <ProgressBox
   title="Tragbarkeit"
   value={formatPercent(tragbarkeitPercent)}
@@ -346,19 +289,12 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
   loanType={loanType}
 />
 
-
-
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-            Continue my project
+          Projekt starten
           </button>
         </div>
       </div>
-
-      {/* COST SECTION */}
-{/* COST SECTION */}
 <div className="flex flex-col gap-[40px] md:gap-[63px] mt-[60px] md:mt-[80px] items-stretch">
-
-  {/* Title + Select Row */}
   <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center w-full">
     <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-sfpro font-medium text-[#132219] tracking-[-0.4px]">
       Estimated Costs in detail
@@ -381,7 +317,6 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
         ))}
       </select>
 
-      {/* Icon */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="12"
@@ -403,24 +338,22 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
 <div className="grid grid-cols-2 gap-[10px] w-full max-w-full md:max-w-[628px]">
   {loanType === "refinancing" ? (
     <>
-      <SmallBox title="Old Monthly Cost" value={formatCHF(monthlyOld)} />
-      <SmallBox title="Monthly costs" value={formatCHF(monthlyCost)} highlight />
+      <SmallBox title="Bisherige monatliche Kosten" value={formatCHF(monthlyOld)} />
+      <SmallBox title="Monatliche Gesamtkosten" value={formatCHF(monthlyCost)} highlight />
 
-      <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
-      <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />
+      <SmallBox title="Zinsen" value={formatCHF(interestYearEffective / 12)} />
+      <SmallBox title="Unterhalt / Nebenkosten" value={formatCHF(maintenanceYear / 12)} />
     </>
   ) : (
     <>
-      <SmallBox title="Interest" value={formatCHF(interestYearEffective / 12)} />
+      <SmallBox title="Zinsen" value={formatCHF(interestYearEffective / 12)} />
       <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
-      <SmallBox title="Incidental expenses" value={formatCHF(maintenanceYear / 12)} />
-      <SmallBox title="Monthly costs" value={formatCHF(monthlyCost)} highlight />
+      <SmallBox title="Unterhalt / Nebenkosten" value={formatCHF(maintenanceYear / 12)} />
+      <SmallBox title="Monatliche Gesamtkosten" value={formatCHF(monthlyCost)} highlight />
     </>
   )}
 </div>
 
-
-    {/* Big yearly box */}
     <div
       className={`
         flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219] 
@@ -438,19 +371,17 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
         {Math.round(interestYearEffective + amortizationYear + maintenanceYear).toLocaleString("de-CH")}
       </h3>
       <p className="text-[16px] sm:text-[18px] md:text-[20px] text-[#132219] opacity-80 mt-3">
-        Total yearly expenses
+     Gesamtkosten pro Jahr
       </p>
     </div>
   </div>
 </div>
 
-{/* Bottom Continue Button */}
 <div className="flex justify-center w-full mt-[30px] md:mt-[40px] px-4">
   <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
     Continue my project
   </button>
 </div>
-
 
 {/* TWO CTA CARDS */}
 <section className="flex flex-col md:flex-row justify-between items-start gap-[24px] w-full max-w-[1280px] mx-auto mt-[60px] md:mt-[100px] mb-[80px] md:mb-[100px] px-4">
@@ -494,8 +425,6 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
   );
 }
 
-/* --------- COMPONENTS (unchanged visuals) --------- */
-
 function ToggleButton({ label, active, onClick }: any) {
   return (
     <button
@@ -525,7 +454,6 @@ function SubToggle({ label, active, onClick }: any) {
     </button>
   );
 }
-
 
 function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   const percentage = ((value - min) / (max - min)) * 100;
@@ -618,19 +546,17 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
 }
 
 function InfoBox({ title, value, red = false, loanType }: any) {
-  // ✅ Background color logic (keeps your structure)
   const bgColor = !loanType
-    ? "bg-[#E5E5E5]" // neutral gray when no selection
+    ? "bg-[#E5E5E5]"
     : red
-    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]" // red when not eligible
-    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; // green when eligible
+    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]" 
+    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; 
 
-  // ✅ Circle background color (also gray when no selection)
   const circleColor = !loanType
-    ? "bg-[#BDBDBD]" // gray circle
+    ? "bg-[#BDBDBD]"
     : red
-    ? "bg-[#FCA5A5]" // red circle
-    : "bg-[#CAF47E]"; // green circle
+    ? "bg-[#FCA5A5]" 
+    : "bg-[#CAF47E]"; 
 
   return (
     <div
@@ -658,12 +584,10 @@ function InfoBox({ title, value, red = false, loanType }: any) {
 function ProgressBox({ title, value, current, total, loanType }: any) {
   const percent = parseFloat(value.replace("%", "").replace(",", ".")) || 0;
 
-  // ✅ Background (gray when no selection)
   const bgColor = !loanType
     ? "bg-[#E5E5E5]"
     : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]";
 
-  // ✅ Circle background (gray when no selection)
   const circleColor = !loanType ? "bg-[#BDBDBD]" : "bg-[#CAF47E]";
 
   return (
@@ -708,12 +632,9 @@ function SmallBox({ title, value, highlight = false }: any) {
     <div
       className={`relative flex flex-col justify-between p-[15px_16px] rounded-[10px] border border-[#132219] w-[308px] h-[216px] bg-white overflow-hidden`}
     >
-      {/* Gradient line only at the bottom when highlight = true */}
       {highlight && (
         <div className="absolute bottom-0 left-0 w-full h-[6px] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" />
       )}
-
-      {/* Title */}
       <p
         className={`text-[#132219] font-['SF Pro Display'] ${
           isMonthlyCosts
@@ -723,8 +644,6 @@ function SmallBox({ title, value, highlight = false }: any) {
       >
         {title}
       </p>
-
-      {/* Value */}
       <div className="flex items-end gap-[4px]">
         <span
           className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
@@ -751,10 +670,10 @@ function SmallBox({ title, value, highlight = false }: any) {
 
 function CheckIcon({ red = false, loanType }: any) {
   const strokeColor = !loanType
-    ? "#6E6E6E" // gri kur nuk është zgjedhur asgjë
+    ? "#6E6E6E" 
     : red
-    ? "#7F1D1D" // e kuqe kur nuk është eligible
-    : "#132219"; // e zezë për normale / jeshile
+    ? "#7F1D1D" 
+    : "#132219"; 
 
   return (
     <svg
