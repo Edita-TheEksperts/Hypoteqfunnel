@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
 
 <Image
@@ -314,13 +314,7 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
   loanType={loanType}
 />
 
-<ProgressBox
-  title="Tragbarkeit"
-  value={formatPercent(tragbarkeitPercent)}
-  current={formatCHF(tragbarkeitCHF)}
-  total={formatCHF(income)}
-  loanType={loanType}
-/>
+{/* Purchase → Eigenmittel */}
 {loanType === "purchase" && (
   <ProgressBox
     title="Eigenmittel"
@@ -330,7 +324,8 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
     loanType={loanType}
   />
 )}
-{/* Belehnung only for refinancing */}
+
+{/* Refinancing → Belehnung */}
 {loanType === "refinancing" && (
   <ProgressBox
     title="Belehnung"
@@ -340,6 +335,16 @@ const minRefinanceMortgage = existingMortgage;       // can't refinance for less
     loanType={loanType}
   />
 )}
+
+{/* Tragbarkeit gjithmonë në fund */}
+<ProgressBox
+  title="Tragbarkeit"
+  value={formatPercent(tragbarkeitPercent)}
+  current={formatCHF(tragbarkeitCHF)}
+  total={formatCHF(income)}
+  loanType={loanType}
+/>
+
 
 
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
@@ -483,60 +488,94 @@ function SubToggle({ label, active, onClick }: any) {
 
 function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   const percentage = ((value - min) / (max - min)) * 100;
+  const animationRef = useRef<number | null>(null);
+
+  // ✅ Gjithmonë ndjek minRequired
+  useEffect(() => {
+    if (minRequired === undefined) return;
+
+    const startValue = value;
+    const endValue = Math.min(Math.max(minRequired, min), max); // kufizo brenda range-it
+    const duration = 400;
+    const startTime = performance.now();
+
+    const animate = (time: number) => {
+      const progress = Math.min((time - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const newVal = startValue + (endValue - startValue) * eased;
+      setValue(Math.round(newVal));
+      if (progress < 1) animationRef.current = requestAnimationFrame(animate);
+    };
+
+    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    animationRef.current = requestAnimationFrame(animate);
+  }, [minRequired, min, max]);
+
+  useEffect(() => {
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col gap-2 relative">
+      {/* Label */}
       <div className="flex justify-between items-center">
         <label className="text-[16px] font-medium">{label}</label>
         <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full bg-[#626D64]">
           <span className="text-white text-[10px] font-medium">?</span>
         </div>
       </div>
+
+      {/* Input Field */}
       <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-5 py-2">
-   <input
-  type="text"
-  value={value.toLocaleString("de-CH")}
-  onChange={(e) => {
-    // Heq presje dhe apostrof
-    const raw = e.target.value.replace(/[^0-9]/g, "");
-
-    // Kthejmë në numër
-    const parsed = Number(raw);
-
-    // Ruajmë vetëm numra valid
-    if (!isNaN(parsed)) {
-      const bounded = Math.max(min, Math.min(parsed, max));
-      setValue(bounded);
-    }
-  }}
-  className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
-/>
-
+        <input
+          type="text"
+          value={value.toLocaleString("de-CH")}
+          onChange={(e) => {
+            const raw = e.target.value.replace(/[^0-9]/g, "");
+            const parsed = Number(raw);
+            if (!isNaN(parsed)) {
+              const bounded = Math.max(min, Math.min(parsed, max));
+              setValue(bounded);
+            }
+          }}
+          className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
+        />
         <span className="text-[18px] font-semibold">CHF</span>
       </div>
-<input
-  type="range"
-  min={min}
-  max={max}
-  value={value}
-  onChange={(e) => {
-    const val = Number(e.target.value);
-    const bounded = Math.max(min, Math.min(val, max));
-    setValue(bounded);
-  }}
-  className="w-full h-[4px] rounded-full appearance-none cursor-pointer"
-  style={{
-    background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
-  }}
-/>
-{minRequired !== undefined && (
-  <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
-    Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
-  </div>
-)}
 
+      {/* Slider */}
+      <input
+        type="range"
+        min={min}
+        max={max}
+        value={value}
+        onChange={(e) => {
+          const newVal = Number(e.target.value);
+          // Mos lejo poshtë minimumit
+          if (minRequired !== undefined && newVal < minRequired) {
+            setValue(minRequired);
+          } else {
+            setValue(newVal);
+          }
+        }}
+        className="w-full h-[4px] rounded-full appearance-none cursor-pointer transition-[background] duration-300 ease-out"
+        style={{
+          background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
+          transition: "all 0.3s ease-out",
+        }}
+      />
+
+      {minRequired !== undefined && (
+        <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
+          Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
+        </div>
+      )}
     </div>
   );
 }
+
 function InfoBox({ title, value, red = false, loanType }: any) {
   // ✅ Background color logic (keeps your structure)
   const bgColor = !loanType
