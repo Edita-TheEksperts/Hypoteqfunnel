@@ -112,7 +112,7 @@ export default function HowItWorks() {
   const steps = [
     {
       step: "Klick 1",
-      title: "Klick",
+      title: "Angaben zur Immobilie & Finanzierung",
       text: "Trage die wichtigsten Informationen zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Bereits nach diesem Schritt siehst du, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen – schnell, einfach und unverbindlich.",
       image: "/images/epara.png",
     },
