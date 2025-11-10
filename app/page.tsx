@@ -28,7 +28,6 @@ export default function Home() {
       <MortgageGuide />
       <ConsultationBanner />
 
-      {/* ✅ Spacing para Footer: 100 mobile / 200 desktop */}
       <div className="mt-[100px] md:mt-[200px]">
         <Footer />
       </div>

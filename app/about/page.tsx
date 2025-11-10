@@ -17,6 +17,7 @@ export default function AboutPage() {
       <PartnersSection />
       |<JoinOurTeam />
       <ConsultationBanner />
+            <div className="mt-[100px] md:mt-[200px]"></div>
       <Footer />
     </main>
   );
