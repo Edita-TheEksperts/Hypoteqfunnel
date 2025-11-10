@@ -74,8 +74,9 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
     tracking-[-0.32px]
   "
 >
-  Start now in just 3 clicks.  
-  We’ll guide you, step by step.
+Jetzt in nur 3 Klicks starten. 
+Wir führen Sie sicher durch 
+jeden Schritt.
 </p>
 
 
@@ -110,28 +111,29 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
 export default function HowItWorks() {
   const steps = [
     {
-      step: "Step 1",
-      title: "Inquiry",
-      text: "Start with a quick, no-obligation inquiry. Tell us about your property, budget, income, and timeline—either via our secure online form or a short call with an advisor. We’ll listen, clarify your goals, and capture only what’s needed to assess options. No fees, no pressure—just a clear first step.",
-      image: "/images/sda.png",
+      step: "Klick 1",
+      title: "Klick",
+      text: "Trage die wichtigsten Informationen zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Bereits nach diesem Schritt siehst du, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen – schnell, einfach und unverbindlich.",
+      image: "/images/epara.png",
     },
     {
-      step: "Step 2",
-      title: "Analysis",
-      text: "Once we have your details, our team gets to work. We evaluate affordability, credit profile, and property documentation to determine eligibility. Using advanced comparison tools, we review offers from partner banks and outline clear scenarios for you. Every rate, fee, and term is explained—transparent, accurate, and tailored to your needs.",
-      image: "/images/oooo.png",
+      step: "Klick  2",
+      title: "Dokumente einreichen",
+      text: "Im nächsten Schritt lädst du die erforderlichen Unterlagen hoch (z. B. Lohnausweis, Steuererklärung, Grundbuchauszug). Sobald alle Dokumente vollständig vorliegen, starten wir unseren Prozess und holen die passenden Bankangebote für dich ein.",
+      image: "/images/documents.png",
     },
     {
-      step: "Step 3",
-      title: "Offer",
-      text: "Once we’ve completed the analysis, we present tailored mortgage offers based on your financial profile and property details. You’ll receive side-by-side comparisons of interest rates, terms, and monthly payments from our network of trusted banks. Each option is explained clearly—so you understand the benefits, trade-offs, and total costs before making a decision. Transparent, data-driven, and fully personalized.",
-      image: "/images/offer.png",
+      step: "Klick  3",
+      title: "Angebot erhalten & entscheiden",
+      text: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt. Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
+      image: "/images/ijiji.png",
     },
-    {
-      title: "Congratulations on Your Mortgage",
-      text: "After we complete our review, we share a tailored set of mortgage offers matched to your profile and property. You’ll see side-by-side comparisons of rates, terms, fees, and projected monthly payments. We highlight the pros, trade-offs, and total cost over time. You choose with confidence—no jargon, no pressure",
-      highlightBox: true,
-    },
+{
+  title: "Gratulation – Deine Hypothek ist bereit",
+  text: "Nach deiner Auswahl übernehmen wir den Rest: Wir koordinieren die nächsten Schritte mit der Bank und begleiten dich bis zum Abschluss.",
+  highlightBox: true,
+},
+
   ];
 
   const ref = useRef<HTMLDivElement>(null);
@@ -152,7 +154,7 @@ export default function HowItWorks() {
 >
 
 
-  <motion.h2
+<motion.h2
   className="
     font-['SF Pro Display']
     text-[#132219]
@@ -162,6 +164,7 @@ export default function HowItWorks() {
     tracking-[-0.4px]
     mb-[-7px]
     text-left
+    whitespace-nowrap
   "
   initial={{ opacity: 1, y: -10 }}
   style={{
@@ -169,8 +172,9 @@ export default function HowItWorks() {
     y: useTransform(scrollYProgress, [0, 0.08], [-10, -60]),
   }}
 >
-  How It Works
+  So funktioniert’s – in nur drei Klicks zu deiner Hypothek
 </motion.h2>
+
 
 
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">

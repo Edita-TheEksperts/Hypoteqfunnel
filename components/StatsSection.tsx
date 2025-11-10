@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 const StatsSection: React.FC = () => {
@@ -14,27 +15,19 @@ const StatsSection: React.FC = () => {
             max-sm:text-[32px]
           "
         >
-          We help homebuyers and homeowners make{" "}
-          <span className="font-semibold">
-            confident financing decisions.
-          </span>
+          Wir helfen dir, die beste Finanzierung zu finden
         </h2>
 
         <p
           className="mt-[32px] font-[SF Pro Display] text-[24px] font-light leading-[140%] 
           max-md:text-[20px] max-sm:text-[18px]"
         >
-          Our mission is to simplify the mortgage journey end-to-end—pairing
-          clear, jargon-free guidance with smart digital tools, so you can
-          compare options, lock great terms, and move forward with confidence.
-          We bring transparency to every step (from inquiry to approval),
-          personalize recommendations to your goals, and stay by your side with
-          real human expertise when it matters most.
+          Unsere Mission ist einfach: Wir machen den Weg zur passenden Hypothek klar, effizient und verständlich. Mit durchdachten Tools, einem breiten Netzwerk an Finanzierungspartnern und persönlicher Beratung begleiten wir dich Schritt für Schritt. Du vergleichst Angebote, erkennst auf einen Blick, was zu dir passt – und triffst informierte Entscheidungen mit Rückendeckung von echten Profis.
         </p>
       </div>
 
       {/* Stats */}
-      <div 
+      <div
         className="
           w-full max-w-[1274px] mt-[80px] mb-[80px] px-[20px]
           grid grid-cols-4 gap-[40px]
@@ -44,20 +37,20 @@ const StatsSection: React.FC = () => {
       >
         {[
           {
-            title: "40+",
-            desc: "Access 40+ partner lenders — more choice and better terms for you.",
+            title: "30+",
+            desc: "Partnerbanken – mehr Auswahl und bessere Konditionen für dich.",
           },
           {
-            title: "3 Clicks",
-            desc: "From inquiry to approval — our streamlined system gets you results fast.",
+            title: "3 Klicks",
+            desc: "Von der Anfrage bis zur Zusage",
           },
           {
-            title: "1,500+",
-            desc: "Thousands of happy homeowners who trusted us with their mortgage journey.",
+            title: "2,500+",
+            desc: "Zufriedene Kund:innen, die uns bereits ihr Vertrauen geschenkt haben.",
           },
           {
-            title: "8+",
-            desc: "Nearly a decade of guiding clients toward confident financing decisions.",
+            title: "5+ Jahre",
+            desc: "Erfahrung aus Hypo- und FinTech-Welt.",
           },
         ].map((item, idx) => (
           <div key={idx} className="flex flex-col gap-[8px]">
@@ -69,7 +62,7 @@ const StatsSection: React.FC = () => {
             >
               {item.title}
             </h3>
-            <p 
+            <p
               className="
                 font-[SF Pro Display] text-[20px] font-light leading-[140%] 
                 max-w-[262px] max-md:text-[18px]
@@ -90,19 +83,34 @@ const StatsSection: React.FC = () => {
         />
       </div>
 
-      {/* Our DNA */}
+      {/* Unsere DNA */}
       <div className="w-full flex flex-col items-center mt-[120px] max-md:mt-[80px]">
-        <div className="max-w-[1274px] w-full flex flex-col gap-[80px] px-[20px]">
+        <div className="max-w-[1274px] w-full flex flex-col gap-[40px] px-[20px]">
+          {/* Title */}
           <h2
             className="
               font-[SF Pro Display] text-[40px] font-medium text-[#132219] 
               max-md:text-[32px] max-sm:text-[28px]
             "
           >
-            Our DNA
+            Unsere DNA
           </h2>
 
-          <div 
+          {/* ✅ Added descriptive paragraph below title */}
+          <p
+            className="
+              font-[SF Pro Display] text-[24px] font-light leading-[140%]
+              text-[#132219] max-w-[1280px]
+              max-md:text-[20px] max-sm:text-[18px]
+            "
+          >
+            Wir vereinfachen den Hypothekenprozess in der Schweiz – digital, smart und nah am Menschen. 
+            Mit Technologie, Daten und einem starken Partnernetzwerk gestalten wir Finanzierung schneller, klarer und zugänglicher. 
+            Für Kund:innen, Vermittler und Kreditgeber.
+          </p>
+
+          {/* Grid with items (unchanged) */}
+          <div
             className="
               grid grid-cols-2 gap-x-[100px] gap-y-[80px]
               max-lg:gap-x-[60px]
@@ -112,23 +120,23 @@ const StatsSection: React.FC = () => {
             {[
               {
                 icon: "/images/mission.svg",
-                title: "Our Mission",
-                desc: "We aim to simplify complex processes through innovation and human-centered solutions...",
+                title: "Unsere Mission",
+                desc: "Hypotheken sollen nicht kompliziert sein. Unser Ziel: dir einfache Tools und transparente Prozesse an die Hand zu geben, damit du schnell, selbstbestimmt und mit gutem Gefühl zur passenden Finanzierung findest – in drei klaren Schritten",
               },
               {
                 icon: "/images/32.svg",
-                title: "Our Vision",
-                desc: "To create a world where technology works seamlessly with people...",
+                title: "Unsere Vision",
+                desc: "Wir schaffen eine Plattform, auf der Technologie auf Vertrauen trifft. Klarheit statt Bürokratie. Effizienz statt Wartezeiten. Entscheidungen, die für alle Beteiligten im Hypomarkt einen echten Unterschied machen.",
               },
               {
                 icon: "/images/Values.svg",
-                title: "Our Values",
-                desc: "Integrity, transparency, and collaboration guide everything we do...",
+                title: "Unsere Werte",
+                desc: "Wir glauben an Offenheit, Verlässlichkeit und Partnerschaft auf Augenhöhe. Ob im Team oder mit unseren Kund:innen – wir handeln transparent, denken langfristig und lernen jeden Tag dazu.",
               },
               {
                 icon: "/images/Group.svg",
-                title: "Our Purpose",
-                desc: "Our purpose is to connect people with opportunities that improve their lives...",
+                title: "Unser Antrieb",
+                desc: "Wir bringen Menschen, Partner und Prozesse zusammen – nicht weil wir müssen, sondern weil wir es besser machen wollen. Mit einfachen digitalen Lösungen, persönlichem Support und einem klaren Ziel: Hypotheken einfacher, fairer und smarter machen.",
               },
             ].map((item, idx) => (
               <div key={idx} className="flex flex-col gap-[28px] relative pl-[42px]">

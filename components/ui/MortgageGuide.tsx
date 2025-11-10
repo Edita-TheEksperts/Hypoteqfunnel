@@ -21,32 +21,40 @@ const MortgageGuide: React.FC = () => {
         "
       >
         {/* Left Text */}
-        <div className="
+        <div
+          className="
           flex flex-col items-start justify-center gap-[16px] 
           max-w-[560px]
           max-sm:gap-[6px]
-        ">
+        "
+        >
           <h2
             className="
               font-sfpro text-[40px] font-[500] leading-[140%]
               max-sm:text-[22px] max-sm:leading-[26px]
             "
           >
-            Mortgage Guide
+            Dein Hypotheken-Ratgeber
           </h2>
-
           <p
             className="
-              font-sfpro text-white text-[22px] font-[300] leading-[140%] opacity-90
-              max-w-[700px]
-              max-sm:text-[14px] 
-              max-sm:leading-[130%]
-              max-sm:max-w-[300px]
-              max-sm:mt-[2px]
-            "
+    font-['SF Pro Display']
+    text-[#f1f8f4]
+    font-[300]
+    text-[22px] sm:text-[20px]
+    leading-[140%]      
+    opacity-90
+    max-w-[720px]
+    tracking-[0.01em]
+    max-sm:text-[14px]
+    max-sm:leading-[130%]
+    max-sm:max-w-[300px]
+    max-sm:mt-[2px]
+  "
           >
-            Learn everything you need to know about mortgages — from key terms
-            and rates to smart tips for financing your home.
+            Alles rund um deine Immobilienfinanzierung – einfach erklärt,
+            transparent und auf den Punkt. So triffst du bei deiner Hypothek die
+            richtigen Entscheidungen.
           </p>
         </div>
 

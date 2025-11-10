@@ -136,31 +136,30 @@ const minRefinanceMortgage = existingMortgage;
 
   // -------------- UI --------------
   return (
-    <section className="flex flex-col items-center mt-[120px] bg-white py-16 px-8 font-sans text-[#132219]">
-      <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[108px] mx-auto">
+<section className="flex flex-col items-center bg-white py-12 px-8 font-sans text-[#132219]">
+<div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1300px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
+
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-          <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
+          <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-20 mt-10">
             <h1
               className="text-[72px] font-[500] leading-[100%] tracking-[-0.72px] text-[#132219] max-w-[536px]"
               style={{ fontFamily: "'SF Pro Display', sans-serif" }}
             >
-              Mortgage
-              <br />
-              Calculator
+           Hypothekenrechner
             </h1>
           </div>
 
           <div className="mt-[16px] flex flex-col gap-[24px]">
             <div className="flex gap-3">
               <ToggleButton
-                label="Purchase"
+                label="Immobilienkauf"
                 active={loanType === "purchase"}
                 onClick={() =>
                   setLoanType(loanType === "purchase" ? null : "purchase")
                 }
               />
               <ToggleButton
-                label="Refinancing"
+                label="Refinanzierung"
                 active={loanType === "refinancing"}
                 onClick={() =>
                   setLoanType(loanType === "refinancing" ? null : "refinancing")
@@ -181,8 +180,8 @@ const minRefinanceMortgage = existingMortgage;
                 />
               </div>
             )}
+<div className="flex flex-col gap-[32px] mt-[22px]">
 
-<div className="flex flex-col gap-[24px] mt-2">
   <SliderInput
     label="Kaufpreis"
     value={propertyPrice}
@@ -244,55 +243,60 @@ const minRefinanceMortgage = existingMortgage;
             />
           </div>
         </div>
-        <div className="flex flex-col items-start w-full max-w-[628px] mt-[19px] gap-[34px]">
-          <p
-            className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"
-            style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-          >
-            Real-time mortgage math. Slide your price, deposit, rate, and term
-            to compare scenarios instantly—monthly cost, total interest, and
-            payoff timeline at a glance.
-          </p>
+<div className="flex flex-col items-start w-full max-w-[628px] mt-[222px]">
 
-<InfoBox
-  title={infoTitle}
-  value={formatCHF(actualMortgage)} 
-  red={!isEligible}
-  loanType={loanType}
-/>
+  {/* InfoBox → gap 36px */}
+  <div className="flex flex-col gap-[36px] w-full">
+    <InfoBox
+      title={infoTitle}
+      value={formatCHF(actualMortgage)} 
+      red={!isEligible}
+      loanType={loanType}
+    />
+  </div>
 
-{loanType === "purchase" && (
-  <ProgressBox
-    title="Eigenmittel"
-    value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
-    current={formatCHF(ownFunds)}
-    total={formatCHF(propertyPrice)}
-    loanType={loanType}
-  />
-)}
+  {/* Eigenmittel ose Belehnung → 14px distancë nga Tragbarkeit */}
+  {loanType === "purchase" && (
+    <div className="mt-[36px] mb-[14px] w-full">
+      <ProgressBox
+        title="Eigenmittel"
+        value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
+        current={formatCHF(ownFunds)}
+        total={formatCHF(propertyPrice)}
+        loanType={loanType}
+      />
+    </div>
+  )}
 
-{loanType === "refinancing" && (
-  <ProgressBox
-    title="Belehnung"
-    value={formatPercent(belehnungRefi)}
-    current={formatCHF(newMortgage)}
-    total={formatCHF(propertyPrice)}
-    loanType={loanType}
-  />
-)}
+  {loanType === "refinancing" && (
+    <div className="mt-[36px] mb-[14px] w-full">
+      <ProgressBox
+        title="Belehnung"
+        value={formatPercent(belehnungRefi)}
+        current={formatCHF(newMortgage)}
+        total={formatCHF(propertyPrice)}
+        loanType={loanType}
+      />
+    </div>
+  )}
 
-<ProgressBox
-  title="Tragbarkeit"
-  value={formatPercent(tragbarkeitPercent)}
-  current={formatCHF(tragbarkeitCHF)}
-  total={formatCHF(income)}
-  loanType={loanType}
-/>
+  {/* Tragbarkeit */}
+  <div className="w-full">
+    <ProgressBox
+      title="Tragbarkeit"
+      value={formatPercent(tragbarkeitPercent)}
+      current={formatCHF(tragbarkeitCHF)}
+      total={formatCHF(income)}
+      loanType={loanType}
+    />
+  </div>
 
-          <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-          Projekt starten
-          </button>
-        </div>
+  {/* Butoni → 28px distancë nga kutia sipër */}
+  <button className="w-full h-[50px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
+    Projekt starten
+  </button>
+</div>
+
       </div>
 <div className="flex flex-col gap-[40px] md:gap-[63px] mt-[60px] md:mt-[80px] items-stretch">
   <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center w-full">
@@ -449,7 +453,7 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 relative">
+<div className="flex flex-col gap-[6px] relative">
       {/* Label */}
       <div className="flex justify-between items-center">
         <label className="text-[16px] font-medium">{label}</label>
@@ -491,7 +495,7 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
             setValue(newVal);
           }
         }}
-        className="w-full h-[4px] rounded-full appearance-none cursor-pointer transition-[background] duration-300 ease-out"
+  className="w-full h-[4px] rounded-full appearance-none cursor-pointer transition-[background] duration-300 ease-out mt-[6px]"
         style={{
           background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
           transition: "all 0.3s ease-out",

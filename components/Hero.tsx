@@ -23,9 +23,8 @@ export default function Hero() {
   className="absolute inset-0 bg-no-repeat bg-cover -z-10 hidden sm:block
   h-full"
   style={{
-    backgroundImage: "url('/images/Hero1.jpg')",
-    backgroundPosition: "-631px -2370px",
-    backgroundSize: "266.561% 549.731%",
+    backgroundImage: "url('/images/photohero.png')",
+ 
   }}
 ></div>
 
@@ -39,10 +38,11 @@ export default function Hero() {
           <h1
   className="text-[#132219] font-medium max-w-[880px]
   text-[48px] leading-[100%] tracking-[-0.48px]
-  sm:text-[128px] sm:leading-[100%] sm:tracking-[-1.28px]"
+  sm:text-[100px] sm:leading-[100%] sm:tracking-[-1.28px]"
 >
-
-            In drei <br /> Schritten zur Ihrer Hypothek
+In drei Klicks <br />                           
+zu deiner <br />
+Hypothek
           </h1>
 
           {/* Description */}
@@ -51,27 +51,40 @@ export default function Hero() {
   text-[16px] leading-[140%] font-[400] mt-[12px]
   sm:text-[20px] sm:leading-snug sm:mt-[24px]"
 >
-  
-            Erhalten Sie Ihr persönliches Hypothekarangebot online – schnell,
-            sicher und transparent. In nur <strong>drei Klicks</strong> vergleichen Sie
-            Optionen, berechnen Ihre monatlichen Kosten und starten Ihren
-            Finanzierungsprozess mit Vertrauen.
+  Erhalte dein persönliches Hypothekarangebot online – schnell, sicher und transparent. 
+  Vergleiche verschiedene Optionen, berechne deine monatlichen 
+  Kosten und starte deinen Finanzierungsprozess mit Vertrauen – alles in nur drei Klicks.
           </p>
 
-<button
-  className="
-    bg-[#132219] text-[#CAF476] font-semibold
-    text-[12px] sm:text-[16px] lg:text-[18px]
-    px-[18px] sm:px-[24px] lg:px-[28px]
-    py-[8px] sm:py-[10px] lg:py-[12px]
-    leading-[1.2]
-    rounded-full hover:opacity-90 transition-all w-fit
-    mt-[24px] sm:mt-[16px]
-  "
->
+{/* Buttons row */}
+<div className="flex items-center gap-[10px] mt-[24px] sm:mt-[16px]">
 
-  Finanzierung starten
-</button>
+  {/* Button 1 */}
+  <button
+    className="bg-[#132219] text-[#CAF476] font-semibold
+      text-[12px] sm:text-[16px] lg:text-[18px]
+      px-[18px] sm:px-[24px] lg:px-[28px]
+      py-[8px] sm:py-[10px] lg:py-[12px]
+      leading-[1.2]
+      rounded-full hover:opacity-90 transition-all w-fit"
+  >
+    Neue Hypothek
+  </button>
+
+  {/* Button 2 */}
+  <button
+    className="bg-[#CAF476] text-[#132219] font-semibold
+      text-[12px] sm:text-[16px] lg:text-[18px]
+      px-[18px] sm:px-[24px] lg:px-[28px]
+      py-[8px] sm:py-[10px] lg:py-[12px]
+      leading-[1.2]
+      rounded-full hover:opacity-90 transition-all w-fit"
+  >
+    Hypothek ablösen
+  </button>
+
+</div>
+
 
 
           {/* Desktop partner section */}

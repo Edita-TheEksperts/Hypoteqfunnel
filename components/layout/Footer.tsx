@@ -1,132 +1,199 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link"; // ✅ Shtohet
 
 const Footer: React.FC = () => {
-  const firstRow = [
-    {
-      title: "Home Page",
-      links: ["Quick Calculator", "Financing Request", "Mortgage Guide"],
-    },
-    {
-      title: "Mortgage Calculator",
-      links: [],
-    },
-    {
-      title: "Mortgages",
-      links: ["New Mortgage", "Refinancing", "New Construction"],
-    },
-    {
-      title: "Guide",
-      links: ["Interest Rate Trends", "Property Market", "Homeownership"],
-    },
-  ];
-
-  const secondRow = [
-    {
-      title: "About Us",
-      links: ["Mission", "Team", "Partners"],
-      extra: "Imprint & Data Protection",
-    },
-    {
-      title: "Partners & White Label",
-      links: ["API", "Platform Integration"],
-    },
-    {
-      title: "Contact & Consolation",
-      links: ["Consultation Form", "Locations"],
-    },
-    {
-      title: "Downloads & Checklists",
-      links: ["Interest Rate Trends", "Property Market", "Homeownership"],
-    },
-  ];
-
   return (
-    <footer className="bg-white text-[#132219] font-['SF Pro Display'] border-t border-[#E5E5E5] w-full">
-      <div className="max-w-[1273px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[168px_repeat(4,minmax(0,1fr))] gap-y-[40px] md:gap-y-[60px] gap-x-[40px] md:gap-x-[60px] lg:gap-x-[108px] px-[20px] sm:px-[40px] md:px-[60px] pt-[50px] md:pt-[70px] pb-[60px]">
+    <footer className="bg-white text-[#132219] font-sfpro border-t border-[#E5E5E5] w-full">
+      <div className="max-w-[1275px] mx-auto px-[20px] md:px-[40px] pt-[50px] pb-[60px] flex flex-col gap-[108px]">
 
-        <div className="flex flex-col gap-[25px] md:gap-[35px] items-start">
-          <Image src="/images/logo.png" alt="Hypoteq Logo" width={145} height={38} className="object-contain w-[120px] sm:w-[145px]" />
-          <h4 className="text-[#132219] text-[16px] font-[400] leading-normal font-['SF Pro Display']">Address</h4>
+        {/* 🔹 Row 1 — Logo + 3 Columns */}
+        <div className="grid grid-cols-[200px_1fr] gap-x-[108px]">
+          {/* ✅ Logo + Address */}
+          <div className="flex flex-col items-start">
+            <Image
+              src="/images/logo.png"
+              alt="Hypoteq Logo"
+              width={145}
+              height={38}
+              className="object-contain mb-[22px]"
+            />
+
+            <p className="text-[20px] leading-[24px] font-[400] text-[#132219] mb-[12px]">
+              HYPOTEQ AG
+            </p>
+            <p className="text-[20px] leading-[24px] font-[400] text-[#132219] mb-[12px]">
+              Löwenstrasse 29 <br /> 8001 Zürich
+            </p>
+            <p className="text-[20px] leading-[24px] font-[400] text-[#132219] mb-[12px]">
+              Telefon: <br /> 044 554 41 00
+            </p>
+            <p className="text-[20px] leading-[24px] font-[400] text-[#132219]">
+              E-Mail-Adresse: <br /> info@hypoteq.ch
+            </p>
+          </div>
+
+          {/* ✅ 3 Column Grid */}
+          <div className="grid grid-cols-3 gap-x-[64px]">
+            <FooterColumn
+              title="Home Page"
+              links={[
+                "Hypoteq’s beste Auswahl",
+                "Hypothekenrechner",
+                "So funktioniert’s",
+                "Immobilienbewertung",
+                "Deine Vorteile mit HYPOTEQ",
+                "Testimonials",
+                "Hypotheken Guide",
+              ]}
+            />
+
+            <FooterColumn
+              title="Über uns"
+              links={[
+                "Unsere Mission",
+                "Unser Team",
+                "Unsere Partner",
+                "Werde Teil von HYPOTEQ",
+              ]}
+            />
+
+            <FooterColumn
+              title="Hypothekenrechner"
+              links={[
+                "Berechne deine Hypothek",
+                "Geschätzte Kosten im Detail",
+              ]}
+            />
+          </div>
         </div>
 
-        {firstRow.map((col, i) => (
-          <div key={i} className="flex flex-col gap-[5px]">
-            <h4 className="text-[16px] sm:text-[18px] font-semibold mb-[20px] sm:mb-[48px]">{col.title}</h4>
-            {col.links.length > 0 && (
-              <ul className="flex flex-col gap-[2px]">
-                {col.links.map((link, j) => (
-                  <li key={j}>
-                    <a href="#" className="text-[14px] sm:text-[15px] font-normal text-[#132219] hover:underline">{link}</a>
-                  </li>
-                ))}
-              </ul>
-            )}
+        {/* 🔹 Row 2 */}
+        <div className="grid grid-cols-[200px_1fr] gap-x-[108px]">
+          <div></div>
+          <div className="grid grid-cols-3 gap-x-[64px]">
+            <FooterColumn
+              title="Hypotheken leicht gemacht"
+              links={["Neuhypothek", "Refinanzierung", "Neubau-Finanzierung"]}
+            />
+            <FooterColumn
+              title="Kontaktiere uns"
+              links={["Schreibe uns", "Ruf uns an", "Standort"]}
+            />
+            <FooterColumn
+              title="Frequently Asked Questions"
+              links={[
+                "Persönliche Informationen",
+                "Finanzielle Informationen",
+                "Allgemeine Informationen",
+              ]}
+            />
           </div>
-        ))}
-
-        <div className="hidden lg:block"></div>
-
-        {secondRow.map((col, i) => (
-          <div key={i} className="flex flex-col gap-[5px]">
-
-            {col.title === "About Us" ? (
-              <Link href="/about" className="text-[16px] sm:text-[18px] font-semibold mb-[20px] sm:mb-[56px] leading-[1.1] hover:underline">
-                {col.title}
-              </Link>
-            ) : (
-              <h4 className="text-[16px] sm:text-[18px] font-semibold mb-[20px] sm:mb-[56px] leading-[1.1]">{col.title}</h4>
-            )}
-
-            <ul className="flex flex-col gap-[1px] mt-[2px]">
-        {col.links.map((link, j) => (
-  <li key={j}>
-    {link === "Quick Calculator" ? (
-      <Link
-        href="/calc"
-        className="text-[14px] sm:text-[15px] font-normal text-[#132219] hover:underline"
-      >
-        {link}
-      </Link>
-    ) : (
-      <a
-        href="#"
-        className="text-[14px] sm:text-[15px] font-normal text-[#132219] hover:underline"
-      >
-        {link}
-      </a>
-    )}
-  </li>
-))}
-
-            </ul>
-
-            {col.extra && (
-              <h4 className="text-[16px] sm:text-[18px] font-semibold mt-[30px] sm:mt-[48px] whitespace-nowrap">{col.extra}</h4>
-            )}
-          </div>
-        ))}
-
-        <div className="col-span-full flex flex-col gap-[10px] mt-[60px] md:mt-[100px] mb-[80px] md:mb-[120px]">
-          <h4 className="text-[16px] sm:text-[18px] font-semibold text-center md:text-left">Subscribe to our Newsletter</h4>
-
-          <div className="flex items-center h-[45px] sm:h-[48px] w-full border border-[rgba(0,0,0,0.3)] bg-[rgba(0,0,0,0.05)] rounded-[10px] px-[14px] sm:px-[17px]">
-            <input type="email" placeholder="Write your email" className="flex-1 bg-transparent text-[13px] sm:text-[14px] placeholder:text-[#9A9A9A] focus:outline-none" />
-          </div>
-
-          <button className="flex items-center justify-center gap-[6px] self-center md:self-end px-[20px] py-[9px] w-[110px] sm:w-[120px] rounded-full bg-[#CAF476] hover:bg-[#b9eb67] text-[#132219] text-[13px] sm:text-[14px] font-medium transition mt-[8px]">
-            Send
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-[13px] h-[13px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
         </div>
 
+        {/* 🔹 Row 3 */}
+        <div className="grid grid-cols-[200px_1fr] gap-x-[108px]">
+          <div></div>
+          <div className="grid grid-cols-3 gap-x-[64px]">
+            <FooterColumn
+              title="Dokumente"
+              links={[
+                "Checklisten & Formulare",
+              ]}
+            />
+            <FooterColumn
+              title="Werde HYPOTEQ Partner"
+              links={[
+                "Was dich bei uns erwartet",
+                "Unsere Vorteile",
+                "Deine Vorteile und dein Einstieg",
+                "Frequently Asked Questions",
+              ]}
+            />
+            <FooterColumn
+              title="Mezzanine-Finanzierung"
+              links={[
+                "Was ist Mezzanine?",
+                "Wann ist Mezzanine sinnvoll?",
+                "Wie funktioniert das?",
+                "Gemeinsam möglich machen",
+              ]}
+            />
+          </div>
+        </div>
+
+        {/* 🔹 Row 4 — Bottom links + Newsletter */}
+        <div className="grid grid-cols-[200px_1fr] gap-x-[108px]">
+          <div></div>
+          <div className="flex flex-col gap-[80px]">
+            {/* Home evaluation + Imprint */}
+            <div className="flex justify-between items-start w-full max-w-[476px]">
+              <h4 className="text-[20px] font-[600] leading-[24px]">
+                Immobilienbewertung
+              </h4>
+              <h4 className="text-[20px] font-[600] leading-[24px]">
+                Impressum & Datenschutz
+              </h4>
+            </div>
+
+            {/* Newsletter */}
+            <div className="flex flex-col gap-[24px]">
+              <h4 className="text-[36px] font-[400] text-[#000] leading-[24px]">
+                Smart Finance – Zuerst vergleichen. <br /> Dann vertrauen.
+              </h4>
+
+              <div className="flex items-center gap-[16px]">
+                {/* Input Field */}
+                <div className="flex items-center border border-[#000]/70 rounded-[58px] px-[24px] py-[8px] opacity-[0.7] w-[720px]">
+                  <input
+                    type="email"
+                    placeholder="Abonniere unseren Newsletter"
+                    className="flex-1 bg-transparent text-[16px] text-[#132219] placeholder:text-[#9A9A9A] focus:outline-none"
+                  />
+                </div>
+
+                {/* Send Button */}
+                <button
+                  className="flex justify-center items-center w-[168px] py-[8px] px-[24px] gap-[10px] 
+                  rounded-[58px] border border-[#000] bg-[#CAF476] 
+                  text-[#132219] text-[16px] font-[600] leading-normal 
+                  hover:bg-[#b9eb67] transition"
+                >
+                  Anmelden
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
 };
+
+const FooterColumn = ({
+  title,
+  links,
+}: {
+  title: string;
+  links: string[];
+}) => (
+  <div className="flex flex-col items-start w-[258px] gap-[16px]">
+    <h4 className="text-[#132219] font-['SF Pro Display'] text-[24px] font-[600] leading-normal mb-[24px] w-full">
+      {title}
+    </h4>
+    <ul className="flex flex-col gap-[16px] w-full">
+      {links.map((link, i) => (
+        <li key={i}>
+          <a
+            href="#"
+            className="text-[#132219] font-['SF Pro Display'] text-[20px] font-[400] leading-[24px] hover:underline"
+          >
+            {link}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default Footer;

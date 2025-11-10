@@ -55,15 +55,6 @@ export default function Header() {
           {/* Desktop Menu */}
           <nav className="hidden lg:flex items-center gap-[32px] xl:gap-[48px]">
             <Link
-              href="/homeevaluation"
-              className={`text-[17px] xl:text-[19px] font-semibold hover:opacity-70 transition ${
-                whiteMenu ? "text-white" : "text-[#132219]"
-              }`}
-            >
-              Immobilie bewerten
-            </Link>
-
-            <Link
               href="/partner"
               className={`text-[17px] xl:text-[19px] font-semibold hover:opacity-70 transition ${
                 whiteMenu ? "text-white" : "text-[#132219]"
@@ -90,19 +81,6 @@ export default function Header() {
               d="M0.46 2.92L3.48 1.09c.22-.13.45-.15.69-.07.24.08.42.24.54.48l2.36 4.74c.19.38.14.84-.13 1.15L5.04 9.53c-.27.31-.33.75-.15 1.12 1 2.08 2.9 4.55 4.6 5.93.31.25.72.26 1.04.03l2.25-1.68c.33-.25.75-.24 1.09.06l3.86 3.34c.2.17.31.39.34.66.03.27-.04.51-.2.73l-2.15 2.96c-.21.29-.53.41-.87.35C7.66 21.63.06 11.75 0 3.79c-.01-.37.17-.69.46-.88z"
             />
           </svg>
-
-          {/* CTA Button */}
-          <button
-            className="
-              h-[34px] sm:h-[38px] md:h-[40px]
-              px-4 sm:px-5 md:px-6
-              rounded-full bg-[#CAF476] text-[#132219]
-              text-[13px] sm:text-[15px] md:text-[16px] font-semibold
-              hover:opacity-80 transition whitespace-nowrap
-            "
-          >
-            Hypothek anfragen
-          </button>
 
           {/* Hamburger */}
           <button

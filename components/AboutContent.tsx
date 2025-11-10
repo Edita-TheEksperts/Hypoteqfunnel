@@ -2,32 +2,43 @@
 import { useState } from "react";
 
 export default function AboutSection() {
-  const [active, setActive] = useState("mission"); 
+  const [active, setActive] = useState("mission");
 
   const buttons = [
-    { id: "mission", label: "Our mission" },
-    { id: "partners", label: "Our Partners" },
-    { id: "team", label: "The Team" },
+    { id: "mission", label: "Unsere Mission" },
+    { id: "team", label: "Unser Team" },
+    { id: "partners", label: "Unsere Partner" },
+    { id: "join", label: "Werde Teil von HYPOTEQ" },
   ];
 
   return (
-    <section
-      className="relative w-full h-screen flex items-start justify-start bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/images/about-home.png')" }}
-    >
-      <div className="absolute inset-0"></div>
+    <section className="relative w-full overflow-x-hidden font-sfpro min-h-[500px] sm:min-h-[100vh]">
+      <div
+        className="absolute inset-0 bg-no-repeat bg-cover -z-10 block sm:hidden h-[500px]"
+        style={{
+          backgroundImage: "url('/images/about-home.png')",
+          backgroundPosition: "center top",
+          backgroundSize: "cover",
+        }}
+      ></div>
 
       <div
-        className="
-        relative z-10 max-w-[1200px] pl-[100px] pt-[180px] flex flex-col gap-[32px]
-        text-[#132219]
-        max-lg:pl-[40px] max-md:pl-[20px] max-md:pt-[140px] max-sm:pt-[120px]
-        max-md:items-center max-md:text-center
-      "
-      >
-        <div className="flex flex-col max-w-[600px] max-sm:max-w-full">
+        className="absolute inset-0 bg-no-repeat bg-cover -z-10 hidden sm:block h-full"
+        style={{
+          backgroundImage: "url('/images/about-home.png')",
+          backgroundPosition: "center top",
+          backgroundSize: "cover",
+        }}
+      ></div>
 
-          {/* Title */}
+      <div
+        className="relative z-10 flex flex-col justify-start h-full w-full mx-auto 
+        px-[20px] pt-[70px] gap-[10px]
+        sm:max-w-[1579px] sm:px-[118px] sm:pt-[180px]
+        max-md:pl-[40px] max-md:pt-[140px]
+        max-sm:pt-[120px] max-md:items-center max-md:text-center"
+      >
+        <div className="flex flex-col max-w-[880px] max-sm:max-w-full">
           <div className="flex flex-col gap-[24px]">
             <h2
               style={{
@@ -39,43 +50,44 @@ export default function AboutSection() {
               }}
               className="text-[#132219] max-md:text-[48px] max-sm:text-[36px]"
             >
-              About Us
+              Über uns
             </h2>
 
             <p className="text-[24px] font-light leading-[1.4] text-[#132219] max-sm:text-[18px]">
-              Clarity, technology, and real experts—built around you.
+              Einfach. Klar. Unabhängig. – Das ist HYPOTEQ.
             </p>
           </div>
 
           {/* Description */}
-          <div className="mt-[95px] max-md:mt-[40px]">
+          <div className="mt-[55px] max-md:mt-[40px]">
             <p className="text-[24px] font-light leading-[1.4] text-[#132219] max-sm:text-[18px]">
-              Home financing shouldn’t feel mysterious. We turn complex terms into
-              plain language, surface the few numbers that actually matter, and
-              keep everything in one clear dashboard. You stay in control while our
-              team handles the legwork behind the scenes.
+              Wir sind dein Partner für smarte Immobilienfinanzierung in der
+              Schweiz. Mit unserer digitalen Plattform erhältst du Zugang zu
+              einer Vielzahl geprüfter Finanzierungspartner. Wir helfen dir,
+              Hypothekenangebote einfacher zu verstehen und fundierte
+              Entscheidungen zu treffen. Mit strukturierten Prozessen und
+              persönlichem Support begleiten wir dich durch die wichtigsten
+              Schritte deiner Finanzierung. Du behältst den Überblick – wir
+              unterstützen im Hintergrund. Keine versteckten Kosten, keine
+              Verpflichtung – dafür Transparenz und Effizienz.
             </p>
           </div>
 
-          {/* Buttons */}
           <div className="flex flex-wrap gap-[10px] mt-[32px] max-md:justify-center">
             {buttons.map((btn) => {
               const isActive = active === btn.id;
-
               return (
                 <button
                   key={btn.id}
                   onClick={() => setActive(btn.id)}
-                  className={`
-                    border border-[#132219] rounded-[45px] font-semibold text-[20px] 
+                  className={`border border-[#132219] rounded-[45px] font-semibold text-[20px] 
                     transition-all duration-300 px-[24px] py-[8px]
                     max-sm:text-[16px] max-sm:px-[18px]
                     ${
                       isActive
                         ? "bg-[#CAF476]"
                         : "bg-transparent hover:bg-[#CAF476]/60"
-                    }
-                  `}
+                    }`}
                   style={{
                     fontFamily: '"SF Pro Display", sans-serif',
                     color: "#132219",

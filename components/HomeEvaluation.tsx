@@ -7,7 +7,7 @@ export default function HomeEvaluation() {
       className="
         relative bg-no-repeat text-white 
         px-4 sm:px-8 md:px-[118px]
-        py-[48px] md:py-[120px]
+        py-[48px] md:py-[60px]
         overflow-hidden
 
         bg-[url('/images/999.png')]
@@ -28,7 +28,7 @@ export default function HomeEvaluation() {
             mb-4 sm:mb-5
           "
         >
-          Home Evaluation
+  Immobilienbewertung
         </h1>
 
     <p
@@ -42,62 +42,60 @@ export default function HomeEvaluation() {
     mb-6 sm:mb-8
   "
 >
-  Find out what your home could be worth today. Our smart valuation tool
-  compares local listings and market data to give you an instant estimate.
+Erfahren Sie den echten Marktwert Ihrer Immobilie – schnell, <br />präzise und unabhängig. In wenigen Schritten erhalten Sie eine <br /> fundierte Bewertung und eine interaktive Standortanalyse.<br /> HYPOTEQ nutzt dabei das bewährte Bewertungstool von Wüest <br /> Partner, den führenden Schweizer Experten für hedonische <br /> Immobilienbewertungen auf Basis realer Marktdaten.
 </p>
-
 
 <button
   className="
-    bg-[#132219] text-white
+    bg-[#132219]
+    text-white
     font-['SF Pro Display']
+        font-[300]
+
+    text-[20px]
+    leading-[140%]
     rounded-[58px]
     flex items-center justify-center
-    px-[24px] py-[8px]
-    text-[14px] font-[600]
-    h-[30px]
-
-    /* Desktop unchanged */
-    md:w-[328px] md:h-[40px]
-    md:text-[20px] md:font-[500]
-
-    hover:opacity-90 transition
+    px-[32px] py-[8px]
+    hover:opacity-90 transition-all duration-200
   "
 >
-  Enter your address
+  Starte deine Bewertung
 </button>
+
 
       </div>
 
       {/* Steps */}
       <div
         className="
-          mt-[70px] md:mt-[120px]
+          mt-[13x] md:mt-[110px]
           grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4
-          gap-x-[30px] gap-y-[50px]
+          gap-x-[155px] gap-y-[50px]
           text-[#132219]
           place-items-start
         "
       >
         <Step
-          icon={<img src="/images/Lokacion.svg" className="w-[49px] h-[68px]" />}
+          icon={<img src="/images/Lokacion.svg" className="w-[35px] h-[68px]" />}
           title="Address Lookup"
-          text="Type your street and number; we auto-complete and pinpoint your exact property."
+  text={`Type your street and number; we auto-complete and pin your exact property.`}
         />
         <Step
           icon={<img src="/images/Shpia.svg" className="w-[49px] h-[68px]" />}
           title="Property match"
-          text="We confirm parcel, unit, and living area      from official records and maps."
+            text={`We confirm parcel, unit, and living area      from official records\n and maps.`}
         />
         <Step
           icon={<img src="/images/ShpiPare.svg" className="w-[54px] h-[68px]" />}
           title="Market comps"
-          text="Recent sales and active listings with similar size and features."
+            text={`Recent nearby sales and\n active listings with similar size and features.`}
+  
         />
         <Step
           icon={<img src="/images/Faktura.svg" className="w-[39px] h-[68px]" />}
           title="Instant estimate"
-          text="We combine comps with local trends to calculate today's value range."
+       text={`We combine comps with local trends to calculate today's value range.`}
         />
       </div>
     </section>
@@ -109,7 +107,6 @@ interface StepProps {
   title: string;
   text: string;
 }
-
 function Step({ icon, title, text }: StepProps) {
   return (
     <div
@@ -117,8 +114,7 @@ function Step({ icon, title, text }: StepProps) {
         flex flex-col
         sm:items-start items-center
         text-center sm:text-left
-w-full max-w-none
-
+        w-full max-w-none
       "
     >
       <div className="mb-4">{icon}</div>
@@ -141,6 +137,7 @@ w-full max-w-none
           font-['SF Pro Display']
           text-[14px] sm:text-[16px]
           leading-[150%] font-[300]
+          whitespace-pre-line
         "
       >
         {text}

@@ -1,41 +1,32 @@
-'use client';
+"use client";
 
 import React from "react";
 
 const jobs = [
   {
-    title: "Loan Officer",
+    title: "Praktikum / Werkstudent",
+    subtext: "Teilzeit (20–50%), Flexibel\nViel lernen, Keine Langeweile",
     description:
-      "Join our growing mortgage advisory team and help clients find the best financing solutions for their homes. You’ll guide borrowers through each step—from pre-approval to closing",
-    tags: ["Competitive salary", "Full Time", "Training", "Commission/OTE"],
+      "Tauche ein in die Welt von FinTech, Projekten und Chaos mit System. Du unterstützt unser Team, bringst Struktur in Prozesse und lernst, wie Digitalisierung wirklich funktioniert.",
   },
   {
-    title: "Loan Processor",
+    title: "Full Stack Developer",
+    subtext: "Full-time, Zürich or remote\nStart-up",
     description:
-      "Own the file from application to clear-to-close. Collect and verify documents, clear conditions, and coordinate appraisals, title, and disclosures—keeping borrowers informed at every step. Organized multitaskers with great communication welcome.",
-    tags: ["Competitive salary", "Full Time", "Training", "Commission/OTE"],
-  },
-  {
-    title: "Pricing Analyst",
-    description:
-      "Set daily pricing, manage locks and concessions, and monitor pipeline risk. Analyze market movements and support execution strategies that optimize margins while staying customer-centric. Excel/SQL skills a plus.",
-    tags: ["Competitive salary", "Full Time", "Training", "Commission/OTE"],
+      "Werde Teil unseres Tech-Teams und gestalte mit uns die Zukunft der digitalen Hypothek. Du entwickelst, automatisierst und machst komplexe Dinge einfach – mit Code, Kreativität und Kaffee.",
   },
 ];
 
-const filters = ["Sales", "Compliance", "Capital Market", "Operations"];
-
 const JoinOurTeam: React.FC = () => {
-  const [selectedJob, setSelectedJob] = React.useState<number | null>(null);
+  const [hovered, setHovered] = React.useState<number | null>(null);
 
   return (
     <section className="py-20 bg-white">
       <div className="w-full px-[100px] max-md:px-5">
-
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-12 flex flex-col lg:flex-row justify-between items-start gap-8">
           <h2
-            className="font-sfpro mb-3"
+            className="font-sfpro mb-3 lg:mb-0"
             style={{
               color: "#132219",
               fontFamily: "SF Pro Display",
@@ -43,49 +34,28 @@ const JoinOurTeam: React.FC = () => {
               fontWeight: 500,
               lineHeight: "120%",
               letterSpacing: "-0.4px",
+              minWidth: "250px",
             }}
           >
-            Join Our Team!
+            Werde Teil <br />
+            von HYPOTEQ
           </h2>
 
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-6 mt-2">
-            <p
-              className="font-sfpro max-w-lg"
-              style={{
-                color: "#132219",
-                fontFamily: "SF Pro Display",
-                fontSize: "20px",
-                fontWeight: 300,
-                lineHeight: "140%",
-              }}
-            >
-              We’re always looking for motivated people who share our passion
-              for transparency, technology.
-            </p>
-
-            <div className="flex flex-wrap gap-[17px] justify-center lg:justify-start">
-              {filters.map((f, index) => (
-                <button
-                  key={index}
-                  className={`font-sfpro flex items-center justify-center gap-[10px] rounded-[58px] border ${
-                    f === "Sales"
-                      ? "bg-[#132219] text-white border-[#132219]"
-                      : "text-[#132219] border-[#132219] hover:bg-gray-100"
-                  }`}
-                  style={{
-                    padding: "8px 24px",
-                    fontSize: "20px",
-                    fontWeight: 600,
-                    lineHeight: "normal",
-                    transition: "0.3s ease",
-                  }}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-
-          </div>
+          <p
+            className="font-sfpro lg:max-w-[630px]"
+            style={{
+              color: "#132219",
+              fontFamily: "SF Pro Display",
+              fontSize: "24px",
+              fontWeight: 300,
+              lineHeight: "140%",
+            }}
+          >
+            Finance, Tech, Transparenz und Teamgeist – das ist unser Antrieb.
+            Egal ob Sales, Compliance, Capital Market oder Operations: Bei uns
+            zählst du, nicht dein Titel. Bewirb dich jetzt und hilf mit, den
+            Hypomarkt neu zu definieren.
+          </p>
         </div>
 
         {/* Job Cards */}
@@ -93,90 +63,93 @@ const JoinOurTeam: React.FC = () => {
           {jobs.map((job, index) => (
             <div
               key={index}
-              onClick={() => setSelectedJob(index)}
-              className="flex justify-between items-start rounded-[10px] border border-black w-full cursor-pointer
-                max-md:flex-col max-md:gap-4"
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(null)}
+              className="flex items-start rounded-[10px] border border-black w-full max-md:flex-col transition-all duration-300"
               style={{
-                padding: "16px 15px 16px 16px",
+                padding: "32px 24px",
                 background:
-                  selectedJob === index
+                  hovered === index
                     ? "linear-gradient(270deg, #CAF476 0%, #E3F4BF 100%)"
                     : "#FFF",
-                transition: "0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                if (selectedJob !== index) {
-                  e.currentTarget.style.background =
-                    "linear-gradient(270deg, rgba(202,244,118,0.5) 0%, rgba(227,244,191,0.5) 100%)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (selectedJob !== index) {
-                  e.currentTarget.style.background = "#FFF";
-                }
+                justifyContent: "space-between",
+                gap: "32px",
               }}
             >
-              {/* Left */}
-              <div className="flex flex-col justify-start w-[40%] max-md:w-full">
+              {/* LEFT COLUMN */}
+              <div
+                className="flex flex-col justify-between"
+                style={{
+                  width: "493px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <h3
                   className="font-sfpro"
                   style={{
                     color: "#132219",
                     fontFamily: "SF Pro Display",
-                    fontSize: "32px",
+                    fontSize: "28px",
                     fontWeight: 500,
                     lineHeight: "140%",
                     letterSpacing: "-0.32px",
-                    marginBottom: "12px",
                   }}
                 >
                   {job.title}
                 </h3>
 
-                <div className="flex flex-wrap gap-[10px]">
-                  {job.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="font-sfpro"
-                      style={{
-                        color: "#132219",
-                        fontFamily: "SF Pro Display",
-                        fontSize: "20px",
-                        fontWeight: 600,
-                        lineHeight: "normal",
-                        border: "1px solid #132219",
-                        borderRadius: "58px",
-                        padding: "8px 24px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right */}
-              <div className="flex flex-col justify-between w-[55%] max-md:w-full" style={{ minHeight: "100%" }}>
                 <p
                   className="font-sfpro"
                   style={{
                     color: "#132219",
-                    fontSize: "24px",
-                    fontWeight: 300,
+                    fontFamily: "SF Pro Display",
+                    fontSize: "20px",
+                    fontWeight: 400,
                     lineHeight: "140%",
-                    marginBottom: "24px",
+                    marginTop: "auto",
+                  }}
+                >
+                  {job.subtext.split("\n").map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </p>
+              </div>
+
+              {/* RIGHT COLUMN */}
+              <div
+                className="flex flex-col justify-between"
+                style={{
+                  width: "591px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  marginLeft: "-24px",
+                }}
+              >
+                <p
+                  className="font-sfpro"
+                  style={{
+                    color: "#132219",
+                    fontSize: "20px",
+                    fontWeight: 400,
+                    lineHeight: "140%",
+                    marginBottom: "32px",
                   }}
                 >
                   {job.description}
                 </p>
 
-                <div className="flex justify-end mt-auto">
+                <div className="flex justify-start mt-auto">
                   <button
                     className="font-sfpro"
                     style={{
+                      width: "100%",
+                      textAlign: "center",
                       border: "1px solid #000",
                       borderRadius: "58px",
                       padding: "8px 24px",
@@ -184,22 +157,28 @@ const JoinOurTeam: React.FC = () => {
                       fontWeight: 600,
                       color: "#132219",
                       background: "transparent",
-                      transition: "0.3s ease",
+                      transition: "all 0.3s ease",
+                      cursor: "pointer",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.background = "#132219";
-                      e.currentTarget.style.color = "#fff";
+                      e.currentTarget.style.color = "#CAF476";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background = "transparent";
                       e.currentTarget.style.color = "#132219";
                     }}
+                    onMouseDown={(e) => {
+                      e.currentTarget.style.transform = "scale(0.98)";
+                    }}
+                    onMouseUp={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
                   >
-                    Apply now
+                    Jetzt bewerben
                   </button>
                 </div>
               </div>
-
             </div>
           ))}
         </div>
