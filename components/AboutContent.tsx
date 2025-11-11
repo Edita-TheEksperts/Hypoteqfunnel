@@ -4,12 +4,24 @@ import { useState } from "react";
 export default function AboutSection() {
   const [active, setActive] = useState("mission");
 
-  const buttons = [
+   const buttons = [
     { id: "mission", label: "Unsere Mission" },
     { id: "team", label: "Unser Team" },
     { id: "partners", label: "Unsere Partner" },
     { id: "join", label: "Werde Teil von HYPOTEQ" },
   ];
+const handleClick = (id: string) => {
+    setActive(id);
+    const section = document.getElementById(id);
+    if (section) {
+      const offset = 100;
+      const topPosition =
+        section.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top: topPosition, behavior: "smooth" });
+    }
+  };
+
 
   return (
     <section className="relative w-full overflow-x-hidden font-sfpro min-h-[500px] sm:min-h-[100vh]">
@@ -72,29 +84,28 @@ export default function AboutSection() {
               Verpflichtung – dafür Transparenz und Effizienz.
             </p>
           </div>
-
-          <div className="flex flex-wrap gap-[10px] mt-[32px] max-md:justify-center">
-            {buttons.map((btn) => {
-              const isActive = active === btn.id;
-              return (
-                <button
-                  key={btn.id}
-                  onClick={() => setActive(btn.id)}
-                  className={`border border-[#132219] rounded-[45px] font-semibold text-[20px] 
-                    transition-all duration-300 px-[24px] py-[8px]
-                    max-sm:text-[16px] max-sm:px-[18px]
-                    ${
-                      isActive
-                        ? "bg-[#CAF476]"
-                        : "bg-transparent hover:bg-[#CAF476]/60"
-                    }`}
-                  style={{
-                    fontFamily: '"SF Pro Display", sans-serif',
-                    color: "#132219",
-                  }}
-                >
-                  {btn.label}
-                </button>
+      <div className="flex flex-wrap gap-[10px] mt-[32px] max-md:justify-center">
+        {buttons.map((btn) => {
+          const isActive = active === btn.id;
+          return (
+            <button
+              key={btn.id}
+              onClick={() => handleClick(btn.id)}
+              className={`border border-[#132219] rounded-[45px] font-semibold text-[20px] 
+                transition-all duration-300 px-[24px] py-[8px]
+                max-sm:text-[16px] max-sm:px-[18px]
+                ${
+                  isActive
+                    ? "bg-[#CAF476]"
+                    : "bg-transparent hover:bg-[#CAF476]/60"
+                }`}
+              style={{
+                fontFamily: '"SF Pro Display", sans-serif',
+                color: "#132219",
+              }}
+            >
+              {btn.label}
+            </button>
               );
             })}
           </div>

@@ -9,15 +9,27 @@ import TeamSection from "@/components/TeamSection";
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen ">
-        <Header />
+    <main className="min-h-screen">
+      <Header />
       <AboutContent />
-      <StatsSection />
-      <TeamSection />
-      <PartnersSection />
-      |<JoinOurTeam />
+      <div id="mission">
+        <StatsSection />
+      </div>
+
+      <div id="team">
+        <TeamSection />
+      </div>
+
+      <div id="partners">
+        <PartnersSection />
+      </div>
+
+      <div id="join">
+        <JoinOurTeam />
+      </div>
+
       <ConsultationBanner />
-            <div className="mt-[100px] md:mt-[200px]"></div>
+      <div className="mt-[100px] md:mt-[200px]"></div>
       <Footer />
     </main>
   );
