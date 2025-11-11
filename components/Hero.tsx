@@ -4,12 +4,8 @@ import Image from "next/image";
 
 export default function Hero() {
   const [openLang, setOpenLang] = useState(false);
-  const [language, setLanguage] = useState("de"); // default: german
 
-  const handleSelect = (lang) => {
-    setLanguage(lang);
-    setOpenLang(false);
-  };
+;
 
   return (
     <section
@@ -75,64 +71,6 @@ export default function Hero() {
           >
             Hypothek berechnen
           </button>
-
-          {/* Language dropdown */}
-          <div className="relative">
-            {/* Trigger (flag) */}
-            <button
-              onClick={() => setOpenLang(!openLang)}
-              className="flex items-center justify-center w-[62px] h-[38px] rounded-full overflow-hidden border border-[#e6e6e6] bg-white shadow-sm hover:shadow-md transition-all"
-            >
-              <Image
-                src={
-                  language === "de"
-                    ? "/images/german.png"
-                    : "/images/united-kingdom.png"
-                }
-                alt={language === "de" ? "German" : "English"}
-                width={62}
-                height={38}
-                  unoptimized
-                className="object-cover"
-              />
-            </button>
-
-            {/* Dropdown menu */}
-            {openLang && (
-              <div
-                className="absolute right-0 mt-2 w-[160px] bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden animate-fadeIn"
-              >
-                <button
-                  onClick={() => handleSelect("de")}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-[#132219] hover:bg-gray-50 text-[16px]"
-                >
-                  <Image
-                    src="/images/german.png"
-                    alt="Deutsch"
-                    width={28}
-                    height={18}
-                    className="rounded-sm"
-                      unoptimized
-                  />
-                  Deutsch
-                </button>
-                <button
-                  onClick={() => handleSelect("en")}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-[#132219] hover:bg-gray-50 text-[16px]"
-                >
-                  <Image
-                    src="/images/united-kingdom.png"
-                    alt="English"
-                    width={28}
-                    height={18}
-                    className="rounded-sm"
-                      unoptimized
-                  />
-                  Englisch
-                </button>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Partners section (unchanged) */}
