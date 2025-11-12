@@ -12,15 +12,15 @@ const logos = [
 
 const PartnersSection: React.FC = () => {
   return (
-    <section className="py-[120px] bg-white overflow-hidden">
-      <div className="max-w-[1579px] mx-auto px-[119px] text-left">
+    <section className="py-[80px] md:py-[120px] bg-white overflow-hidden w-full">
+      <div className="w-full max-w-none md:max-w-[1579px] mx-0 md:mx-auto px-0 md:px-[119px] text-left">
         {/* Title */}
         <h2
-          className="font-sfpro mb-[48px]"
+          className="font-sfpro mb-[32px] md:mb-[48px] px-[20px] md:px-0"
           style={{
             color: "var(--Secondary-Color, #132219)",
             fontFamily: '"SF Pro Display", sans-serif',
-            fontSize: "40px",
+            fontSize: "39px",
             fontWeight: 500,
             lineHeight: "140%",
           }}
@@ -29,16 +29,16 @@ const PartnersSection: React.FC = () => {
         </h2>
 
         {/* Logos Scrolling Section */}
-        <div className="flex flex-col gap-[48px]">
+        <div className="flex flex-col gap-[32px] md:gap-[48px]">
           {/* Row 1 - scrolls left to right */}
           <div className="relative flex overflow-hidden">
-            <div className="animate-scroll-left flex items-center gap-[48px] whitespace-nowrap">
+            <div className="animate-scroll-left flex items-center gap-[32px] md:gap-[48px] whitespace-nowrap px-[16px] md:px-0">
               {[...logos, ...logos].map((partner, index) => (
                 <img
                   key={`row1-${index}`}
                   src={partner.img}
                   alt={partner.name}
-                  className="h-[42px] object-contain"
+                  className="h-[32px] md:h-[42px] object-contain"
                 />
               ))}
             </div>
@@ -46,13 +46,13 @@ const PartnersSection: React.FC = () => {
 
           {/* Row 2 - scrolls right to left */}
           <div className="relative flex overflow-hidden">
-            <div className="animate-scroll-right flex items-center gap-[48px] whitespace-nowrap">
+            <div className="animate-scroll-right flex items-center gap-[32px] md:gap-[48px] whitespace-nowrap px-[16px] md:px-0">
               {[...logos, ...logos].map((partner, index) => (
                 <img
                   key={`row2-${index}`}
                   src={partner.img}
                   alt={partner.name}
-                  className="h-[42px] object-contain"
+                  className="h-[32px] md:h-[42px] object-contain"
                 />
               ))}
             </div>
@@ -88,7 +88,6 @@ const PartnersSection: React.FC = () => {
           animation: scrollRight 25s linear infinite;
         }
 
-        /* Optional hover pause */
         .animate-scroll-left:hover,
         .animate-scroll-right:hover {
           animation-play-state: paused;

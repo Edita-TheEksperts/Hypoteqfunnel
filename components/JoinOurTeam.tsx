@@ -19,6 +19,15 @@ const jobs = [
 
 const JoinOurTeam: React.FC = () => {
   const [hovered, setHovered] = React.useState<number | null>(null);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  // detect screen size
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <section className="py-20 bg-white">
@@ -30,7 +39,7 @@ const JoinOurTeam: React.FC = () => {
             style={{
               color: "#132219",
               fontFamily: "SF Pro Display",
-              fontSize: "40px",
+              fontSize: isMobile ? "28px" : "40px",
               fontWeight: 500,
               lineHeight: "120%",
               letterSpacing: "-0.4px",
@@ -46,7 +55,7 @@ const JoinOurTeam: React.FC = () => {
             style={{
               color: "#132219",
               fontFamily: "SF Pro Display",
-              fontSize: "24px",
+              fontSize: isMobile ? "16px" : "24px",
               fontWeight: 300,
               lineHeight: "140%",
             }}
@@ -65,22 +74,23 @@ const JoinOurTeam: React.FC = () => {
               key={index}
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
-              className="flex items-start rounded-[10px] border border-black w-full max-md:flex-col transition-all duration-300"
+              className="flex items-start rounded-[10px] border border-black w-full transition-all duration-300 flex-wrap"
               style={{
-                padding: "32px 24px",
+                padding: isMobile ? "20px" : "32px 24px",
                 background:
                   hovered === index
                     ? "linear-gradient(270deg, #CAF476 0%, #E3F4BF 100%)"
                     : "#FFF",
                 justifyContent: "space-between",
-                gap: "32px",
+                gap: isMobile ? "16px" : "32px",
+                flexDirection: isMobile ? "column" : "row",
               }}
             >
               {/* LEFT COLUMN */}
               <div
                 className="flex flex-col justify-between"
                 style={{
-                  width: "493px",
+                  width: isMobile ? "100%" : "493px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
@@ -91,7 +101,7 @@ const JoinOurTeam: React.FC = () => {
                   style={{
                     color: "#132219",
                     fontFamily: "SF Pro Display",
-                    fontSize: "28px",
+                    fontSize: isMobile ? "20px" : "28px",
                     fontWeight: 500,
                     lineHeight: "140%",
                     letterSpacing: "-0.32px",
@@ -105,7 +115,7 @@ const JoinOurTeam: React.FC = () => {
                   style={{
                     color: "#132219",
                     fontFamily: "SF Pro Display",
-                    fontSize: "20px",
+                    fontSize: isMobile ? "14px" : "20px",
                     fontWeight: 400,
                     lineHeight: "140%",
                     marginTop: "auto",
@@ -124,36 +134,41 @@ const JoinOurTeam: React.FC = () => {
               <div
                 className="flex flex-col justify-between"
                 style={{
-                  width: "591px",
+                  width: isMobile ? "100%" : "591px",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  marginLeft: "-24px",
+                  marginLeft: isMobile ? "0" : "-24px",
                 }}
               >
                 <p
                   className="font-sfpro"
                   style={{
                     color: "#132219",
-                    fontSize: "20px",
+                    fontSize: isMobile ? "14px" : "20px",
                     fontWeight: 400,
                     lineHeight: "140%",
-                    marginBottom: "32px",
+                    marginBottom: isMobile ? "16px" : "32px",
                   }}
                 >
                   {job.description}
                 </p>
 
-                <div className="flex justify-start mt-auto">
+                <div
+                  className="flex justify-start mt-auto"
+                  style={{
+                    justifyContent: isMobile ? "center" : "flex-start",
+                  }}
+                >
                   <button
                     className="font-sfpro"
                     style={{
-                      width: "100%",
+                      width: isMobile ? "auto" : "100%",
                       textAlign: "center",
                       border: "1px solid #000",
                       borderRadius: "58px",
-                      padding: "8px 24px",
-                      fontSize: "20px",
+                      padding: isMobile ? "6px 16px" : "8px 24px",
+                      fontSize: isMobile ? "14px" : "20px",
                       fontWeight: 600,
                       color: "#132219",
                       background: "transparent",

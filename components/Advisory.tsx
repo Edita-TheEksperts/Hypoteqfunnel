@@ -39,7 +39,7 @@ const cards: Card[] = [
 <section
   className="relative w-full min-h-screen flex justify-center items-center overflow-hidden font-sfpro text-[#132219]"
   style={{
-    backgroundImage: "url('/images/098.png')",
+    backgroundImage: "url('/images/09.png')",
     backgroundSize: "cover",
     backgroundPosition: "center right",
     backgroundRepeat: "no-repeat",
