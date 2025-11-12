@@ -21,7 +21,6 @@ export default function Home() {
       <MortgageCalculator />
 
       <HowItWorks />
-      <HomeEvaluation />
 
       <YourAdvantages />
       <Testimonials />

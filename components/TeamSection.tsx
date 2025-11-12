@@ -9,53 +9,24 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  { name: "Markus Abele", position: "CEO", image: "/images/Markus.png" },
-  {
-    name: "Marco Circelli",
-    position: "Chief Credit Officer",
-    image: "/images/Marco.png",
-  },
-  { name: "Davide Iuorno", position: "CMO", image: "/images/Davide.png" },
-  {
-    name: "Christian Wyss",
-    position: "Beirat & Sales Coach",
-    image: "/images/ChrsitianW.png",
-  },
-  {
-    name: "Cyril Kägi",
-    position: "Initiant und Beirat",
-    image: "/images/Cyril.png",
-  },
-  {
-    name: "Christian Neff",
-    position: "Verwaltungsrat",
-    image: "/images/Christian.png",
-  },
-  {
-    name: "Marco Patera",
-    position: "Key Account Manager",
-    image: "/images/MarcoP.png",
-  },
-  {
-    name: "Fisnik Salihu",
-    position: "Chief Technology Officer",
-    image: "/images/Fisnik.png",
-  },
-  {
-    name: "Claudio Schneider",
-    position: "Präsident des Verwaltungsrates",
-    image: "/images/Claudio.png",
-  },
-  {
-    name: "Alexander von Arx",
-    position: "Head Business Development",
-    image: "/images/Alexander.png",
-  },
+  { name: "Marco Circelli", position: "CEO", image: "/images/Marco.png" },
+  { name: "Davide Iuorno", position: "Deputy CEO", image: "/images/Davide.png" },
+  { name: "Fisnik Salihu", position: "Chief Technology Officer", image: "/images/Fisnik.png" },
+  { name: "Alexander von Arx", position: "Head of Business Development", image: "/images/Alexander.png" },
+
+  { name: "Claudio Schneider", position: "Präsident des Verwaltungsrates", image: "/images/Claudio.png" },
+  { name: "Rosanna Mancina", position: "Key Account Manager", image: "/images/Rosanna.png" },
+  { name: "Christian Neff", position: "Verwaltungsrat", image: "/images/Christian.png" },
+  { name: "Cyril Kägi", position: "Initiant und Beirat", image: "/images/Cyril.png" },
+
+  { name: "Christian Wyss", position: "Beirat & Sales Coach", image: "/images/ChrsitianW.png" },
+  { name: "Dren Haxha", position: "Key Account Manager", image: "/images/Dren.png" },
+  { name: "Markus Abele", position: "Consultant", image: "/images/Markus.png" },
   {
     name: "HYPOTEQ",
     bgColor: "#CAF476",
     description:
-      "We’ve built Hypoteq to earn your trust: transparent comparisons, expert guidance, and bank partnerships that open real options. Your data stays secure, and your goals drive every recommendation. Clear rates, clear steps—no surprises.",
+      "Visit us on LinkedIn to stay informed with our latest news, insights, and updates.",
   },
 ];
 
@@ -64,13 +35,14 @@ const TeamSection: React.FC = () => {
     <section className="w-full flex flex-col items-center py-20 bg-white font-sfpro">
       <div className="w-full max-w-[1320px] px-8">
         <h2 className="text-[40px] font-medium text-[#132219] mb-10">Team</h2>
+
         <div
           className="
-          grid grid-cols-4 gap-x-8 gap-y-20 justify-items-center
-          max-xl:grid-cols-3
-          max-lg:grid-cols-2
-          max-md:grid-cols-1
-        "
+            grid grid-cols-4 gap-x-8 gap-y-20 justify-items-center
+            max-xl:grid-cols-3
+            max-lg:grid-cols-2
+            max-md:grid-cols-1
+          "
         >
           {teamMembers.map((member, index) => (
             <div
@@ -78,65 +50,59 @@ const TeamSection: React.FC = () => {
               className="flex flex-col items-start 
               w-[304px] 
               max-lg:w-[260px]
-              max-md:w-full
-            "
+              max-md:w-full"
             >
-              <div
-                className={`
-    rounded-[10px] overflow-hidden
-    ${member.bgColor ? "border-2 border-[#132219]" : "bg-gray-100"}
-    ${member.bgColor ? "w-full md:w-[627px]" : "w-full md:w-[304px]"}
-  `}
-                style={{
-                  height: "283px",
-                  backgroundColor: member.bgColor,
-                  backgroundImage: member.image
-                    ? `url(${member.image})`
-                    : undefined,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
-                  display: member.bgColor ? "flex" : undefined,
-                  flexDirection: member.bgColor ? "column" : undefined,
-                  justifyContent: member.bgColor ? "space-between" : undefined,
-                  alignItems: member.bgColor ? "flex-start" : undefined,
-                  padding: member.bgColor ? "24px" : undefined,
+              {/* ✅ Conditional box rendering */}
+              {member.bgColor ? (
+                // Green box
+                <div
+                  className="flex flex-col justify-between items-start w-[304px] h-[283px] rounded-[10px]"
+                  style={{
+                    backgroundColor: "#CAF476",
+                    padding: "14px 24px",
+                  }}
+                >
+                  <p
+                    className="text-[#132219]"
+                    style={{
+                      fontFamily: '"SF Pro Display", sans-serif',
+                      fontSize: "20px",
+                      fontWeight: 400,
+                      lineHeight: "120%",
+                    }}
+                  >
+                    {member.description}
+                  </p>
 
-                  gap: member.bgColor ? "7.36px" : undefined,
-                }}
-              >
-                {member.bgColor && (
-                  <>
-                    <h3
-                      className="font-sfpro text-[#132219]"
-                      style={{
-                        fontFamily: "SF Pro Display",
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        lineHeight: "120%",
-                        letterSpacing: "-0.3px",
-                        marginBottom: "16px",
-                      }}
-                    >
-                      {member.name}
-                    </h3>
+                  <button
+                    className="border border-[#132219] rounded-[58px] bg-[#CAF476] text-[#132219] transition-all duration-300 hover:bg-[#dffb9b]"
+                    style={{
+                      fontFamily: '"SF Pro Display", sans-serif',
+                      fontSize: "20px",
+                      fontWeight: 400,
+                      lineHeight: "120%",
+                      padding: "8px 24px",
+                    }}
+                  >
+                    Find my best offer
+                  </button>
+                </div>
+              ) : (
+                // Standard team member box
+                <div
+                  className="rounded-[10px] overflow-hidden bg-gray-100 w-[304px] h-[283px]"
+                  style={{
+                    backgroundImage: member.image
+                      ? `url(${member.image})`
+                      : undefined,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                ></div>
+              )}
 
-                    <p
-                      className="font-sfpro text-[#132219]"
-                      style={{
-                        fontFamily: "SF Pro Display",
-                        fontSize: "24px",
-                        fontWeight: 300,
-                        lineHeight: "120%",
-                        width: "546px",
-                      }}
-                    >
-                      {member.description}
-                    </p>
-                  </>
-                )}
-              </div>
-
+              {/* Text and icons under the box */}
               {!member.bgColor && (
                 <div className="mt-4 w-full flex items-start justify-between">
                   <div className="flex flex-col items-start">

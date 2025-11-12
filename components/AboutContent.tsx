@@ -24,7 +24,7 @@ const handleClick = (id: string) => {
 
 
   return (
-    <section className="relative w-full overflow-x-hidden font-sfpro min-h-[500px] sm:min-h-[100vh]">
+<section className="relative w-full overflow-x-hidden font-sfpro h-[957px] sm:h-[957px]">
       <div
         className="absolute inset-0 bg-no-repeat bg-cover -z-10 block sm:hidden h-[500px]"
         style={{
@@ -60,55 +60,86 @@ const handleClick = (id: string) => {
                 lineHeight: "100%",
                 letterSpacing: "-0.72px",
               }}
-              className="text-[#132219] max-md:text-[48px] max-sm:text-[36px]"
+              className="text-[#fff] max-md:text-[48px] max-sm:text-[36px]"
             >
               Über uns
             </h2>
 
-            <p className="text-[24px] font-light leading-[1.4] text-[#132219] max-sm:text-[18px]">
+            <p className="text-[24px] font-light leading-[1.4] text-[#fff] max-sm:text-[18px]">
               Einfach. Klar. Unabhängig. – Das ist HYPOTEQ.
             </p>
           </div>
 
           {/* Description */}
           <div className="mt-[55px] max-md:mt-[40px]">
-            <p className="text-[24px] font-light leading-[1.4] text-[#132219] max-sm:text-[18px]">
-              Wir sind dein Partner für smarte Immobilienfinanzierung in der
+            <p className="text-[24px] font-light leading-[1.4] text-[#fff] max-sm:text-[18px]">
+              Wir sind dein Partner für smarte Immobilienfinanzierung in der <br/>
               Schweiz. Mit unserer digitalen Plattform erhältst du Zugang zu
-              einer Vielzahl geprüfter Finanzierungspartner. Wir helfen dir,
-              Hypothekenangebote einfacher zu verstehen und fundierte
-              Entscheidungen zu treffen. Mit strukturierten Prozessen und
-              persönlichem Support begleiten wir dich durch die wichtigsten
-              Schritte deiner Finanzierung. Du behältst den Überblick – wir
-              unterstützen im Hintergrund. Keine versteckten Kosten, keine
+              einer <br/> Vielzahl geprüfter Finanzierungspartner. Wir helfen dir,<br/>
+              Hypothekenangebote einfacher zu verstehen und fundierte<br/>
+              Entscheidungen zu treffen. Mit strukturierten Prozessen und<br/>
+              persönlichem Support begleiten wir dich durch die wichtigsten <br/>
+              Schritte deiner Finanzierung. Du behältst den Überblick – wir<br/>
+              unterstützen im Hintergrund. Keine versteckten Kosten, keine<br/>
               Verpflichtung – dafür Transparenz und Effizienz.
             </p>
           </div>
-      <div className="flex flex-wrap gap-[10px] mt-[32px] max-md:justify-center">
-        {buttons.map((btn) => {
-          const isActive = active === btn.id;
-          return (
-            <button
-              key={btn.id}
-              onClick={() => handleClick(btn.id)}
-              className={`border border-[#132219] rounded-[45px] font-semibold text-[20px] 
-                transition-all duration-300 px-[24px] py-[8px]
-                max-sm:text-[16px] max-sm:px-[18px]
-                ${
-                  isActive
-                    ? "bg-[#CAF476]"
-                    : "bg-transparent hover:bg-[#CAF476]/60"
-                }`}
-              style={{
-                fontFamily: '"SF Pro Display", sans-serif',
-                color: "#132219",
-              }}
-            >
-              {btn.label}
-            </button>
-              );
-            })}
-          </div>
+ <div className="flex flex-col gap-[24px] mt-[32px]">
+
+  <div className="flex flex-wrap gap-[10px] mt-[90px] max-md:justify-center">
+    {buttons.slice(0, 2).map((btn) => {
+      const isActive = active === btn.id;
+      return (
+        <button
+          key={btn.id}
+          onClick={() => handleClick(btn.id)}
+          className={`border border-[#132219] rounded-[45px] font-semibold text-[20px] 
+            transition-all duration-300 px-[24px] py-[8px]
+            max-sm:text-[16px] max-sm:px-[18px]
+            ${
+              isActive
+                ? "bg-[#CAF476]"
+                : "bg-transparent hover:bg-[#CAF476]/60"
+            }`}
+          style={{
+            fontFamily: '"SF Pro Display", sans-serif',
+            color: "#132219",
+          }}
+        >
+          {btn.label}
+        </button>
+      );
+    })}
+  </div>
+
+  {/* Rreshti 2 */}
+  <div className="flex flex-wrap gap-[10px] max-md:justify-center">
+    {buttons.slice(2).map((btn) => {
+      const isActive = active === btn.id;
+      return (
+        <button
+          key={btn.id}
+          onClick={() => handleClick(btn.id)}
+          className={`border border-[#132219] rounded-[45px] font-semibold text-[20px] 
+            transition-all duration-300 px-[24px] py-[8px]
+            max-sm:text-[16px] max-sm:px-[18px]
+            ${
+              isActive
+                ? "bg-[#CAF476]"
+                : "bg-transparent hover:bg-[#CAF476]/60"
+            }`}
+          style={{
+            fontFamily: '"SF Pro Display", sans-serif',
+            color: "#132219",
+          }}
+        >
+          {btn.label}
+        </button>
+      );
+    })}
+  </div>
+</div>
+
         </div>
       </div>
     </section>

@@ -11,9 +11,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openLang, setOpenLang] = useState(false);
   const [language, setLanguage] = useState("de"); // default: german
-
-  const whiteMenu =
-    (pathname === "/hypotheken" ) && !isScrolled;
+const whiteMenu =
+  ((pathname === "/hypotheken" || pathname === "/about") && !isScrolled);
 
   useEffect(() => {
     const handleScroll = () => {

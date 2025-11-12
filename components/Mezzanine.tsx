@@ -13,11 +13,11 @@ export default function Mezzanine() {
     { id: "gemeinsam", label: "Gemeinsam möglich machen" },
   ];
 
-  const handleClick = (id) => {
+  const handleClick = (id: string) => {
     setActive(id);
     const section = document.getElementById(id);
     if (section) {
-      const offset = 100; // largësia nga header-i
+      const offset = 100; 
       const top = section.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: "smooth" });
     }

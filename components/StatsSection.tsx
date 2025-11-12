@@ -22,7 +22,7 @@ const StatsSection: React.FC = () => {
           className="mt-[32px] font-[SF Pro Display] text-[24px] font-light leading-[140%] 
           max-md:text-[20px] max-sm:text-[18px]"
         >
-          Unsere Mission ist einfach: Wir machen den Weg zur passenden Hypothek klar, effizient und verständlich. Mit durchdachten Tools, einem breiten Netzwerk an Finanzierungspartnern und persönlicher Beratung begleiten wir dich Schritt für Schritt. Du vergleichst Angebote, erkennst auf einen Blick, was zu dir passt – und triffst informierte Entscheidungen mit Rückendeckung von echten Profis.
+          Unsere Mission ist einfach: Wir machen den Weg zur passenden Hypothek klar, effizient und verständlich.Mit durchdachten Tools, einem breiten Netzwerk an Finanzierungspartnern und persönlicher Beratung begleiten wir dich Schritt für Schritt. Du vergleichst Angebote, erkennst auf einen Blick, was zu dir passt – und triffst informierte Entscheidungen mit Rückendeckung von echten Profis.
         </p>
       </div>
 
@@ -121,17 +121,17 @@ const StatsSection: React.FC = () => {
               {
                 icon: "/images/mission.svg",
                 title: "Unsere Mission",
-                desc: "Hypotheken sollen nicht kompliziert sein. Unser Ziel: dir einfache Tools und transparente Prozesse an die Hand zu geben, damit du schnell, selbstbestimmt und mit gutem Gefühl zur passenden Finanzierung findest – in drei klaren Schritten",
+                desc: "Hypotheken sollen nicht kompliziert sein.Unser Ziel: dir einfache Tools und transparente Prozesse an die Hand zu geben, damit du schnell, selbstbestimmt und mit gutem Gefühl zur passenden Finanzierung findest – in drei klaren Schritten",
               },
               {
                 icon: "/images/32.svg",
                 title: "Unsere Vision",
-                desc: "Wir schaffen eine Plattform, auf der Technologie auf Vertrauen trifft. Klarheit statt Bürokratie. Effizienz statt Wartezeiten. Entscheidungen, die für alle Beteiligten im Hypomarkt einen echten Unterschied machen.",
+                desc: "Wir schaffen eine Plattform, auf der Technologie auf Vertrauen trifft.Klarheit statt Bürokratie. Effizienz statt Wartezeiten. Entscheidungen, die für alle Beteiligten im Hypomarkt einen echten Unterschied machen.",
               },
               {
                 icon: "/images/Values.svg",
                 title: "Unsere Werte",
-                desc: "Wir glauben an Offenheit, Verlässlichkeit und Partnerschaft auf Augenhöhe. Ob im Team oder mit unseren Kund:innen – wir handeln transparent, denken langfristig und lernen jeden Tag dazu.",
+                desc: "Wir glauben an Offenheit, Verlässlichkeit und Partnerschaft auf Augenhöhe.Ob im Team oder mit unseren Kund:innen – wir handeln transparent, denken langfristig und lernen jeden Tag dazu.",
               },
               {
                 icon: "/images/Group.svg",
