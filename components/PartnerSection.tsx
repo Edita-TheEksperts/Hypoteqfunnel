@@ -2,6 +2,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import PartnerExpectSection from "@/components/PartnerExpectSection";
+import VorteileSection from "./VorteileSection";
+import PartnerWerdenSection from "./PartnerWerdenSection";
+import ConsultationBanner from "./ConsultationBanner";
 
 export default function PartnerSection() {
   const [active, setActive] = useState("");
@@ -115,53 +118,11 @@ export default function PartnerSection() {
        <PartnerExpectSection />
 
 
-      {/* =======================
-          SECTION 3: YOUR ADVANTAGES
-      ======================= */}
-      <section className="w-full bg-[#132219] text-[#CAF476] px-6 sm:px-10 md:px-[60px] lg:px-[117px] py-[52px] flex flex-col justify-center font-sfpro">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[60px] sm:gap-[75px]">
-          <h2 className="text-[#CAF476] text-[32px] sm:text-[40px] md:text-[48px] font-[500] leading-[100%] tracking-[-0.48px] text-left">
-            Your advantages with HYPOTEQ
-          </h2>
-
-          <div className="w-full flex flex-wrap justify-center lg:justify-between items-start gap-[40px] sm:gap-[60px]">
-            {[
-              {
-                icon: "/images/partner11.svg",
-                text: "Partner portal with case tracking and analysis",
-              },
-              {
-                icon: "/images/partner22.svg",
-                text: "Lender marketplace with up-to-date criteria",
-              },
-              {
-                icon: "/images/partner33.svg",
-                text: "Marketing toolkit & white-label materials",
-              },
-              {
-                icon: "/images/partner44.svg",
-                text: "Priority support and training",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-start text-left w-full sm:w-[180px] flex-shrink-0"
-              >
-                <Image
-                  src={item.icon}
-                  alt={item.text}
-                  width={64}
-                  height={64}
-                  className="mb-[24px] sm:mb-[38px]"
-                />
-                <p className="text-[#CAF476] opacity-80 text-[18px] sm:text-[20px] font-[400] leading-[140%] tracking-[-0.2px]">
-                  {item.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+<VorteileSection />
+<PartnerWerdenSection />
+<div className="mb-[180px]">
+  <ConsultationBanner />
+</div>
     </>
   );
 }
