@@ -139,16 +139,26 @@ const minRefinanceMortgage = existingMortgage;
     <section className="flex flex-col items-center mt-[120px] bg-white py-16 px-8 font-sans text-[#132219]">
       <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[108px] mx-auto">
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-          <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
-            <h1
-              className="text-[72px] font-[500] leading-[100%] tracking-[-0.72px] text-[#132219] max-w-[536px]"
-              style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-            >
-              Mortgage
-              <br />
-              Calculator
-            </h1>
-          </div>
+      <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
+  <div>
+<h1
+  className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[62px] font-[500] leading-[110%] tracking-[-0.72px] text-[#132219] max-w-[536px] mb-2 sm:mb-3 lg:mb-4"
+  style={{ fontFamily: "'SF Pro Display', sans-serif" }}
+>
+  Hypothekenrechner
+</h1>
+
+<p
+  className="text-[15px] sm:text-[17px] md:text-[20px] lg:text-[24px] font-[400] leading-[140%] text-[#132219] mt-1 sm:mt-2 lg:mt-6"
+  style={{ fontFamily: "'SF Pro Display', sans-serif" }}
+>
+  Calculate in real-time. Decide with clarity.
+</p>
+
+
+  </div>
+</div>
+
 
           <div className="mt-[16px] flex flex-col gap-[24px]">
             <div className="flex gap-3">
@@ -424,12 +434,11 @@ const minRefinanceMortgage = existingMortgage;
     </section>
   );
 }
-
 function ToggleButton({ label, active, onClick }: any) {
   return (
     <button
       onClick={onClick}
-      className={`flex-1 h-[40px] rounded-full border border-[#132219] text-[18px] font-medium transition-all duration-300 ${
+      className={`flex-1 h-[40px] rounded-full border border-[#132219] text-[16px] sm:text-[18px] font-medium transition-all duration-300 ${
         active
           ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
           : "bg-white opacity-80"
@@ -444,7 +453,7 @@ function SubToggle({ label, active, onClick }: any) {
   return (
     <button
       onClick={onClick}
-      className={`flex-1 flex justify-center items-center h-[40px] rounded-[48px] text-[18px] font-semibold transition-all duration-300 ${
+      className={`flex-1 flex justify-center items-center h-[36px] sm:h-[40px] rounded-[48px] text-[16px] sm:text-[18px] font-semibold transition-all duration-300 ${
         active
           ? "bg-[#132219] text-[#CAF47E]"
           : "bg-transparent text-[#132219] opacity-70"
@@ -459,12 +468,10 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   const percentage = ((value - min) / (max - min)) * 100;
   const animationRef = useRef<number | null>(null);
 
-  // ✅ Gjithmonë ndjek minRequired
   useEffect(() => {
     if (minRequired === undefined) return;
-
     const startValue = value;
-    const endValue = Math.min(Math.max(minRequired, min), max); // kufizo brenda range-it
+    const endValue = Math.min(Math.max(minRequired, min), max);
     const duration = 400;
     const startTime = performance.now();
 
@@ -487,17 +494,17 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-2 relative">
+    <div className="flex flex-col gap-2 relative w-full">
       {/* Label */}
       <div className="flex justify-between items-center">
-        <label className="text-[16px] font-medium">{label}</label>
+        <label className="text-[14px] sm:text-[16px] font-medium">{label}</label>
         <div className="w-[16px] h-[16px] flex items-center justify-center rounded-full bg-[#626D64]">
           <span className="text-white text-[10px] font-medium">?</span>
         </div>
       </div>
 
       {/* Input Field */}
-      <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-5 py-2">
+      <div className="flex items-center justify-between border border-[#A8A8A8] rounded-full px-3 sm:px-5 py-2">
         <input
           type="text"
           value={value.toLocaleString("de-CH")}
@@ -509,9 +516,9 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
               setValue(bounded);
             }
           }}
-          className="bg-transparent text-[18px] font-medium w-[120px] outline-none"
+          className="bg-transparent text-[16px] sm:text-[18px] font-medium w-[100px] sm:w-[120px] outline-none"
         />
-        <span className="text-[18px] font-semibold">CHF</span>
+        <span className="text-[16px] sm:text-[18px] font-semibold">CHF</span>
       </div>
 
       {/* Slider */}
@@ -522,7 +529,6 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
         value={value}
         onChange={(e) => {
           const newVal = Number(e.target.value);
-          // Mos lejo poshtë minimumit
           if (minRequired !== undefined && newVal < minRequired) {
             setValue(minRequired);
           } else {
@@ -532,12 +538,11 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
         className="w-full h-[4px] rounded-full appearance-none cursor-pointer transition-[background] duration-300 ease-out"
         style={{
           background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
-          transition: "all 0.3s ease-out",
         }}
       />
 
       {minRequired !== undefined && (
-        <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
+        <div className="flex justify-end text-[12px] sm:text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
           Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
         </div>
       )}
@@ -549,32 +554,32 @@ function InfoBox({ title, value, red = false, loanType }: any) {
   const bgColor = !loanType
     ? "bg-[#E5E5E5]"
     : red
-    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]" 
-    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; 
+    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
+    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]";
 
   const circleColor = !loanType
     ? "bg-[#BDBDBD]"
     : red
-    ? "bg-[#FCA5A5]" 
-    : "bg-[#CAF47E]"; 
+    ? "bg-[#FCA5A5]"
+    : "bg-[#CAF47E]";
 
   return (
     <div
-      className={`flex flex-col justify-center p-[15px_24px] rounded-[10px] border border-[#132219] w-full ${bgColor}`}
+      className={`flex flex-col justify-center p-[15px_18px] sm:p-[15px_24px] rounded-[10px] border border-[#132219] w-full ${bgColor}`}
     >
       <div className="flex justify-between items-start">
-        <p className="text-[14px] font-medium text-[#132219] leading-tight">
+        <p className="text-[13px] sm:text-[14px] font-medium text-[#132219] leading-tight">
           {title}
         </p>
         <div
-          className={`w-[20px] h-[20px] rounded-full flex items-center justify-center border border-[#132219] ${circleColor}`}
+          className={`w-[18px] sm:w-[20px] h-[18px] sm:h-[20px] rounded-full flex items-center justify-center border border-[#132219] ${circleColor}`}
         >
           <CheckIcon red={red} loanType={loanType} />
         </div>
       </div>
 
       <div className="h-[1px] bg-[#132219] w-full mt-[6px] mb-[10px]" />
-      <h2 className="text-[40px] font-semibold text-[#132219] leading-none">
+      <h2 className="text-[28px] sm:text-[40px] font-semibold text-[#132219] leading-none">
         {value}
       </h2>
     </div>
@@ -583,7 +588,6 @@ function InfoBox({ title, value, red = false, loanType }: any) {
 
 function ProgressBox({ title, value, current, total, loanType }: any) {
   const percent = parseFloat(value.replace("%", "").replace(",", ".")) || 0;
-
   const bgColor = !loanType
     ? "bg-[#E5E5E5]"
     : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]";
@@ -592,30 +596,29 @@ function ProgressBox({ title, value, current, total, loanType }: any) {
 
   return (
     <div
-      className={`flex flex-col justify-center rounded-[10px] border border-[#132219] w-full p-[18px_24px] gap-[18px] ${bgColor}`}
+      className={`flex flex-col justify-center rounded-[10px] border border-[#132219] w-full p-[15px_18px] sm:p-[18px_24px] gap-[14px] sm:gap-[18px] ${bgColor}`}
     >
       <div className="flex justify-between items-start">
-        <h3 className="text-[24px] font-normal text-[#132219]">{title}</h3>
-
+        <h3 className="text-[18px] sm:text-[24px] font-normal text-[#132219]">{title}</h3>
         <div
-          className={`w-[22px] h-[22px] rounded-full border border-[#132219] flex items-center justify-center ${circleColor}`}
+          className={`w-[20px] sm:w-[22px] h-[20px] sm:h-[22px] rounded-full border border-[#132219] flex items-center justify-center ${circleColor}`}
         >
           <CheckIcon loanType={loanType} />
         </div>
       </div>
 
-      <h2 className="text-[48px] font-sfpro font-semibold text-[#132219] leading-none opacity-80">
+      <h2 className="text-[36px] sm:text-[48px] font-semibold text-[#132219] leading-none opacity-80">
         {value}
       </h2>
 
-      <div className="relative w-full h-[14px] rounded-full overflow-hidden border border-[#132219] bg-[#132219]">
+      <div className="relative w-full h-[12px] sm:h-[14px] rounded-full overflow-hidden border border-[#132219] bg-[#132219]">
         <div
           className="absolute top-0 left-0 h-full rounded-full bg-[linear-gradient(90deg,#DFF69A_0%,#B8E04E_100%)] transition-all duration-500"
           style={{ width: `${Math.min(percent, 100)}%` }}
         />
       </div>
 
-      <div className="relative w-full flex justify-between text-[16px] text-[#132219] mt-[-15px] opacity-80">
+      <div className="relative w-full flex justify-between text-[14px] sm:text-[16px] text-[#132219] mt-[-10px] sm:mt-[-15px] opacity-80">
         <span>0</span>
         <span>{current}</span>
         <span>{total}</span>
@@ -630,7 +633,7 @@ function SmallBox({ title, value, highlight = false }: any) {
 
   return (
     <div
-      className={`relative flex flex-col justify-between p-[15px_16px] rounded-[10px] border border-[#132219] w-[308px] h-[216px] bg-white overflow-hidden`}
+      className={`relative flex flex-col justify-between p-[12px_14px] sm:p-[15px_16px] rounded-[10px] border border-[#132219] w-full sm:w-[308px] h-[180px] sm:h-[216px] bg-white overflow-hidden`}
     >
       {highlight && (
         <div className="absolute bottom-0 left-0 w-full h-[6px] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" />
@@ -638,8 +641,8 @@ function SmallBox({ title, value, highlight = false }: any) {
       <p
         className={`text-[#132219] font-['SF Pro Display'] ${
           isMonthlyCosts
-            ? "text-[32px] font-[500] tracking-[-0.32px]"
-            : "text-[20px] font-[400] tracking-[-0.2px]"
+            ? "text-[24px] sm:text-[32px] font-[500]"
+            : "text-[18px] sm:text-[20px] font-[400]"
         } leading-[100%]`}
       >
         {title}
@@ -648,8 +651,8 @@ function SmallBox({ title, value, highlight = false }: any) {
         <span
           className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
             isMonthlyCosts
-              ? "text-[40px] font-[600] tracking-[-0.4px]"
-              : "text-[24px] font-[500] tracking-[-0.24px]"
+              ? "text-[28px] sm:text-[40px] font-[600]"
+              : "text-[22px] sm:text-[24px] font-[500]"
           }`}
         >
           {currency}
@@ -657,8 +660,8 @@ function SmallBox({ title, value, highlight = false }: any) {
         <span
           className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
             isMonthlyCosts
-              ? "text-[40px] font-[600] tracking-[-0.4px]"
-              : "text-[32px] font-[500] tracking-[-0.32px]"
+              ? "text-[28px] sm:text-[40px] font-[600]"
+              : "text-[28px] sm:text-[32px] font-[500]"
           }`}
         >
           {amount}
@@ -669,25 +672,10 @@ function SmallBox({ title, value, highlight = false }: any) {
 }
 
 function CheckIcon({ red = false, loanType }: any) {
-  const strokeColor = !loanType
-    ? "#6E6E6E" 
-    : red
-    ? "#7F1D1D" 
-    : "#132219"; 
-
+  const strokeColor = !loanType ? "#6E6E6E" : red ? "#7F1D1D" : "#132219";
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="8"
-      height="6"
-      viewBox="0 0 10 8"
-      fill="none"
-    >
-      <path
-        d="M0.5 3.78129L3.31254 6.59383L9.50012 0.40625"
-        stroke={strokeColor}
-        strokeWidth="1"
-      />
+    <svg xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 10 8" fill="none">
+      <path d="M0.5 3.78129L3.31254 6.59383L9.50012 0.40625" stroke={strokeColor} strokeWidth="1" />
     </svg>
   );
 }
