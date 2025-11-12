@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
 <header
-  className={`fixed top-0 left-0 z-50 w-full font-sfpro transition-all duration-300 overflow-hidden ${
+  className={`fixed top-0 left-0 z-50 w-full font-sfpro transition-all duration-300 ${
     isScrolled ? "backdrop-blur-lg bg-white/60 shadow-sm" : "bg-transparent"
   }`}
 >
@@ -38,9 +38,10 @@ export default function Header() {
       px-[16px] sm:px-6 md:px-8 lg:px-[118px]
       flex items-center justify-between
       max-sm:px-[16px] max-sm:h-[70px]
-      overflow-x-hidden
+      overflow-visible
     "
   >
+
 
         {/* Left side */}
         <div className="flex items-center gap-[20px] sm:gap-[32px] xl:gap-[48px]">
