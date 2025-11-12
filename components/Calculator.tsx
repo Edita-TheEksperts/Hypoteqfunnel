@@ -54,7 +54,7 @@ const effectiveRate = useMemo(() => {
   return 0.0105;
 }, [interestOption]);
 
-const interestOptions = ["SARON 0.85%", "5Y 1.05%", "10Y 1.40%"]; 
+const interestOptions = ["SARON 0.85%", "5 Jahre 1.05%", "10 Jahre 1.40%"]; 
 const mortgageNeed =
   loanType === "purchase"
     ? Math.max(0, propertyPrice - ownFunds)
@@ -152,7 +152,7 @@ const minRefinanceMortgage = existingMortgage;
   className="text-[15px] sm:text-[17px] md:text-[20px] lg:text-[24px] font-[400] leading-[140%] text-[#132219] mt-1 sm:mt-2 lg:mt-6"
   style={{ fontFamily: "'SF Pro Display', sans-serif" }}
 >
-  Calculate in real-time. Decide with clarity.
+Rechne in Echtzeit. Entscheide mit Klarheit.
 </p>
 
 
@@ -259,9 +259,7 @@ const minRefinanceMortgage = existingMortgage;
             className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"
             style={{ fontFamily: "'SF Pro Display', sans-serif" }}
           >
-            Real-time mortgage math. Slide your price, deposit, rate, and term
-            to compare scenarios instantly—monthly cost, total interest, and
-            payoff timeline at a glance.
+   Bewege einfach die Regler für Kaufpreis, Eigenmittel, Zinssatz und Laufzeit – und sieh sofort, wie sich deine monatlichen Kosten, Zinsen und die Gesamtlaufzeit verändern.Smart, transparent und in Sekunden.
           </p>
 
 <InfoBox
@@ -389,7 +387,7 @@ const minRefinanceMortgage = existingMortgage;
 
 <div className="flex justify-center w-full mt-[30px] md:mt-[40px] px-4">
   <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
-    Continue my project
+Hypothek anfragen
   </button>
 </div>
 
@@ -400,11 +398,11 @@ const minRefinanceMortgage = existingMortgage;
   <div className="relative flex flex-col justify-between items-start w-full md:w-[628px] h-[260px] md:h-[293px] p-[20px] md:p-[24px] rounded-[10px] border border-[#132219] overflow-hidden bg-[linear-gradient(90deg,#FFF4DE_0%,#FCEAC5_100%)]">
     <div className="relative z-10 flex flex-col gap-[10px] md:gap-[16px] w-full max-w-[536px]">
       <h3 className="text-[#132219] text-[28px] sm:text-[32px] md:text-[40px] font-[500] leading-[140%] tracking-[-0.4px]">
-        Start your process now!
+       Finde deine Hypothek!
       </h3>
       <p className="text-[#132219] text-[16px] sm:text-[18px] md:text-[20px] font-[300] leading-[140%]">
-        Compare lenders, rates, and terms in a guided flow.<br />
-        See your monthly cost upfront and choose the offer that fits.
+In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transparent.Wir vergleichen Angebote in Echtzeit und zeigen dir sofort, was wirklich passt. 
+<br/>  <strong>Schnell, sicher, ohne Umwege.</strong>
       </p>
     </div>
 
@@ -415,20 +413,78 @@ const minRefinanceMortgage = existingMortgage;
     <Image src="/images/00.jpg" alt="House background" fill className="object-cover rounded-[10px] z-0" />
   </div>
 
-  {/* Right Card */}
-  <div
-    className="relative flex flex-col justify-center items-center w-full md:w-[629px] h-[260px] md:h-[293px] p-[40px] md:p-[59px_48px] gap-[40px] md:gap-[60px] rounded-[10px] border border-[#132219] text-center overflow-hidden"
-    style={{ background: "url('/images/0101.png') center/cover no-repeat, #132219" }}
+{/* Right Card */}
+<div
+  className="
+    relative flex flex-col justify-start items-start 
+    w-full md:w-[629px] 
+    h-[293px]
+    p-[24px]
+    rounded-[10px] border border-[#000000]
+    overflow-hidden
+  "
+  style={{ background: "url('/images/0101.png') center/cover no-repeat, #132219" }}
+>
+  {/* Headline */}
+  <h3
+    className="
+      text-[#CAF476]
+      text-[36px]
+      font-[500]
+      leading-[140%]
+      tracking-[-0.36px]
+      font-sfpro
+      mb-[16px]
+      max-w-[536px]
+    "
+    style={{ fontFamily: '"SF Pro Display", sans-serif' }}
   >
-    <p className="text-[#CAF476] text-[22px] sm:text-[26px] md:text-[32px] leading-[140%] tracking-[-0.32px] max-w-[557px]">
-      Talk to a Hypoteq expert for a{" "}
-      <span className="font-[600]">15-minute consultation</span> for personalized guidance.
-    </p>
+    15&nbsp;Minuten,&nbsp;die&nbsp;Klarheit&nbsp;schaffen
+  </h3>
 
-    <button className="px-[20px] md:px-[24px] py-[8px] md:py-[10px] bg-[#CAF476] text-[#132219] text-[14px] sm:text-[16px] font-[500] rounded-full hover:bg-[#D6FA8A] transition-all">
-      Book your call
-    </button>
-  </div>
+  {/* Subtext */}
+  <p
+    className="
+       text-[#CAF476]
+      text-[20px]
+      font-[300]
+      leading-[140%]
+      tracking-[-0.2px]
+      font-sfpro
+      max-w-[536px]
+      mb-[24px]
+    "
+    style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+  >
+    Unsere Expert:innen erklären dir den Finanzierungsprozess, 
+    zeigen dir passende Optionen – und begleiten dich bei der 
+    Entscheidungsfindung.
+  </p>
+
+  {/* Button */}
+  <button
+    className="
+      flex justify-center items-center 
+      gap-[10px]
+      px-[24px] py-[8px]
+      rounded-[58px]
+      border border-[#000000]
+      bg-[#CAF476]
+      text-[#132219]
+      text-[16px]
+      font-[600]
+      font-sfpro
+      hover:bg-[#D6FA8A]
+      transition
+       mt-[24px]
+    "
+    style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+  >
+    Start now
+  </button>
+</div>
+
+
 </section>
 
     </section>
@@ -543,7 +599,7 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
 
       {minRequired !== undefined && (
         <div className="flex justify-end text-[12px] sm:text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
-          Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
+          Minimum : {Math.round(minRequired).toLocaleString("de-CH")} CHF
         </div>
       )}
     </div>

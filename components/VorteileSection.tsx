@@ -88,47 +88,48 @@ export default function VorteileSection() {
         </div>
       </div>
 
-      {/* =================== */}
-      {/* FAQ Section */}
-      {/* =================== */}
-      <div className="flex flex-col gap-[48px] w-full">
-        <h2
-          className="text-[#132219] text-[48px]  font-[500] leading-[100%] tracking-[-0.48px]
-                     font-['SF Pro Display']"
-        >
-          Frequently Asked Questions
-        </h2>
+    {/* =================== */}
+{/* FAQ Section */}
+{/* =================== */}
+<div className="flex flex-col gap-[32px] sm:gap-[48px] w-full">
+  <h2
+    className="text-[#132219] text-[32px] sm:text-[48px] font-[500] leading-[110%] tracking-[-0.48px]
+               font-['SF Pro Display']"
+  >
+    Frequently Asked Questions
+  </h2>
 
-        <div className="flex flex-col gap-[32px] w-full">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center border border-[#000]
-              rounded-[50px] py-[8px] px-[24px] cursor-pointer transition-all duration-300"
-              onClick={() => toggleFAQ(index)}
-            >
-              <p
-                className="text-[32px] font-[500] leading-[140%] tracking-[-0.32px] text-[#132219]
-                font-['SF Pro Display']"
-              >
-                {faq.question}
-              </p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="#132219"
-                viewBox="0 0 16 16"
-                className={`transition-transform duration-300 ${
-                  openIndex === index ? "rotate-45" : ""
-                }`}
-              >
-                <path d="M9.59969 6.40031V0H6.40031V6.40031H0V9.59969H6.40031V16H9.59969V9.59969H16V6.40031H9.59969Z" />
-              </svg>
-            </div>
-          ))}
-        </div>
+  <div className="flex flex-col gap-[20px] sm:gap-[32px] w-full">
+    {faqs.map((faq, index) => (
+      <div
+        key={index}
+        className="flex justify-between items-center border border-[#000]
+        rounded-[30px] sm:rounded-[50px] py-[8px] px-[16px] sm:px-[24px] cursor-pointer transition-all duration-300"
+        onClick={() => toggleFAQ(index)}
+      >
+        <p
+          className="text-[20px] sm:text-[32px] font-[500] leading-[140%] tracking-[-0.32px] text-[#132219]
+          font-['SF Pro Display']"
+        >
+          {faq.question}
+        </p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          fill="#132219"
+          viewBox="0 0 16 16"
+          className={`transition-transform duration-300 ${
+            openIndex === index ? "rotate-45" : ""
+          }`}
+        >
+          <path d="M9.59969 6.40031V0H6.40031V6.40031H0V9.59969H6.40031V16H9.59969V9.59969H16V6.40031H9.59969Z" />
+        </svg>
       </div>
+    ))}
+  </div>
+</div>
+
     </section>
   );
 }

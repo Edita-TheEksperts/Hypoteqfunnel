@@ -173,17 +173,18 @@ const Footer: React.FC = () => {
 
             {/* Newsletter */}
             <div className="flex flex-col gap-[24px] max-sm:gap-[20px] max-sm:items-center">
-      <h4
+<h4
   className="
-    text-[36px] sm:text-[36px]
+    text-[36px]
     font-[400]
     text-[#000000]
     leading-[normal]
-    font-[sfpro]
     tracking-normal
-    align-self-stretch
-    max-sm:text-[26px] max-sm:leading-[120%] max-sm:text-center
+    max-sm:text-[26px]
+    max-sm:leading-[120%]
+    max-sm:text-center
   "
+  style={{ fontFamily: '"SF Pro Display", sans-serif' }}
 >
   Smart Finance – Zuerst vergleicht. <br /> Dann vertrauen.
 </h4>

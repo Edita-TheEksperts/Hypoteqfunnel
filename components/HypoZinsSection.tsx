@@ -76,18 +76,18 @@ export default function HypoZinsSection() {
         </div>
 
         {/* Bottom Info */}
-        <div
-          className="w-full flex flex-col sm:flex-row justify-center md:justify-between items-center gap-[16px] sm:gap-[20px]"
-          style={{
-            fontFamily: "SF Pro Display",
-            fontSize: "16px",
-            sm: { fontSize: "20px" },
-            md: { fontSize: "24px" },
-            fontWeight: 400,
-            lineHeight: "140%",
-            color: "#132219",
-          }}
-        >
+   <div
+  className="
+    w-full flex flex-col sm:flex-row justify-center md:justify-between 
+    items-center gap-[16px] sm:gap-[20px]
+    text-[16px] sm:text-[20px] md:text-[24px] 
+    leading-[140%] text-[#132219]
+  "
+  style={{
+    fontFamily: '"SF Pro Display", sans-serif',
+    fontWeight: 400,
+  }}
+>
           <div className="flex items-center gap-[16px] sm:gap-[24px]">
             <span className="text-[#132219] text-[22px] sm:text-[26px] md:text-[28px] leading-none">✔</span>
             Zins berechnen

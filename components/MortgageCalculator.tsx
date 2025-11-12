@@ -54,7 +54,7 @@ const effectiveRate = useMemo(() => {
   return 0.0105;
 }, [interestOption]);
 
-const interestOptions = ["SARON 0.85%", "5Y 1.05%", "10Y 1.40%"]; 
+const interestOptions = ["SARON 0.85%", "5 Jahre 1.05%", "10 Jahre 1.40%"]; 
 const mortgageNeed =
   loanType === "purchase"
     ? Math.max(0, propertyPrice - ownFunds)
@@ -513,7 +513,7 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
 
       {minRequired !== undefined && (
         <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
-          Minimum required: {Math.round(minRequired).toLocaleString("de-CH")} CHF
+          Minimum : {Math.round(minRequired).toLocaleString("de-CH")} CHF
         </div>
       )}
     </div>
