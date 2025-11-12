@@ -53,27 +53,30 @@ const Footer: React.FC = () => {
             <FooterColumn
               title="Home Page"
               links={[
-                "Hypoteq’s beste Auswahl",
-                "Hypothekenrechner",
-                "So funktioniert’s",
-                "Immobilienbewertung",
-                "Deine Vorteile mit HYPOTEQ",
-                "Testimonials",
-                "Hypotheken Guide",
+                { label: "Hypoteq’s beste Auswahl", href: "https://hypoteq-l5tt.vercel.app/" },
+                { label: "Hypothekenrechner", href: "http://localhost:3000/calc" },
+                { label: "So funktioniert’s", href: "https://hypoteq-l5tt.vercel.app/about" },
+                { label: "Immobilienbewertung", href: "https://hypoteq-l5tt.vercel.app/advisory" },
+                { label: "Deine Vorteile mit HYPOTEQ", href: "https://hypoteq-l5tt.vercel.app/about" },
+                { label: "Testimonials", href: "https://hypoteq-l5tt.vercel.app/about" },
+                { label: "Hypotheken Guide", href: "https://hypoteq-l5tt.vercel.app/hypotheken" },
               ]}
             />
             <FooterColumn
               title="Über uns"
               links={[
-                "Unsere Mission",
-                "Unser Team",
-                "Unsere Partner",
-                "Werde Teil von HYPOTEQ",
+                { label: "Unsere Mission", href: "https://hypoteq-l5tt.vercel.app/about" },
+                { label: "Unser Team", href: "https://hypoteq-l5tt.vercel.app/about" },
+                { label: "Unsere Partner", href: "https://hypoteq-l5tt.vercel.app/partner" },
+                { label: "Werde Teil von HYPOTEQ", href: "https://hypoteq-l5tt.vercel.app/partner" },
               ]}
             />
             <FooterColumn
               title="Hypothekenrechner"
-              links={["Berechne deine Hypothek", "Geschätzte Kosten im Detail"]}
+              links={[
+                { label: "Berechne deine Hypothek", href: "http://localhost:3000/calc" },
+                { label: "Geschätzte Kosten im Detail", href: "http://localhost:3000/calc" },
+              ]}
             />
           </div>
         </div>
@@ -94,18 +97,26 @@ const Footer: React.FC = () => {
           >
             <FooterColumn
               title="Hypotheken leicht gemacht"
-              links={["Neuhypothek", "Refinanzierung", "Neubau-Finanzierung"]}
+              links={[
+                { label: "Neuhypothek", href: "https://hypoteq-l5tt.vercel.app/hypotheken" },
+                { label: "Refinanzierung", href: "https://hypoteq-l5tt.vercel.app/hypotheken" },
+                { label: "Neubau-Finanzierung", href: "https://hypoteq-l5tt.vercel.app/hypotheken" },
+              ]}
             />
             <FooterColumn
               title="Kontaktiere uns"
-              links={["Schreibe uns", "Ruf uns an", "Standort"]}
+              links={[
+                { label: "Schreibe uns", href: "https://hypoteq-l5tt.vercel.app/contact" },
+                { label: "Ruf uns an", href: "https://hypoteq-l5tt.vercel.app/contact" },
+                { label: "Standort", href: "https://hypoteq-l5tt.vercel.app/contact" },
+              ]}
             />
             <FooterColumn
               title="Frequently Asked Questions"
               links={[
-                "Persönliche Informationen",
-                "Finanzielle Informationen",
-                "Allgemeine Informationen",
+                { label: "Persönliche Informationen", href: "https://hypoteq-l5tt.vercel.app/faq" },
+                { label: "Finanzielle Informationen", href: "https://hypoteq-l5tt.vercel.app/faq" },
+                { label: "Allgemeine Informationen", href: "https://hypoteq-l5tt.vercel.app/faq" },
               ]}
             />
           </div>
@@ -125,23 +136,26 @@ const Footer: React.FC = () => {
               max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]
             "
           >
-            <FooterColumn title="Dokumente" links={["Checklisten & Formulare"]} />
+            <FooterColumn
+              title="Dokumente"
+              links={[{ label: "Checklisten & Formulare", href: "https://hypoteq-l5tt.vercel.app/documents" }]}
+            />
             <FooterColumn
               title="Werde HYPOTEQ Partner"
               links={[
-                "Was dich bei uns erwartet",
-                "Unsere Vorteile",
-                "Deine Vorteile und dein Einstieg",
-                "Frequently Asked Questions",
+                { label: "Was dich bei uns erwartet", href: "https://hypoteq-l5tt.vercel.app/partner" },
+                { label: "Unsere Vorteile", href: "https://hypoteq-l5tt.vercel.app/partner" },
+                { label: "Deine Vorteile und dein Einstieg", href: "https://hypoteq-l5tt.vercel.app/partner" },
+                { label: "Frequently Asked Questions", href: "https://hypoteq-l5tt.vercel.app/faq" },
               ]}
             />
             <FooterColumn
               title="Mezzanine-Finanzierung"
               links={[
-                "Was ist Mezzanine?",
-                "Wann ist Mezzanine sinnvoll?",
-                "Wie funktioniert das?",
-                "Gemeinsam möglich machen",
+                { label: "Was ist Mezzanine?", href: "https://hypoteq-l5tt.vercel.app/mezzanine" },
+                { label: "Wann ist Mezzanine sinnvoll?", href: "https://hypoteq-l5tt.vercel.app/mezzanine" },
+                { label: "Wie funktioniert das?", href: "https://hypoteq-l5tt.vercel.app/mezzanine" },
+                { label: "Gemeinsam möglich machen", href: "https://hypoteq-l5tt.vercel.app/mezzanine" },
               ]}
             />
           </div>
@@ -173,22 +187,21 @@ const Footer: React.FC = () => {
 
             {/* Newsletter */}
             <div className="flex flex-col gap-[24px] max-sm:gap-[20px] max-sm:items-center">
-<h4
-  className="
-    text-[36px]
-    font-[400]
-    text-[#000000]
-    leading-[normal]
-    tracking-normal
-    max-sm:text-[26px]
-    max-sm:leading-[120%]
-    max-sm:text-center
-  "
-  style={{ fontFamily: '"SF Pro Display", sans-serif' }}
->
-  Smart Finance – Zuerst vergleicht. <br /> Dann vertrauen.
-</h4>
-
+              <h4
+                className="
+                  text-[36px]
+                  font-[400]
+                  text-[#000000]
+                  leading-[normal]
+                  tracking-normal
+                  max-sm:text-[26px]
+                  max-sm:leading-[120%]
+                  max-sm:text-center
+                "
+                style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+              >
+                Smart Finance – Zuerst vergleicht. <br /> Dann vertrauen.
+              </h4>
 
               <div
                 className="
@@ -236,25 +249,43 @@ const FooterColumn = ({
   links,
 }: {
   title: string;
-  links: string[];
-}) => (
-  <div className="flex flex-col items-start w-[258px] gap-[16px] max-sm:w-full max-sm:items-center max-sm:text-center">
-    <h4 className="text-[#132219] font-['SF Pro Display'] text-[24px] font-[600] leading-normal mb-[24px] w-full max-sm:text-[20px]">
-      {title}
-    </h4>
-    <ul className="flex flex-col gap-[16px] w-full">
-      {links.map((link, i) => (
-        <li key={i}>
-          <a
-            href="#"
-            className="text-[#132219] font-['SF Pro Display'] text-[20px] font-[400] leading-[24px] hover:underline max-sm:text-[16px]"
-          >
-            {link}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+  links: { label: string; href: string }[];
+}) => {
+  const titleLinks: Record<string, string> = {
+    "Home Page": "https://hypoteq-l5tt.vercel.app/",
+    "Über uns": "https://hypoteq-l5tt.vercel.app/about",
+    "Hypothekenrechner": "http://localhost:3000/calc",
+    "Hypotheken leicht gemacht": "https://hypoteq-l5tt.vercel.app/hypotheken",
+    "Kontaktiere uns": "https://hypoteq-l5tt.vercel.app/contact",
+    "Frequently Asked Questions": "https://hypoteq-l5tt.vercel.app/faq",
+    "Dokumente": "https://hypoteq-l5tt.vercel.app/documents",
+    "Werde HYPOTEQ Partner": "https://hypoteq-l5tt.vercel.app/partner",
+    "Advisory": "https://hypoteq-l5tt.vercel.app/advisory",
+    "Mezzanine-Finanzierung": "https://hypoteq-l5tt.vercel.app/mezzanine",
+  };
 
+  return (
+    <div className="flex flex-col items-start w-[258px] gap-[16px] max-sm:w-full max-sm:items-center max-sm:text-center">
+      <h4 className="text-[#132219] font-['SF Pro Display'] text-[24px] font-[600] leading-normal mb-[24px] w-full max-sm:text-[20px]">
+        <a href={titleLinks[title] || "#"} className="hover:underline">
+          {title}
+        </a>
+      </h4>
+      <ul className="flex flex-col gap-[16px] w-full">
+        {links.map((link, i) => (
+          <li key={i}>
+            <a
+              href={link.href}
+              className="text-[#132219] font-['SF Pro Display'] text-[20px] font-[400] leading-[24px] hover:underline max-sm:text-[16px]"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+  
 export default Footer;
