@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import ConsultationBanner from "./ConsultationBanner";
 
 interface Card {
   title: string;
@@ -10,62 +11,102 @@ interface Card {
 export default function Advisory() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const cards: Card[] = [
-    {
-      title: "Financing in Retirement",
-      text: "Accessing property financing shouldn’t stop once you retire. With changing income structures and long-term financial planning needs, we help design flexible solutions that work even after your active working years. Whether you’re looking to refinance an existing mortgage, purchase a new residence, or unlock equity from your current home, our advisors evaluate your pension income, assets, and future plans to build a sustainable financing model. The goal: financial independence and stability—without compromising your lifestyle or long-term security.",
-    },
-    {
-      title: "Large & Complex Investment Properties",
-      text: "High-value or multi-unit income properties require more than standard financing—they demand expertise and structured planning. We specialize in securing financing for complex portfolios, mixed-use developments, or large-scale rental buildings with layered ownership or revenue streams. From precise valuation and yield analysis to negotiation with lenders, we coordinate every step to ensure favorable conditions.",
-    },
-    {
-      title: "Support After Multiple Bank Rejections",
-      text: "A “no” from traditional banks doesn’t have to be the end of your financing journey. Many clients come to us after several rejections due to rigid criteria, unconventional income sources, or project-specific complexities. We analyze your case thoroughly to identify the root cause of the rejection and match you with lenders who think beyond standard credit frameworks. Through our partner network and flexible mezzanine financing, we open new paths to approval.",
-    },
-    {
-      title: "Complex Borrower Structures",
-      text: "When a transaction involves multiple shareholders, holding companies, or cross-border investors, traditional lending becomes challenging. We simplify this complexity. Our team structures financing solutions that clearly define borrower responsibilities, guarantee arrangements, and repayment flows—making them understandable and acceptable for lenders. Whether managing a joint venture, family office, or multi-entity partnership, we align legal and financial aspects.",
-    },
-  ];
+const cards: Card[] = [
+  {
+    title: "Finanzierung im Ruhestand",
+    text: "Auch im Ruhestand gibt es Wege zur Finanzierung – ob Umschuldung, Ausbau oder Freisetzung von Eigenkapital. Wir analysieren deine Pensionssituation, Vermögenslage und Ziele und zeigen dir Modelle, die zu deinem Lebensabschnitt passen – mit Planungssicherheit und Weitblick.",
+  },
+  {
+    title: "Komplexe Liegenschaften",
+    text: "Mehrfamilienhäuser, gemischt genutzte Objekte oder renditeorientierte Investitionen? Wir kennen die Anforderungen und begleiten dich durch die Bewertung, Strukturierung und Gespräche mit spezialisierten Kreditgebern. Transparent, machbar, professionell.",
+  },
+  {
+    title: "Nach Bankabsagen",
+    text: "Absage von der Bank? Kein Grund aufzugeben. Wir analysieren deinen Fall, identifizieren realistische Optionen und öffnen dir den Zugang zu Finanzierungspartnern mit mehr Flexibilität – ohne Standardschablone, aber mit klarem Plan.",
+  },
+  {
+    title: "Komplexe Eigentümerstrukturen",
+    text: "Mehrere Eigentümer, juristische Personen, Auslandsbeteiligung? Kein Problem. Wir bringen Struktur ins Dossier, klären Verantwortlichkeiten und erarbeiten gemeinsam ein Finanzierungsmodell, das Kreditgeber überzeugt und für dich passt.",
+  },
+];
+
 
   return (
     <>
       {/* =======================
           SECTION 1: ADVISORY
       ======================= */}
-      <section
-        className="relative w-full min-h-screen text-[#132219] font-sfpro overflow-hidden flex items-center py-[60px] sm:py-[80px] md:py-[100px]"
-        style={{
-          backgroundImage: "url('/images/098.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-          backgroundRepeat: "no-repeat",
-        }}
+<section
+  className="relative w-full min-h-screen flex justify-center items-center overflow-hidden font-sfpro text-[#132219]"
+  style={{
+    backgroundImage: "url('/images/098.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center right",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  {/* container */}
+  <div className="w-full max-w-[1504px] flex flex-col justify-center items-start mt-[100px] px-[24px] md:px-[116px] py-[116px]">
+    {/* Titulli */}
+    <div className="flex flex-col items-start gap-[24px] w-full max-w-[650px]">
+      <h1
+        className="text-[72px] md:text-[100px] leading-[100%] tracking-[-1px] font-[500]"
+        style={{ fontFamily: '"SF Pro Display", sans-serif' }}
       >
-        <div className="absolute inset-0" />
+        HYPOTEQ <br /> Advisory
+      </h1>
 
-        <div className="relative z-10 w-full max-w-[1300px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 sm:px-8 md:px-10 gap-[40px] lg:gap-[80px]">
-          <div className="w-full lg:w-[50%] flex flex-col text-left">
-            <h1 className="font-[500] text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px] leading-[100%] tracking-[-0.72px]">
-              Advisory
-            </h1>
-            <p
-              className="mt-[40px] sm:mt-[70px] md:mt-[95px] text-[18px] sm:text-[20px] md:text-[24px] text-[#132219] leading-[150%] max-w-[900px] font-[300] tracking-[0.01em]"
-              style={{
-                fontFamily: '"SF Pro Display", sans-serif',
-              }}
-            >
-              Buying, refinancing, or building a home shouldn’t feel complicated.
-              Our smart platform compares lenders, rates, and terms in real
-              time—so you see only what matters. Whether you’re getting your
-              first mortgage, optimizing an existing one, or financing new
-              construction, we bring clarity, transparency, and human expertise
-              to every step.
-            </p>
-          </div>
-        </div>
-      </section>
+      <p
+        className="text-[24px] leading-[140%] mt-[32px] font-[400]"
+        style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+      >
+        Der Weg zur passenden Finanzierung muss nicht kompliziert sein – auch
+        bei komplexeren Vorhaben. Mit unserem kostenpflichtigen Advisory-Service
+        bekommst du Zugang zu fundierter Analyse, gezielter Strukturierung und
+        den passenden Finanzierungspartnern. Wir helfen dir, Klarheit zu
+        schaffen, Optionen zu bewerten und Lösungen umzusetzen, die über
+        Standardlösungen hinausgehen.
+      </p>
+    </div>
+
+    {/* Butonat */}
+    <div className="flex flex-col mt-[80px] gap-[24px]">
+      <div className="flex flex-wrap gap-[24px]">
+        <a
+          href="#expectations"
+          className="border border-[#132219] rounded-full px-[24px] py-[8px] text-[20px] font-[600] text-[#132219] bg-transparent hover:bg-[#CAF476]/50 active:bg-[#CAF476] transition-all"
+        >
+          Was dich bei uns erwartet
+        </a>
+
+        <a
+          href="#benefits"
+          className="border border-[#132219] rounded-full px-[24px] py-[8px] text-[20px] font-[600] text-[#132219] bg-transparent hover:bg-[#CAF476]/50 active:bg-[#CAF476] transition-all"
+        >
+          Deine Vorteile auf einen Blick
+        </a>
+      </div>
+
+      <div className="flex flex-wrap gap-[24px]">
+        <a
+          href="#faq"
+          className="border border-[#132219] rounded-full px-[24px] py-[8px] text-[20px] font-[600] text-[#132219] bg-transparent hover:bg-[#CAF476]/50 active:bg-[#CAF476] transition-all"
+        >
+          Frequently Asked Questions
+        </a>
+
+        <a
+          href="#partners"
+          className="border border-[#132219] rounded-full px-[24px] py-[8px] text-[20px] font-[600] text-[#132219] bg-transparent hover:bg-[#CAF476]/50 active:bg-[#CAF476] transition-all"
+        >
+          Partner werden
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* =======================
           SECTION 2: CARDS
@@ -105,31 +146,71 @@ export default function Advisory() {
           ))}
         </div>
       </section>
+<section className="w-full flex flex-col justify-end items-start bg-[#132219] px-[114px] py-[48px] font-sfpro">
 
-      {/* =======================
-          SECTION 3: CTA BANNER
-      ======================= */}
-      <section
-        className="relative w-full max-w-[1273px] rounded-[10px] mt-[60px] sm:mt-[100px] mb-[100px] sm:mb-[140px] overflow-hidden mx-auto flex flex-col lg:flex-row items-center justify-between gap-[20px] px-[20px] sm:px-[40px] lg:px-[60px] py-[40px] text-white"
-        style={{
-          background:
-            "url('/images/0101.png') center/cover no-repeat, #132219",
-        }}
+  <h2
+    className="text-[#CAF476] text-[48px] leading-[100%] tracking-[-0.48px] font-[500] mb-[48px]"
+    style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+  >
+    Wie läuft’s ab?
+  </h2>
+  <div className="flex justify-start items-start gap-[19px]">
+
+    {[
+      {
+        number: "1",
+        text: "Du buchst ein gratis Erstgespräch mit einem Advisory-Experten.",
+        button: true,
+      },
+      {
+        number: "2",
+        text: "Wir analysieren deine Situation und machen dir eine Offerte für ein HYPOTEQ Advisory Mandat.",
+      },
+      {
+        number: "3",
+        text: "Wir begleiten dich bei der Umsetzung – von Offertvergleich bis Vertragsverhandlung.",
+      },
+    ].map((box, index) => (
+      <div
+        key={index}
+        className="flex flex-col w-[412px] h-[450px] bg-[#CAF476] border border-[#132219] rounded-[10px] px-[24px] py-[24px] justify-start"
       >
-        <div className="absolute inset-0 bg-black/10" />
 
-        <div className="relative z-10 flex flex-col items-center lg:items-start justify-center gap-[20px] text-center lg:text-left">
-          <p className="text-[#CAF476] text-[16px] sm:text-[18px] md:text-[20px] leading-[150%] font-[400] max-w-[700px]">
-            Talk to a Hypoteq expert for a{" "}
-            <span className="font-[600]">15-minute consultation</span> to get
-            personalized guidance on financing options.
-          </p>
+        <span
+          className="text-[80px] font-[500] leading-[140%] text-[#132219] mb-[68px]"
+          style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+        >
+          {box.number}
+        </span>
 
-          <button className="px-[22px] py-[10px] bg-[#CAF476] text-[#132219] text-[14px] sm:text-[16px] font-[500] rounded-full hover:bg-[#D6FA8A] transition-all">
-            Book your call
+        <p
+          className="text-[32px] font-[500] leading-[140%] text-[#132219] flex-1"
+          style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+        >
+          {box.text}
+        </p>
+        {box.button && (
+          <button className="mt-auto bg-[#132219] text-[#CAF476] px-[16px] py-[4px] text-[18px] font-[500] rounded-full hover:opacity-80 transition-all w-fit">
+            Termin buchen
           </button>
-        </div>
-      </section>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <p
+    className="w-[1272px] text-[32px] font-[300] leading-[140%] text-[#CAF476] mt-[48px]"
+    style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+  >
+    Der Advisory-Service ist kostenpflichtig – du profitierst von tiefem
+    Marktwissen, individueller Betreuung und Lösungen, die wirklich
+    funktionieren.
+  </p>
+</section>
+
+<div className="mb-[180px]">
+  <ConsultationBanner />
+</div>
     </>
   );
 }
