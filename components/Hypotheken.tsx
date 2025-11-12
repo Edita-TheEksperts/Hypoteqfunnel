@@ -25,68 +25,69 @@ export default function NeueHypotheken() {
   return (
     <>
       {/* ====== SECTION 1: Hero ====== */}
-      <section
-        className="relative w-full flex justify-center items-start bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/images/hypotheneHome.png')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/30"></div>
+<section
+  className="relative w-full flex justify-center items-start bg-cover bg-center bg-no-repeat"
+  style={{
+    backgroundImage: "url('/images/hypotheneHome.png')",
+  }}
+>
+  <div className="absolute inset-0 bg-black/30"></div>
 
-        <div className="relative z-10 w-full max-w-[1504px] h-[957px] flex flex-col justify-start px-[24px] md:px-[116px] pt-[140px] md:pt-[180px] gap-[10px] text-[#FFF]">
-          <div className="flex flex-col max-w-[600px]">
-            <div className="flex flex-col gap-[24px]">
-              <h2
-                className="text-[48px] md:text-[72px] leading-[100%] font-[500] tracking-[-0.72px]"
-                style={{ fontFamily: '"SF Pro Display", sans-serif' }}
-              >
-                Hypotheken <br />
-                leicht gemacht
-              </h2>
-            </div>
+  <div className="relative z-10 w-full max-w-[1504px] h-auto md:h-[957px] flex flex-col justify-start px-[16px] sm:px-[24px] md:px-[116px] pt-[100px] sm:pt-[120px] md:pt-[180px] gap-[10px] text-[#FFF]">
+    <div className="flex flex-col max-w-[600px]">
+      <div className="flex flex-col gap-[16px] sm:gap-[24px]">
+        <h2
+          className="text-[32px] sm:text-[40px] md:text-[72px] leading-[110%] md:leading-[100%] font-[500] tracking-[-0.72px]"
+          style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+        >
+          Hypotheken <br />
+          leicht gemacht
+        </h2>
+      </div>
 
-            <div className="mt-[60px] md:mt-[32px]">
-              <p
-                className="text-[18px] md:text-[24px] font-light leading-[1.5] text-white"
-                style={{
-                  fontFamily: '"SF Pro Display", sans-serif',
-                  fontWeight: 100,
-                  letterSpacing: "0.01em",
-                }}
-              >
-                Egal ob Hauskauf, Refinanzierung oder Neubau – der Weg zu deinem
-                Eigenheim muss nicht kompliziert sein. Unsere smarte Plattform
-                vergleicht Angebote von unseren Finanzierungspartnern, damit du
-                nur das siehst, was wirklich zählt. Ob du deine erste Hypothek
-                suchst, eine bestehende optimieren willst oder ein Bauprojekt
-                finanzierst – wir bringen Klarheit und Transparenz in jeden
-                Schritt.
-              </p>
-            </div>
+      <div className="mt-[20px] sm:mt-[40px] md:mt-[32px]">
+        <p
+          className="text-[15px] sm:text-[18px] md:text-[24px] font-light leading-[1.6] text-white"
+          style={{
+            fontFamily: '"SF Pro Display", sans-serif',
+            fontWeight: 100,
+            letterSpacing: "0.01em",
+          }}
+        >
+          Egal ob Hauskauf, Refinanzierung oder Neubau – der Weg zu deinem
+          Eigenheim muss nicht kompliziert sein. Unsere smarte Plattform
+          vergleicht Angebote von unseren Finanzierungspartnern, damit du
+          nur das siehst, was wirklich zählt. Ob du deine erste Hypothek
+          suchst, eine bestehende optimieren willst oder ein Bauprojekt
+          finanzierst – wir bringen Klarheit und Transparenz in jeden
+          Schritt.
+        </p>
+      </div>
 
-            {/* === Butonat interaktiv si te BOUT === */}
-            <div className="flex flex-wrap gap-[10px] mt-[80px]">
-              {buttons.map((btn) => {
-                const isActive = active === btn.id;
-                return (
-                  <button
-                    key={btn.id}
-                    onClick={() => handleClick(btn.id)}
-                    className={`px-[24px] py-[8px] rounded-[45px] text-[20px] font-[600] font-['SF Pro Display'] border transition-all duration-300 ease-in-out
-                    ${
-                      isActive
-                        ? "bg-[#CAF476] text-[#132219] border-[#CAF476]"
-                        : "border-[#FFF] text-[#FFF] hover:bg-[#CAF47680] hover:text-[#132219]"
-                    }`}
-                  >
-                    {btn.label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* === Buttons === */}
+      <div className="flex flex-wrap gap-[8px] sm:gap-[10px] mt-[40px] sm:mt-[60px] md:mt-[80px]">
+        {buttons.map((btn) => {
+          const isActive = active === btn.id;
+          return (
+            <button
+              key={btn.id}
+              onClick={() => handleClick(btn.id)}
+              className={`px-[18px] sm:px-[24px] py-[6px] sm:py-[8px] rounded-[45px] text-[16px] sm:text-[20px] font-[600] font-['SF Pro Display'] border transition-all duration-300 ease-in-out
+              ${
+                isActive
+                  ? "bg-[#CAF476] text-[#132219] border-[#CAF476]"
+                  : "border-[#FFF] text-[#FFF] hover:bg-[#CAF47680] hover:text-[#132219]"
+              }`}
+            >
+              {btn.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* ====== SECTION 2–4 ====== */}
       <section className="w-full bg-white flex flex-col items-center py-[80px] md:py-[120px] px-[24px] md:px-[100px] text-[#132219] font-['SF Pro Display']">
