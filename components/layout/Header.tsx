@@ -10,37 +10,40 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [openLang, setOpenLang] = useState(false);
-  const [language, setLanguage] = useState("de"); // default: german
-const whiteMenu =
-  ((pathname === "/hypotheken" || pathname === "/about") && !isScrolled);
+  const [language, setLanguage] = useState("de");
+
+  const whiteMenu =
+    (pathname === "/hypotheken" || pathname === "/about") && !isScrolled;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-const handleSelect = (lang: string) => {
-  setLanguage(lang);
-  setOpenLang(false);
-};
+  const handleSelect = (lang: string) => {
+    setLanguage(lang);
+    setOpenLang(false);
+  };
 
   return (
-    <header
-      className={`fixed top-0 left-0 z-50 w-full font-sfpro transition-all duration-300 ${
-        isScrolled ? "backdrop-blur-lg bg-white/60 shadow-sm" : "bg-transparent"
-      }`}
-    >
-      <div
-        className="w-full max-w-[1600px] mx-auto 
-        h-[70px] sm:h-[80px] md:h-[90px]
-        px-4 sm:px-6 md:px-12 lg:px-[118px]
-        flex items-center justify-between"
-      >
-        <div className="flex items-center gap-[32px] xl:gap-[48px]">
-          {/* Logo */}
+<header
+  className={`fixed top-0 left-0 z-50 w-full font-sfpro transition-all duration-300 overflow-hidden ${
+    isScrolled ? "backdrop-blur-lg bg-white/60 shadow-sm" : "bg-transparent"
+  }`}
+>
+  <div
+    className="
+      w-full h-[65px] sm:h-[80px] md:h-[90px]
+      px-[16px] sm:px-6 md:px-8 lg:px-[118px]
+      flex items-center justify-between
+      max-sm:px-[16px] max-sm:h-[70px]
+      overflow-x-hidden
+    "
+  >
+
+        {/* Left side */}
+        <div className="flex items-center gap-[20px] sm:gap-[32px] xl:gap-[48px]">
           <Link href="/" className="flex items-center">
             <Image
               src={whiteMenu ? "/images/whitelogo.png" : "/images/logo.png"}
@@ -48,11 +51,11 @@ const handleSelect = (lang: string) => {
               width={168}
               height={42}
               priority
-              className="w-[105px] sm:w-[130px] md:w-[168px] h-auto"
+              className="w-[95px] sm:w-[130px] md:w-[168px] h-auto max-sm:w-[105px]"
             />
           </Link>
 
-          {/* Desktop Menu */}
+          {/* Desktop Menu (hidden on mobile) */}
           <nav className="hidden lg:flex items-center gap-[32px] xl:gap-[48px]">
             <Link
               href="/partner"
@@ -66,8 +69,8 @@ const handleSelect = (lang: string) => {
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-4 sm:gap-5 md:gap-6 relative">
-          {/* Phone icon */}
+        <div className="flex items-center gap-3 sm:gap-4 md:gap-5 ml-auto relative">
+          {/* Phone icon (hidden on mobile) */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -82,49 +85,48 @@ const handleSelect = (lang: string) => {
             />
           </svg>
 
-          {/* Call to action */}
+          {/* Hypothek Button (hidden on small) */}
           <Link
             href="/hypotheken"
-            className="flex items-center justify-center gap-[10px] 
-              w-[219px] h-[40px] px-[24px] py-[8px]
+            className="hidden sm:flex items-center justify-center gap-[10px] 
+              w-[200px] sm:w-[219px] h-[38px] sm:h-[40px]
               rounded-[58px] bg-[#CAF476] text-[#132219]
-              text-[20px] font-semibold hover:opacity-90 transition-all"
+              text-[17px] sm:text-[20px] font-semibold hover:opacity-90 transition-all"
           >
             Hypothek anfragen
           </Link>
 
-          {/* Language dropdown */}
+          {/* Language selector */}
           <div className="relative">
-       <button
-  onClick={() => setOpenLang(!openLang)}
-  className="w-[38px] h-[38px] rounded-full overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all flex items-center justify-center"
->
-  <Image
-    src={
-      language === "de"
-        ? "/images/german.png"
-        : "/images/united-kingdom.png"
-    }
-    alt={language === "de" ? "Deutsch" : "English"}
-    width={38}
-    height={38}
-    className="object-cover object-center"
-    unoptimized
-  />
-</button>
-
+            <button
+              onClick={() => setOpenLang(!openLang)}
+              className="w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] rounded-full overflow-hidden border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all flex items-center justify-center"
+            >
+              <Image
+                src={
+                  language === "de"
+                    ? "/images/german.png"
+                    : "/images/united-kingdom.png"
+                }
+                alt={language === "de" ? "Deutsch" : "English"}
+                width={38}
+                height={38}
+                className="object-cover object-center"
+                unoptimized
+              />
+            </button>
 
             {openLang && (
-              <div className="absolute right-0 mt-2 w-[160px] bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden animate-fadeIn">
+              <div className="absolute right-0 mt-2 w-[140px] bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden animate-fadeIn max-sm:right-auto max-sm:left-0 max-sm:mt-[10px]">
                 <button
                   onClick={() => handleSelect("de")}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-[#132219] hover:bg-gray-50 text-[16px]"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-[#132219] hover:bg-gray-50 text-[15px]"
                 >
                   <Image
                     src="/images/german.png"
                     alt="Deutsch"
-                    width={28}
-                    height={18}
+                    width={20}
+                    height={16}
                     className="rounded-sm"
                     unoptimized
                   />
@@ -132,13 +134,13 @@ const handleSelect = (lang: string) => {
                 </button>
                 <button
                   onClick={() => handleSelect("en")}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-[#132219] hover:bg-gray-50 text-[16px]"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-[#132219] hover:bg-gray-50 text-[15px]"
                 >
                   <Image
                     src="/images/united-kingdom.png"
                     alt="English"
-                    width={28}
-                    height={18}
+                    width={20}
+                    height={16}
                     className="rounded-sm"
                     unoptimized
                   />
@@ -148,7 +150,7 @@ const handleSelect = (lang: string) => {
             )}
           </div>
 
-          {/* Hamburger */}
+          {/* Hamburger menu */}
           <button
             className="flex flex-col justify-center items-center w-[30px] h-[30px] lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -171,6 +173,32 @@ const handleSelect = (lang: string) => {
           </button>
         </div>
       </div>
+
+      {/* Mobile dropdown */}
+      {menuOpen && (
+        <div
+          className="
+            lg:hidden bg-white border-t border-gray-100 shadow-md 
+            px-6 py-6 flex flex-col gap-4 animate-fadeIn 
+            max-sm:px-[24px] max-sm:py-[18px] max-sm:gap-[14px]
+          "
+        >
+          <Link
+            href="/partner"
+            onClick={() => setMenuOpen(false)}
+            className="text-[#132219] text-[16px] font-semibold hover:opacity-70 transition max-sm:text-[15px]"
+          >
+            Partner werden
+          </Link>
+          <Link
+            href="/hypotheken"
+            onClick={() => setMenuOpen(false)}
+            className="text-[#132219] text-[16px] font-semibold hover:opacity-70 transition max-sm:text-[15px]"
+          >
+            Hypothek anfragen
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

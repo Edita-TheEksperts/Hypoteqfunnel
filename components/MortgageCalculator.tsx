@@ -140,14 +140,23 @@ const minRefinanceMortgage = existingMortgage;
 <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1300px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
 
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-          <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-20 mt-10">
-            <h1
-              className="text-[72px] font-[500] leading-[100%] tracking-[-0.72px] text-[#132219] max-w-[536px]"
-              style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-            >
-           Hypothekenrechner
-            </h1>
-          </div>
+<div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10 mt-6 lg:mb-20 lg:mt-10 px-4">
+  <h1
+    className="
+      text-[40px] sm:text-[52px] lg:text-[72px]
+      font-[500]
+      leading-[110%] lg:leading-[100%]
+      tracking-[-0.72px]
+      text-[#132219]
+      max-w-full lg:max-w-[536px]
+      text-left
+    "
+    style={{ fontFamily: "'SF Pro Display', sans-serif" }}
+  >
+    Hypothekenrechner
+  </h1>
+</div>
+
 
           <div className="mt-[16px] flex flex-col gap-[24px]">
             <div className="flex gap-3">
@@ -243,7 +252,7 @@ const minRefinanceMortgage = existingMortgage;
             />
           </div>
         </div>
-<div className="flex flex-col items-start w-full max-w-[628px] mt-[222px]">
+<div className="flex flex-col items-start w-full max-w-[628px] mt-[60px] sm:mt-[100px] lg:mt-[222px]">
 
   {/* InfoBox → gap 36px */}
   <div className="flex flex-col gap-[36px] w-full">
@@ -595,9 +604,11 @@ function SmallBox({ title, value, highlight = false }: any) {
   const [currency, amount] = value.split(" ");
 
   return (
-    <div
-      className={`relative flex flex-col justify-between p-[15px_16px] rounded-[10px] border border-[#132219] w-[308px] h-[216px] bg-white overflow-hidden`}
-    >
+<div
+  className={`relative flex flex-col justify-between p-[12px_10px] sm:p-[15px_16px] rounded-[10px] border border-[#132219]
+  w-full sm:w-[308px] h-[160px] sm:h-[216px] bg-white overflow-hidden`}
+>
+
       {highlight && (
         <div className="absolute bottom-0 left-0 w-full h-[6px] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" />
       )}
