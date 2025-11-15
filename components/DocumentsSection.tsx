@@ -18,7 +18,7 @@ export default function DocumentsSection() {
     ];
 
     return (
-      <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-[40px] md:gap-[80px] lg:gap-[120px]">
+      <div className="flex flex-col lg:flex-row justify-between items-start w-full gap-[40px] md:gap-[80px]  lg:gap-[120px]">
         {/* LEFT SIDE - TITLE */}
         <div className="w-full lg:w-[45%]">
           <h2 className="text-[#132219] font-sfpro text-[30px] sm:text-[36px] md:text-[42px] lg:text-[48px] font-medium leading-[120%]">
@@ -57,7 +57,7 @@ export default function DocumentsSection() {
   };
 
   return (
-    <section className="w-full bg-white py-[80px] sm:py-[100px] md:py-[120px] px-4 sm:px-6 md:px-10 font-sfpro text-[#132219]">
+<section className="w-full bg-white py-[80px] sm:py-[100px] md:py-[120px] px-4 sm:px-6 md:px-[116px] font-sfpro text-[#132219]">
       <div className="w-full max-w-[1300px] mx-auto flex flex-col gap-[80px] sm:gap-[100px] md:gap-[120px]">
         {/* ===== TITLE + FILTERS ===== */}
         <div className="flex flex-col gap-[24px] sm:gap-[32px]">

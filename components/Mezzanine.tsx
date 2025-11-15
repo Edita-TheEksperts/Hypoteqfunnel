@@ -29,7 +29,7 @@ export default function Mezzanine() {
           SECTION 1: HERO
       ======================= */}
       <section
-        className="relative w-full flex justify-center items-start bg-cover bg-center bg-no-repeat"
+        className="relative w-full  px-[16px] sm:px-[32px] md:px-[116px] flex justify-center items-start bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/images/98.png')",
         }}
@@ -38,7 +38,7 @@ export default function Mezzanine() {
 
         <div
           className="relative z-10 w-full max-w-[1504px] h-[auto] md:h-[957px] flex flex-col justify-start
-          px-[16px] sm:px-[32px] md:px-[116px] pt-[120px] md:pt-[180px] gap-[10px] text-[#132219]"
+           pt-[120px] md:pt-[180px] gap-[10px] text-[#132219]"
         >
           <div className="flex flex-col max-w-[692px]">
             <h2

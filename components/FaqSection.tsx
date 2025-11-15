@@ -13,7 +13,7 @@ export default function FaqSection() {
   ];
 
   return (
-    <section className="w-full bg-white py-[120px] px-6 md:px-10 font-sfpro mt-[100px] text-[#132219]">
+    <section className="w-full bg-white py-[120px]  px-6 md:px-[116px] font-sfpro mt-[100px] text-[#132219]">
       <div className="w-full max-w-[1300px] mx-auto flex flex-col gap-[120px]">
         
         {/* ===== TITLE + CATEGORIES TOGETHER ===== */}

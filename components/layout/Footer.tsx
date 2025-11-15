@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
     <footer className="bg-white text-[#132219] font-sfpro border-t border-[#E5E5E5] w-full">
       <div
         className="
-          max-w-[1275px] mx-auto px-[20px] md:px-[40px] 
+          max-w-[1275px] mx-auto px-[20px] md:px-[2px] 
           pt-[50px] pb-[60px] flex flex-col gap-[108px]
           max-sm:gap-[64px] max-sm:pt-[40px] max-sm:pb-[50px]
         "

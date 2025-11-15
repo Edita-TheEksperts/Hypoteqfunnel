@@ -5,7 +5,7 @@ export default function HypoZinsSection() {
   return (
     <section className="w-screen bg-[#CAF476] flex justify-center">
       {/* Inner container */}
-      <div className="w-full max-w-[1504px] flex flex-col justify-center items-center py-[60px] sm:py-[80px] px-[20px] sm:px-[40px] md:px-[115px] gap-[40px] sm:gap-[48px] text-[#132219] font-['SF Pro Display']">
+      <div className="w-full max-w-[1504px] flex flex-col justify-center items-center py-[60px] sm:py-[80px] px-[20px] sm:px-[40px] md:px-[116px] gap-[40px] sm:gap-[48px] text-[#132219] font-['SF Pro Display']">
         {/* Top Section */}
         <div className="w-full flex flex-col md:flex-row justify-between items-start gap-[40px] sm:gap-[80px] md:gap-[201px]">
           {/* Left Side */}

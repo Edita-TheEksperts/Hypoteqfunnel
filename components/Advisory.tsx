@@ -36,7 +36,7 @@ export default function Advisory() {
       {/* SECTION 1: ADVISORY */}
       {/* ======================= */}
       <section
-        className="relative w-full min-h-screen flex justify-center items-center overflow-hidden font-sfpro text-[#132219]"
+        className="relative w-full min-h-screen flex justify-center items-center overflow-hidden font-sfpro px-[16px] sm:px-[24px] md:px-[116px] text-[#132219]"
         style={{
           backgroundImage: "url('/images/09.png')",
           backgroundSize: "cover",
@@ -44,7 +44,7 @@ export default function Advisory() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="w-full max-w-[1504px] flex flex-col justify-center items-start mt-[80px] sm:mt-[100px] px-[16px] sm:px-[24px] md:px-[116px] py-[60px] sm:py-[116px]">
+        <div className="w-full max-w-[1504px] flex flex-col justify-center items-start mt-[80px] sm:mt-[100px]  py-[60px] sm:py-[116px]">
           <div className="flex flex-col items-start gap-[16px] sm:gap-[24px] w-full max-w-[650px]">
             <h1
               className="text-[48px] sm:text-[72px] md:text-[100px] leading-[100%] tracking-[-1px] font-[500]"
@@ -106,7 +106,8 @@ export default function Advisory() {
       {/* ======================= */}
       {/* SECTION 2: CARDS */}
       {/* ======================= */}
-      <section className="w-full bg-white py-[48px] sm:py-[80px] px-[16px] sm:px-6 md:px-10 font-sfpro flex flex-col items-center justify-center">
+      <section className="w-full bg-white py-[48px] sm:py-[80px] px-[16px] sm:px-6 md:px-[116px]
+ font-sfpro flex flex-col items-center justify-center">
         <div className="w-full max-w-[1300px] grid grid-cols-1 sm:grid-cols-2 gap-[24px] sm:gap-[40px] lg:gap-[48px]">
           {cards.map((card, index) => (
             <div
@@ -145,7 +146,7 @@ export default function Advisory() {
       {/* ======================= */}
       {/* SECTION 3: PROCESS */}
       {/* ======================= */}
-      <section className="w-full flex flex-col justify-end items-start bg-[#132219] px-[20px] sm:px-[60px] md:px-[114px] py-[48px] font-sfpro">
+      <section className="w-full flex flex-col justify-end items-start bg-[#132219] px-[20px] sm:px-[60px] md:px-[116px] py-[48px] font-sfpro">
         <h2
           className="text-[#CAF476] text-[32px] sm:text-[48px] leading-[100%] tracking-[-0.48px] font-[500] mb-[32px] sm:mb-[48px]"
           style={{ fontFamily: '"SF Pro Display", sans-serif' }}

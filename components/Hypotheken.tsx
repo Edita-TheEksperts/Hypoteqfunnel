@@ -90,7 +90,7 @@ export default function NeueHypotheken() {
 
 
       {/* ====== SECTION 2–4 ====== */}
-      <section className="w-full bg-white flex flex-col items-center py-[80px] md:py-[120px] px-[24px] md:px-[100px] text-[#132219] font-['SF Pro Display']">
+      <section className="w-full bg-white flex flex-col items-center py-[80px] md:py-[120px] px-[24px] md:px-[116px] text-[#132219] font-['SF Pro Display']">
         {/* Neue Hypothek */}
         <div
           id="neue"

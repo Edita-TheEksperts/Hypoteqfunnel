@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export default function ContactPage() {
   return (
-    <section className="flex flex-col items-center bg-white py-[100px] md:py-[140px] px-4 md:px-8 text-[#132219] font-['SF Pro Display']">
+    <section className="flex flex-col items-center bg-white py-[100px] md:py-[140px]px-4 md:px-[116px]
+ text-[#132219] font-['SF Pro Display']">
       {/* ===== TITLE + TEXT SECTION ===== */}
       <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[60px] md:gap-[108px] mx-auto">
         {/* LEFT SIDE - TITLE */}
@@ -40,7 +41,11 @@ export default function ContactPage() {
       </div>
 
       {/* ===== FORM + BOOK CALL ===== */}
-      <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[60px] md:gap-[108px] mx-auto mt-[100px] md:mt-[160px]">
+<div className="flex flex-col lg:flex-row justify-center items-start 
+w-full max-w-[1300px] 
+gap-[60px] md:gap-[108px] 
+mx-auto mt-[100px] md:mt-[160px] 
+px-[40px] md:px-[10px]">
         {/* LEFT SIDE - FORM */}
         <div className="flex flex-col w-full max-w-[700px] gap-[24px]">
           <div className="relative">
@@ -154,7 +159,7 @@ export default function ContactPage() {
       </div>
 
       {/* ===== MAP SECTION ===== */}
-      <div className="w-full max-w-[1300px] mt-[100px] md:mt-[140px] rounded-[10px] overflow-hidden border border-[#132219]/10">
+      <div className="w-full max-w-[1300px] px-[40px] md:px-[10px] mt-[100px] md:mt-[140px] rounded-[10px] overflow-hidden border border-[#132219]/10">
         <iframe
           title="Google Map - Kemptpark 12, Lindau, Schweiz"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2731.139007689383!2d8.67884367608563!3d47.44480590122277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479aa8a9e6e3f5d3%3A0x1b2b7b2dfdbb1d5!2sKemptpark%2012%2C%208310%20Lindau%2C%20Schweiz!5e0!3m2!1sen!2sch!4v1730050000000!5m2!1sen!2sch"

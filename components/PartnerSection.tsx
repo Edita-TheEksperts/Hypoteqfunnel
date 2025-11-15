@@ -32,7 +32,7 @@ export default function PartnerSection() {
           SECTION 1: BECOME A PARTNER
       ======================= */}
       <section
-        className="relative w-full flex justify-center items-start bg-cover bg-center bg-no-repeat"
+        className="relative w-full flex justify-center items-start  bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/images/98.png')",
         }}
@@ -46,7 +46,7 @@ export default function PartnerSection() {
           pt-[100px] sm:pt-[140px] md:pt-[180px] 
           gap-[10px] text-[#132219]"
         >
-          <div className="flex flex-col w-full px-[16px] sm:px-0 max-w-full md:max-w-[950px] lg:max-w-[1100px]">
+          <div className="flex flex-col w-full  sm:px-0 max-w-full md:max-w-[950px] lg:max-w-[1100px]">
             <h2
               className="text-[36px] sm:text-[56px] md:text-[100px] leading-[110%] font-[500] tracking-[-1px] text-[#132219]"
               style={{ fontFamily: '"SF Pro Display", sans-serif' }}
