@@ -75,7 +75,7 @@ const Testimonials: React.FC = () => {
     <section className="w-full flex flex-col items-center bg-white py-[100px]   mt-[48px] md:mt-[120px] overflow-hidden">
 
       {/* Title */}
-      <div className="w-[1274px] max-w-full px-4 flex flex-col md:flex-row justify-between items-start mb-[56px]">
+      <div className="w-[1274px] max-w-full px-1 flex flex-col md:flex-row justify-between items-start mb-[56px]">
 
         <div>
           <h2 className="text-[#132219] text-[32px] md:text-[40px] font-[500]">

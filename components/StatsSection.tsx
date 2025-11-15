@@ -5,7 +5,8 @@ const StatsSection: React.FC = () => {
   return (
     <section className="w-full bg-white py-[120px] flex flex-col items-center text-[#132219] max-md:py-[60px]">
       {/* Title */}
-      <div className="max-w-[1274px] w-full px-[20px]">
+      <div className="max-w-[1274px] w-full px-[20px] lg:px-[2px]
+">
         <h2
           className="
             font-[SF Pro Display] text-[#132219]
@@ -83,9 +84,10 @@ const StatsSection: React.FC = () => {
         />
       </div>
 
-      {/* Unsere DNA */}
-      <div className="w-full flex flex-col items-center mt-[120px] max-md:mt-[80px]">
-        <div className="max-w-[1274px] w-full flex flex-col gap-[40px] px-[20px]">
+{/* Unsere DNA */}
+<div className="w-full flex flex-col items-center mt-[120px] max-md:mt-[80px]">
+  <div className="max-w-[1274px] w-full flex flex-col gap-[40px] px-[20px] lg:px-[1px]">
+
           {/* Title */}
           <h2
             className="

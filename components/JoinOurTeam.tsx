@@ -31,7 +31,7 @@ const JoinOurTeam: React.FC = () => {
 
   return (
     <section className="py-20 bg-white">
-      <div className="w-full px-[100px] max-md:px-5">
+      <div className="w-full px-[116px] max-md:px-5">
         {/* Header */}
         <div className="mb-12 flex flex-col lg:flex-row justify-between items-start gap-8">
           <h2

@@ -3,19 +3,20 @@ import React from "react";
 
 export default function BestChoices() {
   return (
-    <section
-      className="
-        flex flex-col lg:flex-row justify-between items-center
-        w-full max-w-[1272px] mx-auto
-        p-[24px] sm:p-[32px] md:p-[40px]
-        rounded-[10px]
-        border border-[#000]
-        bg-[#132219]
-        mt-[60px] sm:mt-[80px] mb-[60px] sm:mb-[80px]
-        h-auto lg:h-[297px]
-        gap-[32px] lg:gap-0
-      "
-    >
+<section
+  className="
+    flex flex-col lg:flex-row justify-between items-center
+    w-full max-w-[1272px] mx-auto
+    p-[24px] sm:p-[32px] md:p-[40px]
+    rounded-[10px]
+    border border-[#000]
+    bg-[#132219]
+    mt-[60px] sm:mt-[80px] mb-[60px] sm:mb-[80px]
+    h-auto lg:h-[297px]
+    gap-[32px] lg:gap-0
+  "
+>
+
       {/* ✅ Left Column */}
       <div
         className="

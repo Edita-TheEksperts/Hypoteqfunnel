@@ -111,9 +111,14 @@ const interestYearEffective = actualMortgage * effectiveRate;
 const monthlyCost = (interestYearEffective + amortizationYear + maintenanceYear) / 12;
 const minOwnFunds = loanType === "purchase" ? propertyPrice * 0.20 : 0; 
 const isBelehnungOK     = belehnung <= params.maxBelehnung; 
-const isTragbarkeitOK   = tragbarkeitPercent <= params.tragbarkeitThreshold; 
-const isEquityOK = ownFunds >= minOwnFunds;
-const isEligible = isBelehnungOK && isTragbarkeitOK && isEquityOK;
+const isTragbarkeitOK = Math.round(tragbarkeitPercent * 1000) <= Math.round(params.tragbarkeitThreshold * 1000);
+
+const isEquityOK =
+  loanType === "purchase"
+    ? ownFunds > 0   // mjafton të ketë fonde
+    : true;
+const isEligible = isBelehnungOK && isTragbarkeitOK;
+
 const minVisualMax = 100000; 
 const sliderMaxExisting = Math.max(propertyPrice, minVisualMax);
 const sliderMaxNew = Math.max(dynamicMaxMortgage, minVisualMax);
@@ -136,11 +141,11 @@ const minRefinanceMortgage = existingMortgage;
 
   // -------------- UI --------------
   return (
-<section className="flex flex-col items-center bg-white py-12 px-8 font-sans text-[#132219]">
+<section className="flex flex-col items-center bg-white py-12 px-1 font-sans text-[#132219]">
 <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1300px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
 
         <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-<div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10 mt-6 lg:mb-20 lg:mt-10 px-4">
+<div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10 mt-6 lg:mb-20 lg:mt-10">
   <h1
     className="
       text-[40px] sm:text-[52px] lg:text-[72px]
@@ -279,25 +284,29 @@ const minRefinanceMortgage = existingMortgage;
 
   {loanType === "refinancing" && (
     <div className="mt-[36px] mb-[14px] w-full">
-      <ProgressBox
-        title="Belehnung"
-        value={formatPercent(belehnungRefi)}
-        current={formatCHF(newMortgage)}
-        total={formatCHF(propertyPrice)}
-        loanType={loanType}
-      />
+<ProgressBox
+  title="Belehnung"
+  value={formatPercent(belehnungRefi)}
+  current={formatCHF(newMortgage)}
+  total={formatCHF(propertyPrice)}
+  loanType={loanType}
+  red={!isBelehnungOK}
+/>
+
     </div>
   )}
 
   {/* Tragbarkeit */}
   <div className="w-full">
-    <ProgressBox
-      title="Tragbarkeit"
-      value={formatPercent(tragbarkeitPercent)}
-      current={formatCHF(tragbarkeitCHF)}
-      total={formatCHF(income)}
-      loanType={loanType}
-    />
+<ProgressBox
+  title="Tragbarkeit"
+  value={formatPercent(tragbarkeitPercent)}
+  current={formatCHF(tragbarkeitCHF)}
+  total={formatCHF(income)}
+  loanType={loanType}
+  red={!isTragbarkeitOK}
+/>
+
   </div>
 
   {/* Butoni → 28px distancë nga kutia sipër */}
@@ -506,7 +515,8 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
         }}
   className="w-full h-[4px] rounded-full appearance-none cursor-pointer transition-[background] duration-300 ease-out mt-[6px]"
         style={{
-          background: `linear-gradient(to right, #132219 ${percentage}%, #D9D9D9 ${percentage}%)`,
+background: `linear-gradient(to right, #132219 ${Math.max(percentage, 3)}%, #D9D9D9 ${Math.max(percentage, 3)}%)`,
+
           transition: "all 0.3s ease-out",
         }}
       />
@@ -521,17 +531,18 @@ function SliderInput({ label, value, setValue, min, max, minRequired }: any) {
 }
 
 function InfoBox({ title, value, red = false, loanType }: any) {
-  const bgColor = !loanType
-    ? "bg-[#E5E5E5]"
-    : red
-    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]" 
-    : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; 
+const bgColor = !loanType
+  ? "bg-[#E5E5E5]"
+  : red
+  ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"   // KUQE
+  : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; // JESHILE
 
-  const circleColor = !loanType
-    ? "bg-[#BDBDBD]"
-    : red
-    ? "bg-[#FCA5A5]" 
-    : "bg-[#CAF47E]"; 
+const circleColor = !loanType
+  ? "bg-[#BDBDBD]"
+  : red
+  ? "bg-[#FCA5A5]"
+  : "bg-[#CAF47E]";
+
 
   return (
     <div
@@ -556,7 +567,8 @@ function InfoBox({ title, value, red = false, loanType }: any) {
   );
 }
 
-function ProgressBox({ title, value, current, total, loanType }: any) {
+function ProgressBox({ title, value, current, total, loanType, red = false }: any) {
+
   const percent = parseFloat(value.replace("%", "").replace(",", ".")) || 0;
 
   const bgColor = !loanType

@@ -33,7 +33,8 @@ const teamMembers: TeamMember[] = [
 const TeamSection: React.FC = () => {
   return (
     <section className="w-full flex flex-col items-center py-20 bg-white font-sfpro">
-      <div className="w-full max-w-[1320px] px-8">
+   <div className="w-full max-w-[1320px] px-4 md:px-6 lg:px-4">
+
         <h2 className="text-[40px] font-medium text-[#132219] mb-10">Team</h2>
 
         <div

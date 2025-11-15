@@ -37,7 +37,7 @@ export default function AboutSection() {
       <div
         className="relative z-10 flex flex-col justify-start h-full w-full mx-auto 
         px-[20px] pt-[70px] gap-[10px]
-        sm:max-w-[1579px] sm:px-[118px] sm:pt-[180px]
+        sm:max-w-[1579px] sm:px-[116px] sm:pt-[180px]
         max-md:items-center max-md:text-center"
       >
         <div className="flex flex-col max-w-[880px] w-full">

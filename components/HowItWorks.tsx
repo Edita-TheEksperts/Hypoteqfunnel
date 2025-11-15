@@ -1,7 +1,6 @@
 "use client";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
 
 interface StepProps {
   step?: string;
@@ -11,6 +10,7 @@ interface StepProps {
   highlightBox?: boolean;
 }
 
+/* STEP CARD */
 const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) => (
   <div
     className={`
@@ -30,9 +30,11 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
 
       <h3
         className={`
-          ${highlightBox
-            ? "text-[22px] sm:text-[26px] md:text-[30px] lg:text-[34px]"
-            : "text-[20px] sm:text-[22px] md:text-[26px] lg:text-[28px]"}
+          ${
+            highlightBox
+              ? "text-[22px] sm:text-[26px] md:text-[30px] lg:text-[34px]"
+              : "text-[20px] sm:text-[22px] md:text-[26px] lg:text-[28px]"
+          }
           font-[600] mb-[10px] sm:mb-[12px] md:mb-[16px]
         `}
       >
@@ -41,9 +43,11 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
 
       <p
         className={`
-          ${highlightBox
-            ? "text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px]"
-            : "text-[15px] sm:text-[17px] md:text-[20px] lg:text-[24px]"}
+          ${
+            highlightBox
+              ? "text-[16px] sm:text-[18px] md:text-[22px] lg:text-[26px]"
+              : "text-[15px] sm:text-[17px] md:text-[20px] lg:text-[24px]"
+          }
           font-[300] leading-[160%]
         `}
       >
@@ -51,10 +55,10 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
       </p>
     </div>
 
-    {/* Spacer for Desktop */}
+    {/* Empty spacer for layout */}
     <div className="hidden lg:block w-[199px]" />
 
-    {/* RIGHT SIDE */}
+    {/* RIGHT SIDE: highlight box */}
     {highlightBox ? (
       <div
         className="
@@ -106,6 +110,7 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
   </div>
 );
 
+/* MAIN COMPONENT – PARALLAX RISE */
 export default function HowItWorks() {
   const steps = [
     {
@@ -133,24 +138,16 @@ export default function HowItWorks() {
     },
   ];
 
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-
   return (
     <section
-      ref={ref}
       className="
         relative bg-white 
-        h-[400vh] sm:h-[450vh] md:h-[500vh]
         px-4 sm:px-8 md:px-[118px]
         mt-[32px] sm:mt-[48px] md:mt-[120px]
       "
     >
-      {/* Title */}
-      <motion.h2
+      {/* Sticky Title */}
+      <h2
         className="
           font-['SF Pro Display']
           text-[#132219]
@@ -158,46 +155,30 @@ export default function HowItWorks() {
           text-[28px] sm:text-[36px] md:text-[56px]
           leading-[140%]
           tracking-[-0.4px]
-          mb-[10px] sm:mb-[-7px]
           text-center md:text-left
-          md:whitespace-nowrap
+          sticky top-[80px] z-20 bg-white/80 backdrop-blur-sm py-[12px]
         "
-        initial={{ opacity: 1, y: -10 }}
-        style={{
-          opacity: useTransform(scrollYProgress, [0, 0.08], [1, 0]),
-          y: useTransform(scrollYProgress, [0, 0.08], [-10, -50]),
-        }}
       >
         So funktioniert’s – in nur drei Klicks zu deiner Hypothek
-      </motion.h2>
+      </h2>
 
-      {/* Steps */}
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {steps.map((step, index) => {
-          const start = (index - 0.4) / steps.length;
-          const end = (index + 0.4) / steps.length;
-
-          const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-          const y = useTransform(scrollYProgress, [start, end], [250 + index * 15, index * 10]);
-          const scale = useTransform(scrollYProgress, [start, end], [0.95, 1]);
-          const zIndex = index + 1;
-
-          const [visible, setVisible] = useState(false);
-          useMotionValueEvent(opacity, "change", (latest) => setVisible(latest > 0.12));
-
-          return (
-            <motion.div
-              key={index}
-              style={{ opacity, scale, y, position: "absolute", zIndex }}
-              transition={{ duration: 1.1, ease: "easeOut" }}
-              className={`w-full flex flex-col items-center justify-center ${
-                visible ? "visible pointer-events-auto" : "invisible pointer-events-none"
-              }`}
-            >
-              <Step {...step} />
-            </motion.div>
-          );
-        })}
+      {/* Steps – PARALLAX RISE EFFECT */}
+      <div className="relative flex flex-col gap-[160px] mt-[200px]">
+        {steps.map((step, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 120, scale: 0.96 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 0.9,
+              ease: [0.16, 1, 0.3, 1]
+            }}
+            className="w-full flex justify-center"
+          >
+            <Step {...step} />
+          </motion.div>
+        ))}
       </div>
     </section>
   );

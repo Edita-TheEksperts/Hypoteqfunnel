@@ -20,7 +20,7 @@ export default function Hero() {
       {/* ✅ Content */}
       <div
         className="relative z-10 flex flex-col justify-start h-full w-full mx-auto
-        px-6 sm:px-[118px] pt-[120px] sm:pt-[150px] gap-6 sm:gap-[16px]"
+        px-6 sm:px-[116px] pt-[120px] sm:pt-[150px] gap-6 sm:gap-[16px]"
       >
         {/* ✅ Heading */}
         <h1
