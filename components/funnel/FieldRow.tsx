@@ -1,4 +1,4 @@
-/*import InputControl from './InputControl'
+import InputControl from './InputControl'
 import { isReq } from '../utils'
 
 export default function FieldRow({ field, value, setValue }: { field: any; value: any; setValue: (v: any) => void }) {
@@ -21,4 +21,4 @@ export default function FieldRow({ field, value, setValue }: { field: any; value
       <InputControl field={field} value={value} setValue={setValue} />
     </label>
   )
-// } */
+ } 

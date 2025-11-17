@@ -1,4 +1,4 @@
-/* "use client"
+ "use client"
 import React, { useMemo } from "react"
 import FieldRow from "./FieldRow"
 import { flattenAny } from "../utils"
@@ -60,4 +60,4 @@ export default function StepPanel({ panel, answers, onAnswer, showErrors }: any)
       )}
     </div>
   )
-}*/
+}

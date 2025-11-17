@@ -1,4 +1,4 @@
-/*'use client'
+'use client'
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import StepPanel from './StepPanel'
@@ -267,4 +267,4 @@ export default function JsonWizard({
       </div>
     </div>
   )
-}*/
+}

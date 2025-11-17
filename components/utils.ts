@@ -1,4 +1,4 @@
-/*export type AnyObj = Record<string, any>
+export type AnyObj = Record<string, any>
 
 
 export function flattenAny(comps: AnyObj[]): AnyObj[] {
@@ -54,4 +54,3 @@ export const numericAllowedKeys = new Set([
   'Home',
   'End',
 ])
-*/

@@ -1,4 +1,4 @@
-/*import { readOptions, sanitizeNumber, numericAllowedKeys } from '../utils'
+import { readOptions, sanitizeNumber, numericAllowedKeys } from '../utils'
 import React from 'react'
 
 const DateBox = ({
@@ -277,4 +277,4 @@ export default function InputControl({
       onChange={(e) => setValue(e.target.value)}
     />
   )
-}*/
+}

@@ -1,4 +1,4 @@
-/*"use client"
+"use client"
 
 import { useSearchParams } from "next/navigation"
 import JsonWizard from "@/components/funnel/JsonWizard"
@@ -9,4 +9,4 @@ export default function WizardWrapper() {
 
   
   return <JsonWizard version={version} />
-}*/
+}

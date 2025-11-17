@@ -1,4 +1,4 @@
-/*import { Suspense } from "react"
+import { Suspense } from "react"
 import WizardWrapper from "./WizardWrapper"
 
 export default function WizardPage() {
@@ -12,4 +12,3 @@ export default function WizardPage() {
     </div>
   )
 }
-*/

@@ -5,7 +5,6 @@ import MortgageCalculator from "@/components/MortgageCalculator";
 import BestChoices from "@/components/BestChoices";
 import Footer from "@/components/layout/Footer";
 import MortgageGuide from "@/components/ui/MortgageGuide";
-import HomeEvaluation from "../components/HomeEvaluation";
 import HowItWorks from "@/components/HowItWorks";
 import YourAdvantages from "@/components/YourAdvantages";
 import Testimonials from "@/components/Testimonials";
