@@ -13,7 +13,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sfpro bg-white text-[#132219] overflow-visible">
+      <body
+        className="font-sfpro bg-white text-[#132219] overflow-visible"
+        suppressHydrationWarning
+      >
         <main className="pt-0 overflow-visible">{children}</main>
       </body>
     </html>

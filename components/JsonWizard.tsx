@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import StepPanel from './StepPanel'
-import { flattenAny } from '../utils'
+import { flattenAny } from './utils'
 import { useRouter } from 'next/navigation'
 
 type AnyObj = Record<string, any>

@@ -1,77 +1,180 @@
 "use client";
-import React from "react";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useFunnelStore } from "@/lib/funnelStore";
 
-export default function Home() {
+export default function StartFunnel() {
+  const router = useRouter();
+  const { customerType, setCustomerType, setClient } = useFunnelStore();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    zip: "",
+  });
+
+  const [errors, setErrors] = useState<any>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validateForm = () => {
+    const newErrors: any = {};
+
+    if (!formData.firstName.trim()) newErrors.firstName = "Erforderlich";
+    if (!formData.lastName.trim()) newErrors.lastName = "Erforderlich";
+    if (!formData.email.trim()) newErrors.email = "Erforderlich";
+    if (!formData.zip.trim()) newErrors.zip = "Erforderlich";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+const handleWeiter = () => {
+  if (!validateForm()) return;
+
+  setCustomerType("direct");  // ← FIX
+  setClient(formData);
+
+  router.push("/funnel/project");
+};
+
+
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex flex-col items-center justify-center px-6 py-12">
-      {/* Hero Section */}
-      <div className="text-center max-w-2xl mb-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-          Hypoteq Funnel Setup
+    <div className="w-full min-h-screen flex items-center justify-center px-4">
+      <div className="max-w-[820px] w-full flex flex-col items-center text-center">
+
+        {/* TITLE */}
+        <h1
+          className="
+            text-[#132219]
+            font-normal
+            text-[48px]
+            leading-[57px]
+            tracking-[-0.5px]
+            font-[SF Pro Display]
+          "
+        >
+          Starten Sie Ihre Hypothekanfrage
         </h1>
-        <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-          The funnel system provides two main versions:{" "}
-          <span className="font-semibold text-gray-800">
-            Internal Funnel (Hypoteq Internal)
-          </span>{" "}
-          and{" "}
-          <span className="font-semibold text-gray-800">
-            External Funnel (Sales Partners / Clients)
-          </span>
-          . Both versions are configured without mandatory fields.
-        </p>
-      </div>
 
-      {/* Funnel Options */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
-        {/* Internal Funnel */}
-        <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 p-8 flex flex-col justify-between">
+        {/* SUBTITLE */}
+        <p
+          className="
+            text-[#132219]
+            text-[24px]
+            leading-[28px]
+            mt-2
+            mb-10
+          "
+        >
+          Teilen Sie uns ein paar Basisdaten mit, damit wir Ihr Angebot vorbereiten können.
+        </p>
+
+        {/* FORM */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full text-left">
+
+          {/* firstName */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              1. Internal Funnel
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Hypoteq Internal – no mandatory fields.
-            </p>
+            <label className="text-sm font-medium">Vorname</label>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Bitte geben Sie Ihren Vornamen ein"
+              onChange={handleChange}
+              className={`mt-1 w-full rounded-full border px-4 py-2 focus:ring-2 focus:ring-black outline-none
+                ${errors.firstName ? "border-red-500" : "border-gray-300"}`}
+            />
+            {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
           </div>
-          <Link
-            href="/wizard?version=internal"
-            className="inline-block px-5 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 text-center"
-          >
-            Go to Funnel
-          </Link>
+
+          {/* lastName */}
+          <div>
+            <label className="text-sm font-medium">Nachname</label>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Nachname"
+              onChange={handleChange}
+              className={`mt-1 w-full rounded-full border px-4 py-2 focus:ring-2 focus:ring-black outline-none
+                ${errors.lastName ? "border-red-500" : "border-gray-300"}`}
+            />
+            {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>}
+          </div>
+
+          {/* email */}
+          <div>
+            <label className="text-sm font-medium">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              onChange={handleChange}
+              className={`mt-1 w-full rounded-full border px-4 py-2 focus:ring-2 focus:ring-black outline-none
+                ${errors.email ? "border-red-500" : "border-gray-300"}`}
+            />
+            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+          </div>
+
+          {/* zip */}
+          <div>
+            <label className="text-sm font-medium">ZIP Code</label>
+            <input
+              type="text"
+              name="zip"
+              placeholder="ZIP Code"
+              onChange={handleChange}
+              className={`mt-1 w-full rounded-full border px-4 py-2 focus:ring-2 focus:ring-black outline-none
+                ${errors.zip ? "border-red-500" : "border-gray-300"}`}
+            />
+            {errors.zip && <p className="text-red-500 text-xs mt-1">{errors.zip}</p>}
+          </div>
+
+        </div>
+        <div className="w-full flex items-center justify-between mt-10">
+
+<p className="text-sm text-gray-600">
+  Sind Sie Partner?{" "}
+  <span
+    className="underline cursor-pointer"
+    onClick={() => {
+      if (!validateForm()) return;
+
+      setClient(formData);
+      setCustomerType("partner");
+   router.push("/funnel/project"); 
+
+    }}
+  >
+    Hier klicken, um fortzufahren
+  </span>
+</p>
+
+
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className="px-6 py-2 rounded-full border border-gray-400 bg-white text-gray-700 hover:bg-gray-100 transition"
+            >
+              Go to home page
+            </Link>
+
+            <button
+              className="px-8 py-2 rounded-full bg-lime-400 hover:bg-lime-500 text-gray-900 font-medium transition"
+              onClick={handleWeiter}
+            >
+              Weiter
+            </button>
+          </div>
+
         </div>
 
-        {/* External Funnel */}
-        <div className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 p-8 flex flex-col justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              2. External Funnel
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Sales Partners / Clients – no mandatory fields.
-            </p>
-          </div>
-          <Link
-            href="/wizard?version=external"
-            className="inline-block px-5 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 text-center"
-          >
-            Go to Funnel
-          </Link>
-        </div>
-      </div>
-
-      {/* Footer Explanation */}
-      <div className="mt-12 max-w-3xl text-center text-gray-500">
-        <p>
-          <span className="font-semibold text-gray-700">Result:</span> 2 unique
-          URLs created:
-          <br />
-          1. Internal Funnel – no mandatory fields
-          <br />
-          2. External Funnel – no mandatory fields
-        </p>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
  "use client"
 import React, { useMemo } from "react"
 import FieldRow from "./FieldRow"
-import { flattenAny } from "../utils"
+import { flattenAny } from "./utils"
 import PersonAccordion from "./PersonAccordion"
 
 export default function StepPanel({ panel, answers, onAnswer, showErrors }: any) {
