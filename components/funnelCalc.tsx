@@ -102,50 +102,58 @@ const hasInputs =
     );
   }
 
-  /* ============================================================
-      2) ABLÖSUNG (uses REAL RATE like Excel)
-  ============================================================ */
-  if (projektArt === "abloesung") {
-    const kaufpreis = Number(data.kaufpreis || 0);
+/* ============================================================
+    2) ABLÖSUNG (uses REAL RATE like Excel)
+============================================================ */
+if (projektArt === "abloesung") {
+  const kaufpreis = Number(data.kaufpreis || 0);
 
-    const betrag = Number(data.abloesung_betrag || 0);
-    const erhoehung =
-      data.erhoehung === "Ja" ? Number(data.erhoehung_betrag || 0) : 0;
+  const betrag = Number(data.abloesung_betrag || 0);
+  const erhoehung =
+    data.erhoehung === "Ja" ? Number(data.erhoehung_betrag || 0) : 0;
 
-    const hypothek = betrag + erhoehung;
+  const hypothek = betrag + erhoehung;
 
-    const einkommen = Number(data.brutto || 0) + Number(data.bonus || 0);
+  const einkommen = Number(data.brutto || 0) + Number(data.bonus || 0);
 
-    const zinssatz = getRealRate(data.modell);
+  const zinssatz = getRealRate(data.modell);
 
-    const zinsen = (hypothek * zinssatz) / 12;
-    const unterhalt = (kaufpreis ? kaufpreis * 0.008 : 0) / 12;
+  const zinsen = (hypothek * zinssatz) / 12;
+  const unterhalt = (kaufpreis ? kaufpreis * 0.008 : 0) / 12;
 
-    const zweiteHypothek =
-      kaufpreis > 0 ? Math.max(hypothek - kaufpreis * 0.8, 0) : 0;
+  const zweiteHypothek =
+    kaufpreis > 0 ? Math.max(hypothek - kaufpreis * 0.8, 0) : 0;
 
-    const amortisation =
-      zweiteHypothek > 0 ? zweiteHypothek / 15 / 12 : 0;
+  const amortisation =
+    zweiteHypothek > 0 ? zweiteHypothek / 15 / 12 : 0;
 
-    const total = zinsen + unterhalt + amortisation;
+  const total = zinsen + unterhalt + amortisation;
 
-    const tragbarkeit =
-      einkommen > 0 ? Math.round(((total * 12) / einkommen) * 100) : 0;
+  const tragbarkeitPct =
+    einkommen > 0 ? Math.round(((total * 12) / einkommen) * 100) : 0;
 
-    return (
-      <BoxWrapper>
-        <TopBox title="New Hypothek" subtitle="" value={CHF(hypothek)} />
+  const hasInputs = betrag > 0 || einkommen > 0;
+  const isNegative = tragbarkeitPct > 33;
 
-        <div className="grid grid-cols-2 gap-[12px]">
-          <SmallBox label="Zinsen / Monat" value={CHF(zinsen)} />
-          <SmallBox label="Unterhalt" value={CHF(unterhalt)} />
-          <SmallBox label="Amortisation" value={CHF(amortisation)} />
-          <SmallBox label="Total / Monat" value={CHF(total)} />
-          <SmallBox label="Tragbarkeit" value={`${tragbarkeit}%`} />
-        </div>
-      </BoxWrapper>
-    );
-  }
+  return (
+    <BoxWrapper>
+      <TopBox
+        title={isNegative ? "Not eligible" : "Eligibility confirmed."}
+        subtitle="Estimated mortgage need:"
+        value={CHF(hypothek)}
+        error={hasInputs && isNegative}
+      />
+
+      <TwoBoxGrid
+        leftLabel="Hypothek"
+        leftValue={CHF(hypothek)}
+        rightLabel="Tragbarkeit"
+        rightValue={`${tragbarkeitPct}%`}
+      />
+    </BoxWrapper>
+  );
+}
+
 
   return null;
 }

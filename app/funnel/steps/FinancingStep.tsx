@@ -321,7 +321,7 @@ const isJur = borrowerType === "jur";
 
             {/* Steueroptimierung */}
             <div>
-              <label className="font-medium">Steueroptimierung?</label>
+              <label className="font-medium">  Interessiert an einer steueroptimierten Finanzierungslösung?</label>
               <div className="flex gap-4 mt-3">
                 {["Ja", "Nein"].map((opt) => (
                   <ToggleButton
