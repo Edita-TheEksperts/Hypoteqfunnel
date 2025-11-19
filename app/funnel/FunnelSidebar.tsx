@@ -1,75 +1,65 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+interface Props {
+  step: number;
+}
 
 const steps = [
-  { id: 1, label: "Allgemeines", path: "/funnel/general" },
-  { id: 2, label: "Finanzierung", path: "/funnel/financing" },
-  { id: 3, label: "Kalkulator/ Zusammenfassung", path: "/funnel/summary" },
-  { id: 4, label: "Abschluss", path: "/funnel/finish" }
+  { id: 1, label: "Allgemeines" },
+  { id: 2, label: "Finanzierung" },
+  { id: 3, label: "Kalkulator / Zusammenfassung" },
+  { id: 4, label: "Abschluss" },
 ];
 
-export default function FunnelSidebar() {
-  const pathname = usePathname();
-
+export default function FunnelSidebar({ step }: Props) {
   return (
-    <div className="w-[300px] h-screen bg-[#E2E2E2] flex flex-col px-6 py-10 border-r border-gray-300">
+    <div className="w-[250px] min-h-screen bg-[#E2E2E2] flex flex-col px-5 py-10 border-r border-gray-300">
 
       {/* LOGO */}
-      <Link href="/">
-        <img
-          src="/images/logo.png"
-          alt="Hypoteq Logo"
-          className="w-[166px] h-[42px] mb-16"
-        />
-      </Link>
+      <img src="/images/logo.png" className="w-[140px] h-auto mb-14" />
 
       {/* STEPS */}
-      <div className="flex flex-col gap-12">
-
-        {steps.map((step) => {
-          const isActive = pathname.startsWith(step.path);
+      <div className="flex flex-col gap-10">
+        {steps.map((s) => {
+          const isActive = s.id === step;
+          const isCompleted = s.id < step;
 
           return (
-            <div key={step.id} className="flex items-center gap-4">
+            <div key={s.id} className="relative flex items-center gap-3 mb-6">
 
-              {/* Circle */}
+              {/* ACTIVE LEFT BAR */}
+              {isActive && (
+                <div className="absolute -left-4 h-full w-1.5 bg-[#132219] rounded-r-md" />
+              )}
+
               <div
-                className={`w-[60px] h-[60px] rounded-full border flex items-center justify-center text-[24px] font-semibold
-                  ${
-                    isActive
-                      ? "bg-[#CAF476] border-[#132219] text-[#132219]"
-                      : "bg-transparent border-[#A0A0A0] text-[#A0A0A0]"
+                className={`
+                  w-[46px] h-[46px] rounded-full border flex items-center justify-center
+                  text-[18px] font-semibold transition-all duration-200
+                  ${isActive || isCompleted 
+                    ? "bg-[#CAF476] border-[#132219] text-[#132219]" 
+                    : "border-[#A0A0A0] text-[#A0A0A0]"
                   }
                 `}
               >
-                {step.id}
+                {s.id}
               </div>
 
-              {/* Text */}
-              <div className="flex flex-col">
-                <span
-                  className={`text-[14px] ${
-                    isActive ? "text-black font-medium" : "text-gray-500"
-                  }`}
+              <div>
+                <div className="text-[12px] text-gray-500">Step {s.id}</div>
+                <div
+                  className={`
+                    text-[16px] transition-all duration-200
+                    ${isActive || isCompleted ? "text-[#132219]" : "text-[#A0A0A0]"}
+                  `}
                 >
-                  Step {step.id}
-                </span>
-
-                <span
-                  className={`text-[20px] font-normal ${
-                    isActive ? "text-[#132219]" : "text-gray-500"
-                  }`}
-                >
-                  {step.label}
-                </span>
+                  {s.label}
+                </div>
               </div>
 
             </div>
           );
         })}
-
       </div>
     </div>
   );

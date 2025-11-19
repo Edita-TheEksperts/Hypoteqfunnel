@@ -12,7 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+  <html lang="de" className="font-sf">
+
       <body
         className="font-sfpro bg-white text-[#132219] overflow-visible"
         suppressHydrationWarning

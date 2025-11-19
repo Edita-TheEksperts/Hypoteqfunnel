@@ -208,7 +208,6 @@ p {
            hover:bg-gray-50 border border-gray-200; 
   }
 }
-
 /* -------------------------------
    ✅ Select Styling
 -------------------------------- */
@@ -259,4 +258,24 @@ input[type="range"]::-moz-range-thumb {
   background-color: #132219;
   cursor: pointer;
   transition: background 0.2s ease;
+}
+@layer components {
+.progress-wrapper {
+  @apply w-full flex justify-center sticky top-0 bg-white z-50 py-4;
+}
+
+  .progress-bar {
+    width: 904px;
+    height: 11px;
+    border-radius: 86px;
+    background: #E2E2E2;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: #B7F080;
+    border-radius: 86px;
+    transition: width 0.3s ease-in-out;
+  }
 }

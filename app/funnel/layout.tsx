@@ -1,10 +1,11 @@
-import FunnelSidebar from "@/app/funnel/FunnelSidebar";
-
-export default function FunnelLayout({ children }: { children: React.ReactNode }) {
+export default function FunnelLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="flex">
-      <FunnelSidebar />
-      <div className="flex-1 min-h-screen bg-white p-10 overflow-visible">
+    <div className="flex min-h-screen">
+      <div className="flex-1 bg-white overflow-visible">
         {children}
       </div>
     </div>
