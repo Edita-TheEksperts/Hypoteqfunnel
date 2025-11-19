@@ -320,6 +320,26 @@ const ToggleButton = ({ active, children, onClick }: any) => {
                 update("kreditnehmer", updated);
               }}
             />
+      <div className="relative w-full">
+  <select
+    className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"
+    value={kn.erwerb || ""}
+    onChange={(e) => {
+      const updated = [...data.kreditnehmer];
+      updated[index].erwerb = e.target.value;
+      update("kreditnehmer", updated);
+    }}
+  >
+    <option value="">Erwerbsstatus</option>
+    <option value="angestellt">Angestellt</option>
+    <option value="selbständig">Selbständig</option>
+    <option value="rentner">Rentner</option>
+  </select>
+
+  {/* Dropdown Icon */}
+  <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
+</div>
+
             <input
               type="text"
               placeholder="Geburtsdatum"
@@ -340,28 +360,7 @@ const ToggleButton = ({ active, children, onClick }: any) => {
               }}
               onBlur={(e) => (e.target.type = "text")}
             />
-            <input
-              type="text"
-              placeholder="Selbstständig"
-              className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
-              value={kn.selbst || ""}
-              onChange={(e) => {
-                const updated = [...data.kreditnehmer];
-                updated[index].selbst = e.target.value;
-                update("kreditnehmer", updated);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="Angestellt"
-              className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
-              value={kn.beschaeftigung}
-              onChange={(e) => {
-                const updated = [...data.kreditnehmer];
-                updated[index].beschaeftigung = e.target.value;
-                update("kreditnehmer", updated);
-              }}
-            />
+  
             <div className="relative w-full">
               <select
                 className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"

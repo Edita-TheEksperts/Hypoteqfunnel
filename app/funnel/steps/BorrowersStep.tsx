@@ -86,7 +86,7 @@ const selectType = (type: "nat" | "jur") => {
   `}
 >
 
-          <img src="/images/43.svg" className="w-[100px] h-[80px]" />
+          <img src="/images/2345.svg" className="w-[100px] h-[80px]" />
 
           <div className="flex flex-col w-full items-center">
             <p className="text-[24px] text-[#132219] font-normal">

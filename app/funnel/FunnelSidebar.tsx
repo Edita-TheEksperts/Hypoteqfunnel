@@ -1,17 +1,28 @@
 "use client";
 
+import { useFunnelStore } from "@/src/store/funnelStore";
+
 interface Props {
   step: number;
 }
 
-const steps = [
-  { id: 1, label: "Allgemeines" },
-  { id: 2, label: "Finanzierung" },
-  { id: 3, label: "Kalkulator / Zusammenfassung" },
-  { id: 4, label: "Abschluss" },
-];
-
 export default function FunnelSidebar({ step }: Props) {
+  const { borrowers } = useFunnelStore();
+
+  const isJur = borrowers?.[0]?.type === "jur";
+
+  const steps = [
+    { id: 1, label: "Allgemeines" },
+    { id: 2, label: "Finanzierung" },
+    {
+      id: 3,
+      label: isJur
+        ? "Kalkulator / Dokumente"
+        : "Kalkulator / Zusammenfassung",
+    },
+    { id: 4, label: "Abschluss" },
+  ];
+
   return (
     <div className="w-[250px] min-h-screen bg-[#E2E2E2] flex flex-col px-5 py-10 border-r border-gray-300">
 
@@ -27,7 +38,6 @@ export default function FunnelSidebar({ step }: Props) {
           return (
             <div key={s.id} className="relative flex items-center gap-3 mb-6">
 
-              {/* ACTIVE LEFT BAR */}
               {isActive && (
                 <div className="absolute -left-4 h-full w-1.5 bg-[#132219] rounded-r-md" />
               )}
@@ -37,7 +47,7 @@ export default function FunnelSidebar({ step }: Props) {
                   w-[46px] h-[46px] rounded-full border flex items-center justify-center
                   text-[18px] font-semibold transition-all duration-200
                   ${isActive || isCompleted 
-                    ? "bg-[#CAF476] border-[#132219] text-[#132219]" 
+                    ? "bg-[#CAF476] border-[#132219] text-[#132219]"
                     : "border-[#A0A0A0] text-[#A0A0A0]"
                   }
                 `}
@@ -50,7 +60,10 @@ export default function FunnelSidebar({ step }: Props) {
                 <div
                   className={`
                     text-[16px] transition-all duration-200
-                    ${isActive || isCompleted ? "text-[#132219]" : "text-[#A0A0A0]"}
+                    ${isActive || isCompleted
+                      ? "text-[#132219]"
+                      : "text-[#A0A0A0]"
+                    }
                   `}
                 >
                   {s.label}
