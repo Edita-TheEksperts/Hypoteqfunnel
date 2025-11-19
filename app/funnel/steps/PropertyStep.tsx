@@ -339,27 +339,63 @@ const ToggleButton = ({ active, children, onClick }: any) => {
   {/* Dropdown Icon */}
   <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
 </div>
+<input
+  type="text"
+  placeholder="Geburtsdatum"
+  className="px-5 py-2 border border-[#132219] rounded-full text-sm"
+  value={kn.geburtsdatum || ""}
+  onFocus={(e) => {
+    e.target.type = "date";
 
-            <input
-              type="text"
-              placeholder="Geburtsdatum"
-              className="px-5 py-2 border border-[#132219] rounded-full text-sm"
-              value={kn.geburtsdatum}
-              onFocus={(e) => {
-                e.target.type = "date";
-                if (kn.geburtsdatum?.includes(".")) {
-                  const [d, m, y] = kn.geburtsdatum.split(".");
-                  e.target.value = `${y}-${m}-${d}`;
-                }
-              }}
-              onChange={(e) => {
-                const updated = [...data.kreditnehmer];
-                const [y, m, d] = e.target.value.split("-");
-                updated[index].geburtsdatum = `${d}.${m}.${y}`;
-                update("kreditnehmer", updated);
-              }}
-              onBlur={(e) => (e.target.type = "text")}
-            />
+    // Convert dd.mm.yyyy → yyyy-mm-dd for date input
+    if (kn.geburtsdatum?.includes(".")) {
+      const [d, m, y] = kn.geburtsdatum.split(".");
+      e.target.value = `${y}-${m}-${d}`;
+    }
+  }}
+  onChange={(e) => {
+    const updated = [...data.kreditnehmer];
+
+    // ⚡ If user writes manually while type=text
+    if (e.target.type === "text") {
+      let v = e.target.value.replace(/\D/g, ""); // remove non-digits
+
+      // Auto-format as dd.mm.yyyy
+      if (v.length >= 5) {
+        v = v.replace(/(\d{2})(\d{2})(\d+)/, "$1.$2.$3");
+      } else if (v.length >= 3) {
+        v = v.replace(/(\d{2})(\d+)/, "$1.$2");
+      }
+
+      updated[index].geburtsdatum = v;
+      update("kreditnehmer", updated);
+      return;
+    }
+
+    // ⚡ If selected from calendar: yyyy-mm-dd → dd.mm.yyyy
+    if (e.target.value.includes("-")) {
+      const [y, m, d] = e.target.value.split("-");
+      updated[index].geburtsdatum = `${d}.${m}.${y}`;
+      update("kreditnehmer", updated);
+    }
+  }}
+  onBlur={(e) => {
+    e.target.type = "text";
+
+    const val = e.target.value;
+
+    // Validate final format dd.mm.yyyy
+    const regex = /^\d{2}\.\d{2}\.\d{4}$/;
+
+    if (!regex.test(val)) {
+      // ❗ If invalid, clear or show error (zgjedh vetë)
+      // updated[index].geburtsdatum = "";
+      // update("kreditnehmer", updated);
+      console.warn("Datë e pavlefshme:", val);
+    }
+  }}
+/>
+
   
             <div className="relative w-full">
               <select
