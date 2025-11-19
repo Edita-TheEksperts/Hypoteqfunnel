@@ -7,6 +7,20 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
   const format = (v: any) => (v ? v : "—");
   const CHF = (v: any) =>
     v ? `${parseFloat(v).toLocaleString("de-CH")} CHF` : "—";
+const formatDate = (dateStr: string) => {
+  if (!dateStr) return "—";
+
+  // Format dd.mm.yyyy — e lëmë kështu
+  if (dateStr.includes(".")) return dateStr;
+
+  // Format yyyy-mm-dd — e kthejmë në dd.mm.yyyy
+  if (dateStr.includes("-")) {
+    const [y, m, d] = dateStr.split("-");
+    return `${d}.${m}.${y}`;
+  }
+
+  return dateStr;
+};
 
   return (
     <div className="w-full max-w-[900px] mx-auto flex flex-col text-[#132219] py-16 px-4">
@@ -16,8 +30,8 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
 
         {/* ================= TITLE ================= */}
         <div className="border-b pb-4">
-          <h2 className="text-[30px] font-semibold tracking-tight">
-            Allgemeines
+          <h2 className="text-[37px] font-semibold tracking-tight">
+            Zusammenfassung
           </h2>
         </div>
 
@@ -81,7 +95,8 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
                 .map((k: any) =>
                   borrowers[0]?.type === "jur"
                     ? k.firmenname
-                    : `${k.vorname} ${k.name}, ${k.geburtsdatum}, ${k.status}`
+                    : `${k.vorname} ${k.name}, ${formatDate(k.geburtsdatum)}, ${k.status}`
+
                 )
                 .join("; ")}
             </div>
@@ -117,7 +132,9 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
             <div className="text-[20px] font-[400]">{format(financing.steueroptimierung)}</div>
 
             <div className="text-[20px] font-[300] opacity-70">Kaufdatum</div>
-            <div className="text-[20px] font-[400]">{format(financing.kaufdatum)}</div>
+<div className="text-[20px] font-[400]">
+  {financing.kaufdatum ? formatDate(financing.kaufdatum) : "—"}
+</div>
 
             <div className="text-[20px] font-[300] opacity-70">Kommentar</div>
             <div className="text-[20px] font-[400]">{format(financing.kommentar)}</div>
