@@ -4,26 +4,6 @@ function PropertyStep({ data, setData, saveStep, back, customerType }: any) {
   const update = (key: string, value: any) => {
     setData((prev: any) => ({ ...prev, [key]: value }));
   };
-// Utility function for formatting date
-const formatDate = (value: string) => {
-  const date = new Date(value);
-  if (isNaN(date.getTime())) return "";
-
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-
-  return `${day}.${month}.${year}`;
-};
-const toDDMMYYYY = (dateStr: string) => {
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return "";
-  const day = String(d.getDate()).padStart(2, "0");
-  const month = String(d.getMonth() + 1).padStart(2, "0");
-  const year = d.getFullYear();
-  return `${day}.${month}.${year}`;
-};
-
 const ToggleButton = ({ active, children, onClick }: any) => {
   const isJa = children === "Ja";
   const isNein = children === "Nein";
@@ -34,7 +14,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
       className={`
         flex items-center gap-3
         px-6 py-2.5 rounded-full border text-sm transition-all
-
         ${active
           ? "bg-[#CAF476] border-[#132219] text-[#132219]"
           : "bg-white border-[#C8C8C8] text-[#132219]"}
@@ -46,10 +25,10 @@ const ToggleButton = ({ active, children, onClick }: any) => {
         <span className="w-4 h-4 rounded-full bg-[#132219]"></span>
       )}
 
-      {/* Icon from image for NEIN */}
+      {/* Icon for NEIN */}
       {isNein && (
         <img
-          src="/images/nein1.svg"
+          src="/images/nein1.svg" // ensure you have the correct path for the icon
           alt="Nein Icon"
           className="w-5 h-5"
         />
@@ -74,13 +53,11 @@ const ToggleButton = ({ active, children, onClick }: any) => {
 
   return (
     <div className="w-full max-w-[1400px] mx-auto pl-28 space-y-[30px] -mt-10">
-
       {/* ========================================================= */}
       {/*  ART DER IMMOBILIE                                        */}
       {/* ========================================================= */}
       <div>
         <h3 className="text-[16px] font-semibold mb-[16px]">Art der Immobilie</h3>
-
         <div className="flex flex-wrap gap-[24px]">
           <ToggleButton
             active={data.artImmobilie === "bestehend"}
@@ -88,7 +65,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
           >
             Bestehende Immobilie
           </ToggleButton>
-
           <ToggleButton
             active={data.artImmobilie === "neubau"}
             onClick={() => update("artImmobilie", "neubau")}
@@ -96,8 +72,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             Neubau
           </ToggleButton>
         </div>
-
-        {/* Sub-options for NEUBAU */}
         {data.artImmobilie === "neubau" && (
           <div className="flex flex-wrap gap-[24px] mt-[16px]">
             <ToggleButton
@@ -121,7 +95,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
       {/* ========================================================= */}
       <div>
         <h3 className="text-[16px] font-semibold mb-[16px]">Art der Liegenschaft</h3>
-
         <div className="flex flex-wrap gap-[24px]">
           {[
             "Einfamilienhaus",
@@ -146,7 +119,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
       {/* ========================================================= */}
       <div>
         <h3 className="text-[16px] font-semibold mb-[16px]">Nutzung der Immobilie</h3>
-
         <div className="flex flex-wrap gap-[24px]">
           {propertyUseOptions.map((item) => (
             <ToggleButton
@@ -160,65 +132,64 @@ const ToggleButton = ({ active, children, onClick }: any) => {
         </div>
       </div>
 
-      {/* ========================================================= */}
-      {/*  RENOVATIONEN                                             */}
-      {/* ========================================================= */}
-      <div>
-        <h3 className="text-[16px] font-semibold mb-[16px]">
-          Gibt es Renovationen oder Mehrausgaben über Kaufpreis?
-        </h3>
+{/* ========================================================= */}
+{/*  RENOVATIONEN                                             */}
+{/* ========================================================= */}
+<div>
+  <h3 className="text-[16px] font-semibold mb-[16px]">
+    Gibt es Renovationen oder Mehrausgaben über Kaufpreis?
+  </h3>
+  <div className="flex gap-[24px]">
+    <ToggleButton
+      active={data.renovation === "ja"}
+      onClick={() => update("renovation", "ja")}
+    >
+      Ja
+    </ToggleButton>
+    <ToggleButton
+      active={data.renovation === "nein"}
+      onClick={() => update("renovation", "nein")}
+    >
+      Nein
+    </ToggleButton>
+  </div>
 
-        <div className="flex gap-[24px]">
-          <ToggleButton
-            active={data.renovation === "ja"}
-            onClick={() => update("renovation", "ja")}
-          >
-            Ja
-          </ToggleButton>
+  {data.renovation === "ja" && (
+    <input
+      type="number"
+      placeholder="Betrag in CHF"
+      className="mt-[16px] px-5 py-2 border border-[#C8C8C8] rounded-full w-[260px] text-sm"
+      value={data.renovationsBetrag || ""}
+      onChange={(e) => update("renovationsBetrag", e.target.value)}
+    />
+  )}
+</div>
 
-          <ToggleButton
-            active={data.renovation === "nein"}
-            onClick={() => update("renovation", "nein")}
-          >
-            Nein
-          </ToggleButton>
+
+      {/* ========================================================= */}
+      {/*  RESERVIERUNG – HIDE FOR JURISTICHE PERSON                */}
+      {/* ========================================================= */}
+      {customerType !== "jur" && (
+        <div>
+          <h3 className="text-[16px] font-semibold mb-[16px]">
+            Ist die Liegenschaft bereits reserviert?
+          </h3>
+          <div className="flex gap-[24px]">
+            <ToggleButton
+              active={data.reserviert === "ja"}
+              onClick={() => update("reserviert", "ja")}
+            >
+              Ja
+            </ToggleButton>
+            <ToggleButton
+              active={data.reserviert === "nein"}
+              onClick={() => update("reserviert", "nein")}
+            >
+              Nein
+            </ToggleButton>
+          </div>
         </div>
-
-        {data.renovation === "ja" && (
-          <input
-            type="number"
-            placeholder="Betrag in CHF"
-            className="mt-[16px] px-5 py-2 border border-[#C8C8C8] rounded-full w-[260px] text-sm"
-            value={data.renovationsBetrag || ""}
-            onChange={(e) => update("renovationsBetrag", e.target.value)}
-          />
-        )}
-      </div>
-
-      {/* ========================================================= */}
-      {/*  RESERVIERT                                               */}
-      {/* ========================================================= */}
-      <div>
-        <h3 className="text-[16px] font-semibold mb-[16px]">
-          Ist die Liegenschaft bereits reserviert?
-        </h3>
-
-        <div className="flex gap-[24px]">
-          <ToggleButton
-            active={data.reserviert === "ja"}
-            onClick={() => update("reserviert", "ja")}
-          >
-            Ja
-          </ToggleButton>
-
-          <ToggleButton
-            active={data.reserviert === "nein"}
-            onClick={() => update("reserviert", "nein")}
-          >
-            Nein
-          </ToggleButton>
-        </div>
-      </div>
+      )}
 
       {/* ========================================================= */}
       {/*  FINANZIERUNGSANGEBOTE                                    */}
@@ -227,7 +198,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
         <h3 className="text-[16px] font-semibold mb-[16px]">
           Bestehen bereits Finanzierungsangebote?
         </h3>
-
         <div className="flex gap-[24px]">
           <ToggleButton
             active={data.finanzierungsangebote === "ja"}
@@ -235,7 +205,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
           >
             Ja
           </ToggleButton>
-
           <ToggleButton
             active={data.finanzierungsangebote === "nein"}
             onClick={() => update("finanzierungsangebote", "nein")}
@@ -243,7 +212,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             Nein
           </ToggleButton>
         </div>
-
         {data.finanzierungsangebote === "ja" && (
           <div className="grid grid-cols-3 gap-[24px] mt-[16px]">
             <input
@@ -252,14 +220,12 @@ const ToggleButton = ({ active, children, onClick }: any) => {
               value={data.bank || ""}
               onChange={(e) => update("bank", e.target.value)}
             />
-
             <input
               placeholder="Zins"
               className="px-5 py-2 border border-[#C8C8C8] rounded-full text-sm"
               value={data.zins || ""}
               onChange={(e) => update("zins", e.target.value)}
             />
-
             <input
               placeholder="Laufzeit"
               className="px-5 py-2 border border-[#C8C8C8] rounded-full text-sm"
@@ -283,7 +249,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
   <div className="space-y-[24px]">
     {data.kreditnehmer.map((kn: any, index: number) => (
       <div key={index} className="flex items-center gap-[16px]">
-
         {/* + BUTTON */}
         <button
           onClick={() => {
@@ -292,7 +257,7 @@ const ToggleButton = ({ active, children, onClick }: any) => {
               index + 1,
               0,
               customerType === "jur"
-                ? { firmenname: "" }
+                ? { firmenname: "" } // Only for "jur" customer type
                 : {
                     vorname: "",
                     name: "",
@@ -326,12 +291,10 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             />
           </div>
         ) : (
-
           /* ================================================= */
-          /*      NATÜRLICHE PERSON → 5 INPUTS               */
+          /*      NATÜRLICHE PERSON → 6 INPUTS               */
           /* ================================================= */
-          <div className="grid grid-cols-5 gap-[16px] flex-1">
-
+          <div className="grid grid-cols-6 gap-[16px] flex-1">
             <input
               type="text"
               placeholder="Vorname"
@@ -343,7 +306,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
                 update("kreditnehmer", updated);
               }}
             />
-
             <input
               type="text"
               placeholder="Name"
@@ -355,8 +317,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
                 update("kreditnehmer", updated);
               }}
             />
-
-            {/* DATE INPUT dd.mm.yyyy */}
             <input
               type="text"
               placeholder="Geburtsdatum"
@@ -375,15 +335,23 @@ const ToggleButton = ({ active, children, onClick }: any) => {
                 updated[index].geburtsdatum = `${d}.${m}.${y}`;
                 update("kreditnehmer", updated);
               }}
-              onBlur={(e) => {
-                e.target.type = "text";
+              onBlur={(e) => (e.target.type = "text")}
+            />
+            <input
+              type="text"
+              placeholder="Selbstständig"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
+              value={kn.selbst || ""}
+              onChange={(e) => {
+                const updated = [...data.kreditnehmer];
+                updated[index].selbst = e.target.value;
+                update("kreditnehmer", updated);
               }}
             />
-
             <input
               type="text"
               placeholder="Angestellt"
-              className="px-5 py-2 border border-[#132219] rounded-full text-sm"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
               value={kn.beschaeftigung}
               onChange={(e) => {
                 const updated = [...data.kreditnehmer];
@@ -391,14 +359,9 @@ const ToggleButton = ({ active, children, onClick }: any) => {
                 update("kreditnehmer", updated);
               }}
             />
-
             <div className="relative w-full">
               <select
-                className="
-                  px-5 py-2 rounded-full text-sm w-full
-                  bg-white border border-[#132219]
-                  appearance-none pr-10
-                "
+                className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"
                 value={kn.zivilstand}
                 onChange={(e) => {
                   const updated = [...data.kreditnehmer];
@@ -412,15 +375,8 @@ const ToggleButton = ({ active, children, onClick }: any) => {
                 <option value="geschieden">Geschieden</option>
                 <option value="verwitwet">Verwitwet</option>
               </select>
-
-              <div
-                className="
-                  pointer-events-none absolute right-4 top-1/2 -translate-y-1/2
-                  w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45
-                "
-              ></div>
+              <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
             </div>
-
           </div>
         )}
       </div>
@@ -439,7 +395,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
         >
           Zurück
         </button>
-
         <button
           onClick={saveStep}
           className="px-6 py-2 bg-[#CAF476] text-[#132219] rounded-full"
@@ -447,7 +402,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
           Weiter
         </button>
       </div>
-
     </div>
   );
 }
