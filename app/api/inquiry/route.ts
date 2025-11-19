@@ -39,11 +39,15 @@ const saved = await prisma.inquiry.create({
   },
 });
 
-    // Return a success response
     return NextResponse.json({ success: true, inquiry: saved });
-  } catch (err) {
-    // Log error and return an error response
-    console.error("❌ Failed to save inquiry:", err);
-    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    // Type assertion to ensure 'err' is treated as an Error
+    if (err instanceof Error) {
+      console.error("❌ Failed to save inquiry:", err);
+      return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+    }
+    // In case it's not an instance of Error (fallback case)
+    console.error("❌ Unknown error:", err);
+    return NextResponse.json({ success: false, error: "An unknown error occurred." }, { status: 500 });
   }
 }
