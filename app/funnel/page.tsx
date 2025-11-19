@@ -238,13 +238,15 @@ export default function FunnelPage() {
         )}
 
         {step === 6 && customerType === "partner" && (
-          <DocumentsStep
-            docs={uploadedDocs}
-            setDocs={setUploadedDocs}
-            addDocument={addDocument}
-            saveStep={saveStep6}
-            back={back}
-          />
+ <DocumentsStep
+  borrowers={borrowers}
+  docs={uploadedDocs}
+  setDocs={setUploadedDocs}
+  addDocument={addDocument}
+  saveStep={saveStep6}
+  back={back}
+/>
+
         )}
 
  {step === 7 && (

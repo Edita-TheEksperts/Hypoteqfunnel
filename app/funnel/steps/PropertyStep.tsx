@@ -136,9 +136,12 @@ const ToggleButton = ({ active, children, onClick }: any) => {
 {/*  RENOVATIONEN                                             */}
 {/* ========================================================= */}
 <div>
-  <h3 className="text-[16px] font-semibold mb-[16px]">
-    Gibt es Renovationen oder Mehrausgaben über Kaufpreis?
-  </h3>
+<h3 className="text-[16px] font-semibold mb-[16px]">
+  {customerType === "jur"
+    ? "Gibt es Renovationen?"
+    : "Gibt es Renovationen oder Mehrausgaben über Kaufpreis?"}
+</h3>
+
   <div className="flex gap-[24px]">
     <ToggleButton
       active={data.renovation === "ja"}

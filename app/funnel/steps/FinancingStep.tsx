@@ -15,9 +15,14 @@ function FinancingStep({
       LOGIC CHECKS
   =========================== */
 // Accepts: "direct", "direkt", "direct_customer", "direktkunde"
+const normalizedCustomer = customerType?.toLowerCase();
+
 const isDirect =
-  customerType?.toLowerCase().includes("dir") ||
-  customerType?.toLowerCase().includes("kunde");
+  normalizedCustomer?.includes("dir") ||
+  normalizedCustomer?.includes("kunde") ||
+  normalizedCustomer?.includes("partner") ||   // për variantin e drejtë
+  normalizedCustomer?.includes("parnter");     // për variantin me gabim në UI
+
   const isKauf = projectData?.projektArt?.toLowerCase() === "kauf";
   const isAblösung = projectData?.projektArt?.toLowerCase() === "abloesung";
 const borrowerType = borrowers?.[0]?.type; // nat | jur

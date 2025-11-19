@@ -1,19 +1,28 @@
 "use client";
 import { v4 as uuidv4 } from "uuid";
+import { useFunnelStore } from "@/src/store/funnelStore";
+
+
+
 
 function BorrowersStep({ borrowers, setBorrowers, saveStep, back }: any) {
-  const selectType = (type: "nat" | "jur") => {
-    setBorrowers([
-      {
-        id: borrowers[0]?.id || uuidv4(),
-        type: type,
-      },
-    ]);
+    const { setBorrowers: setBorrowersToStore } = useFunnelStore();
+const selectType = (type: "nat" | "jur") => {
+  const updated = [
+    {
+      id: borrowers[0]?.id || uuidv4(),
+      type: type,
+    },
+  ];
 
-    setTimeout(() => {
-      saveStep();
-    }, 200);
-  };
+  setBorrowers(updated);        // updates local
+  setBorrowersToStore(updated); // updates store <-- IMPORTANT
+
+  setTimeout(() => {
+    saveStep();
+  }, 200);
+};
+
 
   return (
     <div className="w-full max-w-[1400px] mx-auto pl-20 pr-48">
