@@ -298,7 +298,7 @@ to keep track of what you’ve already uploaded (Optional)
             {/* DOCUMENT GRID */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {section.items.map((doc, idx) => {
-                const saved = docs.some((d) => d.name === doc);
+const saved = docs.some((d: { name: string }) => d.name === doc);
 
                 return (
                   <div
