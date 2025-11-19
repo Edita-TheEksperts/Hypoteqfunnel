@@ -43,3 +43,5 @@ pnpm-lock.yaml
 
 # GitHub Codespaces / VSCode specific
 .history/
+
+/generated/prisma

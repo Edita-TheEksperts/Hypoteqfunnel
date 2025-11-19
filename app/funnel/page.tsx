@@ -146,15 +146,17 @@ export default function FunnelPage() {
     next();
   };
 
-  const saveStep3 = () => {
-    setProperty(propertyData);
-    next();
-  };
+// Correct order
+const saveStep3 = () => {
+  setBorrowers(borrowers);
+  next();
+};
 
-  const saveStep4 = () => {
-    setBorrowers(borrowers);
-    next();
-  };
+const saveStep4 = () => {
+  setProperty(propertyData);
+  next();
+};
+
 
   const saveStep5 = () => {
     setFinancing(financingData);
@@ -168,6 +170,51 @@ export default function FunnelPage() {
   // -------------------------------------
   // RENDER
   // -------------------------------------
+const submitFinal = async () => {
+  try {
+    // Get the current state from the store
+    const {
+      customerType,
+      client,
+      project,
+      property,
+      borrowers,
+      financing,
+    } = useFunnelStore.getState();
+
+    // Send the data to the API endpoint
+    const res = await fetch("/api/inquiry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customerType,
+        client,
+        project,
+        property,
+        borrowers,
+        financing,
+      }),
+    });
+
+    // Parse the JSON response
+    const data = await res.json();
+
+    // Check the response
+    if (data.success) {
+      console.log("Successfully saved inquiry:", data);
+      setStep(7); // Move to the success screen
+    } else {
+      console.error("Failed:", data.error);
+      alert("Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.");
+    }
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Serverfehler. Bitte später erneut versuchen.");
+  }
+};
+
 
   return (
     <div className="w-full min-h-screen bg-white flex">
@@ -201,24 +248,25 @@ export default function FunnelPage() {
           />
         )}
 
-        {step === 3 && (
-          <BorrowersStep
-            borrowers={borrowers}
-            setBorrowers={setLocalBorrowers}
-            saveStep={saveStep4}
-            back={back}
-          />
-        )}
+     {step === 3 && (
+  <BorrowersStep
+    borrowers={borrowers}
+    setBorrowers={setLocalBorrowers}
+    saveStep={saveStep3}    // 👈 ndryshon
+    back={back}
+  />
+)}
 
-        {step === 4 && (
-          <PropertyStep
-            data={propertyData}
-            setData={setPropertyData}
-            saveStep={saveStep3}
-            back={back}
-            customerType={borrowers[0]?.type}
-          />
-        )}
+{step === 4 && (
+  <PropertyStep
+    data={propertyData}
+    setData={setPropertyData}
+    saveStep={saveStep4}    // 👈 ndryshon
+    back={back}
+    customerType={borrowers[0]?.type}
+  />
+)}
+
 
         {step === 5 && (
           <FinancingStep
@@ -233,9 +281,10 @@ export default function FunnelPage() {
           />
         )}
 
-        {step === 6 && customerType === "direct" && (
-          <DirectSummaryStep back={back} saveStep={saveStep6} />
-        )}
+       {step === 6 && customerType === "direct" && (
+  <DirectSummaryStep back={back} saveStep={submitFinal} />
+)}
+
 
         {step === 6 && customerType === "partner" && (
  <DocumentsStep
