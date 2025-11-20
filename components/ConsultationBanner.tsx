@@ -5,10 +5,10 @@ const ConsultationBanner: React.FC = () => {
   return (
     <section
       className="
-        relative w-[1273px] h-[278px] rounded-[10px]
-        mt-[48px] md:mt-[120px] overflow-hidden mx-auto
-        flex justify-between items-start px-[60px] pt-[40px]
-        max-lg:flex-col max-lg:items-start max-lg:h-auto max-lg:px-[24px] max-lg:py-[60px]
+        relative w-full max-w-[1273px] h-[278px] rounded-[10px]
+        mt-[120px] md:mt-[120px] mb-[200px] overflow-hidden mx-auto
+        flex justify-start items-start gap-[160px] px-[116px] pt-[40px]
+        max-lg:flex-col max-lg:items-start max-lg:h-auto max-lg:px-[48px] max-lg:py-[60px]
         max-sm:w-full max-sm:rounded-none max-sm:px-[28px] max-sm:py-[60px]
         max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center max-sm:text-center
       "

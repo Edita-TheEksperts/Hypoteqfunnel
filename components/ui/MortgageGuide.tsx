@@ -4,13 +4,13 @@ import React from "react";
 const MortgageGuide: React.FC = () => {
   return (
     <section
-      className="relative w-full mt-[48px] md:mt-[120px] h-[384px] flex items-center justify-center max-sm:h-[340px]"
+      className="relative w-full mt-[120px] md:mt-[120px] h-[384px] flex items-center justify-center max-sm:h-[340px]"
       style={{
         background: "url('/images/foto12345.png') center/cover no-repeat",
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/25" />
+      <div className="absolute " />
 
       {/* Content */}
       <div
@@ -24,7 +24,7 @@ const MortgageGuide: React.FC = () => {
         {/* Text */}
         <div
           className="
-            flex flex-col items-start justify-center gap-[16px]
+            flex flex-col items-start justify-center gap-[48px]
             max-w-[560px]
             max-sm:items-center max-sm:justify-center max-sm:gap-[12px]
           "
@@ -41,9 +41,9 @@ const MortgageGuide: React.FC = () => {
           <p
             className="
               font-['SF Pro Display']
-              text-[#f1f8f4]
+              text-white
               font-[300]
-              text-[22px] sm:text-[20px]
+              text-[25px] sm:text-[20px]
               leading-[140%] opacity-90
               tracking-[0.01em]
               max-sm:text-[15px] max-sm:leading-[135%]
@@ -51,7 +51,7 @@ const MortgageGuide: React.FC = () => {
             "
           >
             Alles rund um deine Immobilienfinanzierung – einfach erklärt,
-            transparent und auf den Punkt. So triffst du bei deiner Hypothek die
+            transparent und auf den Punkt. <br/> So triffst du bei deiner Hypothek die
             richtigen Entscheidungen.
           </p>
         </div>

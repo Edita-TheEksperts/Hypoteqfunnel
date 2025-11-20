@@ -36,14 +36,11 @@ export default function BestChoices() {
           </p>
         </div>
 
-        {/* Paragraph */}
-        <p
-          className="text-[16px] sm:text-[18px] lg:text-[20px] font-[200] leading-[150%] text-white max-w-full"
-          style={{ fontFamily: "'SF Pro Display', sans-serif" }}
-        >
-          Unsere Richtzinsen dienen zur Orientierung. Ihr persönlicher Zinssatz kann je nach
-          Situation variieren. Gerne berechnen wir deinen individuellen Zins.
-        </p>
+ <p className="text-[18px] sm:text-[20px] lg:text-[22px] font-normal text-white leading-[150%] font-sfpro">
+  Unsere Richtzinsen dienen zur Orientierung. Ihr persönlicher Zinssatz kann je nach
+  Situation variieren. Gerne berechnen wir deinen individuellen Zins.
+</p>
+
       </div>
 
       {/* ✅ Right Column */}

@@ -16,13 +16,9 @@ const [income, setIncome] = useState(0);
 const [existingMortgage, setExistingMortgage] = useState(0);  
 const [newMortgage, setNewMortgage] = useState(0);      
 
+const [residenceType, setResidenceType] = useState<"haupt" | "zweit">("haupt");
 
-
-  const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(null);
-
-  const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>(
-    null
-  );
+const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>("purchase");
 
   const [interestOption, setInterestOption] = useState("10Y 1.40%");
   const params =
@@ -144,7 +140,7 @@ const minRefinanceMortgage = existingMortgage;
 <section className="flex flex-col items-center bg-white py-12 px-1 font-sans text-[#132219]">
 <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1300px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
 
-        <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
+        <div className="flex flex-col w-full max-w-[536px] gap-[48px]">
 <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10 mt-6 lg:mb-20 lg:mt-10">
   <h1
     className="
@@ -257,7 +253,7 @@ const minRefinanceMortgage = existingMortgage;
             />
           </div>
         </div>
-<div className="flex flex-col items-start w-full max-w-[628px] mt-[60px] sm:mt-[100px] lg:mt-[222px]">
+<div className="flex flex-col items-start w-full max-w-[628px] mt-[253px]">
 
   {/* InfoBox → gap 36px */}
   <div className="flex flex-col gap-[36px] w-full">

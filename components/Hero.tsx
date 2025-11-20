@@ -11,7 +11,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-no-repeat bg-cover -z-10"
         style={{
-          backgroundImage: "url('/images/photohero.png')",
+          backgroundImage: "url('/images/fotoHeroSection.png')",
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
@@ -44,9 +44,9 @@ export default function Hero() {
           mt-4 sm:mt-[24px]
           max-w-[95%] sm:max-w-[580px]"
         >
-          Erhalte dein persönliches Hypothekarangebot online – schnell, sicher
-          und transparent. Vergleiche verschiedene Optionen, berechne deine
-          monatlichen Kosten und starte deinen Finanzierungsprozess mit
+          Erhalte dein persönliches Hypothekarangebot online – <strong>schnell, <br/> sicher
+          und transparent. </strong><br/>Vergleiche verschiedene Optionen, berechne deine<br/>
+          monatlichen Kosten und starte deinen Finanzierungsprozess <br/> mit
           Vertrauen – alles in nur drei Klicks.
         </p>
 

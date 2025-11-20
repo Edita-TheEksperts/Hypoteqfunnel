@@ -98,14 +98,14 @@ body {
   padding: 0;
 }
 
-/* Paragraph defaults */
 p {
   font-family: 'SF Pro Display', 'Inter', sans-serif;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #132219;
-  letter-spacing: 0.01em;
+  font-weight: inherit;
+}
+
+.container {
+  padding-left: 116px;
+  padding-right: 116px;
 }
 
 /* -------------------------------
