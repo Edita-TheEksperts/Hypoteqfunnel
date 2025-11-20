@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useFunnelStore } from "@/src/store/funnelStore";
+
 
 function StartStep({
   customerType,
@@ -9,12 +11,16 @@ function StartStep({
   saveStep,
 }: any) {
 
+
+
   // Default to direct (fix infinite re-render)
   useEffect(() => {
     if (!customerType) {
       setCustomerType("direct");
     }
   }, []);
+    const { setEmail } = useFunnelStore();
+
 
   return (
 <div className="w-full max-w-[1400px] mx-auto pl-20 pr-32 -mt-10">
@@ -107,12 +113,16 @@ function StartStep({
               </button>
             </span>
 
-            <button
-              onClick={saveStep}
-              className="px-8 py-2 bg-[#CAF476] border border-[#132219] rounded-full text-[14px] font-medium text-[#132219]"
-            >
-              Weiter
-            </button>
+   <button
+  onClick={() => {
+    setEmail(clientData.email);  
+    saveStep();
+  }}
+  className="px-8 py-2 bg-[#CAF476] border border-[#132219] rounded-full text-[14px] font-medium text-[#132219]"
+>
+  Weiter
+</button>
+
           </div>
         </>
       )}
@@ -151,12 +161,16 @@ function StartStep({
           </div>
 
           <div className="flex justify-end mt-6">
-            <button
-              onClick={saveStep}
-              className="px-8 py-2 bg-[#CAF476] border border-[#132219] rounded-full text-[14px] font-medium text-[#132219]"
-            >
-              Weiter
-            </button>
+<button
+  onClick={() => {
+    setEmail(clientData.partnerEmail);   // ✅ RUAN EMAIL-IN E PARTNER-IT
+    saveStep();
+  }}
+  className="px-8 py-2 bg-[#CAF476] border border-[#132219] rounded-full text-[14px] font-medium text-[#132219]"
+>
+  Weiter
+</button>
+
           </div>
         </>
       )}

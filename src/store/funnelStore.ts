@@ -9,6 +9,9 @@ interface FunnelState {
   financing: any;
   documents: any[];
 
+ email: string | null;      
+  setEmail: (email: string) => void;
+
   setCustomerType: (type: "direct" | "partner") => void;
   setClient: (data: any) => void;
   setProject: (data: any) => void;
@@ -26,6 +29,11 @@ export const useFunnelStore = create<FunnelState>((set) => ({
   borrowers: [],
   financing: {},
   documents: [],
+
+  
+  email: null,                       
+
+  setEmail: (email) => set({ email }),
 
   setCustomerType: (type) => set({ customerType: type }),
   setClient: (data) => set({ client: data }),

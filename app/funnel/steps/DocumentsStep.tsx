@@ -5,7 +5,21 @@ import { useFunnelStore } from "@/src/store/funnelStore";
 
 
 function DocumentsStep({ borrowers, docs, setDocs, addDocument, saveStep, back }: any) {
-  const { project } = useFunnelStore();
+const { project, email } = useFunnelStore();
+
+async function uploadDocToSharepoint(file: File, inquiryId: string, email: string) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("inquiryId", inquiryId);
+  formData.append("email", email);
+
+  const res = await fetch("/api/upload-doc", {
+    method: "POST",
+    body: formData,
+  });
+
+  return res.json();
+}
 
 
 const documentsForNeuKaufJur = [
@@ -181,30 +195,45 @@ const sections = [
     ],
   },
 ];
+
+
 const isJur = (borrowers ?? []).some((b: any) => b.type === "jur");
 
 const selectedDocuments = isJur
     ? documentsForNeuKaufJur
     : sections;
 
+const handleUpload = async (e: any) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
-  // -----------------------------
-  // UPLOAD FILE HANDLER
-  // -----------------------------
-  const handleUpload = (e: any) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  // UPLOAD DIREKT TE SHAREPOINT
+const uploadRes = await uploadDocToSharepoint(
+  file,
+  project?.id ?? "no-inquiry-id",
+  email ?? "no-email"
+);
 
-    const newDoc = {
-      id: uuidv4(),
-      name: file.name,
-      size: file.size,
-      file,
-    };
+  if (uploadRes?.error) {
+    console.error("Upload failed:", uploadRes.error);
+    alert("Fehler beim Upload!");
+    return;
+  }
 
-    setDocs((prev: any[]) => [...prev, newDoc]);
-    addDocument(newDoc);
+  // Shto në UI
+  const newDoc = {
+    id: uuidv4(),
+    name: file.name,
+    size: file.size,
+    file,
+    sharepointUrl: uploadRes?.data?.webUrl ?? null, // LINK i SharePoint-it
   };
+
+  setDocs((prev: any[]) => [...prev, newDoc]);
+  addDocument(newDoc);
+};
+
+
 
   const toggleDocument = (docName: string) => {
     const exists = docs.find((d: any) => d.name === docName);

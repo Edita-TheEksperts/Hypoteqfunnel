@@ -122,3 +122,12 @@ model Kreditnehmer {
   geburtsdatum  String?
   property      Property @relation(fields: [propertyId], references: [id])
 }
+model Document {
+  id          String   @id @default(uuid())
+  inquiryId   String
+  fileName    String
+  fileUrl     String
+  uploadedAt  DateTime @default(now())
+
+  inquiry Inquiry @relation(fields: [inquiryId], references: [id])
+}

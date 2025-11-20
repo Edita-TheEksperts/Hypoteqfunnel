@@ -42,6 +42,20 @@ export default function FunnelPage() {
   const next = () => setStep((s) => s + 1);
   const back = () => setStep((s) => Math.max(1, s - 1));
 
+
+  async function uploadDocToSharepoint(file: File, inquiryId: string) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("inquiryId", inquiryId);
+
+  const res = await fetch("/api/upload-doc", {
+    method: "POST",
+    body: formData,
+  });
+
+  return res.json();
+}
+
   // -------------------------------------
   // CALCULATE SIDEBAR MAPPING
   // -------------------------------------
@@ -172,7 +186,6 @@ const saveStep4 = () => {
   // -------------------------------------
 const submitFinal = async () => {
   try {
-    // Get the current state from the store
     const {
       customerType,
       client,
@@ -182,12 +195,10 @@ const submitFinal = async () => {
       financing,
     } = useFunnelStore.getState();
 
-    // Send the data to the API endpoint
+    // 1️⃣ Create Inquiry
     const res = await fetch("/api/inquiry", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         customerType,
         client,
@@ -198,18 +209,33 @@ const submitFinal = async () => {
       }),
     });
 
-    // Parse the JSON response
     const data = await res.json();
 
-    // Check the response
-    if (data.success) {
-      console.log("Successfully saved inquiry:", data);
-      setStep(7); // Move to the success screen
-    } else {
+    if (!data.success) {
       console.error("Failed:", data.error);
       alert("Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.");
+      return;
     }
-  } catch (err) {
+
+    console.log("📌 Inquiry created:", data);
+
+    // 2️⃣ Extract inquiryId
+    const inquiryId = data.inquiry.id;
+
+    // 3️⃣ Upload documents to SharePoint
+    for (const doc of uploadedDocs) {
+      if (doc.file) {
+        console.log("⬆ Uploading:", doc.name);
+        await uploadDocToSharepoint(doc.file, inquiryId);
+      }
+    }
+
+    console.log("🎉 All docs uploaded!");
+
+    // 4️⃣ Move to success step
+    setStep(7);
+
+  } catch (err: any) {
     console.error("Error:", err);
     alert("Serverfehler. Bitte später erneut versuchen.");
   }
