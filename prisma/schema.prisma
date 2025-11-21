@@ -20,6 +20,7 @@ model Inquiry {
   // Relations
   client       Client?
   project      Project?
+  documents Document[]
   property     Property?
   financing    Financing?
   borrowers    Borrower[]
