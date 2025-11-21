@@ -72,19 +72,21 @@ export default function Header() {
         {/* Right side */}
         <div className="flex items-center gap-3 sm:gap-4 md:gap-5 ml-auto relative">
           {/* Phone icon (hidden on mobile) */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="22"
-            fill="none"
-            viewBox="0 0 18 24"
-            className="hidden md:block"
-          >
-            <path
-              fill={whiteMenu ? "#fff" : "#132219"}
-              d="M0.46 2.92L3.48 1.09c.22-.13.45-.15.69-.07.24.08.42.24.54.48l2.36 4.74c.19.38.14.84-.13 1.15L5.04 9.53c-.27.31-.33.75-.15 1.12 1 2.08 2.9 4.55 4.6 5.93.31.25.72.26 1.04.03l2.25-1.68c.33-.25.75-.24 1.09.06l3.86 3.34c.2.17.31.39.34.66.03.27-.04.51-.2.73l-2.15 2.96c-.21.29-.53.41-.87.35C7.66 21.63.06 11.75 0 3.79c-.01-.37.17-.69.46-.88z"
-            />
-          </svg>
+<Link href="/contact" className="hidden md:block">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="22"
+    fill="none"
+    viewBox="0 0 18 24"
+  >
+    <path
+      fill={whiteMenu ? "#fff" : "#132219"}
+      d="M0.46 2.92L3.48 1.09c.22-.13.45-.15.69-.07.24.08.42.24.54.48l2.36 4.74c.19.38.14.84-.13 1.15L5.04 9.53c-.27.31-.33.75-.15 1.12 1 2.08 2.9 4.55 4.6 5.93.31.25.72.26 1.04.03l2.25-1.68c.33-.25.75-.24 1.09.06l3.86 3.34c.2.17.31.39.34.66.03.27-.04.51-.2.73l-2.15 2.96c-.21.29-.53.41-.87.35C7.66 21.63.06 11.75 0 3.79c-.01-.37.17-.69.46-.88z"
+    />
+  </svg>
+</Link>
+
 
           {/* Hypothek Button (hidden on small) */}
 <Link

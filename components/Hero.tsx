@@ -7,7 +7,7 @@ export default function Hero() {
   const [openLang, setOpenLang] = useState(false);
 
   return (
-    <section className="relative w-full overflow-hidden font-sfpro max-w-[1579px]  min-h-[100vh]">
+    <section className="relative w-full overflow-hidden font-sfpro min-h-[100vh]">
       {/* ✅ Background (works for all screens) */}
       <div
         className="absolute inset-0 bg-no-repeat bg-cover -z-10"
