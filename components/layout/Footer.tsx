@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               Löwenstrasse 29 <br /> 8001 Zürich
             </p>
             <p className="text-[20px] leading-[24px] mb-[12px]">
-              Telefon: <br /> 044 554 41 00
+             Telefonnummer: <br /> 044 554 41 00
             </p>
             <p className="text-[20px] leading-[24px]">
               E-Mail-Adresse: <br /> info@hypoteq.ch
@@ -40,13 +40,13 @@ const Footer: React.FC = () => {
             <FooterColumn
               title="Home Page"
               links={[
-                { label: "Hypoteq’s beste Auswahl", href: "#" },
+                { label: "HYPOTEQSmarte Wahl. Beste Zinsen.", href: "#" },
                 { label: "Hypothekenrechner", href: "#" },
                 { label: "So funktioniert’s", href: "#" },
                 { label: "Immobilienbewertung", href: "#" },
                 { label: "Deine Vorteile mit HYPOTEQ", href: "#" },
                 { label: "Testimonials", href: "#" },
-                { label: "Hypotheken Guide", href: "#" },
+                { label: "Dein Hypotheken-Ratgeber", href: "#" },
               ]}
             />
 

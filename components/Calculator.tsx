@@ -392,7 +392,7 @@ Hypothek anfragen
 </div>
 
 {/* TWO CTA CARDS */}
-<section className="flex flex-col md:flex-row justify-between items-start gap-[24px] w-full max-w-[1280px] mx-auto mt-[60px] md:mt-[100px] mb-[80px] md:mb-[100px] px-1">
+<section className="flex flex-col md:flex-row justify-between items-start gap-[24px] w-full max-w-[1280px] mx-auto mt-[60px] md:mt-[100px] mb-[200px] md:mb-[100px] px-1">
 
   {/* Left Card */}
   <div className="relative flex flex-col justify-between items-start w-full md:w-[628px] h-[260px] md:h-[293px] p-[20px] md:p-[24px] rounded-[10px] border border-[#132219] overflow-hidden bg-[linear-gradient(90deg,#FFF4DE_0%,#FCEAC5_100%)]">
