@@ -168,14 +168,14 @@ Rechne in Echtzeit. Entscheide mit Klarheit.
           <div className="mt-[16px] flex flex-col gap-[24px]">
             <div className="flex gap-3">
               <ToggleButton
-                label="Purchase"
+                label="Immobilienkauf"
                 active={loanType === "purchase"}
                 onClick={() =>
                   setLoanType(loanType === "purchase" ? null : "purchase")
                 }
               />
               <ToggleButton
-                label="Refinancing"
+                label="Refinanzierung"
                 active={loanType === "refinancing"}
                 onClick={() =>
                   setLoanType(loanType === "refinancing" ? null : "refinancing")

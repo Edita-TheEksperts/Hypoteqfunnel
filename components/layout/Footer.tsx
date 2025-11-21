@@ -102,8 +102,15 @@ const Footer: React.FC = () => {
                 { label: "Standort", href: "/contact" },
               ]}
             />
+<FooterColumn
+  title={
+    <a href="/faq" className="hover:underline">
+      Frequently Asked Questions
+    </a>
+  }
+  links={[]}
+/>
 
-            <FooterColumn title="Frequently Asked Questions" links={[]} />
           </div>
         </div>
 
