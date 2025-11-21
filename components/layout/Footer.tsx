@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
             <FooterColumn
               title="Home Page"
               links={[
-                { label: "HYPOTEQSmarte Wahl. Beste Zinsen.", href: "#" },
+                { label: "HYPOTEQ Smarte Wahl. Beste Zinsen.", href: "#" },
                 { label: "Hypothekenrechner", href: "#" },
                 { label: "So funktioniert’s", href: "#" },
                 { label: "Immobilienbewertung", href: "#" },
