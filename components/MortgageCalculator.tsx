@@ -307,7 +307,7 @@ const minRefinanceMortgage = existingMortgage;
 
   {/* Butoni → 28px distancë nga kutia sipër */}
   <button className="w-full h-[41px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-    Projekt starten
+ Mein Projekt fortsetzen
   </button>
 </div>
 
@@ -315,7 +315,7 @@ const minRefinanceMortgage = existingMortgage;
 <div className="flex flex-col gap-[40px] md:gap-[63px] mt-[60px] md:mt-[80px] items-stretch">
   <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center w-full">
     <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-sfpro font-medium text-[#132219] tracking-[-0.4px]">
-      Estimated Costs in detail
+Geschätzte Kosten im Detail
     </h2>
 
     <div className="relative w-full md:w-auto">
@@ -398,7 +398,7 @@ const minRefinanceMortgage = existingMortgage;
 <div className="flex justify-center w-full mt-0 md:mt-[40px] px-4">
   
   <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
-    Continue my project
+Hypothek anfragen
   </button>
 </div>
 
