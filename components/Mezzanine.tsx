@@ -148,8 +148,8 @@ text-[#132219] font-['SF Pro Display']">
               <li>Du willst schnell handeln – z. B. bei Akquisitionen, Zwischenfinanzierungen oder Reorganisationen.</li>
             </ul>
           </div>
-          <div className="w-full sm:w-[380px] md:w-[400px] flex justify-center order-1 md:order-2">
-            <img src="/images/Calendar2.png" alt="Closing Day Kalender" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
+          <div className="w-full sm:w-[380px] md:w-[538px] flex justify-center order-1 md:order-2">
+            <img src="/images/Kalendar.png" alt="Closing Day Kalender" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
           </div>
         </div>
 

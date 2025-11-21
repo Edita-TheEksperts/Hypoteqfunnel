@@ -28,7 +28,7 @@ export default function AboutSection() {
       <div
         className="absolute inset-0 bg-no-repeat bg-cover -z-10"
         style={{
-          backgroundImage: "url('/images/556.png')",
+          backgroundImage: "url('/images/8329269237.png')",
           backgroundPosition: "center top",
           backgroundSize: "cover",
         }}

@@ -26,7 +26,7 @@ export default function Home() {
       <MortgageGuide />
       <ConsultationBanner />
 
-      <div className="mt-[100px] md:mt-[200px]">
+      <div className="">
         <Footer />
       </div>
     </main>
