@@ -133,27 +133,29 @@ const Footer: React.FC = () => {
                 { label: "Partner werden", href: "#" },
               ]}
             />
+<FooterColumn
+  title="HYPOTEQ Advisory"
+  links={[
+    { label: "Finanzierung im Ruhestand", href: "#" },
+    { label: "Wie läuft’s ab?", href: "#" },
+  ]}
 
-            <FooterColumn
-              title="HYPOTEQ Advisory"
-              links={[
-                { label: "Finanzierung im Ruhestand", href: "#" },
-                { label: "Wie läuft’s ab?", href: "#" },
-              ]}
-            />
+/>
 
-            <FooterColumn
-              title="Mezzanine-Finanzierung"
-              links={[
-                { label: "Was ist Mezzanine?", href: "#" },
-                { label: "Wann ist Mezzanine sinnvoll?", href: "#" },
-                { label: "Wie funktioniert das?", href: "#" },
-                { label: "Gemeinsam möglich machen", href: "#" },
-              ]}
-            />
+<FooterColumn
+  title="Mezzanine-Finanzierung"
+  links={[
+    { label: "Was ist Mezzanine?", href: "#" },
+    { label: "Wann ist Mezzanine sinnvoll?", href: "#" },
+    { label: "Wie funktioniert das?", href: "#" },
+    { label: "Gemeinsam möglich machen", href: "#" },
+  ]}
+  className="mt-[80px]"
+/>
+
 
             {/* EMPTY */}
-            <FooterColumn title="Impressum & Datenschutz" links={[]} />
+            <FooterColumn title="Impressum & Datenschutz" links={[]} className="mt-[80px]" />
           </div>
         </div>
 
@@ -195,16 +197,18 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-
 const FooterColumn = ({
   title,
   links,
+  className = "",
 }: {
   title: string;
   links: { label: string; href: string }[];
+  className?: string;
 }) => {
   return (
-    <div className="flex flex-col items-start w-[258px] gap-[16px]">
+    <div className={`flex flex-col items-start w-[258px] gap-[16px] ${className}`}>
+
       <h4 className="text-[#132219] text-[24px] font-[600] mb-[24px]">
         {title}
       </h4>
