@@ -1,6 +1,8 @@
 "use client";
 import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+
 
 <Image
   src="/images/123.png"
@@ -137,7 +139,7 @@ const minRefinanceMortgage = existingMortgage;
 
   // -------------- UI --------------
   return (
-<section className="flex flex-col items-center bg-white py-12 px-[116px] mb-[120px] font-sans text-[#132219]">
+<section id="calculator" className="flex flex-col items-center bg-white py-12 px-[116px] mb-[120px] font-sans text-[#132219]">
 <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1579px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
 
         <div className="flex flex-col w-full max-w-[536px] gap-[48px]">
@@ -158,40 +160,40 @@ const minRefinanceMortgage = existingMortgage;
   </h1>
 </div>
 
+{/* INPUT BLOCK — spacing 28px uniform */}
+<div className="flex flex-col gap-[28px] mt-[16px]">
 
-          <div className="mt-[16px] flex flex-col gap-[24px]">
-            <div className="flex gap-3">
-              <ToggleButton
-                label="Immobilienkauf"
-                active={loanType === "purchase"}
-                onClick={() =>
-                  setLoanType(loanType === "purchase" ? null : "purchase")
-                }
-              />
-              <ToggleButton
-                label="Refinanzierung"
-                active={loanType === "refinancing"}
-                onClick={() =>
-                  setLoanType(loanType === "refinancing" ? null : "refinancing")
-                }
-              />
-            </div>
-            {loanType && (
-              <div className="flex w-full border border-[#132219] rounded-full p-[3px] animate-fadeIn">
-                <SubToggle
-                  label="Hauptwohnsitz"
-                  active={residenceType === "haupt"}
-                  onClick={() => setResidenceType("haupt")}
-                />
-                <SubToggle
-                  label="Zweitwohnsitz"
-                  active={residenceType === "zweit"}
-                  onClick={() => setResidenceType("zweit")}
-                />
-              </div>
-            )}
-<div className="flex flex-col gap-[22px] mt-[22px]">
+  {/* Toggle buttons */}
+  <div className="flex gap-[12px]">
+    <ToggleButton
+      label="Immobilienkauf"
+      active={loanType === "purchase"}
+      onClick={() => setLoanType("purchase")}
+    />
+    <ToggleButton
+      label="Refinanzierung"
+      active={loanType === "refinancing"}
+      onClick={() => setLoanType("refinancing")}
+    />
+  </div>
 
+  {/* Sub toggles */}
+  {loanType && (
+    <div className="flex w-full border border-[#132219] rounded-full p-[3px]">
+      <SubToggle
+        label="Hauptwohnsitz"
+        active={residenceType === "haupt"}
+        onClick={() => setResidenceType("haupt")}
+      />
+      <SubToggle
+        label="Zweitwohnsitz"
+        active={residenceType === "zweit"}
+        onClick={() => setResidenceType("zweit")}
+      />
+    </div>
+  )}
+
+  {/* Sliders */}
   <SliderInput
     label="Kaufpreis"
     value={propertyPrice}
@@ -209,7 +211,6 @@ const minRefinanceMortgage = existingMortgage;
         min={0}
         max={sliderMaxExisting}
       />
-
       <SliderInput
         label="Neue Hypothek"
         value={newMortgage}
@@ -220,38 +221,30 @@ const minRefinanceMortgage = existingMortgage;
     </>
   )}
 
-{loanType === "purchase" && (
+  {loanType === "purchase" && (
+    <SliderInput
+      label="Eigenmittel"
+      value={ownFunds}
+      setValue={setOwnFunds}
+      min={0}
+      max={propertyPrice}
+      minRequired={minOwnFunds}
+    />
+  )}
+
   <SliderInput
-    label="Eigenmittel"
-    value={ownFunds}
-    setValue={setOwnFunds}
+    label="Brutto-Haushaltseinkommen"
+    value={income}
+    setValue={setIncome}
     min={0}
-    max={propertyPrice}
-    minRequired={minOwnFunds}  
+    max={500000}
+    minRequired={minIncomeRequired}
   />
-)}
-
- <SliderInput
-
-  label="Brutto-Haushaltseinkommen"
-  value={income}
-  setValue={setIncome}
-  min={0} 
-  max={500000}
-  minRequired={minIncomeRequired} 
-/>
 
 </div>
-          </div>
 
-          <div className="flex flex-col gap-2 mt-[-7px] w-full">
-            <label className="text-[16px] font-medium">Postleitzahl / Ort</label>
-            <input
-              type="text"
-              placeholder="Enter your zip/city"
-              className="w-full border border-[#A8A8A8] rounded-full px-5 py-2 text-[16px] outline-none placeholder:text-[#A8A8A8]"
-            />
-          </div>
+
+   
         </div>
 <div className="flex flex-col items-start w-full max-w-[628px] mt-[253px]">
 
@@ -306,9 +299,12 @@ const minRefinanceMortgage = existingMortgage;
   </div>
 
   {/* Butoni → 28px distancë nga kutia sipër */}
+<Link href="/funnel" className="w-full">
   <button className="w-full h-[41px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
- Mein Projekt fortsetzen
+    Mein Projekt fortsetzen
   </button>
+</Link>
+
 </div>
 
       </div>
@@ -397,9 +393,11 @@ Geschätzte Kosten im Detail
 
 <div className="flex justify-center w-full mt-0 md:mt-[40px] px-4">
   
+  <Link href="/funnel" className="w-full">
   <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
 Hypothek anfragen
   </button>
+  </Link>
 </div>
 
     </section>
@@ -518,11 +516,14 @@ background: `linear-gradient(to right, #132219 ${Math.max(percentage, 3)}%, #D9D
         }}
       />
 
-      {minRequired !== undefined && (
-        <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
-          Minimum : {Math.round(minRequired).toLocaleString("de-CH")} CHF
-        </div>
-      )}
+ {minRequired !== undefined ? (
+  <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px] h-[18px]">
+    Minimum : {Math.round(minRequired).toLocaleString("de-CH")} CHF
+  </div>
+) : (
+  <div className="h-[18px]" />   // placeholder për të mbajtur të njëjtën lartësi
+)}
+
     </div>
   );
 }

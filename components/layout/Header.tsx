@@ -87,15 +87,16 @@ export default function Header() {
           </svg>
 
           {/* Hypothek Button (hidden on small) */}
-          <Link
-            href="/hypotheken"
-            className="hidden sm:flex items-center justify-center gap-[10px] 
-              w-[200px] sm:w-[219px] h-[38px] sm:h-[40px]
-              rounded-[58px] bg-[#CAF476] text-[#132219]
-              text-[17px] sm:text-[20px] font-semibold hover:opacity-90 transition-all"
-          >
-            Hypothek anfragen
-          </Link>
+<Link
+  href="/funnel"
+  className="hidden sm:flex items-center justify-center gap-[10px] 
+    w-[200px] sm:w-[219px] h-[38px] sm:h-[40px]
+    rounded-[58px] bg-[#CAF476] text-[#132219]
+    text-[17px] sm:text-[20px] font-semibold hover:opacity-90 transition-all"
+>
+  Hypothek anfragen
+</Link>
+
 
           {/* Language selector */}
           <div className="relative">

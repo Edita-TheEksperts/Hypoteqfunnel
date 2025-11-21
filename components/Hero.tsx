@@ -52,18 +52,21 @@ export default function Hero() {
 
         {/* ✅ CTA Button */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-[14px] mt-6 sm:mt-[16px] w-full">
-          <button
-            className="flex items-center justify-center 
-            w-full sm:w-[234px]
-            h-[54px] sm:h-[48px]
-            px-[20px] py-[10px]
-            rounded-[45px]
-            bg-[#132219] text-[#CAF476]
-            text-[18px] sm:text-[20px] font-semibold
-            hover:opacity-90 transition-all"
-          >
-            Hypothek berechnen
-          </button>
+<a href="#calculator" className="w-full sm:w-[234px]">
+  <button
+    className="flex items-center justify-center 
+    w-full
+    h-[54px] sm:h-[48px]
+    px-[20px] py-[10px]
+    rounded-[45px]
+    bg-[#132219] text-[#CAF476]
+    text-[18px] sm:text-[20px] font-semibold
+    hover:opacity-90 transition-all"
+  >
+    Hypothek berechnen
+  </button>
+</a>
+
         </div>
 
 {/* ✅ Partners Section */}
