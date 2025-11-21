@@ -52,7 +52,7 @@ const effectiveRate = useMemo(() => {
   return 0.0105;
 }, [interestOption]);
 
-const interestOptions = ["SARON 0.85%", "5 Jahre 1.05%", "10 Jahre 1.40%"]; 
+const interestOptions = ["SARON 0.85%", "5-jährige Festhypothek – 1,03 %", "10 Jahre 1.40%"]; 
 const mortgageNeed =
   loanType === "purchase"
     ? Math.max(0, propertyPrice - ownFunds)

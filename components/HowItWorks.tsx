@@ -134,7 +134,8 @@ export default function HowItWorks() {
     },
     {
       step: "Klick 3",
-      title: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt.Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
+      title:  "Angebot erhalten & entscheiden",
+      text:"Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt.Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
       image: "/images/Offer.png",
     },
     {

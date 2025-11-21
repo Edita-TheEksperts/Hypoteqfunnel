@@ -52,7 +52,7 @@ const effectiveRate = useMemo(() => {
   return 0.0105;
 }, [interestOption]);
 
-const interestOptions = ["SARON 0.85%", "5 Jahre 1.05%", "10 Jahre 1.40%"]; 
+const interestOptions = ["SARON 0.85%", "5-jährige Festhypothek – 1,03 %", "10 Jahre 1.40%"]; 
 const mortgageNeed =
   loanType === "purchase"
     ? Math.max(0, propertyPrice - ownFunds)
@@ -298,14 +298,14 @@ Rechne in Echtzeit. Entscheide mit Klarheit.
 />
 
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-          Projekt starten
+     Mein Projekt fortsetzen
           </button>
         </div>
       </div>
 <div className="flex flex-col gap-[40px] md:gap-[63px] mt-[60px] md:mt-[80px] items-stretch">
   <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center w-full">
     <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-sfpro font-medium text-[#132219] tracking-[-0.4px]">
-      Estimated Costs in detail
+Geschätzte Kosten im Detail
     </h2>
 
     <div className="relative w-full md:w-auto">
