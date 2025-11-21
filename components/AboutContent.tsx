@@ -2,7 +2,8 @@
 import { useState } from "react";
 
 export default function AboutSection() {
-  const [active, setActive] = useState("dna");
+const [active, setActive] = useState("");
+
 
   const buttons = [
     { id: "dna", label: "Unsere DNA" },
