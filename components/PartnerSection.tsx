@@ -11,7 +11,7 @@ export default function PartnerSection() {
   const buttons = [
     { id: "neue", label: "Was dich bei uns erwartet" },
     { id: "refi", label: "Deine Vorteile auf einen Blick:" },
-    { id: "neubau", label: "Neubau-Finanzierung" },
+    { id: "neubau", label: "FAQ" },
     { id: "partner", label: "Partner werden" },
   ];
 
