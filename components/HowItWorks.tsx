@@ -124,7 +124,7 @@ export default function HowItWorks() {
       step: "Klick 1",
       title: "Angaben zur Immobilie & Finanzierung",
       text: "Trage die wichtigsten Informationen zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Bereits nach diesem Schritt siehst du, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen – schnell, einfach und unverbindlich.",
-      image: "/images/epara.png",
+      image: "/images/Epara.png",
     },
     {
       step: "Klick 2",
@@ -136,7 +136,7 @@ export default function HowItWorks() {
       step: "Klick 3",
       title:  "Angebot erhalten & entscheiden",
       text:"Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt.Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
-      image: "/images/Offer.png",
+      image: "/images/486373494.png",
     },
     {
       title: "Gratulation – Deine Hypothek ist bereit",
