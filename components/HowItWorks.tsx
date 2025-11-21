@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 interface StepProps {
   step?: string;
@@ -83,10 +84,16 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
           Jetzt in nur 3 Klicks starten. Wir führen Sie sicher durch jeden Schritt.
         </p>
 
-        <button className="flex items-center justify-center gap-[8px] sm:gap-[10px] border border-[#132219] rounded-[50px] px-[20px] sm:px-[24px] py-[8px] sm:py-[10px]
-          text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-[600] text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all">
-        Bestes Angebot finden
-        </button>
+  <Link href="/funnel" className="w-full">
+  <button
+    className="flex items-center justify-center gap-[8px] sm:gap-[10px] 
+    border border-[#132219] rounded-[50px] px-[20px] sm:px-[24px] py-[8px] sm:py-[10px]
+    text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-[600] 
+    text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all"
+  >
+    Bestes Angebot finden
+  </button>
+</Link>
       </div>
     ) : (
       image && (
@@ -127,13 +134,12 @@ export default function HowItWorks() {
     },
     {
       step: "Klick 3",
-      title: "Angebot erhalten & entscheiden",
-      text: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt. Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
+      title: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt.Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
       image: "/images/Offer.png",
     },
     {
       title: "Gratulation – Deine Hypothek ist bereit",
-      text: "Nach deiner Auswahl übernehmen wir den Rest: Wir koordinieren die nächsten Schritte mit der Bank und begleiten dich bis zum Abschluss.",
+      text: " Nach deiner Auswahl übernehmen wir den Rest: Wir koordinieren die nächsten Schritte mit der Bank und begleiten dich bis zum Abschluss.",
       highlightBox: true,
     },
   ];
