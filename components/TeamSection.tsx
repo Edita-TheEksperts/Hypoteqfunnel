@@ -70,21 +70,27 @@ const TeamSection: React.FC = () => {
                     {member.description}
                   </p>
 
-                  <button
-                    className="
-                      border border-[#132219] rounded-[58px] 
-                      bg-[#CAF476] text-[#132219]
-                      transition-all duration-300
-                      hover:bg-[#dffb9b]
-                    "
-                    style={{
-                      fontSize: "20px",
-                      lineHeight: "120%",
-                      padding: "8px 24px",
-                    }}
-                  >
-                    Bestes Angebot finden
-                  </button>
+          <a
+  href="https://www.linkedin.com/company/hypoteq-ag/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    inline-block
+    w-fit
+    border border-[#132219] rounded-[58px] 
+    bg-[#CAF476] text-[#132219]
+    transition-all duration-300
+    hover:bg-[#dffb9b]
+  "
+  style={{
+    fontSize: "20px",
+    lineHeight: "120%",
+    padding: "8px 24px",
+  }}
+>
+  Bestes Angebot finden
+</a>
+
                 </div>
               ) : (
                 /* Image box */
@@ -98,59 +104,61 @@ const TeamSection: React.FC = () => {
                 ></div>
               )}
 
-              {/* Text + Social icons */}
-              {!member.bgColor && (
-                <div className="mt-4 w-full flex items-start justify-between">
+        {/* Text + Social icons */}
+{!member.bgColor && (
+  <div className="mt-4 w-full flex flex-col gap-[10px]">
 
-                  {/* Name + Position */}
-                  <div className="flex flex-col items-start">
-                    <h3 className="text-[#132219] text-[20px] font-semibold leading-[24px] border border-black rounded-[42px] px-[12px] py-[4px]">
-                      {member.name}
-                    </h3>
-                    <p className="text-[#132219] text-[16px] font-light leading-[22px] border border-black rounded-[42px] px-[12px] py-[4px] mt-[10px]">
-                      {member.position}
-                    </p>
-                  </div>
+    {/* Row 1: Name + LinkedIn */}
+    <div className="flex items-center justify-between w-full">
+      <h3 className="text-[#132219] text-[20px] font-semibold leading-[24px] 
+                     border border-black rounded-[42px] px-[12px] py-[4px]">
+        {member.name}
+      </h3>
 
-                  {/* Social Icons */}
-                  <div className="flex flex-col items-center gap-[10px]">
+      {/* LinkedIn */}
+      <button
+        className="
+          flex justify-center items-center
+          w-[42px] h-[42px]
+          rounded-full border border-black
+          bg-white hover:bg-gray-100 transition
+        "
+      >
+        <img
+          src="/images/linkedin.svg"
+          alt="LinkedIn"
+          className="w-[18px] h-[18px]"
+        />
+      </button>
+    </div>
 
-                    {/* LinkedIn */}
-                    <button
-                      className="
-                        flex justify-center items-center
-                        w-[42px] h-[42px]
-                        rounded-full border border-black
-                        bg-white hover:bg-gray-100 transition
-                      "
-                    >
-                      <img
-                        src="/images/linkedin.svg"
-                        alt="LinkedIn"
-                        className="w-[18px] h-[18px]"
-                      />
-                    </button>
+    {/* Row 2: Position + Email */}
+    <div className="flex items-center justify-between w-full">
+      <p className="text-[#132219] text-[16px] font-light leading-[22px] 
+                    border border-black rounded-[42px] px-[12px] py-[4px]">
+        {member.position}
+      </p>
 
-                    {/* Email */}
-                    <button
-                      className="
-                        flex justify-center items-center
-                        w-[42px] h-[42px]
-                        rounded-full border border-black
-                        bg-white hover:bg-gray-100 transition
-                      "
-                    >
-                      <img
-                        src="/images/email.svg"
-                        alt="Email"
-                        className="w-[18px] h-[18px]"
-                      />
-                    </button>
+      {/* Email */}
+      <button
+        className="
+          flex justify-center items-center
+          w-[42px] h-[42px]
+          rounded-full border border-black
+          bg-white hover:bg-gray-100 transition
+        "
+      >
+        <img
+          src="/images/email.svg"
+          alt="Email"
+          className="w-[18px] h-[18px]"
+        />
+      </button>
+    </div>
 
-                  </div>
+  </div>
+)}
 
-                </div>
-              )}
             </div>
           ))}
         </div>

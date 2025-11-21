@@ -7,12 +7,10 @@ const Footer: React.FC = () => {
     <footer className="bg-white text-[#132219] font-sfpro border-t border-[#E5E5E5] w-full px-[20px] md:px-[116px]">
       <div className="max-w-[1579px] mx-auto pt-[50px] pb-[60px] flex flex-col gap-[108px]">
 
-        {/* ----------------------------------------------- */}
-        {/* ROW 1 — Logo + 3 Columns */}
-        {/* ----------------------------------------------- */}
+        {/* ROW 1 */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
 
-          {/* LEFT SIDE — LOGO + ADDRESS */}
+          {/* LEFT SIDE */}
           <div className="flex flex-col items-start max-sm:items-center max-sm:text-center">
             <Image
               src="/images/logo.png"
@@ -27,141 +25,137 @@ const Footer: React.FC = () => {
               Löwenstrasse 29 <br /> 8001 Zürich
             </p>
             <p className="text-[20px] leading-[24px] mb-[12px]">
-             Telefonnummer: <br /> 044 554 41 00
+              Telefonnummer: <br /> 044 554 41 00
             </p>
             <p className="text-[20px] leading-[24px]">
               E-Mail-Adresse: <br /> info@hypoteq.ch
             </p>
           </div>
 
-          {/* RIGHT SIDE — 3 COLUMNS */}
+          {/* RIGHT SIDE */}
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
 
             <FooterColumn
-              title="Home Page"
+              title={<a href="/" className="hover:underline">Home</a>}
               links={[
-                { label: "HYPOTEQ Smarte Wahl. Beste Zinsen.", href: "#" },
-                { label: "Hypothekenrechner", href: "#" },
-                { label: "So funktioniert’s", href: "#" },
-                { label: "Immobilienbewertung", href: "#" },
-                { label: "Deine Vorteile mit HYPOTEQ", href: "#" },
-                { label: "Testimonials", href: "#" },
-                { label: "Dein Hypotheken-Ratgeber", href: "#" },
+                { label: "HYPOTEQ Smarte Wahl. Beste Zinsen.", href: "/" },
+                { label: "Hypothekenrechner", href: "/hypotheken" },
+                { label: "So funktioniert’s", href: "/advantages" },
+                { label: "Immobilienbewertung", href: "/homeevaluation" },
+                { label: "Deine Vorteile mit HYPOTEQ", href: "/advantages" },
+                { label: "Testimonials", href: "/#testimonials" },
+                { label: "Dein Hypotheken-Ratgeber", href: "/documents" },
               ]}
             />
 
             <FooterColumn
-              title="Über uns"
+              title={<a href="/about" className="hover:underline">Über uns</a>}
               links={[
-                { label: "Unsere Mission", href: "#" },
-                { label: "Unser Team", href: "#" },
-                { label: "Unsere Partner", href: "#" },
-                { label: "Werde Teil von HYPOTEQ", href: "#" },
+                { label: "Unsere Mission", href: "/about" },
+                { label: "Unser Team", href: "/about" },
+                { label: "Unsere Partner", href: "/partner" },
+                { label: "Werde Teil von HYPOTEQ", href: "/partner" },
               ]}
             />
 
             <FooterColumn
-              title="Hypothekenrechner"
+              title={<a href="/calc" className="hover:underline">Hypothekenrechner</a>}
               links={[
-                { label: "Berechne deine Hypothek", href: "#" },
-                { label: "Geschätzte Kosten im Detail", href: "#" },
+                { label: "Berechne deine Hypothek", href: "/calc" },
+                { label: "Geschätzte Kosten im Detail", href: "/calc" },
               ]}
             />
           </div>
         </div>
 
-        {/* ----------------------------------------------- */}
-        {/* ROW 2 — NEWS + 3 Columns */}
-        {/* ----------------------------------------------- */}
+        {/* ROW 2 */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
 
-          {/* NEWS left side */}
           <div>
             <h4 className="text-[24px] font-[600]">News</h4>
           </div>
 
-          {/* Right side */}
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
 
             <FooterColumn
-              title="Hypotheken leicht gemacht"
+              title={<a className="hover:underline">Hypotheken leicht gemacht</a>}
               links={[
-                { label: "Neuhypothek", href: "#" },
-                { label: "Refinanzierung", href: "#" },
-                { label: "Neubau-Finanzierung", href: "#" },
+                { label: "Neuhypothek", href: "/hypotheken" },
+                { label: "Refinanzierung", href: "/hypotheken" },
+                { label: "Neubau-Finanzierung", href: "/hypotheken" },
               ]}
             />
 
             <FooterColumn
-              title="Kontaktiere uns"
+              title={<a href="/contact" className="hover:underline">Kontaktiere uns</a>}
               links={[
-                { label: "Schreibe uns", href: "#" },
-                { label: "Ruf uns an", href: "#" },
-                { label: "Standort", href: "#" },
+                { label: "Schreibe uns", href: "/contact" },
+                { label: "Ruf uns an", href: "tel:0445544100" },
+                { label: "Standort", href: "/contact" },
               ]}
             />
 
-            {/* EMPTY links = no list */}
             <FooterColumn title="Frequently Asked Questions" links={[]} />
           </div>
         </div>
 
-        {/* ----------------------------------------------- */}
-        {/* ROW 3 — DOCUMENTS + OTHER COLUMNS */}
-        {/* ----------------------------------------------- */}
+        {/* ROW 3 */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
           <div></div>
 
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
 
             <FooterColumn
-              title="Dokumente"
+              title={<a href="/documents" className="hover:underline">Dokumente</a>}
               links={[
-                { label: "Hypotheken Checkliste für ein Eigenheim", href: "#" },
-                { label: "Auskunftsermächtigung", href: "#" },
-                { label: "Hypotheken Checkliste für ein Renditeobjekt", href: "#" },
-                { label: "HYPOTEQ Informationsmaterial", href: "#" },
+                { label: "Hypotheken Checkliste für ein Eigenheim", href: "/documents" },
+                { label: "Auskunftsermächtigung", href: "/documents" },
+                { label: "Hypotheken Checkliste für ein Renditeobjekt", href: "/documents" },
+                { label: "HYPOTEQ Informationsmaterial", href: "/documents" },
               ]}
             />
 
             <FooterColumn
-              title="Werde HYPOTEQ Partner"
+              title={<a href="/partner" className="hover:underline">Werde HYPOTEQ Partner</a>}
               links={[
-                { label: "Was dich bei uns erwartet", href: "#" },
-                { label: "Deine Vorteile auf einen Blick:", href: "#" },
-                { label: "Frequently Asked Questions", href: "#" },
-                { label: "Partner werden", href: "#" },
+                { label: "Was dich bei uns erwartet", href: "/partner" },
+                { label: "Deine Vorteile auf einen Blick:", href: "/partner" },
+                { label: "Frequently Asked Questions", href: "/faq" },
+                { label: "Partner werden", href: "/partner" },
               ]}
             />
-<FooterColumn
-  title="HYPOTEQ Advisory"
-  links={[
-    { label: "Finanzierung im Ruhestand", href: "#" },
-    { label: "Wie läuft’s ab?", href: "#" },
-  ]}
 
-/>
+            <FooterColumn
+              title={<a href="/advisory" className="hover:underline">HYPOTEQ Advisory</a>}
+              links={[
+                { label: "Finanzierung im Ruhestand", href: "/advisory" },
+                { label: "Wie läuft’s ab?", href: "/advisory" },
+              ]}
+            />
 
-<FooterColumn
-  title="Mezzanine-Finanzierung"
-  links={[
-    { label: "Was ist Mezzanine?", href: "#" },
-    { label: "Wann ist Mezzanine sinnvoll?", href: "#" },
-    { label: "Wie funktioniert das?", href: "#" },
-    { label: "Gemeinsam möglich machen", href: "#" },
-  ]}
-  className="mt-[80px]"
-/>
+            <FooterColumn
+              title={<a href="/mezzanine" className="hover:underline">Mezzanine-Finanzierung</a>}
+              links={[
+                { label: "Was ist Mezzanine?", href: "/mezzanine" },
+                { label: "Wann ist Mezzanine sinnvoll?", href: "/mezzanine" },
+                { label: "Wie funktioniert das?", href: "/mezzanine" },
+                { label: "Gemeinsam möglich machen", href: "/mezzanine" },
+              ]}
+              className="mt-[80px]"
+            />
 
-
-            {/* EMPTY */}
-            <FooterColumn title="Impressum & Datenschutz" links={[]} className="mt-[80px]" />
+            <FooterColumn
+              title={<a href="/contact" className="hover:underline">Impressum & Datenschutz</a>}
+              links={[
+                { label: "Impressum", href: "/contact" },
+                { label: "Datenschutz", href: "/contact" },
+              ]}
+              className="mt-[80px]"
+            />
           </div>
         </div>
 
-        {/* ----------------------------------------------- */}
-        {/* ROW 4 — Bottom Newsletter */}
-        {/* ----------------------------------------------- */}
+        {/* ROW 4 */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px]">
           <div></div>
 
@@ -197,18 +191,18 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
+
 const FooterColumn = ({
   title,
   links,
   className = "",
 }: {
-  title: string;
+  title: React.ReactNode;
   links: { label: string; href: string }[];
   className?: string;
 }) => {
   return (
     <div className={`flex flex-col items-start w-[258px] gap-[16px] ${className}`}>
-
       <h4 className="text-[#132219] text-[24px] font-[600] mb-[24px]">
         {title}
       </h4>
@@ -217,10 +211,7 @@ const FooterColumn = ({
         <ul className="flex flex-col gap-[16px] w-full">
           {links.map((link, i) => (
             <li key={i}>
-              <a
-                href={link.href}
-                className="text-[#132219] text-[20px] hover:underline"
-              >
+              <a href={link.href} className="text-[#132219] text-[20px] hover:underline">
                 {link.label}
               </a>
             </li>

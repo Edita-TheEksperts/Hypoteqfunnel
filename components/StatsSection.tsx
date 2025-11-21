@@ -29,55 +29,59 @@ const StatsSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Stats */}
-      <div
+  {/* Stats */}
+<div
+  className="
+    w-full max-w-[1579px] px-[20px] lg:px-[116px] mx-auto
+    mt-[80px] mb-[80px]
+    grid grid-cols-4 gap-[40px]
+    max-lg:grid-cols-2
+    max-sm:grid-cols-1
+  "
+>
+  {[
+    {
+      title: "30+",
+      desc: "Partnerbanken – mehr Auswahl und bessere Konditionen für dich.",
+    },
+{
+  title: "3 Klicks",
+  desc: "Von der Anfragebis <br/> zur Zusage",
+},
+
+    {
+      title: "2,500+",
+      desc: "Zufriedene Kund:innen, die uns bereits ihr Vertrauen geschenkt haben.",
+    },
+    {
+      title: "5+ Jahre",
+      desc: "Erfahrung aus Hypo- und <br/> FinTech-Welt.",
+    },
+  ].map((item, idx) => (
+    <div key={idx} className="flex flex-col gap-[12px]">
+
+      <h3
         className="
-          w-full w-full max-w-[1579px] px-[20px] lg:px-[116px] mx-auto
-] mt-[80px] mb-[80px] px-[20px] lg:px-[116px]
-          grid grid-cols-4 gap-[40px]
-          max-lg:grid-cols-2
-          max-sm:grid-cols-1
+          font-sfpro text-[48px] font-normal leading-[140%]
+          max-md:text-[36px] max-sm:text-[32px]
         "
       >
-        {[
-          {
-            title: "30+",
-            desc: "Partnerbanken – mehr Auswahl und bessere Konditionen für dich.",
-          },
-          {
-            title: "3 Klicks",
-            desc: "Von der Anfrage bis zur Zusage",
-          },
-          {
-            title: "2,500+",
-            desc: "Zufriedene Kund:innen, die uns bereits ihr Vertrauen geschenkt haben.",
-          },
-          {
-            title: "5+ Jahre",
-            desc: "Erfahrung aus Hypo- und FinTech-Welt.",
-          },
-        ].map((item, idx) => (
-          <div key={idx} className="flex flex-col gap-[12px]">
-            <h3
-              className="
-                font-sfpro text-[48px] font-normal leading-[140%]
-                max-md:text-[36px] max-sm:text-[32px]
-              "
-            >
-              {item.title}
-            </h3>
+        {item.title}
+      </h3>
 
-            <p
-              className="
-                font-sfpro text-[20px] font-light leading-[140%]
-                max-w-[262px] max-md:text-[18px]
-              "
-            >
-              {item.desc}
-            </p>
-          </div>
-        ))}
-      </div>
+<p
+  className="
+    font-sfpro text-[20px] font-light leading-[150%]
+    max-w-[400px] max-lg:max-w-full max-md:text-[18px]
+  "
+  dangerouslySetInnerHTML={{ __html: item.desc }}
+/>
+
+
+    </div>
+  ))}
+</div>
+
 
       {/* Image */}
       <div className="w-full w-full max-w-[1579px] px-[20px] lg:px-[116px] mx-auto
