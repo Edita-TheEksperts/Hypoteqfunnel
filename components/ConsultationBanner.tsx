@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 
 const ConsultationBanner: React.FC = () => {
   return (
@@ -47,7 +48,7 @@ const ConsultationBanner: React.FC = () => {
         <p
           className="
             font-['SF Pro Display']
-            text-[#f3f7f2]
+        text-[#CAF476]
             text-[16px] lg:text-[20px]
             font-[300]
             leading-[140%]
@@ -61,9 +62,7 @@ const ConsultationBanner: React.FC = () => {
           Unsere Expert:innen erklären dir den Finanzierungsprozess, zeigen dir passende Optionen
           und begleiten dich bei der Entscheidungsfindung.{" "}
           <br className="max-sm:hidden" />
-          <span className="font-[400] text-[#CAF476]">
-            Jetzt kostenloses Infogespräch buchen.
-          </span>
+     
         </p>
       </div>
 
@@ -74,25 +73,28 @@ const ConsultationBanner: React.FC = () => {
           max-sm:mt-[26px] max-sm:w-full max-sm:justify-center
         "
       >
-        <button
-          className="
-            bg-[#CAF476]
-            text-[#132219]
-            font-['SF Pro Display']
-            font-[600]
-            text-[18px] lg:text-[20px]
-            leading-normal tracking-[-0.2px]
-            px-[22px] py-[10px]
-            rounded-full border border-[#132219]
-            hover:bg-[#D6FA8A]
-            transition-all duration-300
-            whitespace-nowrap shadow-[0_0_15px_rgba(202,244,118,0.25)]
-            max-sm:text-[15px] max-sm:px-[24px] max-sm:py-[12px]
-            max-sm:w-auto max-sm:shadow-[0_0_20px_rgba(202,244,118,0.3)]
-          "
-        >
-          Jetzt kostenloses Infogespräch buchen
-        </button>
+<Link href="/contact">
+  <button
+    className="
+      bg-[#CAF476]
+      text-[#132219]
+      font-['SF Pro Display']
+      font-[600]
+      text-[18px] lg:text-[20px]
+      leading-normal tracking-[-0.2px]
+      px-[22px] py-[10px]
+      rounded-full border border-[#132219]
+      hover:bg-[#D6FA8A]
+      transition-all duration-300
+      whitespace-nowrap shadow-[0_0_15px_rgba(202,244,118,0.25)]
+      max-sm:text-[15px] max-sm:px-[24px] max-sm:py-[12px]
+      max-sm:w-auto max-sm:shadow-[0_0_20px_rgba(202,244,118,0.3)]
+    "
+  >
+    Jetzt kostenloses Infogespräch buchen
+  </button>
+</Link>
+
       </div>
     </section>
   );
