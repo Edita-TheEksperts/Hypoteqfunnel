@@ -85,7 +85,7 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
 
         <button className="flex items-center justify-center gap-[8px] sm:gap-[10px] border border-[#132219] rounded-[50px] px-[20px] sm:px-[24px] py-[8px] sm:py-[10px]
           text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-[600] text-[#132219] bg-[#CAF476] hover:opacity-90 transition-all">
-          Find my best offer
+        Bestes Angebot finden
         </button>
       </div>
     ) : (
