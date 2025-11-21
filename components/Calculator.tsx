@@ -296,10 +296,12 @@ Rechne in Echtzeit. Entscheide mit Klarheit.
   total={formatCHF(income)}
   loanType={loanType}
 />
-
+< Link href="/funnel" className="w-full">
           <button className="w-full h-[50px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
      Mein Projekt fortsetzen
           </button>
+     </Link>
+
         </div>
       </div>
 <div className="flex flex-col gap-[40px] md:gap-[63px] mt-[60px] md:mt-[80px] items-stretch">
@@ -386,9 +388,11 @@ Geschätzte Kosten im Detail
 </div>
 
 <div className="flex justify-center w-full mt-[30px] md:mt-[40px] px-4">
+<Link href="/funnel" className="w-full">
   <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
-Hypothek anfragen
+    Hypothek anfragen
   </button>
+</Link>
 </div>
 
 {/* TWO CTA CARDS */}
@@ -405,11 +409,11 @@ In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transpare
 <br/>  <strong>Schnell, sicher, ohne Umwege.</strong>
       </p>
     </div>
-
+< Link href="/funnel" className="w-full">
     <button className="relative z-10 bg-white border border-[#132219] rounded-full px-[20px] md:px-[24px] py-[6px] md:py-[8px] text-[14px] sm:text-[16px] font-[600] text-[#132219] hover:scale-[1.03] transition-transform">
   Hypothek anfragen 
     </button>
-
+</Link>
     <Image src="/images/00.jpg" alt="House background" fill className="object-cover rounded-[10px] z-0" />
   </div>
 
@@ -460,7 +464,7 @@ In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transpare
     zeigen dir passende Optionen – und begleiten dich bei der 
     Entscheidungsfindung.
   </p>
-
+< Link href="/contact" className="w-full">
   {/* Button */}
   <button
     className="
@@ -482,6 +486,7 @@ In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transpare
   >
 Jetzt kostenloses Infogespräch buchen.
   </button>
+  </Link>
 </div>
 
 

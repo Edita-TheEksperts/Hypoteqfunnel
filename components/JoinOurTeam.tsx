@@ -149,40 +149,47 @@ const JoinOurTeam: React.FC = () => {
                 >
                   {job.description}
                 </p>
-
-         <button
-  className="font-sfpro"
-  style={{
-    width: "100%",
-    alignSelf: "stretch",
-    textAlign: "center",
-    border: "1px solid #000",
-    borderRadius: "58px",
-    padding: isMobile ? "6px 16px" : "8px 24px",
-    fontSize: isMobile ? "14px" : "20px",
-    fontWeight: 600,
-    color: "#132219",
-    background: "transparent",
-    transition: "all 0.3s ease",
-    cursor: "pointer",
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.background = "#132219";
-    e.currentTarget.style.color = "#CAF476";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.background = "transparent";
-    e.currentTarget.style.color = "#132219";
-  }}
-  onMouseDown={(e) => {
-    e.currentTarget.style.transform = "scale(0.98)";
-  }}
-  onMouseUp={(e) => {
-    e.currentTarget.style.transform = "scale(1)";
-  }}
+<a
+  href="https://www.linkedin.com/company/hypoteq-ag/"
+  target="_blank"
+  rel="noopener noreferrer"
+  style={{ width: "100%" }}
 >
-  Jetzt bewerben
-</button>
+  <button
+    className="font-sfpro"
+    style={{
+      width: "100%",
+      alignSelf: "stretch",
+      textAlign: "center",
+      border: "1px solid #000",
+      borderRadius: "58px",
+      padding: isMobile ? "6px 16px" : "8px 24px",
+      fontSize: isMobile ? "14px" : "20px",
+      fontWeight: 600,
+      color: "#132219",
+      background: "transparent",
+      transition: "all 0.3s ease",
+      cursor: "pointer",
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.background = "#132219";
+      e.currentTarget.style.color = "#CAF476";
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.background = "transparent";
+      e.currentTarget.style.color = "#132219";
+    }}
+    onMouseDown={(e) => {
+      e.currentTarget.style.transform = "scale(0.98)";
+    }}
+    onMouseUp={(e) => {
+      e.currentTarget.style.transform = "scale(1)";
+    }}
+  >
+    Jetzt bewerben
+  </button>
+</a>
+
 
               </div>
             </div>
