@@ -370,12 +370,14 @@ export default function FaqSection() {
 
                 {/* Dropdown Content */}
                 {isOpen && (
-                  <div
-                    className="mt-[12px] border border-[#132219] rounded-[16px] p-[24px] 
-                    bg-white shadow-sm"
-                  >
-                    {item.answer}
-                  </div>
+          <div
+  className="mt-[12px] border border-[#132219] rounded-[16px] p-[24px] 
+  bg-white shadow-sm
+  text-[20px] leading-[150%] font-normal font-sfpro text-[#132219]"
+>
+  {item.answer}
+</div>
+
                 )}
               </div>
             );
