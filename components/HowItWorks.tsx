@@ -139,13 +139,14 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section
-      className="
-        relative bg-white 
-        px-4 sm:px-8 md:px-[118px]
-        mt-[32px] sm:mt-[48px] md:mt-[120px]
-      "
-    >
+<section
+  className="
+    relative bg-white 
+    px-[116px]
+    mt-[32px] sm:mt-[48px] md:mt-[120px]
+  "
+>
+
       {/* Sticky Title */}
       <h2
         className="

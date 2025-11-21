@@ -137,7 +137,7 @@ const minRefinanceMortgage = existingMortgage;
 
   // -------------- UI --------------
   return (
-<section className="flex flex-col items-center bg-white py-12 px-1 font-sans text-[#132219]">
+<section className="flex flex-col items-center bg-white py-12 px-[116px] mb-[120px] font-sans text-[#132219]">
 <div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1300px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
 
         <div className="flex flex-col w-full max-w-[536px] gap-[48px]">
@@ -190,7 +190,7 @@ const minRefinanceMortgage = existingMortgage;
                 />
               </div>
             )}
-<div className="flex flex-col gap-[32px] mt-[22px]">
+<div className="flex flex-col gap-[22px] mt-[22px]">
 
   <SliderInput
     label="Kaufpreis"
@@ -306,7 +306,7 @@ const minRefinanceMortgage = existingMortgage;
   </div>
 
   {/* Butoni → 28px distancë nga kutia sipër */}
-  <button className="w-full h-[50px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
+  <button className="w-full h-[41px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
     Projekt starten
   </button>
 </div>
@@ -395,7 +395,8 @@ const minRefinanceMortgage = existingMortgage;
   </div>
 </div>
 
-<div className="flex justify-center w-full mt-[30px] md:mt-[40px] px-4">
+<div className="flex justify-center w-full mt-0 md:mt-[40px] px-4">
+  
   <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
     Continue my project
   </button>
@@ -587,7 +588,7 @@ function ProgressBox({ title, value, current, total, loanType, red = false }: an
         </div>
       </div>
 
-      <h2 className="text-[48px] font-sfpro font-semibold text-[#132219] leading-none opacity-80">
+      <h2 className="text-[48px] font-sfpro font-semibold text-[#132219] leading-none ">
         {value}
       </h2>
 

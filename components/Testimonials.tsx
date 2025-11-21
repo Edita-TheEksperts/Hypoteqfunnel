@@ -72,7 +72,7 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section className="w-full flex flex-col items-center bg-white py-[100px]   mt-[48px] md:mt-[120px] overflow-hidden">
+    <section className="w-full flex flex-col items-center bg-white py-[100px]   mt-[48px] md:mb-[116px] overflow-hidden">
 
       {/* Title */}
       <div className="w-[1274px] max-w-full px-1 flex flex-col md:flex-row justify-between items-start mb-[56px]">
@@ -81,14 +81,14 @@ const Testimonials: React.FC = () => {
           <h2 className="text-[#132219] text-[32px] md:text-[40px] font-[500]">
             Testimonials
           </h2>
-          <p className="text-[#132219] text-[18px] md:text-[24px] font-[300] leading-[140%] mt-[8px] max-w-[1154px]">
+          <p className="text-[#132219] text-[18px] md:text-[24px] font-[300] leading-[140%] mt-[16px] max-w-[1154px]">
             Real experiences from people who found clarity, confidence <br />
             and better decisions with our mortgage and property tools.
           </p>
         </div>
 
         {/* Arrows */}
-        <div className="flex gap-[12px] mt-[20px] md:mt-[8px] self-start md:self-auto">
+        <div className="flex gap-[12px] mt-[60px] md:mt-[8px] self-start md:self-auto">
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
@@ -114,7 +114,7 @@ const Testimonials: React.FC = () => {
       </div>
 
       {/* Slider */}
-      <div className="w-[1274px] max-w-full overflow-hidden px-2">
+<div className="w-[1274px] max-w-full px-2">
         <div
           className="flex gap-[20px] transition-transform duration-500 ease-in-out"
 

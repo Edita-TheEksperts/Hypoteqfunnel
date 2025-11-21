@@ -87,7 +87,7 @@ const YourAdvantages: React.FC = () => {
 
       <div className="w-full lg:w-[1274px] flex flex-col gap-[24px] mb-[60px]">
         {/* FIRST ROW */}
-        <div className="flex flex-col lg:flex-row gap-[24px]">
+        <div className="flex flex-col lg:flex-row gap-[16px]">
           <div className="lg:w-[810px] w-full">
             <AdvantageCard
               title="Direkter Weg zur besten Offerte"
@@ -118,7 +118,7 @@ const YourAdvantages: React.FC = () => {
         </div>
 
         {/* SECOND ROW */}
-        <div className="flex flex-col lg:flex-row gap-[24px]">
+        <div className="flex flex-col lg:flex-row gap-[16px]">
           <div className="w-full lg:flex-1">
             <AdvantageCard
               title={

@@ -11,11 +11,12 @@ export default function BestChoices() {
     rounded-[10px]
     border border-[#000]
     bg-[#132219]
-    mt-[60px] sm:mt-[80px] mb-[60px] sm:mb-[80px]
+    mt-[120px] mb-[120px]
     h-auto lg:h-[297px]
     gap-[32px] lg:gap-0
   "
 >
+
 
       {/* ✅ Left Column */}
       <div
