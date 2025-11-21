@@ -71,9 +71,17 @@ const Footer: React.FC = () => {
         {/* ROW 2 */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
 
-          <div>
-            <h4 className="text-[24px] font-[600]">News</h4>
-          </div>
+       <div>
+  <a
+    href="https://www.linkedin.com/company/hypoteq-ag/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-[24px] font-[600] hover:underline"
+  >
+    Neuigkeiten
+  </a>
+</div>
+
 
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
 

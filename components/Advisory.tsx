@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import ConsultationBanner from "./ConsultationBanner";
 
@@ -190,9 +191,11 @@ export default function Advisory() {
               </p>
 
               {box.button && (
-                <button className="mt-[24px] bg-[#132219] text-[#CAF476] px-[16px] py-[6px] rounded-full text-[16px] sm:text-[18px] font-[500] hover:opacity-80 transition-all w-fit">
-                  Termin buchen
-                </button>
+          <Link href="/contact">
+  <button className="mt-[24px] bg-[#132219] text-[#CAF476] px-[16px] py-[6px] rounded-full text-[16px] sm:text-[18px] font-[500] hover:opacity-80 transition-all w-fit">
+    Termin buchen
+  </button>
+</Link>
               )}
             </div>
           ))}
