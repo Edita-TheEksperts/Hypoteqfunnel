@@ -31,10 +31,11 @@ export default function VorteileSection() {
   ];
 
   const faqs = [
-    { question: "Do I keep ownership of the client?" },
-    { question: "How are commissions structured?" },
-    { question: "Can I use my own branding?" },
-    { question: "How long does onboarding take?" },
+    { question: "Wer kann HYPOTEQ Partner werden?" },
+    { question: "Welche Vorteile bietet eine Partnerschaft mit HYPOTEQ? " },
+    { question: "Wie funktioniert die Zusammenarbeit?" },
+    { question: "Welche Tools stehen mir als Partner zur Verfügung?" },
+        { question: "Wie profitiert meine Kundschaft von der Partnerschaft mit HYPOTEQ? " },
   ];
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -45,7 +46,7 @@ export default function VorteileSection() {
   return (
     <section
       className="relative w-full flex flex-col items-start gap-[120px]
-      px-[24px] md:px-[116px] max-w-[1504px] mx-auto mt-[80px] mb-[120px]"
+      px-[24px] md:px-[116px] max-w-[1579px] mx-auto mt-[120px] mb-[120px]"
     >
       {/* =================== */}
       {/* Vorteile Section */}
@@ -62,7 +63,7 @@ export default function VorteileSection() {
           {cards.map((card, i) => (
             <div
               key={i}
-              className="flex items-start gap-[16px] relative border-l-[5px] border-[#CAF476] pl-[24px]"
+              className="flex items-start gap-[16px] relative border-l-[5px] border-[#CAF476] pl-[24px] rounded-[2px]"
             >
      <div className="absolute top-[6px] left-[12px]">
   <Image
@@ -92,7 +93,7 @@ export default function VorteileSection() {
 {/* FAQ Section */}
 {/* =================== */}
 <div className="flex flex-col gap-[32px] sm:gap-[48px] w-full">
-  <h2
+  <h2  id="faq"
     className="text-[#132219] text-[32px] sm:text-[48px] font-[500] leading-[110%] tracking-[-0.48px]
                font-['SF Pro Display']"
   >
@@ -104,11 +105,11 @@ export default function VorteileSection() {
       <div
         key={index}
         className="flex justify-between items-center border border-[#000]
-        rounded-[30px] sm:rounded-[50px] py-[8px] px-[16px] sm:px-[24px] cursor-pointer transition-all duration-300"
+        rounded-[30px] sm:rounded-[50px] py-[8px] px-[16px] sm:px-[20px] cursor-pointer transition-all duration-300"
         onClick={() => toggleFAQ(index)}
       >
         <p
-          className="text-[20px] sm:text-[32px] font-[500] leading-[140%] tracking-[-0.32px] text-[#132219]
+          className="text-[20px] sm:text-[20px] font-[500] leading-[140%] tracking-[-0.32px] text-[#132219]
           font-['SF Pro Display']"
         >
           {faq.question}

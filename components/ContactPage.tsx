@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ContactPage() {
   return (
-    <section className="flex flex-col items-center bg-white py-[100px] md:py-[140px]px-4 md:px-[116px]
+    <section className="flex flex-col items-center mb-[200px] bg-white py-[100px] md:py-[140px]px-4 md:px-[116px]
  text-[#132219] font-['SF Pro Display']">
       {/* ===== TITLE + TEXT SECTION ===== */}
       <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[60px] md:gap-[108px] mx-auto">
@@ -17,8 +17,7 @@ export default function ContactPage() {
         {/* RIGHT SIDE - TEXT */}
         <div className="flex flex-col w-full max-w-[629px] mt-0 gap-[24px] md:gap-[34px]">
           <p className="text-[20px] md:text-[24px] leading-[140%] font-normal text-[#132219]">
-            Hast du Fragen zur Immobilienfinanzierung oder möchtest du Teil
-            unseres Partnernetzwerks werden?
+          Hast du Fragen zur Immobilienfinanzierung oder möchtest du Teil unseres Partnernetzwerks werden?
             <br />
             In unseren{" "}
             <Link
@@ -27,15 +26,9 @@ export default function ContactPage() {
             >
               FAQ
             </Link>{" "}
-            zu den wichtigsten Themen – von Voraussetzungen und Dokumenten bis
-            zu Abläufen und Provisionen.
-            <br />
-            Falls deine Frage offen bleibt:
-            <br />
-            Füll einfach das Formular mit ein paar Infos zu deinem Anliegen aus.
-            Wir prüfen deine Nachricht und melden uns mit dem{" "}
-            <span className="font-medium">nächsten passenden Schritt</span> bei
-            dir.
+           findest du Antworten zu den wichtigsten Themen – von Voraussetzungen und Dokumenten bis zu Abläufen und Provisionen.
+           <br/>Falls deine Frage offen bleibt:<br/>Füll einfach das Formular mit ein paar Infos zu deinem Anliegen aus.<br/>Wir prüfen deine Nachricht und melden uns mit dem <strong>nächsten passenden Schritt </strong>bei dir.
+       
           </p>
         </div>
       </div>

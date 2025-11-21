@@ -65,12 +65,12 @@ const PartnerExpectSection: React.FC = () => {
 
   return (
     <section
-      className="bg-[#E6E6E6] py-[120px] px-[116px] mb-[80px]
+      className="bg-[#E6E6E6] py-[120px] px-[116px] mb-[120px]
                  flex justify-between items-start gap-[46px]
                  max-lg:flex-col max-lg:px-[40px] max-md:px-[24px]"
     >
       {/* LEFT COLUMN — Sticky Title */}
-      <div className="max-w-[272px] flex-shrink-0 sticky top-[160px] self-start">
+      <div className="max-w-[1579px] flex-shrink-0 sticky top-[160px] self-start">
         <h2
           className="text-[#132219] text-[48px] font-[500] leading-[100%] tracking-[-0.48px]
                      font-['SF Pro Display'] max-md:text-[36px]"

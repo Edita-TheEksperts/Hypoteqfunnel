@@ -13,26 +13,29 @@ const logos = [
 const PartnersSection: React.FC = () => {
   return (
     <section className="py-[80px] md:py-[120px] bg-white overflow-hidden w-full">
-      <div className="w-full max-w-none md:max-w-[1579px] mx-0 md:mx-auto px-0 md:px-[119px] text-left">
-        {/* Title */}
-        <h2
-          className="font-sfpro mb-[32px] md:mb-[48px] px-[20px] md:px-0"
-          style={{
-            color: "var(--Secondary-Color, #132219)",
-            fontFamily: '"SF Pro Display", sans-serif',
-            fontSize: "39px",
-            fontWeight: 500,
-            lineHeight: "140%",
-          }}
-        >
-          Partners
-        </h2>
 
-        {/* Logos Scrolling Section */}
-        <div className="flex flex-col gap-[32px] md:gap-[48px]">
-          {/* Row 1 - scrolls left to right */}
-          <div className="relative flex overflow-hidden">
-            <div className="animate-scroll-left flex items-center gap-[32px] md:gap-[48px] whitespace-nowrap px-[16px] md:px-0">
+      {/* TITLE — ONLY THIS HAS 116PX */}
+      <h2
+        className="font-sfpro mb-[32px] md:mb-[48px] px-[20px] md:px-[116px]"
+        style={{
+          color: "var(--Secondary-Color, #132219)",
+          fontFamily: '"SF Pro Display", sans-serif',
+          fontSize: "39px",
+          fontWeight: 500,
+          lineHeight: "140%",
+        }}
+      >
+        Partners
+      </h2>
+
+      {/* FULL WIDTH SCROLLING WRAPPER */}
+      <div className="w-full overflow-hidden">
+
+        <div className="flex flex-col gap-[32px] md:gap-[48px] w-full">
+          
+          {/* ROW 1 */}
+          <div className="relative flex overflow-hidden w-full">
+            <div className="animate-scroll-left flex items-center gap-[32px] md:gap-[48px] whitespace-nowrap px-[16px]">
               {[...logos, ...logos].map((partner, index) => (
                 <img
                   key={`row1-${index}`}
@@ -44,9 +47,9 @@ const PartnersSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Row 2 - scrolls right to left */}
-          <div className="relative flex overflow-hidden">
-            <div className="animate-scroll-right flex items-center gap-[32px] md:gap-[48px] whitespace-nowrap px-[16px] md:px-0">
+          {/* ROW 2 */}
+          <div className="relative flex overflow-hidden w-full">
+            <div className="animate-scroll-right flex items-center gap-[32px] md:gap-[48px] whitespace-nowrap px-[16px]">
               {[...logos, ...logos].map((partner, index) => (
                 <img
                   key={`row2-${index}`}
@@ -57,10 +60,10 @@ const PartnersSection: React.FC = () => {
               ))}
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* Animation styles */}
       <style jsx>{`
         @keyframes scrollLeft {
           0% {
@@ -93,6 +96,7 @@ const PartnersSection: React.FC = () => {
           animation-play-state: paused;
         }
       `}</style>
+
     </section>
   );
 };

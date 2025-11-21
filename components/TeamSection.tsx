@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 interface TeamMember {
@@ -15,31 +16,37 @@ const teamMembers: TeamMember[] = [
   { name: "Alexander von Arx", position: "Head of Business Development", image: "/images/Alexander.png" },
 
   { name: "Claudio Schneider", position: "Präsident des Verwaltungsrates", image: "/images/Claudio.png" },
-  { name: "Rosanna Mancina", position: "Key Account Manager", image: "/images/Rosanna.png" },
   { name: "Christian Neff", position: "Verwaltungsrat", image: "/images/Christian.png" },
   { name: "Cyril Kägi", position: "Initiant und Beirat", image: "/images/Cyril.png" },
 
   { name: "Christian Wyss", position: "Beirat & Sales Coach", image: "/images/ChrsitianW.png" },
-  { name: "Dren Haxha", position: "Key Account Manager", image: "/images/Dren.png" },
   { name: "Markus Abele", position: "Consultant", image: "/images/Markus.png" },
+
   {
     name: "HYPOTEQ",
     bgColor: "#CAF476",
     description:
-      "Visit us on LinkedIn to stay informed with our latest news, insights, and updates.",
+      "Besuchen Sie uns auf LinkedIn, um über unsere neuesten Neuigkeiten, Einblicke und Updates auf dem Laufenden zu bleiben.",
   },
 ];
 
 const TeamSection: React.FC = () => {
   return (
-    <section className="w-full flex flex-col items-center py-20 bg-white font-sfpro">
-   <div className="w-full max-w-[1320px] px-4 md:px-6 lg:px-4">
+    <section className="w-full flex flex-col items-center py-[120px] bg-white font-sfpro">
 
-        <h2 className="text-[40px] font-medium text-[#132219] mb-10">Team</h2>
+      {/* Container with left/right spacing */}
+      <div className="w-full max-w-[1579px] px-[20px] lg:px-[116px] mx-auto">
 
+        {/* Title */}
+        <h2 className="text-[40px] font-medium text-[#132219] mb-[60px]">
+          Team
+        </h2>
+
+        {/* Grid */}
         <div
           className="
-            grid grid-cols-4 gap-x-8 gap-y-20 justify-items-center
+            grid grid-cols-4 gap-x-[40px] gap-y-[80px]
+            justify-items-start
             max-xl:grid-cols-3
             max-lg:grid-cols-2
             max-md:grid-cols-1
@@ -48,89 +55,100 @@ const TeamSection: React.FC = () => {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="flex flex-col items-start 
-              w-[304px] 
-              max-lg:w-[260px]
-              max-md:w-full"
+              className="flex flex-col items-start w-[304px] max-lg:w-[260px] max-md:w-full"
             >
-              {/* ✅ Conditional box rendering */}
               {member.bgColor ? (
-                // Green box
+                /* Green box */
                 <div
-                  className="flex flex-col justify-between items-start w-[304px] h-[283px] rounded-[10px]"
+                  className="flex flex-col justify-between w-[970px] h-[283px] rounded-[10px]"
                   style={{
                     backgroundColor: "#CAF476",
                     padding: "14px 24px",
                   }}
                 >
-                  <p
-                    className="text-[#132219]"
-                    style={{
-                      fontFamily: '"SF Pro Display", sans-serif',
-                      fontSize: "20px",
-                      fontWeight: 400,
-                      lineHeight: "120%",
-                    }}
-                  >
+                  <p className="text-[#132219] text-[32px] leading-[120%] font-normal font-sfpro">
                     {member.description}
                   </p>
 
                   <button
-                    className="border border-[#132219] rounded-[58px] bg-[#CAF476] text-[#132219] transition-all duration-300 hover:bg-[#dffb9b]"
+                    className="
+                      border border-[#132219] rounded-[58px] 
+                      bg-[#CAF476] text-[#132219]
+                      transition-all duration-300
+                      hover:bg-[#dffb9b]
+                    "
                     style={{
-                      fontFamily: '"SF Pro Display", sans-serif',
                       fontSize: "20px",
-                      fontWeight: 400,
                       lineHeight: "120%",
                       padding: "8px 24px",
                     }}
                   >
-                    Find my best offer
+                    Bestes Angebot finden
                   </button>
                 </div>
               ) : (
-                // Standard team member box
+                /* Image box */
                 <div
-                  className="rounded-[10px] overflow-hidden bg-gray-100 w-[304px] h-[283px]"
+                  className="rounded-[10px] overflow-hidden w-[304px] h-[283px]"
                   style={{
-                    backgroundImage: member.image
-                      ? `url(${member.image})`
-                      : undefined,
+                    backgroundImage: `url(${member.image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
                   }}
                 ></div>
               )}
 
-              {/* Text and icons under the box */}
+              {/* Text + Social icons */}
               {!member.bgColor && (
                 <div className="mt-4 w-full flex items-start justify-between">
+
+                  {/* Name + Position */}
                   <div className="flex flex-col items-start">
-                    <h3 className="inline-flex items-center justify-center text-[#132219] text-[20px] font-bold border border-black rounded-[42px] px-[12px] py-[4px] leading-[24px]">
+                    <h3 className="text-[#132219] text-[20px] font-semibold leading-[24px] border border-black rounded-[42px] px-[12px] py-[4px]">
                       {member.name}
                     </h3>
-                    <p className="inline-flex items-center justify-center text-[#132219] text-[16px] border border-black rounded-[42px] px-[12px] py-[4px] mt-[10px] leading-[22px] font-light">
+                    <p className="text-[#132219] text-[16px] font-light leading-[22px] border border-black rounded-[42px] px-[12px] py-[4px] mt-[10px]">
                       {member.position}
                     </p>
                   </div>
 
-                  <div className="flex flex-col items-center gap-[10px] mt-1">
-                    <button className="flex justify-center items-center w-[34px] h-[34px] border border-black rounded-full bg-white hover:bg-gray-100">
+                  {/* Social Icons */}
+                  <div className="flex flex-col items-center gap-[10px]">
+
+                    {/* LinkedIn */}
+                    <button
+                      className="
+                        flex justify-center items-center
+                        w-[42px] h-[42px]
+                        rounded-full border border-black
+                        bg-white hover:bg-gray-100 transition
+                      "
+                    >
                       <img
                         src="/images/linkedin.svg"
                         alt="LinkedIn"
-                        className="w-[16px] h-[16px]"
+                        className="w-[18px] h-[18px]"
                       />
                     </button>
-                    <button className="flex justify-center items-center w-[34px] h-[28px] border border-black rounded-[10px] bg-white hover:bg-gray-100">
+
+                    {/* Email */}
+                    <button
+                      className="
+                        flex justify-center items-center
+                        w-[42px] h-[42px]
+                        rounded-full border border-black
+                        bg-white hover:bg-gray-100 transition
+                      "
+                    >
                       <img
                         src="/images/email.svg"
                         alt="Email"
-                        className="w-[16px] h-[14px]"
+                        className="w-[18px] h-[18px]"
                       />
                     </button>
+
                   </div>
+
                 </div>
               )}
             </div>

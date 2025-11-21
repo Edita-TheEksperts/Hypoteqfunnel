@@ -3,13 +3,13 @@ import React from "react";
 
 export default function HypoZinsSection() {
   return (
-    <section className="w-screen bg-[#CAF476] flex justify-center">
+    <section className="w-screen bg-[#CAF476]  mb-[200px] flex justify-center">
       {/* Inner container */}
-      <div className="w-full max-w-[1504px] flex flex-col justify-center items-center py-[60px] sm:py-[80px] px-[20px] sm:px-[40px] md:px-[116px] gap-[40px] sm:gap-[48px] text-[#132219] font-['SF Pro Display']">
+      <div className="w-full max-w-[1579px] flex flex-col justify-center items-center py-[60px] sm:py-[80px] px-[20px] sm:px-[40px] md:px-[116px] gap-[40px] sm:gap-[48px] text-[#132219] font-['SF Pro Display']">
         {/* Top Section */}
         <div className="w-full flex flex-col md:flex-row justify-between items-start gap-[40px] sm:gap-[80px] md:gap-[201px]">
           {/* Left Side */}
-          <div className="flex flex-col w-full md:w-[536px]">
+          <div className="flex flex-col w-full ">
             <h2
               className="text-[#132219] font-[500] text-[32px] sm:text-[40px] md:text-[48px] leading-[110%] md:leading-[100%] tracking-[-0.48px]"
               style={{ fontFamily: "SF Pro Display" }}
@@ -20,8 +20,7 @@ export default function HypoZinsSection() {
               className="mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#132219] font-[500] text-[16px] sm:text-[20px] md:text-[24px] leading-[150%]"
               style={{ fontFamily: "SF Pro Display" }}
             >
-              Bist du immer noch unsicher und willst wissen, was drin liegt? Dann
-              füll einfach kurz das Formular aus und wir melden uns.
+          Bist du immer noch unsicher und willst wissen, was drin liegt? Dann füll einfach kurz das Formular aus und wir melden uns.
             </p>
           </div>
 
@@ -89,15 +88,28 @@ export default function HypoZinsSection() {
   }}
 >
           <div className="flex items-center gap-[16px] sm:gap-[24px]">
-            <span className="text-[#132219] text-[22px] sm:text-[26px] md:text-[28px] leading-none">✔</span>
+<img
+  src="/images/002.svg"
+  alt="icon"
+  className="w-[24px] sm:w-[28px] md:w-[32px] h-auto"
+/>
             Zins berechnen
           </div>
           <div className="flex items-center gap-[16px] sm:gap-[24px]">
-            <span className="text-[#132219] text-[22px] sm:text-[26px] md:text-[28px] leading-none">✔</span>
+<img
+  src="/images/002.svg"
+  alt="icon"
+  className="w-[24px] sm:w-[28px] md:w-[32px] h-auto"
+/>
             Keine Verpflichtung
           </div>
           <div className="flex items-center gap-[16px] sm:gap-[24px]">
-            <span className="text-[#132219] text-[22px] sm:text-[26px] md:text-[28px] leading-none">✔</span>
+            <span className="text-[#132219] text-[22px] sm:text-[26px] md:text-[28px] leading-none"><img
+  src="/images/002.svg"
+  alt="icon"
+  className="w-[24px] sm:w-[28px] md:w-[32px] h-auto"
+/>
+</span>
             Antwort in wenigen Stunden
           </div>
         </div>

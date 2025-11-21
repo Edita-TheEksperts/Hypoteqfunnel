@@ -138,7 +138,7 @@ const minRefinanceMortgage = existingMortgage;
   // -------------- UI --------------
   return (
 <section className="flex flex-col items-center bg-white py-12 px-[116px] mb-[120px] font-sans text-[#132219]">
-<div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1300px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
+<div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1579px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
 
         <div className="flex flex-col w-full max-w-[536px] gap-[48px]">
 <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10 mt-6 lg:mb-20 lg:mt-10">

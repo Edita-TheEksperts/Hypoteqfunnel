@@ -25,89 +25,159 @@ export default function NeueHypotheken() {
   return (
     <>
       {/* ====== SECTION 1: Hero ====== */}
-<section
-  className="relative w-full flex justify-center items-start bg-cover bg-center bg-no-repeat"
-  style={{
-    backgroundImage: "url('/images/hypotheneHome.png')",
-  }}
->
-  <div className="absolute inset-0 bg-black/30"></div>
+      <section
+        className="relative w-full flex justify-center items-start bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/hypotheneHome.png')",
+        }}
+      >
+        <div className="absolute inset-0"></div>
 
-  <div className="relative z-10 w-full max-w-[1504px] h-auto md:h-[957px] flex flex-col justify-start px-[16px] sm:px-[24px] md:px-[116px] pt-[100px] sm:pt-[120px] md:pt-[180px] gap-[10px] text-[#FFF]">
-    <div className="flex flex-col max-w-[600px]">
-      <div className="flex flex-col gap-[16px] sm:gap-[24px]">
-        <h2
-          className="text-[32px] sm:text-[40px] md:text-[72px] leading-[110%] md:leading-[100%] font-[500] tracking-[-0.72px]"
-          style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+        <div
+          className="
+            relative z-10 w-full max-w-[1579px]
+            h-auto md:h-[957px]
+            flex flex-col justify-start
+            px-[16px] sm:px-[24px] md:px-[116px]
+            pt-[100px] sm:pt-[120px] md:pt-[180px]
+            gap-[10px] text-[#FFF]
+          "
         >
-          Hypotheken <br />
-          leicht gemacht
-        </h2>
-      </div>
+          <div className="flex flex-col max-w-[600px]">
+            <div className="flex flex-col gap-[16px] sm:gap-[24px]">
+              <h2
+                className="text-[32px] sm:text-[40px] md:text-[72px] leading-[110%] md:leading-[100%] font-[500] tracking-[-0.72px]"
+                style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+              >
+                Hypotheken <br />
+                leicht gemacht
+              </h2>
+            </div>
 
-      <div className="mt-[20px] sm:mt-[40px] md:mt-[32px]">
-        <p
-          className="text-[15px] sm:text-[18px] md:text-[24px] font-light leading-[1.6] text-white"
-          style={{
-            fontFamily: '"SF Pro Display", sans-serif',
-            fontWeight: 100,
-            letterSpacing: "0.01em",
-          }}
-        >
-          Egal ob Hauskauf, Refinanzierung oder Neubau – der Weg zu deinem
-          Eigenheim muss nicht kompliziert sein. Unsere smarte Plattform
-          vergleicht Angebote von unseren Finanzierungspartnern, damit du
-          nur das siehst, was wirklich zählt. Ob du deine erste Hypothek
-          suchst, eine bestehende optimieren willst oder ein Bauprojekt
-          finanzierst – wir bringen Klarheit und Transparenz in jeden
-          Schritt.
-        </p>
-      </div>
+            <div className="mt-[20px] sm:mt-[40px] md:mt-[32px]">
+              <p
+                className="text-[15px] sm:text-[18px] md:text-[24px] font-light leading-[1.6] text-white"
+                style={{
+                  fontFamily: '"SF Pro Display", sans-serif',
+                  fontWeight: 100,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                Egal ob Hauskauf, Refinanzierung oder Neubau – der Weg zu deinem
+                Eigenheim muss nicht kompliziert sein. Unsere smarte Plattform
+                vergleicht Angebote von unseren Finanzierungspartnern, damit du
+                nur das siehst, was wirklich zählt. Ob du deine erste Hypothek
+                suchst, eine bestehende optimieren willst oder ein Bauprojekt
+                finanzierst – wir bringen Klarheit und Transparenz in jeden
+                Schritt.
+              </p>
+            </div>
 
-      {/* === Buttons === */}
-      <div className="flex flex-wrap gap-[8px] sm:gap-[10px] mt-[40px] sm:mt-[60px] md:mt-[80px]">
-        {buttons.map((btn) => {
-          const isActive = active === btn.id;
-          return (
-            <button
-              key={btn.id}
-              onClick={() => handleClick(btn.id)}
-              className={`px-[18px] sm:px-[24px] py-[6px] sm:py-[8px] rounded-[45px] text-[16px] sm:text-[20px] font-[600] font-['SF Pro Display'] border transition-all duration-300 ease-in-out
-              ${
-                isActive
-                  ? "bg-[#CAF476] text-[#132219] border-[#CAF476]"
-                  : "border-[#FFF] text-[#FFF] hover:bg-[#CAF47680] hover:text-[#132219]"
-              }`}
-            >
-              {btn.label}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  </div>
-</section>
+            {/* ===== BUTTON GRID (aligned like Figma) ===== */}
+            <div className="flex flex-col gap-[24px] mt-[32px] max-sm:mt-[-30px]">
 
+              {/* Row 1 */}
+              <div className="flex flex-wrap gap-[12px] mt-[46px] justify-center sm:justify-start">
+                {buttons.slice(0, 2).map((btn) => {
+                  const isActive = active === btn.id;
+                  return (
+                    <button
+                      key={btn.id}
+                      onClick={() => handleClick(btn.id)}
+                      className={`
+                        font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
+                        rounded-[45px] border border-[#fff]
+                        transition-all duration-300
+                        max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
+                        ${
+                          isActive
+                            ? "bg-[#CAF476] text-[#132219]"
+                            : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
+                        }
+                      `}
+                    >
+                      {btn.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Row 2 */}
+              <div className="flex flex-wrap gap-[12px] justify-center sm:justify-start">
+                {buttons.slice(2).map((btn) => {
+                  const isActive = active === btn.id;
+                  return (
+                    <button
+                      key={btn.id}
+                      onClick={() => handleClick(btn.id)}
+                      className={`
+                        font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
+                        rounded-[45px] border border-[#fff]
+                        transition-all duration-300
+                        max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
+                        ${
+                          isActive
+                            ? "bg-[#CAF476] text-[#132219]"
+                            : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
+                        }
+                      `}
+                    >
+                      {btn.label}
+                    </button>
+                  );
+                })}
+
+                {/* Werde Teil Button (static active) */}
+                <button
+                  className="
+                    font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
+                    rounded-[45px] transition-all
+                    max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
+                    bg-[#CAF476] text-[#132219] border border-white
+                  "
+                >
+                  Werde Teil von HYPOTEQ
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ====== SECTION 2–4 ====== */}
       <section className="w-full bg-white flex flex-col items-center py-[80px] md:py-[120px] px-[24px] md:px-[116px] text-[#132219] font-['SF Pro Display']">
+
         {/* Neue Hypothek */}
         <div
           id="neue"
-          className="flex flex-col md:flex-row justify-between items-start w-full max-w-[1504px] mb-[80px] md:mb-[120px] gap-[40px]"
+          className="
+            flex flex-col md:flex-row 
+            justify-between 
+            items-center md:items-center
+            w-full max-w-[1504px] 
+            mb-[80px] md:mb-[120px] 
+            gap-[40px]
+          "
         >
           <div className="max-w-[536px]">
             <h2 className="text-[28px] md:text-[36px] font-medium leading-[140%] tracking-[-0.36px] mb-[16px] md:mb-[24px]">
               Neue Hypothek
             </h2>
-            <p className="text-[18px] md:text-[24px] font-light leading-[140%] tracking-[-0.24px]">
-              Starte mit einer kurzen, unverbindlichen Anfrage. Sag uns, worum’s
-              geht – Immobilie, Budget, Einkommen, Zeitplan – online oder per
-              Call. Wir hören zu, klären deine Ziele und nehmen nur auf, was
-              wirklich nötig ist. <br /> Keine Gebühren. Kein Druck. Einfach der erste
-              klare Schritt. Alternativ kannst du auch alles bei uns direkt
-              hochladen und deine Hypothekenanfrage starten.
-            </p>
+<p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
+>
+  Starte mit einer kurzen, unverbindlichen Anfrage. Sag uns, worum’s geht – Immobilie, Budget, Einkommen,
+  Zeitplan – online oder per Call.
+  <br />
+  Wir hören zu, klären deine Ziele und nehmen nur auf, was wirklich nötig ist.
+  <br />
+  Keine Gebühren. Kein Druck. Einfach der erste klare Schritt.
+  <span className="underline font-normal">
+    {" "}
+    Alternativ, kannst du auch alles bei uns direkt hochladen, und deine Hypothekenanfrage starten
+  </span>
+  .
+</p>
+
           </div>
 
           <div className="w-full md:w-[537px] h-[300px] md:h-[443px] rounded-[10px] overflow-hidden flex items-center justify-center bg-[#F8F8F8]">
@@ -122,18 +192,26 @@ export default function NeueHypotheken() {
         {/* Refinanzierung */}
         <div
           id="refi"
-          className="flex flex-col md:flex-row justify-between items-start w-full max-w-[1504px] mb-[80px] md:mb-[120px] gap-[40px]"
+          className="
+            flex flex-col md:flex-row 
+            justify-between 
+            items-center md:items-center
+            w-full max-w-[1504px] 
+            mb-[80px] md:mb-[120px] 
+            gap-[40px]
+          "
         >
           <div className="max-w-[536px] order-2 md:order-1">
             <h2 className="text-[28px] md:text-[36px] font-medium leading-[140%] tracking-[-0.36px] mb-[16px] md:mb-[24px]">
               Refinanzierung
             </h2>
-            <p className="text-[18px] md:text-[24px] font-light leading-[140%] tracking-[-0.24px]">
-              Du hast schon eine Hypothek? Wir prüfen Tragbarkeit, Bonität & Co.
-              – und zeigen dir, ob es bessere Optionen gibt. Unser Vergleichstool
-              checkt Offerten aus unserem Netzwerk und stellt dir transparente
-              Szenarien zusammen. <br /> Zinssätze, Laufzeiten, Bedingungen –
-              alles vergleichbar.
+            <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
+>
+              Du hast schon eine Hypothek? Wir prüfen Tragbarkeit, Bonität &
+              Co. – und zeigen dir, ob es bessere Optionen gibt. Unser
+              Vergleichstool checkt Offerten aus unserem Netzwerk und stellt dir
+              transparente Szenarien zusammen. <br />
+              Zinssätze, Laufzeiten, Bedingungen – alles vergleichbar.
             </p>
           </div>
 
@@ -149,13 +227,20 @@ export default function NeueHypotheken() {
         {/* Neubau */}
         <div
           id="neubau"
-          className="flex flex-col md:flex-row justify-between items-start w-full max-w-[1504px] gap-[40px] mb-[80px]"
+          className="
+            flex flex-col md:flex-row 
+            justify-between 
+            items-center md:items-center
+            w-full max-w-[1504px] 
+            gap-[40px] mb-[80px]
+          "
         >
           <div className="max-w-[536px]">
             <h2 className="text-[28px] md:text-[36px] font-medium leading-[140%] tracking-[-0.36px] mb-[16px] md:mb-[24px]">
               Neubau-Finanzierung
             </h2>
-            <p className="text-[18px] md:text-[24px] font-light leading-[140%] tracking-[-0.24px]">
+            <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
+>
               Dein Bauprojekt verdient die passende Finanzierung. Wir analysieren
               dein Profil, holen passende Angebote und zeigen dir alle Optionen
               klar nebeneinander: Zinssatz, Laufzeit, monatliche Kosten. Du

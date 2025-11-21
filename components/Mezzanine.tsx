@@ -31,13 +31,13 @@ export default function Mezzanine() {
       <section
         className="relative w-full  px-[16px] sm:px-[32px] md:px-[116px] flex justify-center items-start bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/98.png')",
+          backgroundImage: "url('/images/FOtototo.png')",
         }}
       >
         <div className="absolute inset-0"></div>
 
         <div
-          className="relative z-10 w-full max-w-[1504px] h-[auto] md:h-[957px] flex flex-col justify-start
+          className="relative z-10 w-full max-w-[1579px] h-[auto] md:h-[957px] flex flex-col justify-start
            pt-[120px] md:pt-[180px] gap-[10px] text-[#132219]"
         >
           <div className="flex flex-col max-w-[692px]">
@@ -117,7 +117,11 @@ export default function Mezzanine() {
       {/* =======================
           SECTION 2: DETAILS
       ======================= */}
-      <section className="w-full bg-white flex flex-col items-center py-[40px] sm:py-[60px] md:py-[120px] px-[16px] sm:px-[32px] md:px-[118px] text-[#132219] font-['SF Pro Display']">
+<section className="w-full bg-white flex flex-col items-center 
+py-[40px] sm:py-[60px] md:py-[120px] 
+px-[16px] sm:px-[32px] max-w-[1579px]
+ md:px-[116px] 
+text-[#132219] font-['SF Pro Display']">
 
         {/* SECTION 1 */}
         <div id="neue" className="flex flex-col md:flex-row items-center justify-between w-full max-w-[1504px] gap-[40px] sm:gap-[60px] md:gap-[199px] mb-[40px] md:mb-[120px]">
@@ -163,7 +167,7 @@ export default function Mezzanine() {
             </ul>
           </div>
           <div className="w-full sm:w-[380px] md:w-[538px] flex justify-center">
-            <img src="/images/Wie funktioniert das v2.png" alt="Projekt Risiko Zeithorizont" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
+            <img src="/images/7777.png" alt="Projekt Risiko Zeithorizont" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
           </div>
         </div>
 
@@ -178,7 +182,7 @@ export default function Mezzanine() {
             </p>
           </div>
           <div className="w-full sm:w-[380px] md:w-[538px] flex justify-center">
-            <img src="/images/s9.png" alt="Features Graph" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
+            <img src="/images/9999.png" alt="Features Graph" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
           </div>
         </div>
       </section>
