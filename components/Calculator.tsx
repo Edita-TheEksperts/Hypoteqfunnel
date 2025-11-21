@@ -1,6 +1,8 @@
 "use client";
 import { useState, useMemo, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
+
 
 <Image
   src="/images/123.png"
@@ -16,13 +18,9 @@ const [income, setIncome] = useState(0);
 const [existingMortgage, setExistingMortgage] = useState(0);  
 const [newMortgage, setNewMortgage] = useState(0);      
 
+const [residenceType, setResidenceType] = useState<"haupt" | "zweit">("haupt");
 
-
-  const [residenceType, setResidenceType] = useState<"haupt" | "zweit" | null>(null);
-
-  const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>(
-    null
-  );
+const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>("purchase");
 
   const [interestOption, setInterestOption] = useState("10Y 1.40%");
   const params =
@@ -139,12 +137,14 @@ const infoTitle = isEligible
 const minRefinanceMortgage = existingMortgage;   
 
 
+
   // -------------- UI --------------
   return (
-    <section className="flex flex-col items-center mt-[120px] bg-white py-16 px-8 font-sans text-[#132219]">
-      <div className="flex flex-col lg:flex-row justify-center items-start w-full max-w-[1300px] gap-[108px] mx-auto">
-        <div className="flex flex-col w-full max-w-[536px] gap-[28px]">
-      <div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10">
+<section className="flex flex-col items-center bg-white py-12 px-[116px] mt-[60px] mb-[120px] font-sans text-[#132219]">
+<div className="flex flex-col lg:flex-row justify-between items-start w-full max-w-[1579px] mx-auto gap-[60px] lg:gap-[80px] lg:items-stretch">
+
+        <div className="flex flex-col w-full max-w-[536px] gap-[48px]">
+<div className="flex flex-col lg:flex-row items-start justify-between w-full mb-10 mt-6 lg:mb-20 lg:mt-10">
   <div>
 <h1
   className="text-[36px] sm:text-[48px] md:text-[56px] lg:text-[62px] font-[500] leading-[110%] tracking-[-0.72px] text-[#132219] max-w-[536px] mb-2 sm:mb-3 lg:mb-4"
@@ -251,17 +251,12 @@ Rechne in Echtzeit. Entscheide mit Klarheit.
           </div>
 
           <div className="flex flex-col gap-2 mt-[-7px] w-full">
-            <label className="text-[16px] font-medium">Postleitzahl / Ort</label>
-            <input
-              type="text"
-              placeholder="Enter your zip/city"
-              className="w-full border border-[#A8A8A8] rounded-full px-5 py-2 text-[16px] outline-none placeholder:text-[#A8A8A8]"
-            />
+    
           </div>
         </div>
         <div className="flex flex-col items-start w-full max-w-[628px] mt-[19px] gap-[34px]">
           <p
-            className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[62px]"
+            className="text-[#132219] text-[22px] font-[300] leading-[150%] mb-[120px]"
             style={{ fontFamily: "'SF Pro Display', sans-serif" }}
           >
    Bewege einfach die Regler für Kaufpreis, Eigenmittel, Zinssatz und Laufzeit – und sieh sofort, wie sich deine monatlichen Kosten, Zinsen und die Gesamtlaufzeit verändern.Smart, transparent und in Sekunden.
@@ -412,7 +407,7 @@ In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transpare
     </div>
 
     <button className="relative z-10 bg-white border border-[#132219] rounded-full px-[20px] md:px-[24px] py-[6px] md:py-[8px] text-[14px] sm:text-[16px] font-[600] text-[#132219] hover:scale-[1.03] transition-transform">
-      Start now
+  Hypothek anfragen 
     </button>
 
     <Image src="/images/00.jpg" alt="House background" fill className="object-cover rounded-[10px] z-0" />
@@ -485,7 +480,7 @@ In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transpare
     "
     style={{ fontFamily: '"SF Pro Display", sans-serif' }}
   >
-    Start now
+Jetzt kostenloses Infogespräch buchen.
   </button>
 </div>
 
@@ -608,11 +603,14 @@ background: `linear-gradient(to right, #132219 ${Math.max(percentage, 3)}%, #D9D
         }}
       />
 
-      {minRequired !== undefined && (
-        <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px]">
-          Minimum : {Math.round(minRequired).toLocaleString("de-CH")} CHF
-        </div>
-      )}
+ {minRequired !== undefined ? (
+  <div className="flex justify-end text-[13px] text-[#4b4b4b] italic pr-2 mt-[-4px] h-[18px]">
+    Minimum : {Math.round(minRequired).toLocaleString("de-CH")} CHF
+  </div>
+) : (
+  <div className="h-[18px]" />   // placeholder për të mbajtur të njëjtën lartësi
+)}
+
     </div>
   );
 }
@@ -678,7 +676,7 @@ function ProgressBox({ title, value, current, total, loanType, red = false }: an
         </div>
       </div>
 
-      <h2 className="text-[48px] font-sfpro font-semibold text-[#132219] leading-none opacity-80">
+      <h2 className="text-[48px] font-sfpro font-semibold text-[#132219] leading-none ">
         {value}
       </h2>
 

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   const [openLang, setOpenLang] = useState(false);
@@ -52,7 +53,7 @@ export default function Hero() {
 
         {/* ✅ CTA Button */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-[14px] mt-6 sm:mt-[16px] w-full">
-<a href="#calculator" className="w-full sm:w-[234px]">
+<Link href="/calc" className="w-full sm:w-[234px]">
   <button
     className="flex items-center justify-center 
     w-full
@@ -65,7 +66,7 @@ export default function Hero() {
   >
     Hypothek berechnen
   </button>
-</a>
+</Link>
 
         </div>
 

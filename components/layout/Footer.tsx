@@ -7,19 +7,19 @@ const Footer: React.FC = () => {
     <footer className="bg-white text-[#132219] font-sfpro border-t border-[#E5E5E5] w-full px-[20px] md:px-[116px]">
       <div className="max-w-[1579px] mx-auto pt-[50px] pb-[60px] flex flex-col gap-[108px]">
 
-        {/* ------------------------------------------------ */}
-        {/* 🔹 ROW 1 — Logo + 3 Columns */}
-        {/* ------------------------------------------------ */}
+        {/* ----------------------------------------------- */}
+        {/* ROW 1 — Logo + 3 Columns */}
+        {/* ----------------------------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
-          
-          {/* LEFT — Logo + Address */}
+
+          {/* LEFT SIDE — LOGO + ADDRESS */}
           <div className="flex flex-col items-start max-sm:items-center max-sm:text-center">
             <Image
               src="/images/logo.png"
               alt="Hypoteq Logo"
               width={145}
               height={38}
-              className="object-contain mb-[22px] max-sm:mb-[16px]"
+              className="object-contain mb-[22px]"
             />
 
             <p className="text-[20px] leading-[24px] mb-[12px]">HYPOTEQ AG</p>
@@ -34,8 +34,9 @@ const Footer: React.FC = () => {
             </p>
           </div>
 
-          {/* RIGHT — 3 Columns */}
+          {/* RIGHT SIDE — 3 COLUMNS */}
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
+
             <FooterColumn
               title="Home Page"
               links={[
@@ -69,18 +70,19 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* ------------------------------------------------ */}
-        {/* 🔹 ROW 2 — NEWS + 3 Columns */}
-        {/* ------------------------------------------------ */}
+        {/* ----------------------------------------------- */}
+        {/* ROW 2 — NEWS + 3 Columns */}
+        {/* ----------------------------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
 
-          {/* LEFT — NEWS (Perfect FIGMA position) */}
+          {/* NEWS left side */}
           <div>
             <h4 className="text-[24px] font-[600]">News</h4>
           </div>
 
-          {/* RIGHT — 3 Columns */}
+          {/* Right side */}
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
+
             <FooterColumn
               title="Hypotheken leicht gemacht"
               links={[
@@ -99,33 +101,44 @@ const Footer: React.FC = () => {
               ]}
             />
 
-            <FooterColumn
-              title="Frequently Asked Questions"
-              links={[
-                { label: "Persönliche Informationen", href: "#" },
-                { label: "Finanzielle Informationen", href: "#" },
-                { label: "Allgemeine Informationen", href: "#" },
-              ]}
-            />
+            {/* EMPTY links = no list */}
+            <FooterColumn title="Frequently Asked Questions" links={[]} />
           </div>
         </div>
 
-        {/* ------------------------------------------------ */}
-        {/* 🔹 ROW 3 — Other Columns */}
-        {/* ------------------------------------------------ */}
+        {/* ----------------------------------------------- */}
+        {/* ROW 3 — DOCUMENTS + OTHER COLUMNS */}
+        {/* ----------------------------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px] max-lg:gap-[48px]">
           <div></div>
 
           <div className="grid grid-cols-3 gap-x-[64px] max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-y-[36px]">
-            <FooterColumn title="Dokumente" links={[{ label: "Checklisten & Formulare", href: "#" }]} />
+
+            <FooterColumn
+              title="Dokumente"
+              links={[
+                { label: "Hypotheken Checkliste für ein Eigenheim", href: "#" },
+                { label: "Auskunftsermächtigung", href: "#" },
+                { label: "Hypotheken Checkliste für ein Renditeobjekt", href: "#" },
+                { label: "HYPOTEQ Informationsmaterial", href: "#" },
+              ]}
+            />
 
             <FooterColumn
               title="Werde HYPOTEQ Partner"
               links={[
                 { label: "Was dich bei uns erwartet", href: "#" },
-                { label: "Unsere Vorteile", href: "#" },
-                { label: "Deine Vorteile und dein Einstieg", href: "#" },
-                { label: "FAQ", href: "#" },
+                { label: "Deine Vorteile auf einen Blick:", href: "#" },
+                { label: "Frequently Asked Questions", href: "#" },
+                { label: "Partner werden", href: "#" },
+              ]}
+            />
+
+            <FooterColumn
+              title="HYPOTEQ Advisory"
+              links={[
+                { label: "Finanzierung im Ruhestand", href: "#" },
+                { label: "Wie läuft’s ab?", href: "#" },
               ]}
             />
 
@@ -138,23 +151,26 @@ const Footer: React.FC = () => {
                 { label: "Gemeinsam möglich machen", href: "#" },
               ]}
             />
+
+            {/* EMPTY */}
+            <FooterColumn title="Impressum & Datenschutz" links={[]} />
           </div>
         </div>
 
-        {/* ------------------------------------------------ */}
-        {/* 🔹 ROW 4 — Bottom area */}
-        {/* ------------------------------------------------ */}
+        {/* ----------------------------------------------- */}
+        {/* ROW 4 — Bottom Newsletter */}
+        {/* ----------------------------------------------- */}
         <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-x-[108px]">
           <div></div>
 
-          <div className="flex flex-col gap-[80px] max-sm:gap-[40px]">
-            <div className="flex justify-between max-w-[476px] max-sm:flex-col max-sm:items-center max-sm:gap-[12px]">
+          <div className="flex flex-col gap-[80px]">
+            <div className="flex justify-between max-w-[476px] max-sm:flex-col max-sm:items-center gap-[12px]">
               <h4 className="text-[20px] font-[600]">Immobilienbewertung</h4>
               <h4 className="text-[20px] font-[600]">Impressum & Datenschutz</h4>
             </div>
 
-            <div className="flex flex-col gap-[24px] max-sm:items-center">
-              <h4 className="text-[36px] font-[400] max-sm:text-[26px] text-center">
+            <div className="flex flex-col gap-[24px] max-sm:items-center text-center">
+              <h4 className="text-[36px] font-[400] max-sm:text-[26px]">
                 Smart Finance – Zuerst vergleicht. <br /> Dann vertrauen.
               </h4>
 
@@ -180,7 +196,6 @@ const Footer: React.FC = () => {
   );
 };
 
-
 const FooterColumn = ({
   title,
   links,
@@ -190,16 +205,24 @@ const FooterColumn = ({
 }) => {
   return (
     <div className="flex flex-col items-start w-[258px] gap-[16px]">
-      <h4 className="text-[#132219] text-[24px] font-[600] mb-[24px]">{title}</h4>
-      <ul className="flex flex-col gap-[16px] w-full">
-        {links.map((link, i) => (
-          <li key={i}>
-            <a href={link.href} className="text-[#132219] text-[20px] hover:underline">
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <h4 className="text-[#132219] text-[24px] font-[600] mb-[24px]">
+        {title}
+      </h4>
+
+      {links.length > 0 && (
+        <ul className="flex flex-col gap-[16px] w-full">
+          {links.map((link, i) => (
+            <li key={i}>
+              <a
+                href={link.href}
+                className="text-[#132219] text-[20px] hover:underline"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

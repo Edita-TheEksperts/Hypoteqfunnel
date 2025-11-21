@@ -182,7 +182,7 @@ text-[#132219] font-['SF Pro Display']">
             </p>
           </div>
           <div className="w-full sm:w-[380px] md:w-[538px] flex justify-center">
-            <img src="/images/9999.png" alt="Features Graph" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
+            <img src="/images/58965552.png" alt="Features Graph" className="w-full max-w-[340px] sm:max-w-[420px] md:max-w-none h-auto object-contain" />
           </div>
         </div>
       </section>

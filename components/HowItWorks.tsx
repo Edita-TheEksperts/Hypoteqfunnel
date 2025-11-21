@@ -129,7 +129,7 @@ export default function HowItWorks() {
       step: "Klick 3",
       title: "Angebot erhalten & entscheiden",
       text: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt. Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
-      image: "/images/ijiji.png",
+      image: "/images/Offer.png",
     },
     {
       title: "Gratulation – Deine Hypothek ist bereit",
