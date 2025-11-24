@@ -39,7 +39,7 @@ const TeamSection: React.FC = () => {
 
         {/* Title */}
         <h2 className="text-[40px] font-medium text-[#132219] mb-[60px]">
-          Team
+          Management Team
         </h2>
 
         {/* Grid */}

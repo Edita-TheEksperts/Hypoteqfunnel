@@ -405,7 +405,7 @@ Geschätzte Kosten im Detail
        Finde deine Hypothek!
       </h3>
       <p className="text-[#132219] text-[16px] sm:text-[18px] md:text-[20px] font-[300] leading-[140%]">
-In nur 3 Klicks zu deiner optimalen Finanzierung – einfach, digital, transparent.Wir vergleichen Angebote in Echtzeit und zeigen dir sofort, was wirklich passt. 
+In nur 3 Schritte zu deiner optimalen Finanzierung – einfach, digital, transparent.Wir vergleichen Angebote in Echtzeit und zeigen dir sofort, was wirklich passt. 
 <br/>  <strong>Schnell, sicher, ohne Umwege.</strong>
       </p>
     </div>

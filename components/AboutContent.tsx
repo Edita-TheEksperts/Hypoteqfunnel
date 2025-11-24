@@ -8,7 +8,6 @@ const [active, setActive] = useState("");
   const buttons = [
     { id: "dna", label: "Unsere DNA" },
     { id: "team", label: "Unser Team" },
-    { id: "partners", label: "Unsere Partner" },
     { id: "join", label: "Werde Teil von HYPOTEQ" },
   ];
 

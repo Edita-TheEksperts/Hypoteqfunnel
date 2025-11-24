@@ -20,9 +20,7 @@ export default function AboutPage() {
         <TeamSection />
       </div>
 
-      <div id="partners">
-        <PartnersSection />
-      </div>
+     
 
       <div id="join">
         <JoinOurTeam />

@@ -3,60 +3,64 @@ import React from "react";
 
 export default function BestChoices() {
   return (
-<section
-  className="
-    flex flex-col lg:flex-row justify-between items-center
-    w-full max-w-[1272px] mx-auto
-    p-[24px] sm:p-[32px] md:p-[40px]
-    rounded-[10px]
-    border border-[#000]
-    bg-[#132219]
-    mt-[120px] mb-[120px]
-    h-auto lg:h-[297px]
-    gap-[32px] lg:gap-0
-  "
->
-
-
-      {/* ✅ Left Column */}
-      <div
+    <>
+      <section
         className="
-          flex flex-col justify-center items-start
-          w-full lg:w-[511px] h-auto lg:h-[249px]
-          gap-[24px] lg:gap-[58px]
-          text-white font-sfpro
+          flex flex-col lg:flex-row justify-between items-center
+          w-full max-w-[1272px] mx-auto
+          p-[24px] sm:p-[32px] md:p-[40px]
+          rounded-[10px]
+          border border-[#000]
+          bg-[#132219]
+          mt-[120px] mb-[24px] 
+          h-auto lg:h-[297px]
+          gap-[32px] lg:gap-0
         "
       >
-        {/* Title + Subtitle */}
-        <div>
-          <h2 className="text-[32px] sm:text-[40px] lg:text-[48px] font-[500] leading-[140%] tracking-[-0.48px] text-white">
-            HYPOTEQ
-          </h2>
-          <p className="text-[22px] sm:text-[26px] lg:text-[32px] font-[400] leading-[140%] tracking-[-0.32px] text-white">
-            Smarte Wahl. Beste Zinsen.
+        {/* ✅ Left Column */}
+        <div
+          className="
+            flex flex-col justify-center items-start
+            w-full lg:w-[511px] h-auto lg:h-[249px]
+            gap-[24px] lg:gap-[58px]
+            text-white font-sfpro
+          "
+        >
+          {/* Title + Subtitle */}
+          <div>
+            <h2 className="text-[32px] sm:text-[40px] lg:text-[48px] font-[500] leading-[140%] tracking-[-0.48px] text-white">
+              HYPOTEQ
+            </h2>
+            <p className="text-[22px] sm:text-[26px] lg:text-[32px] font-[400] leading-[140%] tracking-[-0.32px] text-white">
+              Smarte Wahl. Beste Zinsen.
+            </p>
+          </div>
+
+          <p className="text-[18px] sm:text-[20px] lg:text-[22px] font-normal text-white leading-[150%] font-sfpro">
+            Unsere Richtzinsen dienen zur Orientierung. Ihr persönlicher Zinssatz kann je nach
+            Situation variieren. Gerne berechnen wir deinen individuellen Zins.
           </p>
         </div>
 
- <p className="text-[18px] sm:text-[20px] lg:text-[22px] font-normal text-white leading-[150%] font-sfpro">
-  Unsere Richtzinsen dienen zur Orientierung. Ihr persönlicher Zinssatz kann je nach
-  Situation variieren. Gerne berechnen wir deinen individuellen Zins.
-</p>
+        {/* ✅ Right Column */}
+        <div
+          className="
+            flex flex-wrap lg:flex-nowrap items-center justify-center
+            gap-[10px] sm:gap-[16px] lg:gap-[42px]
+            w-full lg:w-[622px] h-auto lg:h-[225px]
+          "
+        >
+          <RateCard title="Saron ab" value="0.83%" />
+          <RateCard title="5 Jahre ab" value="0.99%" />
+          <RateCard title="10 Jahre ab" value="1.38%" />
+        </div>
+      </section>
 
-      </div>
-
-      {/* ✅ Right Column */}
-      <div
-        className="
-          flex flex-wrap lg:flex-nowrap items-center justify-center
-          gap-[10px] sm:gap-[16px] lg:gap-[42px]
-          w-full lg:w-[622px] h-auto lg:h-[225px]
-        "
-      >
-        <RateCard title="Saron ab" value="0.83%" />
-        <RateCard title="5 Jahre ab" value="0.99%" />
-        <RateCard title="10 Jahre ab" value="1.38%" />
-      </div>
-    </section>
+      {/* ✅ Info text below the box */}
+      <p className="max-w-[1352px] mx-auto text-[#132219] text-[18px] sm:text-[16px] lg:text-[22px] font-sfpro leading-[150%] px-[24px] sm:px-[32px] md:px-[40px] mb-[120px] text-center lg:text-left">
+        Unsere Richtzinsen geben dir eine erste Orientierung - dein persönlicher Zinssatz kann je nach Situation variieren. <br/> Gerne berechnen wir deine individuellen Zins und zeigen dir, wie viel du wirklich sparen kannst.
+      </p>
+    </>
   );
 }
 

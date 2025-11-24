@@ -59,8 +59,8 @@ const ConsultationBanner: React.FC = () => {
             max-sm:max-w-[310px] max-sm:opacity-95 max-sm:mt-[4px]
           "
         >
-          Unsere Expert:innen erklären dir den Finanzierungsprozess, zeigen dir passende Optionen
-          und begleiten dich bei der Entscheidungsfindung.{" "}
+         Unsere Experten werden Ihnen erklären, wie Sie Vertriebspartner 
+         bei uns werden können und welche Bedingungen dafür gelten.
           <br className="max-sm:hidden" />
      
         </p>

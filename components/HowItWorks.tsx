@@ -81,7 +81,7 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
             tracking-[-0.32px]
           "
         >
-          Jetzt in nur 3 Klicks starten. Wir führen Sie sicher durch jeden Schritt.
+          Jetzt in nur 3 Schritten starten. Wir führen Sie sicher durch jeden Schritt.
         </p>
 
   <Link href="/funnel" className="w-full">
@@ -167,7 +167,7 @@ export default function HowItWorks() {
           sticky top-[80px] z-20 bg-white/80 backdrop-blur-sm py-[12px]
         "
       >
-        So funktioniert’s – in nur drei Klicks zu deiner Hypothek
+        So funktioniert’s – in nur drei Schritten zu deiner Hypothek
       </h2>
 
       {/* Steps – PARALLAX RISE EFFECT */}

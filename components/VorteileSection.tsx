@@ -100,7 +100,7 @@ export default function VorteileSection() {
     "
   >
     Dann trag dich ein – wir melden uns persönlich bei dir.{" "}
-    <span className="font-[500]">HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.</span>
+HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
   </p>
 </div>
 {/* =================== */}

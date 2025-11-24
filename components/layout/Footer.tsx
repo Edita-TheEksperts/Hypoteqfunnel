@@ -38,31 +38,21 @@ const Footer: React.FC = () => {
             <FooterColumn
               title={<a href="/" className="hover:underline">Home</a>}
               links={[
-                { label: "HYPOTEQ Smarte Wahl. Beste Zinsen.", href: "/" },
-                { label: "Hypothekenrechner", href: "/hypotheken" },
-                { label: "So funktioniert’s", href: "/advantages" },
-                { label: "Immobilienbewertung", href: "/homeevaluation" },
-                { label: "Deine Vorteile mit HYPOTEQ", href: "/advantages" },
-                { label: "Testimonials", href: "/#testimonials" },
-                { label: "Dein Hypotheken-Ratgeber", href: "/documents" },
+      
               ]}
             />
 
             <FooterColumn
               title={<a href="/about" className="hover:underline">Über uns</a>}
               links={[
-                { label: "Unsere Mission", href: "/about" },
-                { label: "Unser Team", href: "/about" },
-                { label: "Unsere Partner", href: "/partner" },
-                { label: "Werde Teil von HYPOTEQ", href: "/partner" },
+    
               ]}
             />
 
             <FooterColumn
               title={<a href="/calc" className="hover:underline">Hypothekenrechner</a>}
               links={[
-                { label: "Berechne deine Hypothek", href: "/calc" },
-                { label: "Geschätzte Kosten im Detail", href: "/calc" },
+   
               ]}
             />
           </div>
@@ -88,18 +78,14 @@ const Footer: React.FC = () => {
             <FooterColumn
               title={<a className="hover:underline">Hypotheken leicht gemacht</a>}
               links={[
-                { label: "Neuhypothek", href: "/hypotheken" },
-                { label: "Refinanzierung", href: "/hypotheken" },
-                { label: "Neubau-Finanzierung", href: "/hypotheken" },
+   
               ]}
             />
 
             <FooterColumn
               title={<a href="/contact" className="hover:underline">Kontaktiere uns</a>}
               links={[
-                { label: "Schreibe uns", href: "/contact" },
-                { label: "Ruf uns an", href: "tel:0445544100" },
-                { label: "Standort", href: "/contact" },
+
               ]}
             />
 <FooterColumn
@@ -123,38 +109,28 @@ const Footer: React.FC = () => {
             <FooterColumn
               title={<a href="/documents" className="hover:underline">Dokumente</a>}
               links={[
-                { label: "Hypotheken Checkliste für ein Eigenheim", href: "/documents" },
-                { label: "Auskunftsermächtigung", href: "/documents" },
-                { label: "Hypotheken Checkliste für ein Renditeobjekt", href: "/documents" },
-                { label: "HYPOTEQ Informationsmaterial", href: "/documents" },
+
               ]}
             />
 
             <FooterColumn
               title={<a href="/partner" className="hover:underline">Werde HYPOTEQ Partner</a>}
               links={[
-                { label: "Was dich bei uns erwartet", href: "/partner" },
-                { label: "Deine Vorteile auf einen Blick:", href: "/partner" },
-                { label: "Frequently Asked Questions", href: "/faq" },
-                { label: "Partner werden", href: "/partner" },
+
               ]}
             />
 
             <FooterColumn
               title={<a href="/advisory" className="hover:underline">HYPOTEQ Advisory</a>}
               links={[
-                { label: "Finanzierung im Ruhestand", href: "/advisory" },
-                { label: "Wie läuft’s ab?", href: "/advisory" },
+        
               ]}
             />
 
             <FooterColumn
               title={<a href="/mezzanine" className="hover:underline">Mezzanine-Finanzierung</a>}
               links={[
-                { label: "Was ist Mezzanine?", href: "/mezzanine" },
-                { label: "Wann ist Mezzanine sinnvoll?", href: "/mezzanine" },
-                { label: "Wie funktioniert das?", href: "/mezzanine" },
-                { label: "Gemeinsam möglich machen", href: "/mezzanine" },
+
               ]}
               className="mt-[80px]"
             />
@@ -162,8 +138,7 @@ const Footer: React.FC = () => {
             <FooterColumn
               title={<a href="/contact" className="hover:underline">Impressum & Datenschutz</a>}
               links={[
-                { label: "Impressum", href: "/contact" },
-                { label: "Datenschutz", href: "/contact" },
+
               ]}
               className="mt-[80px]"
             />
@@ -213,7 +188,7 @@ const FooterColumn = ({
   className = "",
 }: {
   title: React.ReactNode;
-  links: { label: string; href: string }[];
+  links?: { label: string; href: string }[];
   className?: string;
 }) => {
   return (
@@ -222,7 +197,7 @@ const FooterColumn = ({
         {title}
       </h4>
 
-      {links.length > 0 && (
+      {links && links.length > 0 && (
         <ul className="flex flex-col gap-[16px] w-full">
           {links.map((link, i) => (
             <li key={i}>
@@ -236,5 +211,6 @@ const FooterColumn = ({
     </div>
   );
 };
+
 
 export default Footer;

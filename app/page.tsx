@@ -23,7 +23,6 @@ export default function Home() {
 
       <YourAdvantages />
       <Testimonials />
-      <MortgageGuide />
       <ConsultationBanner />
 
       <div className="">

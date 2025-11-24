@@ -31,7 +31,7 @@ export default function Hero() {
           tracking-[-0.6px] sm:tracking-[-1.28px]
           max-w-[95%] sm:max-w-[880px]"
         >
-          In drei Klicks <br />
+          In drei Schritte <br />
           zu deiner <br />
           Hypothek
         </h1>
@@ -43,12 +43,11 @@ export default function Hero() {
           leading-[150%] sm:leading-snug
           font-[400]
           mt-4 sm:mt-[24px]
-          max-w-[95%] sm:max-w-[580px]"
+          max-w-[95%] sm:max-w-[800px]"
         >
-          Erhalte dein persönliches Hypothekarangebot online – <strong>schnell, <br/> sicher
-          und transparent. </strong><br/>Vergleiche verschiedene Optionen, berechne deine<br/>
-          monatlichen Kosten und starte deinen Finanzierungsprozess <br/> mit
-          Vertrauen – alles in nur drei Klicks.
+          Erhalte dein persönliches Hypothekarangebot online <br/> – <strong>schnell, sicher
+          und transparent. </strong><br/>Vergleiche verschiedene Optionen, berechne deine
+          monatlichen Kosten<br/>  und starte deinen Finanzierungsprozess - alles nur in drei Schritten<br/> Zuerst vergleichen - dann vertrauen
         </p>
 
         {/* ✅ CTA Button */}
@@ -70,13 +69,12 @@ export default function Hero() {
 
         </div>
 
-{/* ✅ Partners Section */}
+{/*
 <div className="flex flex-col mt-[60px] sm:mt-[80px] gap-[16px] sm:gap-[24px]">
   <p className="text-[#132219]/70 text-[15px] sm:text-[16px] font-normal">
     In Zusammenarbeit mit:
   </p>
 
-  {/* ✅ Partner logos grid (responsive) */}
   <div
     className="
       flex flex-wrap sm:flex-nowrap
@@ -122,6 +120,8 @@ export default function Hero() {
     />
   </div>
 </div>
+*/}
+
 
       </div>
     </section>

@@ -45,7 +45,7 @@ const StatsSection: React.FC = () => {
       desc: "Partnerbanken – mehr Auswahl und bessere Konditionen für dich.",
     },
 {
-  title: "3 Klicks",
+  title: "3 Schritte",
   desc: "Von der Anfragebis <br/> zur Zusage",
 },
 
