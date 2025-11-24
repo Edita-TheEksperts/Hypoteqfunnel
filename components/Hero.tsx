@@ -31,7 +31,7 @@ export default function Hero() {
           tracking-[-0.6px] sm:tracking-[-1.28px]
           max-w-[95%] sm:max-w-[880px]"
         >
-          In drei Schritte <br />
+          In drei Schritten <br />
           zu deiner <br />
           Hypothek
         </h1>
