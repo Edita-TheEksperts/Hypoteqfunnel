@@ -46,33 +46,35 @@ const showNeukauf = isDirect && isKauf && (borrowerType === "nat" || borrowerTyp
       [key]: value,
     }));
   };
+  const formatCHF = (value: string | number) => {
+  if (!value) return "";
+  const num = typeof value === "string" ? Number(value.replace(/'/g, "")) : value;
+  return num.toLocaleString("de-CH"); // Formats 100000 → 100'000
+};
 
-  const ToggleButton = ({ active, children, onClick }: any) => {
-    const isJa = children === "Ja";
-    const isNein = children === "Nein";
 
-    return (
-      <button
-        onClick={onClick}
-        className={`
-          flex items-center gap-3
-          px-6 py-2.5 rounded-full border text-sm transition-all
-          ${
-            active
-              ? "bg-[#CAF476] border-[#132219] text-[#132219]"
-              : "bg-white border-[#C8C8C8] text-[#132219]"
-          }
+const ToggleButton = ({ active, children, onClick }: any) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        flex items-center gap-3
+        px-6 py-2.5 rounded-full border text-sm transition-all
+        ${active ? "bg-[#CAF476] border-[#132219] text-[#132219]" : "bg-white border-[#C8C8C8] text-[#132219]"}
+      `}
+      style={{ minHeight: "40px" }}
+    >
+      {/* Full Circle Indicator */}
+      <span
+        className={`w-4 h-4 rounded-full flex-shrink-0
+          ${active ? "bg-[#132219]" : "bg-[#132219]"} 
         `}
-        style={{ minHeight: "40px" }}
-      >
-        {isJa && <span className="w-4 h-4 rounded-full bg-[#132219]"></span>}
-        {isNein && (
-          <img src="/images/nein1.svg" alt="Nein Icon" className="w-5 h-5" />
-        )}
-        {children}
-      </button>
-    );
-  };
+      ></span>
+      {children}
+    </button>
+  );
+};
+
 
   const inputStyle =
     "px-5 py-2 border border-[#132219] rounded-full text-sm w-full";
@@ -92,77 +94,67 @@ const showNeukauf = isDirect && isKauf && (borrowerType === "nat" || borrowerTyp
 
      {/* Kaufpreis */}
 <div>
-  <label className="font-medium">
-    Kaufpreis Immobilie (inkl. Renovationskosten)
-  </label>
-  <input
-    type="number"
-    placeholder="Betrag"
-    className={inputStyle}
-    value={data.kaufpreis || ""}
-    onChange={(e) => handleChange("kaufpreis", e.target.value)}
-  />
+<input
+  type="text"
+  placeholder="Betrag"
+  className={inputStyle}
+  value={data.kaufpreis ? `CHF ${formatCHF(data.kaufpreis)}` : ""}
+  onChange={(e) => {
+    const rawValue = e.target.value.replace(/CHF\s?|'/g, "");
+    const numericValue = rawValue.replace(/\D/g, "");
+    handleChange("kaufpreis", numericValue);
+  }}
+/>
+
 </div>
 
+{/* Eigenmittel */}
+<div>
+  <label className="font-medium">Eigenmittel</label>
 
-            {/* Eigenmittel */}
-            <div>
-              <label className="font-medium">Eigenmittel</label>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+    {[
+      { key: "eigenmittel_bar", placeholder: "Bar" },
+      { key: "eigenmittel_saeule3", placeholder: "3 Säule" },
+      { key: "eigenmittel_pk", placeholder: "PK: Betrag" },
+      { key: "eigenmittel_schenkung", placeholder: "Schenkung, usw" },
+    ].map(({ key, placeholder }) => (
+      <input
+        key={key}
+        type="text"
+        placeholder={placeholder}
+        className={inputStyle}
+        value={data[key] ? `CHF ${formatCHF(data[key])}` : ""}
+        onChange={(e) => {
+          const rawValue = e.target.value.replace(/CHF\s?|'/g, "");
+          const numericValue = rawValue.replace(/\D/g, "");
+          handleChange(key, numericValue);
+        }}
+      />
+    ))}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                <input
-                  type="number"
-                  placeholder="Bar"
-                  className={inputStyle}
-                  value={data.eigenmittel_bar || ""}
-                  onChange={(e) => handleChange("eigenmittel_bar", e.target.value)}
-                />
-
-                <input
-                  type="number"
-                  placeholder="3 Säule"
-                  className={inputStyle}
-                  value={data.eigenmittel_saeule3 || ""}
-                  onChange={(e) => handleChange("eigenmittel_saeule3", e.target.value)}
-                />
-
-                <input
-                  type="number"
-                  placeholder="PK: Betrag"
-                  className={inputStyle}
-                  value={data.eigenmittel_pk || ""}
-                  onChange={(e) => handleChange("eigenmittel_pk", e.target.value)}
-                />
-
-                <input
-                  type="number"
-                  placeholder="Schenkung, usw"
-                  className={inputStyle}
-                  value={data.eigenmittel_schenkung || ""}
-                  onChange={(e) =>
-                    handleChange("eigenmittel_schenkung", e.target.value)
-                  }
-                />
-                {/* Total Eigenmittel (Betrag) */}
-<div className="col-span-1 md:col-span-2">
-  <input
-    type="number"
-    disabled
-    placeholder="Betrag"
-    className={`${inputStyle} bg-[#F5F5F5] text-[#555] cursor-not-allowed`}
-    value={
-      (
-        Number(data.eigenmittel_bar || 0) +
-        Number(data.eigenmittel_saeule3 || 0) +
-        Number(data.eigenmittel_pk || 0) +
-        Number(data.eigenmittel_schenkung || 0)
-      ) || ""
-    }
-  />
+    {/* Total Eigenmittel (Betrag) */}
+    <div className="col-span-1 md:col-span-2">
+      <input
+        type="text"
+        disabled
+        placeholder="Betrag"
+        className={`${inputStyle} bg-[#F5F5F5] text-[#555] cursor-not-allowed`}
+        value={
+          (() => {
+            const total =
+              Number(data.eigenmittel_bar || 0) +
+              Number(data.eigenmittel_saeule3 || 0) +
+              Number(data.eigenmittel_pk || 0) +
+              Number(data.eigenmittel_schenkung || 0);
+            return total ? `CHF ${formatCHF(total)}` : "";
+          })()
+        }
+      />
+    </div>
+  </div>
 </div>
 
-              </div>
-            </div>
 {/* PK-Verpfändung + Hypothekarlaufzeiten */}
 <div className="flex flex-col md:flex-row gap-4 md:gap-[45px]">
 

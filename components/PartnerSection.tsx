@@ -3,7 +3,7 @@ import { useState } from "react";
 import PartnerExpectSection from "@/components/PartnerExpectSection";
 import VorteileSection from "./VorteileSection";
 import PartnerWerdenSection from "./PartnerWerdenSection";
-import ConsultationBanner from "./ConsultationBanner";
+import Banner from "./Banner";
 
 export default function PartnerSection() {
   const [active, setActive] = useState("");
@@ -140,7 +140,7 @@ const handleClick = (id: string) => {
 
 
       <div className="mb-[200px] md:mb-[180px]">
-        <ConsultationBanner />
+        <Banner />
       </div>
     </>
   );
