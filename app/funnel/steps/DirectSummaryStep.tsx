@@ -1,9 +1,14 @@
 "use client";
 
 import { useFunnelStore } from "@/src/store/funnelStore";
+import { useEffect } from "react";
 
 export default function DirectSummaryStep({ back, saveStep }: any) {
   const { project, property, borrowers, financing } = useFunnelStore();
+
+  useEffect(() => {
+    console.log("📌 DirectSummaryStep - project from store:", project);
+  }, [project]);
 
   /* ================= HELPERS ================= */
   const format = (v: any) => (v ? v : "—");
@@ -33,6 +38,49 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
     </div>
   );
 
+  // fallback nëse projektArt nuk është zgjedhur
+  const projectLabel =
+    project.projektArt === "kauf"
+      ? "Neukauf"
+      : project.projektArt === "abloesung"
+      ? "Ablösung"
+      : "Nicht gewählt";
+
+  /* ================= FALLBACK BORROWER LABEL ================= */
+  const borrowerLabel =
+    borrowers?.[0]?.type === "jur"
+      ? "Juristische Person"
+      : borrowers?.[0]?.type === "nat"
+      ? "Natürliche Person"
+      : "—";
+
+  /* ================= CALCULATE TOTAL EIGENMITTEL ================= */
+  const totalEigenmittel = financing
+    ? Number(financing.eigenmittel_bar || 0) +
+      Number(financing.eigenmittel_saeule3 || 0) +
+      Number(financing.eigenmittel_pk || 0) +
+      Number(financing.eigenmittel_schenkung || 0)
+    : 0;
+/* ================= MAP HYPOTHEKARLAUFZEITEN ================= */
+const laufzeitMap = {
+  saron: "Saron",
+  "1": "1 Jahr",
+  "2": "2 Jahre",
+  "3": "3 Jahre",
+  "4": "4 Jahre",
+  "5": "5 Jahre",
+  "6": "6 Jahre",
+  "7": "7 Jahre",
+  "8": "8 Jahre",
+  "9": "9 Jahre",
+  "10": "10 Jahre",
+  mix: "Mix",
+} as const;
+
+const laufzeitLabel =
+  laufzeitMap[financing?.modell as keyof typeof laufzeitMap] || "—";
+
+ 
   return (
     <div className="w-full max-w-[1100px] mx-auto text-[#132219] py-20 px-6">
 
@@ -50,16 +98,10 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
           <label className="text-[18px] font-light opacity-70">
             Was ist Ihr Projekt?
           </label>
-          <div className="text-[20px] font-medium">
-            {project.projektArt === "kauf" ? "Neukauf" : "Ablösung"}
-          </div>
+          <div className="text-[20px] font-medium">{projectLabel}</div>
 
           <label className="text-[18px] font-light opacity-70">Kreditnehmer</label>
-          <div className="text-[20px] font-medium">
-            {borrowers[0]?.type === "jur"
-              ? "Juristische Person"
-              : "Natürliche Person"}
-          </div>
+          <div className="text-[20px] font-medium">{borrowerLabel}</div>
         </CardSection>
 
         {/* ================= SECTION: Finanzierung ================= */}
@@ -67,16 +109,12 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
           <label className="text-[18px] font-light opacity-70">
             Art der Immobilie
           </label>
-          <div className="text-[20px] font-medium">
-            {format(property.artImmobilie)}
-          </div>
+          <div className="text-[20px] font-medium">{format(property.artImmobilie)}</div>
 
           <label className="text-[18px] font-light opacity-70">
             Art der Liegenschaft
           </label>
-          <div className="text-[20px] font-medium">
-            {format(property.artLiegenschaft)}
-          </div>
+          <div className="text-[20px] font-medium">{format(property.artLiegenschaft)}</div>
 
           <label className="text-[18px] font-light opacity-70">Nutzung</label>
           <div className="text-[20px] font-medium">{format(property.nutzung)}</div>
@@ -111,12 +149,12 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
           </label>
           <div className="text-[20px] font-medium leading-snug">
             {property.kreditnehmer
-              .map((k: any) =>
+              ?.map((k: any) =>
                 borrowers[0]?.type === "jur"
                   ? k.firmenname
                   : `${k.vorname} ${k.name}, ${formatDate(k.geburtsdatum)}`
               )
-              .join("; ")}
+              .join("; ") || "—"}
           </div>
         </CardSection>
 
@@ -128,17 +166,18 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
           <div className="text-[20px] font-medium">{CHF(financing.kaufpreis)}</div>
 
           <label className="text-[18px] font-light opacity-70">Eigenmittel</label>
-          <div className="text-[20px] font-medium">—</div>
-
-          <label className="text-[18px] font-light opacity-70">PK-Verpfändung</label>
           <div className="text-[20px] font-medium">
-            {format(financing.pkVorbezug)}
+            {totalEigenmittel > 0 ? CHF(totalEigenmittel) : "—"}
           </div>
 
-          <label className="text-[18px] font-light opacity-70">
-            Hypothekenlaufzeiten
-          </label>
-          <div className="text-[20px] font-medium">{format(financing.laufzeit)}</div>
+          <label className="text-[18px] font-light opacity-70">PK-Verpfändung</label>
+          <div className="text-[20px] font-medium">{format(financing.pkVorbezug)}</div>
+
+   <label className="text-[18px] font-light opacity-70">
+  Hypothekenlaufzeiten
+</label>
+<div className="text-[20px] font-medium">{laufzeitLabel}</div>
+
 
           <label className="text-[18px] font-light opacity-70">Einkommen</label>
           <div className="text-[20px] font-medium">
@@ -149,16 +188,12 @@ export default function DirectSummaryStep({ back, saveStep }: any) {
           <label className="text-[18px] font-light opacity-70">
             Steueroptimierung
           </label>
-          <div className="text-[20px] font-medium">
-            {format(financing.steueroptimierung)}
-          </div>
+          <div className="text-[20px] font-medium">{format(financing.steueroptimierung)}</div>
 
           <label className="text-[18px] font-light opacity-70">
             Kaufdatum
           </label>
-          <div className="text-[20px] font-medium">
-            {formatDate(financing.kaufdatum)}
-          </div>
+          <div className="text-[20px] font-medium">{formatDate(financing.kaufdatum)}</div>
 
           <label className="text-[18px] font-light opacity-70">Kommentar</label>
           <div className="text-[20px] font-medium">{format(financing.kommentar)}</div>

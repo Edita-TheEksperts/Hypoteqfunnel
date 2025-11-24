@@ -5,9 +5,6 @@ function PropertyStep({ data, setData, saveStep, back, customerType }: any) {
     setData((prev: any) => ({ ...prev, [key]: value }));
   };
 const ToggleButton = ({ active, children, onClick }: any) => {
-  const isJa = children === "Ja";
-  const isNein = children === "Nein";
-
   return (
     <button
       onClick={onClick}
@@ -20,23 +17,17 @@ const ToggleButton = ({ active, children, onClick }: any) => {
       `}
       style={{ minHeight: "40px" }}
     >
-      {/* Icon for JA */}
-      {isJa && (
-        <span className="w-4 h-4 rounded-full bg-[#132219]"></span>
-      )}
-
-      {/* Icon for NEIN */}
-      {isNein && (
-        <img
-          src="/images/nein1.svg" // ensure you have the correct path for the icon
-          alt="Nein Icon"
-          className="w-5 h-5"
-        />
-      )}
-
+      {/* Always show filled circle */}
+      <span className="w-4 h-4 rounded-full bg-[#132219]"></span>
       {children}
     </button>
   );
+};
+
+const formatCHF = (value: string | number) => {
+  if (!value) return "";
+  const num = typeof value === "string" ? Number(value.replace(/'/g, "")) : value;
+  return num.toLocaleString("de-CH"); // Swiss formatting
 };
 
 
@@ -100,7 +91,6 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             "Einfamilienhaus",
             "Wohnung",
             "Mehrfamilienhaus",
-            "Mischliegenschaft",
             "Landwirschaftszone",
           ].map((item) => (
             <ToggleButton
@@ -157,15 +147,21 @@ const ToggleButton = ({ active, children, onClick }: any) => {
     </ToggleButton>
   </div>
 
-  {data.renovation === "ja" && (
-    <input
-      type="number"
-      placeholder="Betrag in CHF"
-      className="mt-[16px] px-5 py-2 border border-[#C8C8C8] rounded-full w-[260px] text-sm"
-      value={data.renovationsBetrag || ""}
-      onChange={(e) => update("renovationsBetrag", e.target.value)}
-    />
-  )}
+{data.renovation === "ja" && (
+  <input
+    type="text" // keep text to allow formatting
+    placeholder="Betrag in CHF"
+    className="mt-[16px] px-5 py-2 border border-[#C8C8C8] rounded-full w-[260px] text-sm"
+    value={data.renovationsBetrag ? `CHF ${formatCHF(data.renovationsBetrag)}` : ""}
+    onChange={(e) => {
+      // Remove "CHF " and thousands separators
+      const rawValue = e.target.value.replace(/CHF\s?|'/g, "");
+      const numericValue = rawValue.replace(/\D/g, ""); // only digits
+      update("renovationsBetrag", numericValue);
+    }}
+  />
+)}
+
 </div>
 
 
@@ -344,57 +340,25 @@ const ToggleButton = ({ active, children, onClick }: any) => {
   placeholder="Geburtsdatum"
   className="px-5 py-2 border border-[#132219] rounded-full text-sm"
   value={kn.geburtsdatum || ""}
-  onFocus={(e) => {
-    e.target.type = "date";
-
-    // Convert dd.mm.yyyy → yyyy-mm-dd for date input
-    if (kn.geburtsdatum?.includes(".")) {
-      const [d, m, y] = kn.geburtsdatum.split(".");
-      e.target.value = `${y}-${m}-${d}`;
-    }
-  }}
   onChange={(e) => {
     const updated = [...data.kreditnehmer];
+    let val = e.target.value.replace(/\D/g, ""); // keep only digits
 
-    // ⚡ If user writes manually while type=text
-    if (e.target.type === "text") {
-      let v = e.target.value.replace(/\D/g, ""); // remove non-digits
+    // Auto-format as dd.mm.yyyy
+    if (val.length >= 5) val = val.replace(/(\d{2})(\d{2})(\d+)/, "$1.$2.$3");
+    else if (val.length >= 3) val = val.replace(/(\d{2})(\d+)/, "$1.$2");
 
-      // Auto-format as dd.mm.yyyy
-      if (v.length >= 5) {
-        v = v.replace(/(\d{2})(\d{2})(\d+)/, "$1.$2.$3");
-      } else if (v.length >= 3) {
-        v = v.replace(/(\d{2})(\d+)/, "$1.$2");
-      }
-
-      updated[index].geburtsdatum = v;
-      update("kreditnehmer", updated);
-      return;
-    }
-
-    // ⚡ If selected from calendar: yyyy-mm-dd → dd.mm.yyyy
-    if (e.target.value.includes("-")) {
-      const [y, m, d] = e.target.value.split("-");
-      updated[index].geburtsdatum = `${d}.${m}.${y}`;
-      update("kreditnehmer", updated);
-    }
+    updated[index].geburtsdatum = val;
+    update("kreditnehmer", updated);
   }}
   onBlur={(e) => {
-    e.target.type = "text";
-
+    // Optional: validate final format
     const val = e.target.value;
-
-    // Validate final format dd.mm.yyyy
     const regex = /^\d{2}\.\d{2}\.\d{4}$/;
-
-    if (!regex.test(val)) {
-      // ❗ If invalid, clear or show error (zgjedh vetë)
-      // updated[index].geburtsdatum = "";
-      // update("kreditnehmer", updated);
-      console.warn("Datë e pavlefshme:", val);
-    }
+    if (!regex.test(val) && val) console.warn("Ungültiges Datum:", val);
   }}
 />
+
 
   
             <div className="relative w-full">

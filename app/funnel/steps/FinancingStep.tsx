@@ -11,6 +11,12 @@ function FinancingStep({
     borrowers, 
   back,
 }: any) {
+  console.log("🔥 FinancingStep Debug:", {
+  customerType,
+  borrowers,
+  projectArt: projectData?.projektArt
+});
+
   /* ==========================
       LOGIC CHECKS
   =========================== */
@@ -23,15 +29,13 @@ const isDirect =
   normalizedCustomer?.includes("partner") ||   // për variantin e drejtë
   normalizedCustomer?.includes("parnter");     // për variantin me gabim në UI
 
-  const isKauf = projectData?.projektArt?.toLowerCase() === "kauf";
-  const isAblösung = projectData?.projektArt?.toLowerCase() === "abloesung";
-const borrowerType = borrowers?.[0]?.type; // nat | jur
+const projectArt = projectData?.projektArt;
+const isKauf = projectArt?.toLowerCase() === "kauf";
+const isAblösung = projectArt?.toLowerCase() === "abloesung";
+const borrowerType = borrowers?.[0]?.type || "nat"; // fallback to "nat"
 
-const isNat = borrowerType === "nat";
-const isJur = borrowerType === "jur";
+const showNeukauf = isDirect && isKauf && (borrowerType === "nat" || borrowerType === "jur");
 
-
-  const showNeukauf = isDirect && isKauf && (isNat || isJur);
 
   /* ==========================
       HANDLERS
@@ -86,17 +90,20 @@ const isJur = borrowerType === "jur";
           <div className="space-y-10">
             <h1 className="text-4xl font-semibold">Kauf</h1>
 
-            {/* Kaufpreis */}
-            <div>
-              <label className="font-medium">Kaufpreis Immobilie</label>
-              <input
-                type="number"
-                placeholder="Betrag"
-                className={inputStyle}
-                value={data.kaufpreis || ""}
-                onChange={(e) => handleChange("kaufpreis", e.target.value)}
-              />
-            </div>
+     {/* Kaufpreis */}
+<div>
+  <label className="font-medium">
+    Kaufpreis Immobilie (inkl. Renovationskosten)
+  </label>
+  <input
+    type="number"
+    placeholder="Betrag"
+    className={inputStyle}
+    value={data.kaufpreis || ""}
+    onChange={(e) => handleChange("kaufpreis", e.target.value)}
+  />
+</div>
+
 
             {/* Eigenmittel */}
             <div>
@@ -208,7 +215,7 @@ const isJur = borrowerType === "jur";
             {/* Einkommen */}
             <div>
               <label className="font-medium">Einkommen<br/>
-(inkl. Jährliches Bruttoeinkommen inkl. Bonus*)  </label>
+(Inkl. Jährliches Bruttoeinkommen inkl. durchschnittlicher Bonus der letzten 3 Jahre)  </label>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                 <input

@@ -127,53 +127,39 @@ function StartStep({
         </>
       )}
 
-      {/* === PARTNER FORM === */}
-      {customerType === "partner" && (
-        <>
-          <div className="grid grid-cols-2 gap-10 mb-10">
-            <div>
-              <label className="text-[14px] font-medium text-[#132219]">Vorname</label>
-              <input
-                className="w-full mt-1 border border-[#132219] opacity-80 rounded-full px-5 py-2 text-[#132219]"
-                value={clientData.firstName}
-                onChange={(e) =>
-                  setClientData((p: any) => ({
-                    ...p,
-                    firstName: e.target.value,
-                  }))
-                }
-              />
-            </div>
+{/* === PARTNER FORM === */}
+{customerType === "partner" && (
+  <>
+    <div className="grid grid-cols-1 gap-10 mb-10">
+      <div>
+        <label className="text-[14px] font-medium text-[#132219]">Email Adresse</label>
+        <input
+          className="w-full mt-1 border border-[#132219] opacity-80 rounded-full px-5 py-2 text-[#132219]"
+          value={clientData.partnerEmail}
+          onChange={(e) =>
+            setClientData((p: any) => ({
+              ...p,
+              partnerEmail: e.target.value,
+            }))
+          }
+        />
+      </div>
+    </div>
 
-            <div>
-              <label className="text-[14px] font-medium text-[#132219]">Email Adresse</label>
-              <input
-                className="w-full mt-1 border border-[#132219] opacity-80 rounded-full px-5 py-2 text-[#132219]"
-                value={clientData.partnerEmail}
-                onChange={(e) =>
-                  setClientData((p: any) => ({
-                    ...p,
-                    partnerEmail: e.target.value,
-                  }))
-                }
-              />
-            </div>
-          </div>
+    <div className="flex justify-end mt-6">
+      <button
+        onClick={() => {
+          setEmail(clientData.partnerEmail); // ✅ RUAN EMAIL-IN E PARTNER-IT
+          saveStep();
+        }}
+        className="px-8 py-2 bg-[#CAF476] border border-[#132219] rounded-full text-[14px] font-medium text-[#132219]"
+      >
+        Weiter
+      </button>
+    </div>
+  </>
+)}
 
-          <div className="flex justify-end mt-6">
-<button
-  onClick={() => {
-    setEmail(clientData.partnerEmail);   // ✅ RUAN EMAIL-IN E PARTNER-IT
-    saveStep();
-  }}
-  className="px-8 py-2 bg-[#CAF476] border border-[#132219] rounded-full text-[14px] font-medium text-[#132219]"
->
-  Weiter
-</button>
-
-          </div>
-        </>
-      )}
     </div>
   );
 }

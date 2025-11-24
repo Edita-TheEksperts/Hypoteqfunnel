@@ -9,12 +9,12 @@ interface FunnelState {
   financing: any;
   documents: any[];
 
- email: string | null;      
+  email: string | null;
   setEmail: (email: string) => void;
 
   setCustomerType: (type: "direct" | "partner") => void;
   setClient: (data: any) => void;
-  setProject: (data: any) => void;
+  setProject: (data: any | ((prev: any) => any)) => void;
   setProperty: (data: any) => void;
   setBorrowers: (data: any[]) => void;
   setFinancing: (data: any) => void;
@@ -24,20 +24,23 @@ interface FunnelState {
 export const useFunnelStore = create<FunnelState>((set) => ({
   customerType: null,
   client: {},
-  project: {},
+  project: { projektArt: "" },
   property: {},
   borrowers: [],
   financing: {},
   documents: [],
-
-  
-  email: null,                       
+  email: null,
 
   setEmail: (email) => set({ email }),
-
   setCustomerType: (type) => set({ customerType: type }),
   setClient: (data) => set({ client: data }),
-  setProject: (data) => set({ project: data }),
+
+  // FIX: support updater function për project
+  setProject: (data) =>
+    set((state) => ({
+      project: typeof data === "function" ? data(state.project) : data,
+    })),
+
   setProperty: (data) => set({ property: data }),
   setBorrowers: (data) => set({ borrowers: data }),
   setFinancing: (data) => set({ financing: data }),

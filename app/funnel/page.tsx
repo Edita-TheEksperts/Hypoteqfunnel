@@ -155,10 +155,10 @@ export default function FunnelPage() {
     next();
   };
 
-  const saveStep2 = () => {
-    setProject(projectData);
-    next();
-  };
+const saveStep2 = () => {
+  next();
+};
+
 
 // Correct order
 const saveStep3 = () => {
@@ -171,11 +171,12 @@ const saveStep4 = () => {
   next();
 };
 
+const saveStep5 = () => {
+  setFinancing(financingData); // push local financing state to store
+  next();
+};
 
-  const saveStep5 = () => {
-    setFinancing(financingData);
-    next();
-  };
+
 
   const saveStep6 = () => {
     setStep(7);
@@ -274,12 +275,11 @@ const submitFinal = async () => {
           />
         )}
 
-     {step === 3 && (
+{step === 3 && (
   <BorrowersStep
-    borrowers={borrowers}
-    setBorrowers={setLocalBorrowers}
-    saveStep={saveStep3}    // 👈 ndryshon
-    back={back}
+    saveStep={() => {
+      next(); // move to step 4
+    }}
   />
 )}
 
@@ -293,19 +293,18 @@ const submitFinal = async () => {
   />
 )}
 
+{step === 5 && (
+  <FinancingStep
+    data={financingData}
+    setData={setFinancingData}
+    projectData={projectData}
+    borrowers={borrowers}      
+    customerType={customerType}
+    saveStep={saveStep5}
+    back={back}
+  />
+)}
 
-        {step === 5 && (
-          <FinancingStep
-            data={financingData}
-            setData={setFinancingData}
-            projectData={projectData}
-                borrowers={borrowers}      
-
-            customerType={customerType}
-            saveStep={saveStep5}
-            back={back}
-          />
-        )}
 
        {step === 6 && customerType === "direct" && (
   <DirectSummaryStep back={back} saveStep={submitFinal} />

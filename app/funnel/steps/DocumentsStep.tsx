@@ -102,7 +102,7 @@ const sections = [
   },
 
   {
-    title: "Bei Angestellten",
+    title: "Angestellten",
     items: [
       "Aktueller Lohnausweis",
       "Pensionskassenausweis und Rückkaufswerte von der 3. Säule",
@@ -110,7 +110,7 @@ const sections = [
   },
 
   {
-    title: "Bei Selbständig",
+    title: "Selbständig",
     items: [
       "Aktueller Lohnausweis",
       "Pensionskassenausweis und Rückkaufswerte von der 3. Säule",
@@ -118,7 +118,7 @@ const sections = [
   },
 
   {
-    title: "Bei Rentner",
+    title: " Rentner",
     items: [
       "Rentenbescheinigung (PK, AHV)",
     ],
@@ -133,7 +133,7 @@ const sections = [
   },
 
   {
-    title: "Bei Neubau",
+    title: " Neubau",
     items: [
       "Verkaufsdokumentation",
       "Bau-/Grundrisspläne inkl. Nettowohnfläche, Raumhöhe, Deckenform, Bodenbeläge, Baubeschrieb",
@@ -153,14 +153,14 @@ const sections = [
   },
 
   {
-    title: "Bei Renditeobjekt",
+    title: "Renditeobjekt",
     items: [
       "Aktueller Mieterspiegel inkl. Mietzinsaufstellung",
     ],
   },
 
   {
-    title: "Bei Ablösung",
+    title: "Ablösung",
     items: [
       "Bauschein",
       "Bau-/Grundrisspläne inkl. Nettowohnfläche, Raumhöhe, Deckenform, Bodenbeläge, Baubeschrieb",
@@ -170,7 +170,7 @@ const sections = [
   },
 
   {
-    title: "Bei Stockwerkeigentum",
+    title: "Stockwerkeigentum",
     items: [
       "Stockwerkeigentum-Besitzungsausweis mit Wertzuwachsbewertung",
       "Nutzungs- und Verwaltungsreglement der STWE-Gemeinschaft",
@@ -179,7 +179,7 @@ const sections = [
   },
 
   {
-    title: "Bei Andere Eigentümer",
+    title: " Andere Eigentümer",
     items: [
       "Schenkungsvertrag",
       "Darlehensvertrag",
@@ -188,7 +188,7 @@ const sections = [
   },
 
   {
-    title: "Bei Bauprojekt, Bei Renovation",
+    title: " Bauprojekt, Bei Renovation",
     items: [
       "Bauvorlage",
       "Projektpläne, Baubeschrieb und Bauherrenwerkvertrag inkl. Kostenzusammenzug und Kubatur",
