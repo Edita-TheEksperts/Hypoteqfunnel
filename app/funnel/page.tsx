@@ -277,20 +277,21 @@ const submitFinal = async () => {
 
 {step === 3 && (
   <BorrowersStep
-    saveStep={() => {
-      next(); // move to step 4
-    }}
+    saveStep={() => next()}
+    back={back}      // <--- KJO MUNGON
   />
 )}
 
 {step === 4 && (
-  <PropertyStep
-    data={propertyData}
-    setData={setPropertyData}
-    saveStep={saveStep4}    // 👈 ndryshon
-    back={back}
-    customerType={borrowers[0]?.type}
-  />
+<PropertyStep
+  data={propertyData}
+  setData={setPropertyData}
+  saveStep={saveStep4}
+  back={back}
+  customerType={customerType}            // direct / partner
+  borrowerType={borrowers[0]?.type}      // nat / jur
+/>
+
 )}
 
 {step === 5 && (

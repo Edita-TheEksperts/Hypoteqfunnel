@@ -20,22 +20,28 @@ function FinancingStep({
   /* ==========================
       LOGIC CHECKS
   =========================== */
-// Accepts: "direct", "direkt", "direct_customer", "direktkunde"
-const normalizedCustomer = customerType?.toLowerCase();
+/* ==========================
+   RREGULLIMI LOGJIK
+   ========================== */
 
-const isDirect =
-  normalizedCustomer?.includes("dir") ||
-  normalizedCustomer?.includes("kunde") ||
-  normalizedCustomer?.includes("partner") ||   // për variantin e drejtë
-  normalizedCustomer?.includes("parnter");     // për variantin me gabim në UI
+const normalizedCustomer = (customerType || "").toLowerCase();
+const isDirect = normalizedCustomer === "direct";
+const isPartner = normalizedCustomer === "partner";
 
-const projectArt = projectData?.projektArt;
-const isKauf = projectArt?.toLowerCase() === "kauf";
-const isAblösung = projectArt?.toLowerCase() === "abloesung";
-const borrowerType = borrowers?.[0]?.type || "nat"; // fallback to "nat"
+const projectArt = projectData?.projektArt?.toLowerCase();
+const isKauf = projectArt === "kauf";
+const isAblösung = projectArt === "abloesung";
 
-const showNeukauf = isDirect && isKauf && (borrowerType === "nat" || borrowerType === "jur");
+const borrowerType = borrowers?.[0]?.type || "nat";
+const isJur = borrowerType === "jur";
+const isNat = borrowerType === "nat";
 
+/* ==========================
+   SHFAQJA E SEKSIONEVE
+   ========================== */
+
+const showNeukauf = isKauf;           // Mjafton
+const showAblosung = isAblösung;     // Mjafton
 
   /* ==========================
       HANDLERS
@@ -241,12 +247,23 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             {/* Kaufdatum */}
             <div>
               <label className="font-medium">Kaufdatum</label>
-              <input
-                type="date"
-                className={inputStyle}
-                value={data.kaufdatum || ""}
-                onChange={(e) => handleChange("kaufdatum", e.target.value)}
-              />
+         <input
+  type="text"
+  placeholder="TT.MM.JJJJ"
+  className={inputStyle}
+  value={data.kaufdatum || ""}
+  onChange={(e) => {
+    let v = e.target.value.replace(/\D/g, ""); // vetëm numrat
+
+    // 12 → 12.
+    if (v.length >= 3) v = v.replace(/(\d{2})(\d+)/, "$1.$2");
+    // 1212 → 12.12.
+    if (v.length >= 5) v = v.replace(/(\d{2})\.(\d{2})(\d+)/, "$1.$2.$3");
+
+    handleChange("kaufdatum", v);
+  }}
+/>
+
             </div>
 
             {/* Kommentar */}
@@ -342,12 +359,21 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             {/* Kaufdatum */}
             <div>
               <label className="font-medium">Kaufdatum</label>
-              <input
-                type="date"
-                className={inputStyle}
-                value={data.abloesedatum || ""}
-                onChange={(e) => handleChange("abloesedatum", e.target.value)}
-              />
+       <input
+  type="text"
+  placeholder="TT.MM.JJJJ"
+  className={inputStyle}
+  value={data.abloesedatum || ""}
+  onChange={(e) => {
+    let v = e.target.value.replace(/\D/g, "");
+
+    if (v.length >= 3) v = v.replace(/(\d{2})(\d+)/, "$1.$2");
+    if (v.length >= 5) v = v.replace(/(\d{2})\.(\d{2})(\d+)/, "$1.$2.$3");
+
+    handleChange("abloesedatum", v);
+  }}
+/>
+
             </div>
 
             {/* Kommentar */}

@@ -15,11 +15,11 @@ function BorrowersStep({ saveStep , back}: any) {
     }
   }, [borrowers, setBorrowers]);
 
-  const selectType = (type: "nat" | "jur") => {
-    const updated = [{ id: borrowers[0]?.id || uuidv4(), type }];
-    setBorrowers(updated); // update store
-    saveStep();            // move to next step
-  };
+const selectType = (type: "nat" | "jur") => {
+  const updated = [{ id: borrowers[0]?.id || uuidv4(), type }];
+  setBorrowers(updated); // Update store only
+};
+
 
   return (
     <div className="w-full max-w-[1400px] mx-auto pl-20 pr-48">

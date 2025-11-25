@@ -343,10 +343,16 @@ return (
           
         </label>
 
-<p className="text-gray-500 mt-3 text-[16px] leading-relaxed text-center">
-       Upload your documents in one place and use the checkboxes <br/>
-to keep track of what you’ve already uploaded (Optional)
-        </p>
+<div className="flex flex-col items-center mt-6">
+  <div className="h-[1px] w-24 bg-[#132219]/20 mb-4"></div>
+
+  <p className="text-[16px] text-[#132219]/70 leading-relaxed text-center max-w-[480px]">
+    Laden Sie alle Unterlagen bequem an einem Ort hoch.  
+    Markieren Sie hochgeladene Dateien ganz einfach mit einer Checkbox. 
+    <span className="opacity-60"> (optional)</span>
+  </p>
+</div>
+
       </div>
 
       {/* SECTION LIST */}

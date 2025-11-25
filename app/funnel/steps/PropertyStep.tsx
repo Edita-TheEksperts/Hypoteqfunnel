@@ -1,6 +1,6 @@
 "use client";
 
-function PropertyStep({ data, setData, saveStep, back, customerType }: any) {
+function PropertyStep({ data, setData, saveStep, borrowers, back, customerType }: any) {
   const update = (key: string, value: any) => {
     setData((prev: any) => ({ ...prev, [key]: value }));
   };
@@ -29,10 +29,11 @@ function PropertyStep({ data, setData, saveStep, back, customerType }: any) {
     const num = typeof value === "string" ? Number(value.replace(/'/g, "")) : value;
     return num.toLocaleString("de-CH"); // Swiss formatting
   };
+  const borrowerType = borrowers?.[0]?.type || "nat"; 
 
-  /* ======== OPTIONS ======== */
-  const propertyUseOptions =
-    customerType === "jur"
+
+const propertyUseOptions =
+    borrowerType === "jur"
       ? ["Rendite-Immobilie", "Für eigenes Geschäft"]
       : [
           "Selbstbewohnt",
@@ -40,6 +41,7 @@ function PropertyStep({ data, setData, saveStep, back, customerType }: any) {
           "Zweitwohnsitz / Ferienliegenschaft",
           "Vermietet & teilweise selbstbewohnt",
         ];
+
 
   return (
     <div className="w-full max-w-[1400px] mx-auto pl-28 space-y-[30px] -mt-10">
@@ -234,140 +236,159 @@ function PropertyStep({ data, setData, saveStep, back, customerType }: any) {
         )}
       </div>
 
-      {/* ========================================================= */}
-      {/*  KREDITNEHMER FORM                                        */}
-      {/* ========================================================= */}
-      <div>
-        <h3 className="text-[16px] font-semibold mb-[16px]">
-          {customerType === "jur"
-            ? "Kreditnehmer (1-6) (bitte alle angeben)"
-            : "Angaben zum Kreditnehmer"}
-        </h3>
+{/* ========================================================= */}
+{/*  KREDITNEHMER FORM                                        */}
+{/* ========================================================= */}
+<div>
+  <h3 className="text-[16px] font-semibold mb-[16px]">
+    {(customerType === "jur" || customerType === "partner")
+      ? "Kreditnehmer (1-6) (bitte alle angeben)"
+      : "Angaben zum Kreditnehmer"}
+  </h3>
 
-        <div className="space-y-[24px]">
-          {data.kreditnehmer.map((kn: any, index: number) => (
-            <div key={index} className="flex items-center gap-[16px]">
-              <button
-                onClick={() => {
+  <div className="space-y-[24px]">
+    {data.kreditnehmer.map((kn: any, index: number) => (
+      <div key={index} className="flex items-center gap-[16px]">
+        
+        {/* ADD BUTTON */}
+        <button
+          onClick={() => {
+            const updated = [...data.kreditnehmer];
+            updated.splice(
+              index + 1,
+              0,
+              (customerType === "jur" || customerType === "partner")
+                ? { firmenname: "", adresse: "" }
+                : {
+                    vorname: "",
+                    name: "",
+                    geburtsdatum: "",
+                    beschaeftigung: "",
+                    zivilstand: "",
+                  }
+            );
+            update("kreditnehmer", updated);
+          }}
+          className="text-3xl leading-none text-[#132219] mt-[5px]"
+        >
+          +
+        </button>
+
+        {/* ======================== */}
+        {/*   JUR / PARTNER VIEW     */}
+        {/* ======================== */}
+        {(customerType === "jur" || customerType === "partner") ? (
+          <div className="grid grid-cols-2 gap-[16px] w-full max-w-[600px]">
+
+            {/* Firmenname */}
+            <input
+              type="text"
+              placeholder="Firmenname"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
+              value={kn.firmenname || ""}
+              onChange={(e) => {
+                const updated = [...data.kreditnehmer];
+                updated[index].firmenname = e.target.value;
+                update("kreditnehmer", updated);
+              }}
+            />
+
+            {/* Adresse */}
+            <input
+              type="text"
+              placeholder="Adresse"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
+              value={kn.adresse || ""}
+              onChange={(e) => {
+                const updated = [...data.kreditnehmer];
+                updated[index].adresse = e.target.value;
+                update("kreditnehmer", updated);
+              }}
+            />
+          </div>
+        ) : (
+          /* ======================== */
+          /*  NATÜRLICHE PERSON VIEW  */
+          /* ======================== */
+          <div className="grid grid-cols-6 gap-[16px] flex-1">
+            <input
+              type="text"
+              placeholder="Vorname"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm"
+              value={kn.vorname}
+              onChange={(e) => {
+                const updated = [...data.kreditnehmer];
+                updated[index].vorname = e.target.value;
+                update("kreditnehmer", updated);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Name"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm"
+              value={kn.name}
+              onChange={(e) => {
+                const updated = [...data.kreditnehmer];
+                updated[index].name = e.target.value;
+                update("kreditnehmer", updated);
+              }}
+            />
+            <div className="relative w-full">
+              <select
+                className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"
+                value={kn.erwerb || ""}
+                onChange={(e) => {
                   const updated = [...data.kreditnehmer];
-                  updated.splice(
-                    index + 1,
-                    0,
-                    customerType === "jur"
-                      ? { firmenname: "" }
-                      : {
-                          vorname: "",
-                          name: "",
-                          geburtsdatum: "",
-                          beschaeftigung: "",
-                          zivilstand: "",
-                        }
-                  );
+                  updated[index].erwerb = e.target.value;
                   update("kreditnehmer", updated);
                 }}
-                className="text-3xl leading-none text-[#132219] mt-[5px]"
               >
-                +
-              </button>
-
-              {customerType === "jur" ? (
-                <div className="w-[260px]">
-                  <input
-                    type="text"
-                    placeholder="Firmenname"
-                    className="px-5 py-2 border border-[#132219] rounded-full text-sm w-full"
-                    value={kn.firmenname || ""}
-                    onChange={(e) => {
-                      const updated = [...data.kreditnehmer];
-                      updated[index].firmenname = e.target.value;
-                      update("kreditnehmer", updated);
-                    }}
-                  />
-                </div>
-              ) : (
-                <div className="grid grid-cols-6 gap-[16px] flex-1">
-                  <input
-                    type="text"
-                    placeholder="Vorname"
-                    className="px-5 py-2 border border-[#132219] rounded-full text-sm"
-                    value={kn.vorname}
-                    onChange={(e) => {
-                      const updated = [...data.kreditnehmer];
-                      updated[index].vorname = e.target.value;
-                      update("kreditnehmer", updated);
-                    }}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="px-5 py-2 border border-[#132219] rounded-full text-sm"
-                    value={kn.name}
-                    onChange={(e) => {
-                      const updated = [...data.kreditnehmer];
-                      updated[index].name = e.target.value;
-                      update("kreditnehmer", updated);
-                    }}
-                  />
-                  <div className="relative w-full">
-                    <select
-                      className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"
-                      value={kn.erwerb || ""}
-                      onChange={(e) => {
-                        const updated = [...data.kreditnehmer];
-                        updated[index].erwerb = e.target.value;
-                        update("kreditnehmer", updated);
-                      }}
-                    >
-                      <option value="">Erwerbsstatus</option>
-                      <option value="angestellt">Angestellt</option>
-                      <option value="selbständig">Selbständig</option>
-                      <option value="rentner">Rentner</option>
-                    </select>
-                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
-                  </div>
-                  <input
-                    type="text"
-                    placeholder="Geburtsdatum"
-                    className="px-5 py-2 border border-[#132219] rounded-full text-sm"
-                    value={kn.geburtsdatum || ""}
-                    onChange={(e) => {
-                      const updated = [...data.kreditnehmer];
-                      let val = e.target.value.replace(/\D/g, "");
-                      if (val.length >= 5) val = val.replace(/(\d{2})(\d{2})(\d+)/, "$1.$2.$3");
-                      else if (val.length >= 3) val = val.replace(/(\d{2})(\d+)/, "$1.$2");
-                      updated[index].geburtsdatum = val;
-                      update("kreditnehmer", updated);
-                    }}
-                    onBlur={(e) => {
-                      const val = e.target.value;
-                      const regex = /^\d{2}\.\d{2}\.\d{4}$/;
-                      if (!regex.test(val) && val) console.warn("Ungültiges Datum:", val);
-                    }}
-                  />
-                  <div className="relative w-full">
-                    <select
-                      className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"
-                      value={kn.zivilstand}
-                      onChange={(e) => {
-                        const updated = [...data.kreditnehmer];
-                        updated[index].zivilstand = e.target.value;
-                        update("kreditnehmer", updated);
-                      }}
-                    >
-                      <option value="">Zivilstand</option>
-                      <option value="ledig">Ledig</option>
-                      <option value="verheiratet">Verheiratet</option>
-                      <option value="geschieden">Geschieden</option>
-                      <option value="verwitwet">Verwitwet</option>
-                    </select>
-                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
-                  </div>
-                </div>
-              )}
+                <option value="">Erwerbsstatus</option>
+                <option value="angestellt">Angestellt</option>
+                <option value="selbständig">Selbständig</option>
+                <option value="rentner">Rentner</option>
+              </select>
+              <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
             </div>
-          ))}
-        </div>
+            <input
+              type="text"
+              placeholder="Geburtsdatum"
+              className="px-5 py-2 border border-[#132219] rounded-full text-sm"
+              value={kn.geburtsdatum || ""}
+              onChange={(e) => {
+                const updated = [...data.kreditnehmer];
+                let val = e.target.value.replace(/\D/g, "");
+                if (val.length >= 5) val = val.replace(/(\d{2})(\d{2})(\d+)/, "$1.$2.$3");
+                else if (val.length >= 3) val = val.replace(/(\d{2})(\d+)/, "$1.$2");
+                updated[index].geburtsdatum = val;
+                update("kreditnehmer", updated);
+              }}
+            />
+            <div className="relative w-full">
+              <select
+                className="px-5 py-2 rounded-full text-sm w-full bg-white border border-[#132219] appearance-none pr-10"
+                value={kn.zivilstand}
+                onChange={(e) => {
+                  const updated = [...data.kreditnehmer];
+                  updated[index].zivilstand = e.target.value;
+                  update("kreditnehmer", updated);
+                }}
+              >
+                <option value="">Zivilstand</option>
+                <option value="ledig">Ledig</option>
+                <option value="verheiratet">Verheiratet</option>
+                <option value="geschieden">Geschieden</option>
+                <option value="verwitwet">Verwitwet</option>
+              </select>
+              <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 border-r-2 border-b-2 border-[#132219] rotate-45" />
+            </div>
+          </div>
+        )}
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* ========================================================= */}
       {/*  BUTTONS                                                  */}

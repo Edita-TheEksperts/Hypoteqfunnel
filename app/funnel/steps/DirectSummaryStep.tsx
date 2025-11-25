@@ -82,7 +82,7 @@ const laufzeitLabel =
 
  
   return (
-    <div className="w-full max-w-[1100px] mx-auto text-[#132219] py-20 px-6">
+<div className="w-full max-w-[1100px] mx-auto text-[#132219] py-20 px-6 -mt-16">
 
       {/* ================= HEADER ================= */}
       <div className="pb-8 border-b border-gray-200">
