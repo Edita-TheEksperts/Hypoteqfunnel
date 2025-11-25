@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useFunnelStore } from "@/src/store/funnelStore";
 import { v4 as uuidv4 } from "uuid";
 
-function BorrowersStep({ saveStep }: any) {
+function BorrowersStep({ saveStep , back}: any) {
   const borrowers = useFunnelStore((state) => state.borrowers);
   const setBorrowers = useFunnelStore((state) => state.setBorrowers);
 
@@ -57,6 +57,18 @@ function BorrowersStep({ saveStep }: any) {
           <img src="/images/2345.svg" alt="Juristische Person" className="w-[100px] h-[80px]" />
           <p className="text-[24px] text-[#132219] font-normal">Juristische Person</p>
         </div>
+      </div>
+      
+      {/* ========================================================= */}
+      {/*  BUTTONS                                                  */}
+      {/* ========================================================= */}
+      <div className="flex justify-between mt-20">
+        <button onClick={back} className="px-6 py-2 border border-[#132219] rounded-full">
+          Zurück
+        </button>
+        <button onClick={saveStep} className="px-6 py-2 bg-[#CAF476] text-[#132219] rounded-full">
+          Weiter
+        </button>
       </div>
     </div>
   );

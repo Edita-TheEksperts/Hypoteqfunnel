@@ -5,7 +5,15 @@ import { useFunnelStore } from "@/src/store/funnelStore";
 
 
 function DocumentsStep({ borrowers, docs, setDocs, addDocument, saveStep, back }: any) {
-const { project, email } = useFunnelStore();
+const { project, email, property } = useFunnelStore();
+
+const isNeubau = property?.artImmobilie === "neubau";
+const isAblösung = project?.projektArt === "abloesung";const isStockwerkeigentum = property?.artLiegenschaft === "Stockwerkeigentum";
+const isMultipleEigentuemer = property?.kreditnehmer?.length > 1;
+const isBauprojekt = property?.neubauArt === "bauprojekt";
+const isRenovation = property?.renovation === "ja";
+
+
 
 async function uploadDocToSharepoint(file: File, inquiryId: string, email: string) {
   const formData = new FormData();
@@ -79,7 +87,7 @@ const documentsForNeuKaufJur = [
   },
 
   {
-    title: "Bei Bauprojekt, Bei Renovation",
+    title: "Bei Bauprojekt, Renovation",
     items: [
       "Baubewilligung",
       "Projektplan, Baubeschrieb und Bauhandwerkerverzeichnis (inkl. Kostenvoranschlag und Kubatur)",
@@ -199,40 +207,71 @@ const sections = [
 
 const isJur = (borrowers ?? []).some((b: any) => b.type === "jur");
 
-const selectedDocuments = isJur
-    ? documentsForNeuKaufJur
-    : sections;
+let selectedDocuments = isJur
+  ? documentsForNeuKaufJur
+  : sections;
 
-const handleUpload = async (e: any) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+  selectedDocuments = selectedDocuments.filter((section: any) => {
+  const title = section.title.trim().toLowerCase();
 
-  // UPLOAD DIREKT TE SHAREPOINT
-const uploadRes = await uploadDocToSharepoint(
-  file,
-  project?.id ?? "no-inquiry-id",
-  email ?? "no-email"
-);
-
-  if (uploadRes?.error) {
-    console.error("Upload failed:", uploadRes.error);
-    alert("Fehler beim Upload!");
-    return;
+  // Neubau
+  if (title.includes("neubau")) {
+    return isNeubau;
   }
 
-  // Shto në UI
-  const newDoc = {
-    id: uuidv4(),
-    name: file.name,
-    size: file.size,
-    file,
-    sharepointUrl: uploadRes?.data?.webUrl ?? null, // LINK i SharePoint-it
-  };
+  // Ablösung
+  if (title.includes("ablösung") || title.includes("bei ablösung")) {
+    return isAblösung;
+  }
 
-  setDocs((prev: any[]) => [...prev, newDoc]);
-  addDocument(newDoc);
+  // Stockwerkeigentum
+  if (title.includes("stockwerkeigentum")) {
+    return isStockwerkeigentum;
+  }
+
+  // Andere Eigentümer – SHFAQET vetëm kur ka >1 kreditnehmer
+  if (title.includes("andere eigentümer") || title.includes("bei andere eigentümer")) {
+    return isMultipleEigentuemer;
+  }
+
+  // Bauprojekt/Renovation
+  if (title.includes("bauprojekt") || title.includes("renovation")) {
+    return isBauprojekt || isRenovation;
+  }
+
+  return true;
+});
+
+
+const handleUpload = async (e: any) => {
+  const files = e.target.files;
+  if (!files || files.length === 0) return;
+
+  for (const file of files) {
+    const uploadRes = await uploadDocToSharepoint(
+      file,
+      project?.id ?? "no-inquiry-id",
+      email ?? "no-email"
+    );
+
+    if (uploadRes?.error) {
+      console.error("Upload failed:", uploadRes.error);
+      alert("Fehler beim Upload!");
+      continue;
+    }
+
+    const newDoc = {
+      id: uuidv4(),
+      name: file.name,
+      size: file.size,
+      file,
+      sharepointUrl: uploadRes?.data?.webUrl ?? null,
+    };
+
+    setDocs((prev: any[]) => [...prev, newDoc]);
+    addDocument(newDoc);
+  }
 };
-
 
 
   const toggleDocument = (docName: string) => {
@@ -292,7 +331,12 @@ return (
         </p>
 
         <label className="cursor-pointer mt-3">
-          <input type="file" className="hidden" onChange={handleUpload} />
+<input
+  type="file"
+  className="hidden"
+  multiple    
+  onChange={handleUpload}
+/>
           <div className="bg-[#132219] text-white px-8 py-3 rounded-full text-sm tracking-wide hover:bg-black">
             Browse Files
           </div>

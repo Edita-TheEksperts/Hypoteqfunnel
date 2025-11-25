@@ -2,7 +2,7 @@
 
 import { useFunnelStore } from "@/src/store/funnelStore";
 
-function ProjectStep({ data, setData, saveStep, customerType }: any) {
+function ProjectStep({ data, setData, saveStep, customerType, back }: any) {
   const project = useFunnelStore((state) => state.project);
   const setProject = useFunnelStore((state) => state.setProject);
 const selectCard = (value: string) => {
@@ -75,6 +75,17 @@ const selectCard = (value: string) => {
             <div className="w-full h-[1px] bg-[#132219] mt-2"></div>
           </div>
         </div>
+      </div>
+         {/* ========================================================= */}
+      {/*  BUTTONS                                                  */}
+      {/* ========================================================= */}
+      <div className="flex justify-between mt-20">
+        <button onClick={back} className="px-6 py-2 border border-[#132219] rounded-full">
+          Zurück
+        </button>
+        <button onClick={saveStep} className="px-6 py-2 bg-[#CAF476] text-[#132219] rounded-full">
+          Weiter
+        </button>
       </div>
     </div>
   );

@@ -103,15 +103,50 @@ function StartStep({
 
           {/* Footer */}
           <div className="flex items-center justify-between w-full mt-6">
-            <span className="text-[14px] font-medium text-[#132219] opacity-70">
-              Sind Sie Partner?{" "}
-              <button
-                onClick={() => setCustomerType("partner")}
-                className="underline underline-offset-2 text-[#132219]"
-              >
-                Hier klicken, um fortzufahren
-              </button>
-            </span>
+    <div
+  onClick={() => setCustomerType("partner")}
+  className="
+    group cursor-pointer select-none mt-6
+    flex items-center gap-4
+    px-7 py-4
+
+    transition-all duration-300
+  "
+>
+  {/* Icon Circle */}
+  <div
+    className="
+      w-10 h-10 flex items-center justify-center
+      rounded-full bg-[#CAF476]/20
+      group-hover:bg-[#CAF476]/40
+      backdrop-blur-sm
+      transition-all duration-300
+      shadow-inner
+    "
+  >
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      className='w-5 h-5 text-[#132219]'
+      fill='none'
+      viewBox='0 0 24 24'
+      stroke='currentColor'
+      strokeWidth={2}
+    >
+      <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
+    </svg>
+  </div>
+
+  {/* Text Area */}
+  <div className="flex flex-col">
+    <span className="text-[18px] font-semibold text-[#132219]">
+      Sind Sie Partner?
+    </span>
+    <span className="text-[13px] text-[#132219]/70 group-hover:text-[#132219] transition-colors">
+      Klicken Sie hier, um fortzufahren
+    </span>
+  </div>
+</div>
+
 
    <button
   onClick={() => {
