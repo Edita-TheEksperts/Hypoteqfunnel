@@ -121,7 +121,7 @@ if (!clientData.zip)
           </div>
 
           {/* Row 2 */}
-          <div className="grid grid-cols-2 gap-4 mb-10">
+<div className="grid grid-cols-2 gap-4 mb-2">
             <div>
               <label className="text-[14px] font-medium text-[#132219]">
                 Email Adresse
@@ -168,16 +168,11 @@ if (!clientData.zip)
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between w-full mt-6">
+<div className="flex items-center justify-between w-full mt-0">
             <div
               onClick={() => setCustomerType("partner")}
-              className="
-    group cursor-pointer select-none mt-6
-    flex items-center gap-4
-    px-7 py-4
+className="group cursor-pointer select-none flex items-center gap-4 px-7 py-4"
 
-    transition-all duration-300
-  "
             >
               
               {/* Icon Circle */}
@@ -206,16 +201,27 @@ if (!clientData.zip)
                   />
                 </svg>
               </div>
+<div className="flex items-center gap-4 mt-3 ">
+  <span className="text-[17px] font-semibold text-[#132219]">
+    Sind Sie Partner?
+  </span>
 
-              {/* Text Area */}
-              <div className="flex flex-col">
-                <span className="text-[18px] font-semibold text-[#132219]">
-                  Sind Sie Partner?
-                </span>
-                <span className="text-[13px] text-[#132219]/70 group-hover:text-[#132219] transition-colors">
-                  Klicken Sie hier, um fortzufahren
-                </span>
-              </div>
+  <button
+    onClick={() => setCustomerType("partner")}
+    className="
+      px-6 py-2
+      rounded-full
+      bg-[#CAF476]
+      border border-[#132219]
+      text-[14px] font-medium text-[#132219]
+      hover:bg-[#b8e966]
+      transition
+    "
+  >
+    Hier klicken
+  </button>
+</div>
+
             </div>
 
             <button
