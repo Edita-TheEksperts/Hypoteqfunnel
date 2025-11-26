@@ -62,7 +62,7 @@ const Footer = () => {
 
   {/* Title */}
   <h4 className="text-[36px] font-[400] leading-normal text-[#000] w-full text-left max-sm:text-center">
-    Smart Finance – Zuerst vergleicht. <br /> Dann vertrauen.
+    Zuerstvergleichen. <br /> Dann vertrauen.
   </h4>
 
   {/* Input + Button */}
@@ -72,7 +72,7 @@ const Footer = () => {
     <div className="flex items-center border border-[#000]/70 rounded-[58px] px-[24px] py-[8px] opacity-[0.7] w-full max-w-[906px] max-sm:w-full">
       <input
         type="email"
-        placeholder="Subscribe to our newsletter"
+        placeholder="Melde dich für unseren Newsletter an"
         className="flex-1 bg-transparent text-[16px] placeholder:text-[#9A9A9A] focus:outline-none"
       />
     </div>

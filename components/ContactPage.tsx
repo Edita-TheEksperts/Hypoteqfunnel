@@ -151,19 +151,18 @@ px-[40px] md:px-[10px]">
         </div>
       </div>
 
-      {/* ===== MAP SECTION ===== */}
-      <div className="w-full max-w-[1300px] px-[40px] md:px-[10px] mt-[100px] md:mt-[140px] rounded-[10px] overflow-hidden border border-[#132219]/10">
-        <iframe
-          title="Google Map - Kemptpark 12, Lindau, Schweiz"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2731.139007689383!2d8.67884367608563!3d47.44480590122277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479aa8a9e6e3f5d3%3A0x1b2b7b2dfdbb1d5!2sKemptpark%2012%2C%208310%20Lindau%2C%20Schweiz!5e0!3m2!1sen!2sch!4v1730050000000!5m2!1sen!2sch"
-          width="100%"
-          height="400"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+<div className="w-full max-w-[1300px] px-[40px] md:px-[10px] mt-[100px] md:mt-[140px] rounded-[10px] overflow-hidden border border-[#132219]/10">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2701.903054835955!2d8.533314476619616!3d47.374810571169505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900a05ce8582db%3A0x8227a52e01443909!2sL%C3%B6wenstrasse%2029%2C%208001%20Z%C3%BCrich%2C%20Switzerland!5e0!3m2!1sen!2s!4v1764146163573!5m2!1sen!2s"
+    width="100%"
+    height="450"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
     </section>
   );
 }

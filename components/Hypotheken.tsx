@@ -5,11 +5,13 @@ import { useState } from "react";
 export default function NeueHypotheken() {
   const [active, setActive] = useState("");
 
-  const buttons = [
-    { id: "neue", label: "Neue Hypothek" },
-    { id: "refi", label: "Refinanzierung" },
-    { id: "neubau", label: "Neubau-Finanzierung" },
-  ];
+const buttons = [
+  { id: "neue", label: "Neue Hypothek" },
+  { id: "refi", label: "Refinanzierung" },
+  { id: "neubau", label: "Neubau-Finanzierung" },
+  { id: "hypo", label: "Deine Hypothek berechnen?" }, // ← tani është korrekt
+];
+
 
   const handleClick = (id: string) => {
     setActive(id);
@@ -101,44 +103,32 @@ export default function NeueHypotheken() {
                   );
                 })}
               </div>
+{/* Row 2 */}
+<div className="flex flex-wrap gap-[12px] justify-center sm:justify-start">
+  {buttons.slice(2).map((btn) => {
+    const isActive = active === btn.id;
+    return (
+      <button
+        key={btn.id}
+        onClick={() => handleClick(btn.id)}
+        className={`
+          font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
+          rounded-[45px] border border-[#fff]
+          transition-all duration-300
+          max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
+          ${
+            isActive
+              ? "bg-[#CAF476] text-[#132219]"
+              : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
+          }
+        `}
+      >
+        {btn.label}
+      </button>
+    );
+  })}
+</div>
 
-              {/* Row 2 */}
-              <div className="flex flex-wrap gap-[12px] justify-center sm:justify-start">
-                {buttons.slice(2).map((btn) => {
-                  const isActive = active === btn.id;
-                  return (
-                    <button
-                      key={btn.id}
-                      onClick={() => handleClick(btn.id)}
-                      className={`
-                        font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
-                        rounded-[45px] border border-[#fff]
-                        transition-all duration-300
-                        max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
-                        ${
-                          isActive
-                            ? "bg-[#CAF476] text-[#132219]"
-                            : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
-                        }
-                      `}
-                    >
-                      {btn.label}
-                    </button>
-                  );
-                })}
-
-                {/* Werde Teil Button (static active) */}
-                <button
-                  className="
-                    font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
-                    rounded-[45px] transition-all
-                    max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
-                    bg-[#CAF476] text-[#132219] border border-white
-                  "
-                >
-                  Werde Teil von HYPOTEQ
-                </button>
-              </div>
             </div>
           </div>
         </div>

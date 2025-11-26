@@ -56,7 +56,7 @@ const selectCard = (value: string) => {
         >
           <img src="/images/88  (1).svg" className="w-[55px] h-[38px]" />
           <div className="flex flex-col w-full items-center">
-            <p className="text-[24px] text-[#132219] font-normal">Neu (Kauf)</p>
+            <p className="text-[24px] text-[#132219] font-normal">Neue Hypothek</p>
             <div className="w-full h-[1px] bg-[#132219] mt-2"></div>
           </div>
         </div>

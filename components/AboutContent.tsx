@@ -9,6 +9,7 @@ const [active, setActive] = useState("");
     { id: "dna", label: "Unsere DNA" },
     { id: "team", label: "Unser Team" },
     { id: "join", label: "Werde Teil von HYPOTEQ" },
+    
   ];
 
   const handleClick = (id: string) => {

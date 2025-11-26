@@ -20,7 +20,7 @@ const teamMembers: TeamMember[] = [
   { name: "Cyril Kägi", position: "Initiant und Beirat", image: "/images/Cyril.png" },
 
   { name: "Christian Wyss", position: "Beirat & Sales Coach", image: "/images/ChrsitianW.png" },
-  { name: "Markus Abele", position: "Consultant", image: "/images/Markus.png" },
+  { name: "Markus Abeler", position: "Consultant", image: "/images/Markus.png" },
 
   {
     name: "HYPOTEQ",

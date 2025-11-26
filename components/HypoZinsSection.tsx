@@ -3,7 +3,7 @@ import React from "react";
 
 export default function HypoZinsSection() {
   return (
-    <section className="w-screen bg-[#CAF476]  mb-[200px] flex justify-center">
+    <section id="hypo" className="w-screen bg-[#CAF476]  mb-[200px] flex justify-center">
       {/* Inner container */}
       <div className="w-full max-w-[1579px] flex flex-col justify-center items-center py-[60px] sm:py-[80px] px-[20px] sm:px-[40px] md:px-[116px] gap-[40px] sm:gap-[48px] text-[#132219] font-['SF Pro Display']">
         {/* Top Section */}
@@ -14,7 +14,7 @@ export default function HypoZinsSection() {
               className="text-[#132219] font-[500] text-[32px] sm:text-[40px] md:text-[48px] leading-[110%] md:leading-[100%] tracking-[-0.48px]"
               style={{ fontFamily: "SF Pro Display" }}
             >
-              Hypo-Zins berechnen?
+           Deine Hypothek berechnen?
             </h2>
             <p
               className="mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#132219] font-[500] text-[16px] sm:text-[20px] md:text-[24px] leading-[150%]"
@@ -69,7 +69,7 @@ export default function HypoZinsSection() {
                 fontFamily: "SF Pro Display",
               }}
             >
-              Send
+              Senden
             </button>
           </form>
         </div>
@@ -110,7 +110,7 @@ export default function HypoZinsSection() {
   className="w-[24px] sm:w-[28px] md:w-[32px] h-auto"
 />
 </span>
-            Antwort in wenigen Stunden
+          Persönliche beratung
           </div>
         </div>
       </div>
