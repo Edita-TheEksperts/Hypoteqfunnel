@@ -118,53 +118,75 @@ const ToggleButton = ({ active, children, onClick }: any) => {
 <div>
   <label className="font-medium">Eigenmittel</label>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-    {[
-      { key: "eigenmittel_bar", placeholder: "Bar" },
-      { key: "eigenmittel_saeule3", placeholder: "3 Säule" },
-      { key: "eigenmittel_pk", placeholder: "PK: Betrag" },
-      { key: "eigenmittel_schenkung", placeholder: "Schenkung, usw" },
-    ].map(({ key, placeholder }) => (
+  {/* Juristische Person → Only 1 field */}
+  {isJur ? (
+    <div className="mt-3">
       <input
-        key={key}
         type="text"
-        placeholder={placeholder}
+        placeholder="Eigenmittel"
         className={inputStyle}
-        value={data[key] ? `CHF ${formatCHF(data[key])}` : ""}
+        value={
+          data.eigenmittel_bar
+            ? `CHF ${formatCHF(data.eigenmittel_bar)}`
+            : ""
+        }
         onChange={(e) => {
-          const rawValue = e.target.value.replace(/CHF\s?|'/g, "");
-          const numericValue = rawValue.replace(/\D/g, "");
-          handleChange(key, numericValue);
+          const raw = e.target.value.replace(/CHF\s?|'/g, "");
+          const numeric = raw.replace(/\D/g, "");
+          handleChange("eigenmittel_bar", numeric);
         }}
       />
-    ))}
+    </div>
+  ) : (
+    /* Natürliche Person → Full version */
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+      {[  
+        { key: "eigenmittel_bar", placeholder: "Bar" },
+        { key: "eigenmittel_saeule3", placeholder: "3 Säule" },
+        { key: "eigenmittel_pk", placeholder: "PK: Betrag" },
+        { key: "eigenmittel_schenkung", placeholder: "Schenkung, usw" },
+      ].map(({ key, placeholder }) => (
+        <input
+          key={key}
+          type="text"
+          placeholder={placeholder}
+          className={inputStyle}
+          value={data[key] ? `CHF ${formatCHF(data[key])}` : ""}
+          onChange={(e) => {
+            const raw = e.target.value.replace(/CHF\s?|'/g, "");
+            const numeric = raw.replace(/\D/g, "");
+            handleChange(key, numeric);
+          }}
+        />
+      ))}
 
-    {/* Total Eigenmittel (Betrag) */}
-    <div className="col-span-1 md:col-span-2">
-      <input
-        type="text"
-        disabled
-        placeholder="Betrag"
-        className={`${inputStyle} bg-[#F5F5F5] text-[#555] cursor-not-allowed`}
-        value={
-          (() => {
+      {/* Total Eigenmittel */}
+      <div className="col-span-1 md:col-span-2">
+        <input
+          type="text"
+          disabled
+          placeholder="Betrag"
+          className={`${inputStyle} bg-[#F5F5F5] text-[#555] cursor-not-allowed`}
+          value={(() => {
             const total =
               Number(data.eigenmittel_bar || 0) +
               Number(data.eigenmittel_saeule3 || 0) +
               Number(data.eigenmittel_pk || 0) +
               Number(data.eigenmittel_schenkung || 0);
             return total ? `CHF ${formatCHF(total)}` : "";
-          })()
-        }
-      />
+          })()}
+        />
+      </div>
     </div>
-  </div>
+  )}
 </div>
+
 
 {/* PK-Verpfändung + Hypothekarlaufzeiten */}
 <div className="flex flex-col md:flex-row gap-4 md:gap-[45px]">
 
-  {/* PK-Verpfändung */}
+{/* PK-Verpfändung – hide for juristische Personen */}
+{!isJur && (
   <div className="flex-1">
     <label className="font-medium">PK-Verpfändung</label>
     <div className="flex gap-4 mt-3">
@@ -179,6 +201,8 @@ const ToggleButton = ({ active, children, onClick }: any) => {
       ))}
     </div>
   </div>
+)}
+
 
 {/* Hypothekarlaufzeiten */}
 <div className="flex-1">
@@ -210,39 +234,55 @@ const ToggleButton = ({ active, children, onClick }: any) => {
 </div>
 
 
-            {/* Einkommen */}
-            <div>
-              <label className="font-medium">Einkommen<br/>
-(Inkl. Jährliches Bruttoeinkommen inkl. durchschnittlicher Bonus der letzten 3 Jahre)  </label>
+   {/* Einkommen – hide for juristische Personen */}
+{!isJur && (
+  <div>
+    <label className="font-medium">
+      Einkommen<br />
+      (Inkl. Jährliches Bruttoeinkommen inkl. durchschnittlicher Bonus der letzten 3 Jahre)
+    </label>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
-                <input
-                  placeholder="Brutto-Haushaltseinkommen"
-                  className={inputStyle}
-                  value={data.brutto || ""}
-                  onChange={(e) => handleChange("brutto", e.target.value)}
-                />
-              </div>
-            </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+      <div className="col-span-1 md:col-span-2">
+<input
+  type="text"
+  placeholder="Brutto-Haushaltseinkommen"
+  className={inputStyle}
+  value={data.brutto ? `CHF ${formatCHF(data.brutto)}` : ""}
+  onChange={(e) => {
+    const raw = e.target.value.replace(/CHF\s?|'/g, "");
+    const numeric = raw.replace(/\D/g, ""); 
+    handleChange("brutto", numeric);
+  }}
+/>
 
-            {/* Steueroptimierung */}
-            <div>
-              <label className="font-medium">
-                Interessiert an einer steueroptimierten Finanzierungslösung?
-              </label>
+      </div>
+    </div>
+  </div>
+)}
 
-              <div className="flex gap-4 mt-3">
-                {["Ja", "Nein"].map((opt) => (
-                  <ToggleButton
-                    key={opt}
-                    active={data.steueroptimierung === opt}
-                    onClick={() => handleChange("steueroptimierung", opt)}
-                  >
-                    {opt}
-                  </ToggleButton>
-                ))}
-              </div>
-            </div>
+
+    {/* Steueroptimierung – hidden for juristische Personen */}
+{!isJur && (
+  <div>
+    <label className="font-medium">
+      Interessiert an einer steueroptimierten Finanzierungslösung?
+    </label>
+
+    <div className="flex gap-4 mt-3">
+      {["Ja", "Nein"].map((opt) => (
+        <ToggleButton
+          key={opt}
+          active={data.steueroptimierung === opt}
+          onClick={() => handleChange("steueroptimierung", opt)}
+        >
+          {opt}
+        </ToggleButton>
+      ))}
+    </div>
+  </div>
+)}
+
 
             {/* Kaufdatum */}
             <div>
@@ -281,7 +321,7 @@ const ToggleButton = ({ active, children, onClick }: any) => {
           {/* RIGHT SIDE – Calculator */}
           <div className="w-full flex justify-center lg:justify-start">
             <div className="w-[444px] max-w-full">
-           <FunnelCalc data={data} projectData={projectData} />
+<FunnelCalc data={data} projectData={projectData} borrowers={borrowers} />
 
             </div>
           </div>
@@ -300,13 +340,18 @@ const ToggleButton = ({ active, children, onClick }: any) => {
             {/* Hypothekarbetrag */}
             <div>
               <label className="font-medium">Hypothekarbetrag</label>
-              <input
-                type="number"
-                placeholder="Betrag"
-                className={inputStyle}
-                value={data.abloesung_betrag || ""}
-                onChange={(e) => handleChange("abloesung_betrag", e.target.value)}
-              />
+      <input
+  type="text"
+  placeholder="Betrag"
+  className={inputStyle}
+  value={data.abloesung_betrag ? `CHF ${formatCHF(data.abloesung_betrag)}` : ""}
+  onChange={(e) => {
+    const raw = e.target.value.replace(/CHF\s?|'/g, ""); // hiq CHF, hapësira, '
+    const numeric = raw.replace(/\D/g, ""); // vetëm numra
+    handleChange("abloesung_betrag", numeric);
+  }}
+/>
+
             </div>
 
             {/* Erhöhung */}
@@ -328,33 +373,42 @@ const ToggleButton = ({ active, children, onClick }: any) => {
               </div>
 
               {data.erhoehung === "Ja" && (
-                <input
-                  type="number"
-                  placeholder="85,000 CHF"
-                  className={`${inputStyle} mt-[4px]`}
-                  value={data.erhoehung_betrag || ""}
-                  onChange={(e) =>
-                    handleChange("erhoehung_betrag", e.target.value)
-                  }
-                />
+       <input
+  type="text"
+  placeholder="Betrag"
+  className={`${inputStyle} mt-[4px]`}
+  value={data.erhoehung_betrag ? `CHF ${formatCHF(data.erhoehung_betrag)}` : ""}
+  onChange={(e) => {
+    const raw = e.target.value.replace(/CHF\s?|'/g, "");
+    const numeric = raw.replace(/\D/g, "");
+    handleChange("erhoehung_betrag", numeric);
+  }}
+/>
+
               )}
             </div>
 
-            {/* Steueroptimierung */}
-            <div>
-              <label className="font-medium">  Interessiert an einer steueroptimierten Finanzierungslösung?</label>
-              <div className="flex gap-4 mt-3">
-                {["Ja", "Nein"].map((opt) => (
-                  <ToggleButton
-                    key={opt}
-                    active={data.steueroptimierung === opt}
-                    onClick={() => handleChange("steueroptimierung", opt)}
-                  >
-                    {opt}
-                  </ToggleButton>
-                ))}
-              </div>
-            </div>
+      {/* Steueroptimierung – hide for juristische Personen */}
+{!isJur && (
+  <div>
+    <label className="font-medium">
+      Interessiert an einer steueroptimierten Finanzierungslösung?
+    </label>
+
+    <div className="flex gap-4 mt-3">
+      {["Ja", "Nein"].map((opt) => (
+        <ToggleButton
+          key={opt}
+          active={data.steueroptimierung === opt}
+          onClick={() => handleChange("steueroptimierung", opt)}
+        >
+          {opt}
+        </ToggleButton>
+      ))}
+    </div>
+  </div>
+)}
+
 
             {/* Kaufdatum */}
             <div>
@@ -390,7 +444,7 @@ const ToggleButton = ({ active, children, onClick }: any) => {
 
           <div className="w-full flex lg:justify-end justify-center">
             <div className="max-w-[380px] w-full lg:ml-auto">
-    <FunnelCalc data={data} projectData={projectData} />
+<FunnelCalc data={data} projectData={projectData} borrowers={borrowers} />
 
             </div>
           </div>

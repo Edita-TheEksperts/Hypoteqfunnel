@@ -135,6 +135,8 @@ const infoTitle = isEligible
   const formatPercent = (num: number) =>
     (num * 100).toFixed(1).replace(".", ",") + "%";
 const minRefinanceMortgage = existingMortgage;   
+const [openDropdown, setOpenDropdown] = useState(false);
+
 
 
   // -------------- UI --------------
@@ -258,9 +260,11 @@ const minRefinanceMortgage = existingMortgage;
     />
   </div>
 
-  {/* Eigenmittel ose Belehnung → 14px distancë nga Tragbarkeit */}
+<div className="grid grid-cols-2 gap-[10px] w-full mt-[20px] mb-[10px]">
+
+  {/* PURCHASE → Eigenmittel + Tragbarkeit */}
   {loanType === "purchase" && (
-    <div className="mt-[36px] mb-[14px] w-full">
+    <>
       <ProgressBox
         title="Eigenmittel"
         value={formatPercent(propertyPrice > 0 ? ownFunds / propertyPrice : 0)}
@@ -268,138 +272,150 @@ const minRefinanceMortgage = existingMortgage;
         total={formatCHF(propertyPrice)}
         loanType={loanType}
       />
-    </div>
+
+      <ProgressBox
+        title="Tragbarkeit"
+        value={formatPercent(tragbarkeitPercent)}
+        current={formatCHF(tragbarkeitCHF)}
+        total={formatCHF(income)}
+        loanType={loanType}
+        red={!isTragbarkeitOK}
+      />
+    </>
   )}
 
+  {/* REFINANCING → Belehnung + Tragbarkeit */}
   {loanType === "refinancing" && (
-    <div className="mt-[36px] mb-[14px] w-full">
-<ProgressBox
-  title="Belehnung"
-  value={formatPercent(belehnungRefi)}
-  current={formatCHF(newMortgage)}
-  total={formatCHF(propertyPrice)}
-  loanType={loanType}
-  red={!isBelehnungOK}
-/>
+    <>
+      <ProgressBox
+        title="Belehnung"
+        value={formatPercent(belehnungRefi)}
+        current={formatCHF(newMortgage)}
+        total={formatCHF(propertyPrice)}
+        loanType={loanType}
+        red={!isBelehnungOK}
+      />
 
-    </div>
+      <ProgressBox
+        title="Tragbarkeit"
+        value={formatPercent(tragbarkeitPercent)}
+        current={formatCHF(tragbarkeitCHF)}
+        total={formatCHF(income)}
+        loanType={loanType}
+        red={!isTragbarkeitOK}
+      />
+    </>
   )}
 
-  {/* Tragbarkeit */}
-  <div className="w-full">
-<ProgressBox
-  title="Tragbarkeit"
-  value={formatPercent(tragbarkeitPercent)}
-  current={formatCHF(tragbarkeitCHF)}
-  total={formatCHF(income)}
-  loanType={loanType}
-  red={!isTragbarkeitOK}
-/>
+</div>
+
+
+    {/* === 4 Kosten Boxes Nën Tragbarkeit/Eigenmittel === */}
+<div className="grid grid-cols-[repeat(4,minmax(0,1fr))] gap-[10px] w-full mt-[16px]">
+
+    {loanType === "refinancing" ? (
+      <>
+        <SmallBox title="Bisherige monatliche Kosten" value={formatCHF(monthlyOld)} />
+        <SmallBox title="Monatliche Gesamtkosten" value={formatCHF(monthlyCost)} highlight />
+        <SmallBox title="Zinsen" value={formatCHF(interestYearEffective / 12)} />
+        <SmallBox title="Unterhalt / Nebenkosten" value={formatCHF(maintenanceYear / 12)} />
+      </>
+    ) : (
+      <>
+        <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
+        <SmallBox title="Nebenkosten" value={formatCHF(maintenanceYear / 12)} />
+        <SmallBox title="Zinskosen" value={formatCHF(interestYearEffective / 12)} />
+        <SmallBox title="Monatliche Kosten" value={formatCHF(monthlyCost)} highlight />
+      </>
+    )}
 
   </div>
 
-  {/* Butoni → 28px distancë nga kutia sipër */}
-<Link href="/funnel" className="w-full">
-  <button className="w-full h-[41px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
-    Mein Projekt fortsetzen
+ <div className="relative w-full mt-[16px]">
+  <button
+    onClick={() => setOpenDropdown((prev) => !prev)}
+    className="
+      w-full h-[40px] 
+      bg-white 
+      border border-[#132219] 
+      rounded-[50px]
+      flex items-center justify-between
+      px-[16px]
+      text-[16px] font-medium
+    "
+    style={{
+      paddingTop: "16.346px",
+      paddingBottom: "17.056px"
+    }}
+  >
+    <span className="text-[#132219]">{interestOption}</span>
+
+    {/* Arrow icon */}
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={`transition-transform duration-300 ${
+        openDropdown ? "rotate-180" : "rotate-0"
+      }`}
+    >
+      <path
+        d="M5 7L10 12L15 7"
+        stroke="#132219"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   </button>
-</Link>
+
+  {openDropdown && (
+    <div
+      className="
+        absolute left-0 top-[45px] w-full 
+        bg-white border border-[#132219]
+        rounded-[10px]
+        shadow-lg z-10
+        py-2
+      "
+    >
+      {interestOptions.map((option) => (
+        <button
+          key={option}
+          className="
+            w-full text-left px-4 py-2 
+            text-[16px] text-[#132219] 
+            hover:bg-[#F4F4F4]
+          "
+          onClick={() => {
+            setInterestOption(option);
+            setOpenDropdown(false);
+          }}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+
+
+
 
 </div>
 
       </div>
-<div className="flex flex-col gap-[40px] md:gap-[63px] mt-[60px] md:mt-[80px] items-stretch">
-  <div className="flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-start md:items-center w-full">
-    <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-sfpro font-medium text-[#132219] tracking-[-0.4px]">
-Geschätzte Kosten im Detail
-    </h2>
 
-    <div className="relative w-full md:w-auto">
-      <select
-        value={interestOption}
-        onChange={(e) => setInterestOption(e.target.value)}
-        className="
-          appearance-none w-full md:w-[444px] h-[40px] px-4 md:px-6
-          bg-[#132219] text-white text-[16px] md:text-[20px] font-semibold
-          rounded-[58px] cursor-pointer outline-none
-        "
-      >
-        {interestOptions.map((option) => (
-          <option key={option} value={option} className="bg-[#132219] text-white">
-            {option}
-          </option>
-        ))}
-      </select>
 
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="7"
-        viewBox="0 0 12 7"
-        fill="none"
-        className="absolute right-4 md:right-6 top-[14px] pointer-events-none"
-      >
-        <path
-          d="M6 7c-.27 0-.51-.09-.72-.28L.28 1.72A1.01 1.01 0 0 1 1 0c.27 0 .51.09.72.28L6 4.59l4.28-4.31a1.01 1.01 0 0 1 1.44 1.44L6.72 6.72C6.51 6.91 6.27 7 6 7Z"
-          fill="white"
-        />
-      </svg>
-    </div>
-  </div>
-
-  <div className="flex flex-col md:flex-row gap-[16px]">
-    
-<div className="grid grid-cols-2 gap-[10px] w-full max-w-full md:max-w-[628px]">
-  {loanType === "refinancing" ? (
-    <>
-      <SmallBox title="Bisherige monatliche Kosten" value={formatCHF(monthlyOld)} />
-      <SmallBox title="Monatliche Gesamtkosten" value={formatCHF(monthlyCost)} highlight />
-
-      <SmallBox title="Zinsen" value={formatCHF(interestYearEffective / 12)} />
-      <SmallBox title="Unterhalt / Nebenkosten" value={formatCHF(maintenanceYear / 12)} />
-    </>
-  ) : (
-    <>
-      <SmallBox title="Zinsen" value={formatCHF(interestYearEffective / 12)} />
-      <SmallBox title="Amortisation" value={formatCHF(amortizationYear / 12)} />
-      <SmallBox title="Unterhalt / Nebenkosten" value={formatCHF(maintenanceYear / 12)} />
-      <SmallBox title="Monatliche Gesamtkosten" value={formatCHF(monthlyCost)} highlight />
-    </>
-  )}
-</div>
-
-    <div
-      className={`
-        flex flex-col justify-center items-center rounded-[10px] border-2 border-[#132219] 
-        w-full md:w-[628px] h-[280px] md:h-[444px] text-center px-[20px] md:px-[40px] py-[40px] md:py-[60px]
-        ${
-          !loanType
-            ? "bg-[#E5E5E5]"
-            : isEligible
-            ? "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"
-            : "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
-        }
-      `}
-    >
-      <h3 className="font-sfpro text-[#132219] text-[48px] sm:text-[60px] md:text-[85px] font-medium leading-[100%] tracking-[-0.85px]">
-        {Math.round(interestYearEffective + amortizationYear + maintenanceYear).toLocaleString("de-CH")}
-      </h3>
-      <p className="text-[16px] sm:text-[18px] md:text-[20px] text-[#132219] opacity-80 mt-3">
-     Gesamtkosten pro Jahr
-      </p>
-    </div>
-  </div>
-</div>
-
-<div className="flex justify-center w-full mt-0 md:mt-[40px] px-4">
-  
-  <Link href="/funnel" className="w-full">
-  <button className="w-full max-w-[1273px] h-[41px] rounded-[69px] border border-[#132219] bg-[#132219] text-white text-[16px] md:text-[18px] font-medium text-center hover:opacity-90 transition">
-Hypothek anfragen
+  {/* Butoni → 28px distancë nga kutia sipër */}
+<Link href="/funnel" className="w-full col-span-2 block">
+  <button className="w-full h-[41px] mt-[28px] rounded-full bg-[#132219] text-white text-[18px] font-sfpro font-medium text-center leading-normal hover:opacity-90 transition">
+    Mein Projekt fortsetzen
   </button>
-  </Link>
-</div>
-
+</Link>
     </section>
   );
 }
@@ -529,131 +545,86 @@ background: `linear-gradient(to right, #132219 ${Math.max(percentage, 3)}%, #D9D
 }
 
 function InfoBox({ title, value, red = false, loanType }: any) {
-const bgColor = !loanType
-  ? "bg-[#E5E5E5]"
-  : red
-  ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"   // KUQE
-  : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]"; // JESHILE
-
-const circleColor = !loanType
-  ? "bg-[#BDBDBD]"
-  : red
-  ? "bg-[#FCA5A5]"
-  : "bg-[#CAF47E]";
-
-
-  return (
-    <div
-      className={`flex flex-col justify-center p-[15px_24px] rounded-[10px] border border-[#132219] w-full ${bgColor}`}
-    >
-      <div className="flex justify-between items-start">
-        <p className="text-[14px] font-medium text-[#132219] leading-tight">
-          {title}
-        </p>
-        <div
-          className={`w-[20px] h-[20px] rounded-full flex items-center justify-center border border-[#132219] ${circleColor}`}
-        >
-          <CheckIcon red={red} loanType={loanType} />
-        </div>
-      </div>
-
-      <div className="h-[1px] bg-[#132219] w-full mt-[6px] mb-[10px]" />
-      <h2 className="text-[40px] font-semibold text-[#132219] leading-none">
-        {value}
-      </h2>
-    </div>
-  );
-}
-
-function ProgressBox({ title, value, current, total, loanType, red = false }: any) {
-
-  const percent = parseFloat(value.replace("%", "").replace(",", ".")) || 0;
-
-  const bgColor = !loanType
-    ? "bg-[#E5E5E5]"
+  const bgColor = red
+    ? "bg-[linear-gradient(270deg,#FCA5A5_0%,#FECACA_100%)]"
     : "bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]";
 
-  const circleColor = !loanType ? "bg-[#BDBDBD]" : "bg-[#CAF47E]";
-
   return (
     <div
-      className={`flex flex-col justify-center rounded-[10px] border border-[#132219] w-full p-[18px_24px] gap-[18px] ${bgColor}`}
+      className={`flex flex-col justify-between w-full h-[185px] 
+      border border-[#132219] rounded-[10px] 
+      px-[16px] py-[12px] ${bgColor}`}
     >
       <div className="flex justify-between items-start">
-        <h3 className="text-[24px] font-normal text-[#132219]">{title}</h3>
+        <p className="text-[16px] font-medium leading-tight">{title}</p>
 
-        <div
-          className={`w-[22px] h-[22px] rounded-full border border-[#132219] flex items-center justify-center ${circleColor}`}
-        >
-          <CheckIcon loanType={loanType} />
+        <div className="w-[20px] h-[20px] rounded-full border border-[#132219] bg-[#CAF47E] flex items-center justify-center">
+          <CheckIcon />
         </div>
       </div>
 
-      <h2 className="text-[48px] font-sfpro font-semibold text-[#132219] leading-none ">
+      <h2 className="text-[40px] font-semibold tracking-tight leading-none">
         {value}
       </h2>
-
-      <div className="relative w-full h-[14px] rounded-full overflow-hidden border border-[#132219] bg-[#132219]">
-        <div
-          className="absolute top-0 left-0 h-full rounded-full bg-[linear-gradient(90deg,#DFF69A_0%,#B8E04E_100%)] transition-all duration-500"
-          style={{ width: `${Math.min(percent, 100)}%` }}
-        />
-      </div>
-
-      <div className="relative w-full flex justify-between text-[16px] text-[#132219] mt-[-15px] opacity-80">
-        <span>0</span>
-        <span>{current}</span>
-        <span>{total}</span>
-      </div>
     </div>
   );
 }
 
-function SmallBox({ title, value, highlight = false }: any) {
-  const isMonthlyCosts = title === "Monthly costs";
+
+function ProgressBox({ title, value, current, total, loanType, red = false }: any) {
+  return (
+    <div
+      className="
+      flex-1 h-[185px]
+      flex flex-col justify-between 
+      rounded-[10px] border border-[#132219] 
+      px-[16px] py-[15px]
+      bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]
+      "
+    >
+      <div className="flex justify-between items-start">
+        <h3 className="text-[20px]">{title}</h3>
+        <div className="w-[20px] h-[20px] rounded-full border border-[#132219] bg-[#CAF47E] flex items-center justify-center">
+          <CheckIcon />
+        </div>
+      </div>
+
+      <h2 className="text-[40px] font-semibold leading-none">{value}</h2>
+    </div>
+  );
+}
+
+
+function SmallBox({ title, value, highlight = false }) {
   const [currency, amount] = value.split(" ");
 
   return (
-<div
-  className={`relative flex flex-col justify-between p-[12px_10px] sm:p-[15px_16px] rounded-[10px] border border-[#132219]
-  w-full sm:w-[308px] h-[160px] sm:h-[216px] bg-white overflow-hidden`}
->
-
+    <div
+      className={`
+        relative flex flex-col justify-between
+        w-[147px] h-[127px]
+        p-[8px_12px]
+        rounded-[10px] border border-[#132219]
+        bg-white overflow-hidden
+      `}
+    >
+      {/* highlight bar poshtë */}
       {highlight && (
-        <div className="absolute bottom-0 left-0 w-full h-[6px] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" />
+        <div className="absolute bottom-0 left-0 w-full h-[4px] bg-[linear-gradient(270deg,#CAF476_0%,#E3F4BF_100%)]" />
       )}
-      <p
-        className={`text-[#132219] font-['SF Pro Display'] ${
-          isMonthlyCosts
-            ? "text-[32px] font-[500] tracking-[-0.32px]"
-            : "text-[20px] font-[400] tracking-[-0.2px]"
-        } leading-[100%]`}
-      >
+
+      <p className="text-[14px] font-medium text-[#132219] leading-none">
         {title}
       </p>
-      <div className="flex items-end gap-[4px]">
-        <span
-          className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
-            isMonthlyCosts
-              ? "text-[40px] font-[600] tracking-[-0.4px]"
-              : "text-[24px] font-[500] tracking-[-0.24px]"
-          }`}
-        >
-          {currency}
-        </span>
-        <span
-          className={`text-[#132219] font-['SF Pro Display'] leading-[100%] ${
-            isMonthlyCosts
-              ? "text-[40px] font-[600] tracking-[-0.4px]"
-              : "text-[32px] font-[500] tracking-[-0.32px]"
-          }`}
-        >
-          {amount}
-        </span>
+
+      <div className="flex items-end gap-[3px] mt-[4px]">
+        <span className="text-[20px] font-semibold">{currency}</span>
+        <span className="text-[20px] font-semibold">{amount}</span>
       </div>
     </div>
   );
 }
+
 
 function CheckIcon({ red = false, loanType }: any) {
   const strokeColor = !loanType

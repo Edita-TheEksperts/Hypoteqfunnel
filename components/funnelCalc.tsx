@@ -3,6 +3,7 @@
 interface FunnelCalcProps {
   data: any;
   projectData?: any;
+  borrowers?: any[];
 }
 
 const getRealRate = (modell: string) => {
@@ -30,37 +31,79 @@ const getRealRate = (modell: string) => {
 
 const STRESS_RATE = 0.05;
 
-export default function FunnelCalc({ data, projectData }: FunnelCalcProps) {
+export default function FunnelCalc({ data, projectData, borrowers }: FunnelCalcProps) {
   const projektArt = projectData?.projektArt?.toLowerCase();
+
+  const borrowerType = borrowers?.[0]?.type;
+  const isJur = borrowerType === "jur";
 
   const CHF = (v: number) => "CHF " + Math.round(v).toLocaleString("de-CH");
 
+  /* ------------------------------------------
+     KAUF
+  -------------------------------------------*/
   if (projektArt === "kauf") {
     const kaufpreis = Number(data.kaufpreis || 0);
 
-    const eigenmittel =
-      Number(data.eigenmittel_bar || 0) +
-      Number(data.eigenmittel_saeule3 || 0) +
-      Number(data.eigenmittel_pk || 0) +
-      Number(data.eigenmittel_schenkung || 0);
+    const eigenmittel = isJur
+      ? Number(data.eigenmittel_bar || 0)
+      : Number(data.eigenmittel_bar || 0) +
+        Number(data.eigenmittel_saeule3 || 0) +
+        Number(data.eigenmittel_pk || 0) +
+        Number(data.eigenmittel_schenkung || 0);
 
-    const einkommen = Number(data.brutto || 0) + Number(data.bonus || 0);
     const hypothek = Math.max(kaufpreis - eigenmittel, 0);
+
+    /* ======================================
+       HAS INPUTS → prevents early red color
+       ====================================== */
+    const hasInputs = kaufpreis > 0 || eigenmittel > 0;
 
     const eigenmittelPct =
       kaufpreis > 0 ? Math.round((eigenmittel / kaufpreis) * 100) : 0;
-    const zinssatz = STRESS_RATE;
-    const hasInputs = kaufpreis > 0 || eigenmittel > 0 || einkommen > 0;
 
-    // Calculate tragbarkeitPct normally (remove useMemo)
-    const tragbarkeitPct =
-      einkommen > 0
-        ? Math.round(((hypothek * zinssatz + kaufpreis * 0.008) / einkommen) * 100)
-        : 0;
+    let isNegative = false;
 
-    // Only show red if there are inputs
-    const isNegative = hasInputs && (eigenmittelPct < 20 || tragbarkeitPct > 33);
+    /* For Juristische Personen */
+    if (isJur) {
+      isNegative = hasInputs && eigenmittelPct < 20;
+    } else {
+      /* NATÜRLICHE PERSON */
+      const einkommen = Number(data.brutto || 0) + Number(data.bonus || 0);
+      const tragbarkeitPct =
+        einkommen > 0
+          ? Math.round(((hypothek * STRESS_RATE + kaufpreis * 0.008) / einkommen) * 100)
+          : 0;
 
+      isNegative = hasInputs && (eigenmittelPct < 20 || tragbarkeitPct > 33);
+    }
+
+    /* ------------------------------------------
+       JURISTISCHE PERSON VIEW
+    -------------------------------------------*/
+    if (isJur) {
+      return (
+        <BoxWrapper>
+          <TopBox
+            title={isNegative ? "Not eligible" : "Berechnung"}
+            subtitle="Geschätzter Finanzierungsbedarf:"
+            value={CHF(hypothek)}
+            error={isNegative}
+          />
+
+          <TwoBoxGrid
+            leftLabel="Eigenmittel"
+            leftValue={CHF(eigenmittel)}
+            rightLabel="Hypothek"
+            rightValue={CHF(hypothek)}
+          />
+        </BoxWrapper>
+      );
+    }
+
+    /* ------------------------------------------
+       NATÜRLICHE PERSON VIEW
+    -------------------------------------------*/
     return (
       <BoxWrapper>
         <TopBox
@@ -74,42 +117,86 @@ export default function FunnelCalc({ data, projectData }: FunnelCalcProps) {
           leftLabel="Eigenmittel"
           leftValue={`${eigenmittelPct}%`}
           rightLabel="Tragbarkeit"
-          rightValue={`${tragbarkeitPct}%`}
+          rightValue={`${(
+            ((hypothek * STRESS_RATE + kaufpreis * 0.008) /
+              (Number(data.brutto || 0) + Number(data.bonus || 0) || 1)) *
+            100
+          ).toFixed(0)}%`}
         />
       </BoxWrapper>
     );
   }
 
+  /* ------------------------------------------
+     ABLÖSUNG
+  -------------------------------------------*/
   if (projektArt === "abloesung") {
-    const kaufpreis = Number(data.kaufpreis || 0);
-
     const betrag = Number(data.abloesung_betrag || 0);
     const erhoehung =
       data.erhoehung === "Ja" ? Number(data.erhoehung_betrag || 0) : 0;
 
     const hypothek = betrag + erhoehung;
 
-    const einkommen = Number(data.brutto || 0) + Number(data.bonus || 0);
+    const kaufpreis = Number(data.kaufpreis || 0);
 
-    const zinssatz = getRealRate(data.modell);
+    const hasInputs = hypothek > 0 || kaufpreis > 0;
 
-    const zinsen = (hypothek * zinssatz) / 12;
-    const unterhalt = (kaufpreis ? kaufpreis * 0.008 : 0) / 12;
+    let isNegative = false;
 
-    const zweiteHypothek =
-      kaufpreis > 0 ? Math.max(hypothek - kaufpreis * 0.8, 0) : 0;
+    if (isJur) {
+      const eigenmittelPct =
+        kaufpreis > 0
+          ? Math.round(((kaufpreis - hypothek) / kaufpreis) * 100)
+          : 0;
 
-    const amortisation =
-      zweiteHypothek > 0 ? zweiteHypothek / 15 / 12 : 0;
+      isNegative = hasInputs && eigenmittelPct < 20;
+    } else {
+      const einkommen = Number(data.brutto || 0);
 
-    const total = zinsen + unterhalt + amortisation;
+      const zinssatz = getRealRate(data.modell);
+      const zinsen = (hypothek * zinssatz) / 12;
+      const unterhalt = (kaufpreis ? kaufpreis * 0.008 : 0) / 12;
 
-    const tragbarkeitPct =
-      einkommen > 0 ? Math.round(((total * 12) / einkommen) * 100) : 0;
+      const zweiteHypothek =
+        kaufpreis > 0 ? Math.max(hypothek - kaufpreis * 0.8, 0) : 0;
 
-    const hasInputs = betrag > 0 || einkommen > 0;
-    const isNegative = hasInputs && tragbarkeitPct > 33;
+      const amortisation =
+        zweiteHypothek > 0 ? zweiteHypothek / 15 / 12 : 0;
 
+      const total = zinsen + unterhalt + amortisation;
+
+      const tragbarkeitPct =
+        einkommen > 0 ? Math.round(((total * 12) / einkommen) * 100) : 0;
+
+      isNegative = hasInputs && tragbarkeitPct > 33;
+    }
+
+    /* ------------------------------------------
+       JURISTISCHE PERSON
+    -------------------------------------------*/
+    if (isJur) {
+      return (
+        <BoxWrapper>
+          <TopBox
+            title={isNegative ? "Not eligible" : "Berechnung"}
+            subtitle="Geschätzter Finanzierungsbedarf:"
+            value={CHF(hypothek)}
+            error={isNegative}
+          />
+
+          <TwoBoxGrid
+            leftLabel="Hypothek"
+            leftValue={CHF(hypothek)}
+            rightLabel="Erhöhung"
+            rightValue={CHF(erhoehung)}
+          />
+        </BoxWrapper>
+      );
+    }
+
+    /* ------------------------------------------
+       NATÜRLICHE PERSON
+    -------------------------------------------*/
     return (
       <BoxWrapper>
         <TopBox
@@ -123,7 +210,10 @@ export default function FunnelCalc({ data, projectData }: FunnelCalcProps) {
           leftLabel="Hypothek"
           leftValue={CHF(hypothek)}
           rightLabel="Tragbarkeit"
-          rightValue={`${tragbarkeitPct}%`}
+          value={`${(
+            ((Number(data.brutto || 0) === 0 ? 0 : (hypothek * getRealRate(data.modell) + kaufpreis * 0.008) /
+              Number(data.brutto || 0))) * 100
+          ).toFixed(0)}%`}
         />
       </BoxWrapper>
     );
@@ -144,20 +234,17 @@ function BoxWrapper({ children }: any) {
 function TopBox({ title, subtitle, value, error = false }: any) {
   return (
     <div
-      className={`
-        w-full border border-black rounded-[10px]
-        flex flex-col items-center gap-[12px] py-[14px] px-[12px]
-        ${error ? "bg-[#FF9A9A]" : "bg-[#CAF476]"}
-      `}
+      className={`w-full border border-black rounded-[10px]
+      flex flex-col items-center gap-[12px] py-[14px] px-[12px]
+      ${error ? "bg-[#FF9A9A]" : "bg-[#CAF476]"}`}
     >
-      <p className="text-center text-[16px] leading-tight font-medium text-[#132219]">
+      <p className="text-center text-[16px] font-medium text-[#132219]">
         {title}
         <br />
         {subtitle}
       </p>
-      <div className="text-[38px] font-semibold leading-none text-center">
-        {value}
-      </div>
+
+      <div className="text-[38px] font-semibold">{value}</div>
     </div>
   );
 }
@@ -173,7 +260,8 @@ function TwoBoxGrid({ leftLabel, leftValue, rightLabel, rightValue }: any) {
 
 function SmallBox({ label, value }: any) {
   return (
-    <div className="bg-[#CAF476] border border-black rounded-[10px] flex flex-col items-center py-[14px] px-[12px] gap-[12px]">
+    <div className="bg-[#CAF476] border border-black rounded-[10px]
+    flex flex-col items-center py-[14px] px-[12px] gap-[12px]">
       <p className="text-[20px] font-medium">{label}</p>
       <div className="border-t border-black w-full" />
       <p className="text-[32px] font-bold">{value}</p>

@@ -1,110 +1,88 @@
 "use client";
-import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="bg-white text-[#132219] font-sfpro border-t border-[#E5E5E5] w-full px-[20px] md:px-[116px]">
-      <div className="max-w-[1579px] mx-auto pt-[50px] pb-[60px] flex flex-col gap-[108px]">
+    <footer className="w-full bg-[#0B1C14] text-white font-sfpro px-[116px] pt-[60px] pb-[80px]">
 
-        {/* ROW 1 — LEFT INFO + RIGHT 3-COLUMN GRID */}
-        <div className="grid grid-cols-[200px_858px] max-lg:grid-cols-1 gap-x-[108px]">
+      {/* LOGO */}
+      <div className="w-full flex justify-start">
+        <Image
+          src="/images/whitelogo.png"
+          width={168}
+          height={42}
+          alt="Logo"
+          className="object-contain"
+        />
+      </div>
 
-          {/* LEFT */}
-          <div className="flex flex-col items-start max-sm:items-center max-sm:text-center">
-            <Image
-              src="/images/logo.png"
-              alt="Hypoteq Logo"
-              width={145}
-              height={38}
-              className="object-contain mb-[65px]"
-            />
+      {/* TOP SECTION */}
+      <div className="mt-[60px] flex flex-col gap-[48px]">
 
-            <p className="text-[20px] leading-[24px] mb-[12px]">HYPOTEQ AG</p>
-            <p className="text-[20px] leading-[24px] mb-[12px]">
-              Löwenstrasse 29 <br /> 8001 Zürich
-            </p>
-            <p className="text-[20px] leading-[24px] mb-[12px]">
-              Telefonnummer: <br /> 044 554 41 00
-            </p>
-            <p className="text-[20px] leading-[24px]">
-              E-Mail-Adresse: <br /> info@hypoteq.ch
-            </p>
+        {/* TITLE + INPUT */}
+        <div className="flex items-end gap-[173px]">
+          <h2 className="text-[40px] font-[400] leading-[110%] tracking-[-0.4px]">
+             Zuerst vergleicht -<br />
+            Dann vertrauen.
+          </h2>
+
+          {/* INPUT */}
+          <div className="flex items-center gap-[22px]">
+            <div className="flex items-center w-[356px] h-[40px] rounded-[50px] bg-[#2A3B2C] px-[16px]">
+              <input
+                className="flex-1 bg-transparent text-white placeholder-white/70 outline-none"
+                placeholder="Type your email"
+              />
+            </div>
+
+            <button className="w-[159px] h-[40px] flex items-center justify-center bg-[#CAF476] 
+              rounded-[50px] text-[#132219] font-medium hover:opacity-90 transition">
+              Senden
+            </button>
           </div>
-
-          {/* RIGHT GRID */}
-          <div className="grid grid-cols-3 gap-x-[64px] gap-y-[67px] max-lg:grid-cols-2 max-sm:grid-cols-1">
-
-            <FooterColumn title="Home Page" />
-            <FooterColumn title="Über uns" href="about"/>
-            <FooterColumn title="Hypothekenrechner" href="calc" />
-
-            <FooterColumn title="Hypotheken leicht gemacht" href="hypotheken" />
-            <FooterColumn title="Kontaktiere uns"  href="contact"/>
-            <FooterColumn title="Frequently Asked Questions" href="/faq" />
-
-            <FooterColumn title="Dokumente" href="/documents" />
-            <FooterColumn title="Werde HYPOTEQ Partner" href="/partner" />
-            <FooterColumn title="HYPOTEQ Advisory" href="/advisory" />
-
-            <FooterColumn title="Mezzanine-Finanzierung" href="/mezzanine" />
-            <FooterColumn title="Impressum & Datenschutz" href="/contact" />
-            <FooterColumn title="Neuigkeiten" href="https://www.linkedin.com/company/hypoteq-ag/" />
-          </div>
-
         </div>
 
-        {/* ROW 2 – After 120px */}
-        <div className="grid grid-cols-[200px_858px] max-lg:grid-cols-1 gap-x-[108px] mt-[120px]">
+        <div className="w-full border-b border-white/40 mt-[24px]"></div>
+      </div>
 
-          <div></div>
-<div className="flex flex-col gap-[24px] max-sm:items-center text-center w-full">
+      {/* 3 COLUMNS */}
+      <div className="mt-[24px] flex justify-start gap-[317px] text-[18px]">
 
-  {/* Title */}
-  <h4 className="text-[36px] font-[400] leading-normal text-[#000] w-full text-left max-sm:text-center">
-    Zuerstvergleichen. <br /> Dann vertrauen.
-  </h4>
+        {/* COLUMN 1 */}
+        <div className="flex flex-col gap-[24px]">
+          <Link href="/" className="hover:underline">Home Page</Link>
+          <Link href="/hypotheken" className="hover:underline">
+            Hypotheken<br />leicht gemacht
+          </Link>
+          <Link href="/documents" className="hover:underline">Dokumente</Link>
+          <Link href="/mezzanine" className="hover:underline">Mezzanine-Finanzierung</Link>
+        </div>
 
-  {/* Input + Button */}
-  <div className="flex items-center gap-[16px] max-sm:flex-col max-sm:w-full w-full">
+        {/* COLUMN 2 */}
+        <div className="flex flex-col gap-[24px]">
+          <Link href="/about" className="hover:underline">Über uns</Link>
+          <Link href="/contact" className="hover:underline">Kontaktiere uns</Link>
+          <Link href="/partner" className="hover:underline">Werde HYPOTEQ Partner</Link>
+          <Link href="/impressum" className="hover:underline">Impressum & Datenschutz</Link>
+        </div>
 
-    {/* Input Wrapper */}
-    <div className="flex items-center border border-[#000]/70 rounded-[58px] px-[24px] py-[8px] opacity-[0.7] w-full max-w-[906px] max-sm:w-full">
-      <input
-        type="email"
-        placeholder="Melde dich für unseren Newsletter an"
-        className="flex-1 bg-transparent text-[16px] placeholder:text-[#9A9A9A] focus:outline-none"
-      />
-    </div>
-
-    {/* Button */}
-    <button className="flex justify-center items-center w-[168px] py-[8px] px-[24px] rounded-[58px] border border-[#000] bg-[#CAF476] hover:bg-[#b9eb67] whitespace-nowrap">
-      Anmelden
-    </button>
-  </div>
-</div>
-
+        {/* COLUMN 3 */}
+        <div className="flex flex-col gap-[24px]">
+          <Link href="/calc" className="hover:underline">Hypothekenrechner</Link>
+          <Link href="/faq" className="hover:underline">Frequently Asked Questions</Link>
+          <Link href="/advisory" className="hover:underline">HYPOTEQ Advisory</Link>
+          <Link
+            href="https://www.linkedin.com/company/hypoteq-ag/"
+            target="_blank"
+            className="hover:underline"
+          >
+            Neuigkeiten
+          </Link>
         </div>
 
       </div>
+
     </footer>
   );
-};
-
-const FooterColumn = ({
-  title,
-  href = "#"
-}: {
-  title: string;
-  href?: string;
-}) => {
-  return (
-    <div className="flex flex-col w-[258px]">
-      <a href={href} className="text-[24px] font-[600] hover:underline">
-        {title}
-      </a>
-    </div>
-  );
-};
-
-export default Footer;
+}
