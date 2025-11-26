@@ -594,9 +594,15 @@ function ProgressBox({ title, value, current, total, loanType, red = false }: an
   );
 }
 
+interface SmallBoxProps {
+  title: string;
+  value: string;
+  highlight?: boolean;
+}
 
-function SmallBox({ title, value, highlight = false }) {
+function SmallBox({ title, value, highlight = false }: SmallBoxProps) {
   const [currency, amount] = value.split(" ");
+
 
   return (
     <div
