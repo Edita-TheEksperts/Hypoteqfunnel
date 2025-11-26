@@ -20,7 +20,6 @@ export default function FunnelPage() {
     setClient,
     setProject,
     setProperty,
-    setBorrowers,
     setFinancing,
     addDocument,
   } = useFunnelStore();
@@ -38,9 +37,19 @@ export default function FunnelPage() {
       }
     }
   }, [customerType, setCustomerType]);
+  
 
   const next = () => setStep((s) => s + 1);
   const back = () => setStep((s) => Math.max(1, s - 1));
+
+  
+const borrowers = useFunnelStore((state) => state.borrowers);
+const setBorrowers = useFunnelStore((state) => state.setBorrowers);
+useEffect(() => {
+  if (!borrowers || borrowers.length === 0) {
+    setBorrowers([{ id: uuidv4(), type: "nat" }]);
+  }
+}, []);
 
 
   async function uploadDocToSharepoint(file: File, inquiryId: string) {
@@ -107,19 +116,7 @@ export default function FunnelPage() {
     firmen: [{ firmenname: "" }],
   });
 
-  const [borrowers, setLocalBorrowers] = useState([
-    {
-      id: uuidv4(),
-      type: "" as "" | "nat" | "jur",
-      firstName: "",
-      lastName: "",
-      birthdate: "",
-      civil: "",
-      job: "",
-      firmaName: "",
-      firmaUID: "",
-    },
-  ]);
+
 
   const [financingData, setFinancingData] = useState({
     kaufpreis: "",
@@ -277,10 +274,12 @@ const submitFinal = async () => {
 
 {step === 3 && (
   <BorrowersStep
-    saveStep={() => next()}
-    back={back}      // <--- KJO MUNGON
+saveStep={next}
+
+    back={back}
   />
 )}
+
 
 {step === 4 && (
 <PropertyStep
@@ -289,7 +288,9 @@ const submitFinal = async () => {
   saveStep={saveStep4}
   back={back}
   customerType={customerType}            // direct / partner
-  borrowerType={borrowers[0]?.type}      // nat / jur
+borrowerType={borrowers[0]?.type}
+
+
 />
 
 )}

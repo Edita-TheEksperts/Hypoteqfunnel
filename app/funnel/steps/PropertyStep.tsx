@@ -1,6 +1,7 @@
 "use client";
 
-function PropertyStep({ data, setData, saveStep, borrowers, back, customerType }: any) {
+function PropertyStep({ data, setData, saveStep, borrowers, back, customerType, borrowerType }: any)
+ {
   const update = (key: string, value: any) => {
     setData((prev: any) => ({ ...prev, [key]: value }));
   };
@@ -29,11 +30,11 @@ function PropertyStep({ data, setData, saveStep, borrowers, back, customerType }
     const num = typeof value === "string" ? Number(value.replace(/'/g, "")) : value;
     return num.toLocaleString("de-CH"); // Swiss formatting
   };
-  const borrowerType = borrowers?.[0]?.type || "nat"; 
+const bt = borrowerType || "nat";
 
 
 const propertyUseOptions =
-    borrowerType === "jur"
+    bt === "jur"
       ? ["Rendite-Immobilie", "Für eigenes Geschäft"]
       : [
           "Selbstbewohnt",
@@ -277,7 +278,8 @@ const propertyUseOptions =
         {/* ======================== */}
         {/*   JUR / PARTNER VIEW     */}
         {/* ======================== */}
-        {(customerType === "jur" || customerType === "partner") ? (
+  {borrowerType === "jur" ? (
+
           <div className="grid grid-cols-2 gap-[16px] w-full max-w-[600px]">
 
             {/* Firmenname */}
