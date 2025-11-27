@@ -40,8 +40,7 @@ const Banner: React.FC = () => {
             max-sm:max-w-[320px]
           "
         >
-          15 Minuten, die Klarheit{" "}
-          <span className="font-[500] text-[#CAF476]">schaffen</span>
+         Noch Fragen?
         </h3>
 
         {/* Paragraph */}
@@ -59,8 +58,10 @@ const Banner: React.FC = () => {
             max-sm:max-w-[310px] max-sm:opacity-95 max-sm:mt-[4px]
           "
         >
-Unsere Experten werden Ihnen erklären, wie Sie Vertriebspartner bei uns werden können und welche Bedingungen dafür gelten.
-          <br className="max-sm:hidden" />
+Unsere Expert:innen erklären dir den Finanzierungsprozess, zeigen dir passende Optionen
+und begleiten dich in deiner Entscheidungsfindung – persönlich, klar und effizient.
+In einem kurzen Gespräch erhältst du genau die Informationen, die du brauchst,
+um sicher weiterzugehen.
      
         </p>
       </div>

@@ -9,7 +9,6 @@ const buttons = [
   { id: "neue", label: "Neue Hypothek" },
   { id: "refi", label: "Refinanzierung" },
   { id: "neubau", label: "Neubau-Finanzierung" },
-  { id: "hypo", label: "Deine Hypothek berechnen?" }, // ← tani është korrekt
 ];
 
 
@@ -41,12 +40,13 @@ const buttons = [
             h-auto md:h-[957px]
             flex flex-col justify-start
             px-[16px] sm:px-[24px] md:px-[116px]
-            pt-[100px] sm:pt-[120px] md:pt-[180px]
+ pt-[40px] sm:pt-[80px] md:pt-[110px]
+
             gap-[10px] text-[#FFF]
           "
         >
           <div className="flex flex-col max-w-[600px]">
-            <div className="flex flex-col gap-[16px] sm:gap-[24px]">
+            <div className="flex flex-col gap-[16px] sm:gap-[20px]">
               <h2
                 className="text-[32px] sm:text-[40px] md:text-[72px] leading-[110%] md:leading-[100%] font-[500] tracking-[-0.72px]"
                 style={{ fontFamily: '"SF Pro Display", sans-serif' }}
@@ -56,80 +56,53 @@ const buttons = [
               </h2>
             </div>
 
-            <div className="mt-[20px] sm:mt-[40px] md:mt-[32px]">
-              <p
-                className="text-[15px] sm:text-[18px] md:text-[24px] font-light leading-[1.6] text-white"
-                style={{
-                  fontFamily: '"SF Pro Display", sans-serif',
-                  fontWeight: 100,
-                  letterSpacing: "0.01em",
-                }}
-              >
-                Egal ob Hauskauf, Refinanzierung oder Neubau – der Weg zu deinem
-                Eigenheim muss nicht kompliziert sein. Unsere smarte Plattform
-                vergleicht Angebote von unseren Finanzierungspartnern, damit du
-                nur das siehst, was wirklich zählt. Ob du deine erste Hypothek
-                suchst, eine bestehende optimieren willst oder ein Bauprojekt
-                finanzierst – wir bringen Klarheit und Transparenz in jeden
-                Schritt.
-              </p>
-            </div>
+      <div className="mt-[20px] sm:mt-[40px] md:mt-[32px]">
+  <p
+    className="text-[15px] sm:text-[18px] md:text-[24px] font-light leading-[1.6] text-white"
+    style={{
+      fontFamily: '"SF Pro Display", sans-serif',
+      fontWeight: 100,
+      letterSpacing: "0.01em",
+    }}
+  >
+   Wir sind dein Partner für smarte Immobilienfinanzierung in der Schweiz. Unsere digitale Plattform verbindet dich mit geprüften Finanzierungspartnern und macht Hypothekenangebote einfach vergleichbar. Mit klaren Prozessen und persönlicher Unterstützung begleiten wir dich vom ersten Schritt bis zum Abschluss – transparent, effizient und unverbindlich.
+Unsere DNA - Wir vereinfachen den Hypothekenprozess in der Schweiz – digital, smart und nah am Menschen. Mit Technologie, Daten und einem starken Partnernetzwerk gestalten wir Finanzierung schneller, klarer und zugänglicher. Für Kund:innen, Vermittler und Kreditgeber.
+  </p>
 
-            {/* ===== BUTTON GRID (aligned like Figma) ===== */}
-            <div className="flex flex-col gap-[24px] mt-[32px] max-sm:mt-[-30px]">
 
-              {/* Row 1 */}
-              <div className="flex flex-wrap gap-[12px] mt-[46px] justify-center sm:justify-start">
-                {buttons.slice(0, 2).map((btn) => {
-                  const isActive = active === btn.id;
-                  return (
-                    <button
-                      key={btn.id}
-                      onClick={() => handleClick(btn.id)}
-                      className={`
-                        font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
-                        rounded-[45px] border border-[#fff]
-                        transition-all duration-300
-                        max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
-                        ${
-                          isActive
-                            ? "bg-[#CAF476] text-[#132219]"
-                            : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
-                        }
-                      `}
-                    >
-                      {btn.label}
-                    </button>
-                  );
-                })}
-              </div>
-{/* Row 2 */}
-<div className="flex flex-wrap gap-[12px] justify-center sm:justify-start">
-  {buttons.slice(2).map((btn) => {
-    const isActive = active === btn.id;
-    return (
-      <button
-        key={btn.id}
-        onClick={() => handleClick(btn.id)}
-        className={`
-          font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
-          rounded-[45px] border border-[#fff]
-          transition-all duration-300
-          max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
-          ${
-            isActive
-              ? "bg-[#CAF476] text-[#132219]"
-              : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
-          }
-        `}
-      >
-        {btn.label}
-      </button>
-    );
-  })}
 </div>
 
-            </div>
+{/* ===== BUTTON GRID ===== */}
+<div className="mt-[32px] max-sm:mt-[-30px]">
+
+  {/* ALL 3 BUTTONS IN ONE ROW */}
+  <div className="flex flex-wrap gap-[12px] mt-[46px] justify-center sm:justify-start">
+    {buttons.map((btn) => {
+      const isActive = active === btn.id;
+      return (
+        <button
+          key={btn.id}
+          onClick={() => handleClick(btn.id)}
+          className={`
+            font-sfpro text-[20px] font-semibold px-[28px] py-[10px]
+            rounded-[45px] border border-[#fff]
+            transition-all duration-300
+            max-sm:text-[16px] max-sm:px-[20px] max-sm:w-full
+            ${
+              isActive
+                ? "bg-[#CAF476] text-[#132219]"
+                : "bg-transparent hover:bg-[#CAF476]/60 text-[#fff]"
+            }
+          `}
+        >
+          {btn.label}
+        </button>
+      );
+    })}
+  </div>
+
+</div>
+
           </div>
         </div>
       </section>
@@ -155,17 +128,12 @@ const buttons = [
             </h2>
 <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
 >
-  Starte mit einer kurzen, unverbindlichen Anfrage. Sag uns, worum’s geht – Immobilie, Budget, Einkommen,
-  Zeitplan – online oder per Call.
+ Der erste Schritt ist einfach. Starte mit einer kurzen, unverbindlichen Anfrage.
   <br />
-  Wir hören zu, klären deine Ziele und nehmen nur auf, was wirklich nötig ist.
+Um zu starten brauchen wir Angaben zur  Immobilie, Budget, Einkommen und deinen Zeitplan. 
+Keine Gebühren. Kein Druck.
   <br />
-  Keine Gebühren. Kein Druck. Einfach der erste klare Schritt.
-  <span className="underline font-normal">
-    {" "}
-    Alternativ, kannst du auch alles bei uns direkt hochladen, und deine Hypothekenanfrage starten
-  </span>
-  .
+Du kannst alles direkt bei uns hochladen, und deine Hypothekenanfrage starten oder wir helfen dir telefonisch weiter. 
 </p>
 
           </div>
@@ -230,12 +198,10 @@ const buttons = [
               Neubau-Finanzierung
             </h2>
             <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
->
-              Dein Bauprojekt verdient die passende Finanzierung. Wir analysieren
-              dein Profil, holen passende Angebote und zeigen dir alle Optionen
-              klar nebeneinander: Zinssatz, Laufzeit, monatliche Kosten. Du
-              verstehst die Vorteile, Kompromisse – und triffst deine Entscheidung
-              datenbasiert & stressfrei.
+>Für dein Bauprojekt brauchst du eine Finanzierung, die wirklich zu dir passt. 
+Wir analysieren dein Profil, vergleichen die besten Angebote und erklären dir alle Optionen verständlich. 
+So triffst du deine Entscheidung entspannt und auf Basis klarer Daten.
+
             </p>
           </div>
 
@@ -248,9 +214,6 @@ const buttons = [
           </div>
         </div>
       </section>
-
-      {/* ====== HypoZins Section ====== */}
-      <HypoZinsSection />
     </>
   );
 }

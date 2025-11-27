@@ -22,8 +22,8 @@ const PartnerExpectSection: React.FC = () => {
       text: "Unsere Margen sind höher als bei klassischen Vermittlern – und du erhältst eine faire Provision pro Abschluss.",
     },
     {
-      title: "Ein Tool für alles",
-      text: "Unser Partnerbereich unterstützt dich bei Beratung, Erfassung und Offertanfragen – strukturiert, intuitiv und verständlich. Du leitest die Kund:innen durch die wichtigsten Schritte, wir übernehmen die Analyse und holen passende Finanzierungsvorschläge bei unseren Partnern ein. Alles ohne direkte Bankschnittstellen – dafür mit persönlicher Begleitung und klarer Kommunikation.",
+      title: "Partnerschaft auf Augenhöhe",
+      text: "Unser Partnerbereich unterstützt dich bei Beratung, Erfassung und Offertanfragen – strukturiert, schnell und verständlich. Du leitest die Kund:innen durch die wichtigsten Schritte, wir übernehmen die Analyse und holen passende Finanzierungsvorschläge bei unseren Partnern ein. Alles ohne direkte Bankschnittstellen – dafür mit persönlicher Begleitung und klarer Kommunikation.",
     },
     {
       title: "Immobilienbewertung inklusive",

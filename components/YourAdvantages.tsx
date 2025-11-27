@@ -86,36 +86,23 @@ const YourAdvantages: React.FC = () => {
       </h2>
 
       <div className="w-full lg:w-[1274px] flex flex-col gap-[24px] mb-[60px]">
-        {/* FIRST ROW */}
-        <div className="flex flex-col lg:flex-row gap-[16px]">
-          <div className="lg:w-[810px] w-full">
-            <AdvantageCard
-              title="Direkter Weg zur besten Offerte"
-              text={
-                <>
-                  Du erwartest schnelle und verlässliche Resultate – wir liefern
-                  sie. <br /> Mit HYPOTEQ wird deine Hypothekensuche einfach,
-                  digital und transparent. In nur wenigen Klicks erhältst du ein
-                  auf deine Ziele und dein Budget abgestimmtes
-                  Finanzierungsangebot.
-                </>
-              }
-            />
-          </div>
+  {/* FIRST ROW – merged into one box */}
+<div className="flex flex-col lg:flex-row gap-[16px]">
+  <div className="w-full">
+    <AdvantageCard
+      title="Einfach & schnell zur besten Finanzierung"
+      text={
+        <>
+          Dein Weg zum Eigenheim muss nicht kompliziert sein. <br />
+          HYPOTEQ vergleicht Angebote verschiedener Finanzierungspartner und
+          zeigt dir sofort, welche Lösung zu dir passt. <br />
+          Schnell, transparent und komplett digital.
+        </>
+      }
+    />
+  </div>
+</div>
 
-          <div className="w-full lg:w-[446px]">
-            <AdvantageCard
-              title="Einfach zum Eigenheim"
-              text={
-                <>
-                  Unser smarter Online-Prozess macht den Weg zur Hypothek so
-                  unkompliziert wie noch nie. Wir führen dich Schritt für
-                  Schritt – schnell, sicher und ohne unnötigen Aufwand.
-                </>
-              }
-            />
-          </div>
-        </div>
 
         {/* SECOND ROW */}
         <div className="flex flex-col lg:flex-row gap-[16px]">
@@ -143,7 +130,7 @@ const YourAdvantages: React.FC = () => {
               title="Volle Transparenz"
               text={
                 <>
-                  Mit HYPOTEQ weisst du immer, <strong>wo du stehst</strong>.
+                  Mit HYPOTEQ weisst du immer, wo du stehst.
                   <br /> Keine versteckten Gebühren, keine Schaufensterzinsen –
                   nur faire, nachvollziehbare Offerten und ehrliche Beratung.
                 </>

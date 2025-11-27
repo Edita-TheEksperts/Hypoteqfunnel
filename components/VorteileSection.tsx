@@ -9,7 +9,7 @@ export default function VorteileSection() {
       text: "Kein Versicherungs- oder Anlagevertrieb durch HYPOTEQ",
     },
     {
-      title: "Hohe Margen",
+      title: "Attraktive Margen",
       text: "Faire Provisionsstruktur, schnelle Auszahlung",
     },
     {
@@ -18,7 +18,7 @@ export default function VorteileSection() {
     },
     {
       title: "Effiziente Prozesse",
-      text: "Kein Papierkram – wir übernehmen die Abwicklung",
+      text: "Wir kümmern uns um den Ablauf – schnell, digital und zuverlässig",
     },
     {
       title: "Support auf Augenhöhe",
@@ -35,7 +35,10 @@ export default function VorteileSection() {
     { question: "Welche Vorteile bietet eine Partnerschaft mit HYPOTEQ? " },
     { question: "Wie funktioniert die Zusammenarbeit?" },
     { question: "Welche Tools stehen mir als Partner zur Verfügung?" },
-        { question: "Wie profitiert meine Kundschaft von der Partnerschaft mit HYPOTEQ? " },
+    {
+      question:
+        "Wie profitiert meine Kundschaft von der Partnerschaft mit HYPOTEQ? ",
+    },
   ];
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -48,48 +51,48 @@ export default function VorteileSection() {
       className="relative w-full flex flex-col items-start gap-[120px]
       px-[24px] md:px-[116px] max-w-[1579px] mx-auto mt-[120px] mb-[120px]"
     >
-{/* =================== */}
-{/* Vorteile Section */}
-{/* =================== */}
-<div className="flex flex-col gap-[48px] w-full">
-  <h2
-    className="text-[#132219] text-[48px] font-[500] leading-[100%] tracking-[-0.48px]
+      {/* =================== */}
+      {/* Vorteile Section */}
+      {/* =================== */}
+      <div className="flex flex-col gap-[48px] w-full">
+        <h2
+          className="text-[#132219] text-[48px] font-[500] leading-[100%] tracking-[-0.48px]
                font-['SF Pro Display']"
-  >
-    Deine Vorteile auf einen Blick:
-  </h2>
+        >
+          Deine Vorteile auf einen Blick:
+        </h2>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[26px] gap-y-[48px] w-full">
-    {cards.map((card, i) => (
-      <div
-        key={i}
-        className="flex items-start gap-[16px] relative border-l-[5px] border-[#CAF476] pl-[24px] rounded-[2px]"
-      >
-        <div className="absolute top-[6px] left-[12px]">
-          <Image
-            src="/images/MMMA.svg"
-            alt="Arrow Icon"
-            width={24}
-            height={24}
-            priority
-          />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[26px] gap-y-[48px] w-full">
+          {cards.map((card, i) => (
+            <div
+              key={i}
+              className="flex items-start gap-[16px] relative border-l-[5px] border-[#CAF476] pl-[24px] rounded-[2px]"
+            >
+              <div className="absolute top-[6px] left-[12px]">
+                <Image
+                  src="/images/MMMA.svg"
+                  alt="Arrow Icon"
+                  width={24}
+                  height={24}
+                  priority
+                />
+              </div>
+
+              <div className="flex flex-col gap-[8px] mt-[40px]">
+                <h3 className="text-[#132219] text-[34px] mt-[40px] font-[500] leading-normal font-['SF Pro Display']">
+                  {card.title}
+                </h3>
+                <p className="text-[#132219] text-[22px] font-[400] mt-[32px] leading-[22px] max-w-[300px]">
+                  {card.text}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="flex flex-col gap-[8px] mt-[40px]">
-          <h3 className="text-[#132219] text-[34px] mt-[40px] font-[500] leading-normal font-['SF Pro Display']">
-            {card.title}
-          </h3>
-          <p className="text-[#132219] text-[22px] font-[400] mt-[32px] leading-[22px] max-w-[300px]">
-            {card.text}
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-
-  {/* ➤ INSERTED TEXT BELOW CARDS */}
-  <p
-    className="
+        {/* ➤ INSERTED TEXT BELOW CARDS */}
+        <p
+          className="
       text-[#132219]
       font-['SF Pro Display']
       text-[24px]
@@ -98,15 +101,17 @@ export default function VorteileSection() {
       tracking-[-0.24px]
       mt-[48px]
     "
-  >
-    Dann trag dich ein – wir melden uns persönlich bei dir.{" "}
-HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
-  </p>
-</div>
-{/* =================== */}
-{/* FAQ Section – DROPDOWN STYLE LIKE MAIN FAQ PAGE */}
-{/* =================== */}
+        >
+          Dann trag dich ein – wir melden uns persönlich bei dir. HYPOTEQ – Dein
+          Partner für smarte Immobilienfinanzierung.
+        </p>
+      </div>
 
+    {/* ------------------------------------------------------- */}
+{/* --------------------  FAQ SECTION OFF  ----------------- */}
+{/* ------------------------------------------------------- */}
+
+{/*
 <div className="flex flex-col gap-[32px] sm:gap-[48px] w-full">
   <h2
     id="faq"
@@ -133,7 +138,7 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
         q: "Welche Vorteile bietet eine Partnerschaft mit HYPOTEQ?",
         a: (
           <>
-            Als Partner profitierst du von hohen Margen, einer fairen
+            Als Partner profitierst du von attraktiven Margen, einer fairen
             Provisionsstruktur, schnellen Auszahlungen, digitalen Tools sowie
             persönlichem Support – und das alles ohne Produktkonkurrenz.
             <br />
@@ -147,7 +152,6 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
         a: (
           <>
             Du bleibst im Lead: Die Kundenbeziehung gehört dir, während HYPOTEQ
-   
             <br />
             Du führst die Beratung, wir übernehmen die Analyse, holen Offerten
             bei unseren Partnerbanken ein und begleiten dich bis zum Abschluss.
@@ -163,7 +167,6 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
             unsere digitalen Tools wie den Hypothekenrechner oder die
             Immobilienbewertung (bereit ab Dezember 2025) verwenden – einfach,
             effizient und transparent.
-
             <br />
             Es gibt keinen separaten Login oder geschützten Bereich – du nutzt
             unsere Online-Tools direkt über die Website.
@@ -176,13 +179,13 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
           <>
             Über unser Netzwerk mit mehr als 30 Kreditgebern vergleichen wir für
             deine Kund:innen die besten Finanzierungslösungen am Markt –
-  
             <br />
             Du bleibst Hauptansprechperson und bietest echten Mehrwert, während
             wir im Hintergrund die passende Finanzierung strukturieren und
- 
+            begleiten.
             <br />
-            Mehr dazu unter <a
+            Mehr dazu unter 
+            <a
               href="https://hypoteq.ch/partner"
               target="_blank"
               className="underline"
@@ -198,7 +201,6 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
       return (
         <div key={index} className="flex flex-col w-full">
 
-          {/* Question Row */}
           <div
             onClick={() => toggleFAQ(index)}
             className="flex justify-between items-center border border-[#000]
@@ -209,7 +211,6 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
               {item.q}
             </p>
 
-            {/* Plus Icon */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -224,7 +225,6 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
             </svg>
           </div>
 
-          {/* Expanded Answer */}
           {isOpen && (
             <div
               className="mt-[12px] border border-[#132219] rounded-[16px] p-[24px]
@@ -238,6 +238,12 @@ HYPOTEQ – Dein Partner für smarte Immobilienfinanzierung.
     })}
   </div>
 </div>
+*/}
+
+{/* ------------------------------------------------------- */}
+{/* ------------------  END FAQ COMMENT  ------------------- */}
+{/* ------------------------------------------------------- */}
+
 
 
     </section>

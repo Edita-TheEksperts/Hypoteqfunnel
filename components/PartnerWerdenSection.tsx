@@ -5,14 +5,12 @@ export default function PartnerWerdenSection() {
     <section className="w-full flex flex-col items-start gap-[32px] sm:gap-[40px] md:gap-[48px] px-[16px] sm:px-[24px] md:px-[116px] max-w-[1579px] mx-auto mt-[120px] sm:mt-[100px] md:mt-[120px] mb-[120px] sm:mb-[100px] md:mb-[120px]">
       {/* Title */}
       <h2 className="text-[#132219] text-[32px] sm:text-[40px] md:text-[48px] font-[500] leading-[110%] md:leading-[100%] tracking-[-0.48px] font-['SF Pro Display'] text-center md:text-left">
-        Ja, ich möchte Partner werden!
+    Du möchtest Hypotheken aktiv vermitteln und mit HYPOTEQ zusammenarbeiten?
       </h2>
 
       {/* Subtitle */}
       <p className="text-[#132219] text-[16px] sm:text-[18px] md:text-[20px] font-[600] leading-[140%] md:leading-[22px] font-['SF Pro Display'] text-center md:text-left">
-        Du möchtest Hypotheken aktiv vermitteln und mit HYPOTEQ zusammenarbeiten?
-        <br className="hidden sm:block" />
-        Dann freuen wir uns über deine Anfrage!
+      Dann freuen wir uns über deine Anfrage!
       </p>
 
       {/* Form */}
@@ -47,7 +45,7 @@ export default function PartnerWerdenSection() {
 
         {/* Message */}
         <textarea
-          placeholder="Your message"
+          placeholder="Deine Nachricht"
           className="w-full border border-[#132219] opacity-70 rounded-[10px] px-[16px] sm:px-[20px] md:px-[24px] py-[8px] h-[110px] sm:h-[133px] text-[#132219] text-[14px] sm:text-[15px] md:text-[16px] font-['SF Pro Display']"
         ></textarea>
 

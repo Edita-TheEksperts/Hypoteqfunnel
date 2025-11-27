@@ -40,8 +40,7 @@ const ConsultationBanner: React.FC = () => {
             max-sm:max-w-[320px]
           "
         >
-          15 Minuten, die Klarheit{" "}
-          <span className="font-[500] text-[#CAF476]">schaffen</span>
+      Noch Fragen?
         </h3>
 
         {/* Paragraph */}
@@ -59,8 +58,10 @@ const ConsultationBanner: React.FC = () => {
             max-sm:max-w-[310px] max-sm:opacity-95 max-sm:mt-[4px]
           "
         >
-          Unsere Expert:innen erklären dir den Finanzierungsprozess, zeigen dir passende Optionen
-          und begleiten dich bei der Entscheidungsfindung.{" "}
+        Unsere Expert:innen erklären dir den Finanzierungsprozess, zeigen dir passende Optionen
+und begleiten dich in deiner Entscheidungsfindung – persönlich, klar und effizient.
+In einem kurzen Gespräch erhältst du genau die Informationen, die du brauchst,
+um sicher weiterzugehen.
           <br className="max-sm:hidden" />
      
         </p>

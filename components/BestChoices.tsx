@@ -4,20 +4,33 @@ import React from "react";
 export default function BestChoices() {
   return (
     <>
-      <section
-        className="
-          flex flex-col lg:flex-row justify-between items-center
-          w-full max-w-[1272px] mx-auto
-          p-[24px] sm:p-[32px] md:p-[40px]
-          rounded-[10px]
-          border border-[#000]
-          bg-[#132219]
-          mt-[120px] mb-[24px] 
-          h-auto lg:h-[297px]
-          gap-[32px] lg:gap-0
-        "
-      >
-        {/* ✅ Left Column */}
+    
+{/* Wrapper që ngjit tekstin tek box-i */}
+<div className="w-full max-w-[1352px] mx-auto px-[24px] sm:px-[32px] md:px-[40px] mt-[120px] -mb-[100px]">
+
+  {/* Teksti i kuq — ndodhet brenda wrapper-it */}
+  <p className="text-[#132219] text-[16px] sm:text-[18px] lg:text-[20px] font-sfpro leading-[150%] text-center lg:text-left">
+    Dein persönlicher Zinssatz kann je nach Situation variieren – wir berechnen gerne deinen individuellen Zins.
+  </p>
+
+</div>
+
+{/* BOX që ruan mt siç është te Figma */}
+<section
+  className="
+    flex flex-col lg:flex-row justify-between items-center
+    w-full max-w-[1272px] mx-auto
+    p-[24px] sm:p-[32px] md:p-[40px]
+    rounded-[10px]
+    border border-[#000]
+    bg-[#132219]
+    mt-[120px]
+    mb-[24px]
+  "
+>
+
+ 
+        {/* Left Column */}
         <div
           className="
             flex flex-col justify-center items-start
@@ -26,7 +39,6 @@ export default function BestChoices() {
             text-white font-sfpro
           "
         >
-          {/* Title + Subtitle */}
           <div>
             <h2 className="text-[32px] sm:text-[40px] lg:text-[48px] font-[500] leading-[140%] tracking-[-0.48px] text-white">
               HYPOTEQ
@@ -42,7 +54,7 @@ export default function BestChoices() {
           </p>
         </div>
 
-        {/* ✅ Right Column */}
+        {/* Right Column */}
         <div
           className="
             flex flex-wrap lg:flex-nowrap items-center justify-center
@@ -56,15 +68,15 @@ export default function BestChoices() {
         </div>
       </section>
 
-      {/* ✅ Info text below the box */}
+      {/* Info text below */}
       <p className="max-w-[1352px] mx-auto text-[#132219] text-[18px] sm:text-[16px] lg:text-[22px] font-sfpro leading-[150%] px-[24px] sm:px-[32px] md:px-[40px] mb-[120px] text-center lg:text-left">
-        Unsere Richtzinsen geben dir eine erste Orientierung - dein persönlicher Zinssatz kann je nach Situation variieren. <br/> Gerne berechnen wir deine individuellen Zins und zeigen dir, wie viel du wirklich sparen kannst.
+        Mit HYPOTEQ weisst du immer, wo du stehst. <br/>
+        Keine Schaufensterzinsen, keine versteckten Gebühren – nur faire, nachvollziehbare Angebote.
       </p>
     </>
   );
 }
 
-/* ✅ Rate Card */
 function RateCard({ title, value }: { title: string; value: string }) {
   return (
     <div

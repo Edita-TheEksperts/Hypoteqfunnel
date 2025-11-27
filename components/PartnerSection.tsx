@@ -60,22 +60,22 @@ const handleClick = (id: string) => {
           "
         >
           <h2 className="text-[36px] sm:text-[56px] md:text-[100px] font-[500] leading-[110%] tracking-[-1px]">
-            Werde <br/> <br className="sm:hidden" />
-            <span className="block md:inline">HYPOTEQ Partner</span>
+            HYPOTEQ <br/> <br className="sm:hidden" />
+            <span className="block md:inline"> Partner werden</span>
           </h2>
 
           <p className="mt-[16px] sm:mt-[24px] text-[18px] sm:text-[22px] md:text-[24px] leading-[140%]">
-            Und wachse mit uns.
+        Wachse mit HYPOTEQ
           </p>
 
           <p className="mt-[20px] sm:mt-[32px] text-[16px] sm:text-[20px] md:text-[24px] leading-[150%] max-w-full sm:max-w-[850px]">
-            Du bist Treuhänder:in, Vermögensverwalter:in, Makler:in oder Broker?
+        Du bist Treuhänder:in, Vermögensverwalter:in, Makler:in oder Broker?
+
             <br className="hidden sm:block" />
-            Dann kannst du mit HYPOTEQ dein Angebot um professionelle
-            Hypothekenberatung erweitern – ganz ohne eigenen Bankenvertrag.
+       Dann kannst du mit HYPOTEQ dein Angebot  mit unserer professioneller Hypothekenberatung erweitern – ganz ohne eigenen Bankenvertrag.
+
             <br className="hidden sm:block" />
-            Wir liefern dir die Tools, das Netzwerk und den Support, damit du
-            deine Kund:innen mit Finanzierungslösungen überzeugst.
+       Wir liefern dir die Tools, das Netzwerk und den Support, damit du deine Kund:innen mit passenden Finanzierungslösungen unterstützen kannst.
           </p>
 
           {/* BUTTONS */}

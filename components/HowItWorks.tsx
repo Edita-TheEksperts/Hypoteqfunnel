@@ -81,7 +81,7 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
             tracking-[-0.32px]
           "
         >
-          Jetzt in nur 3 Schritten starten. Wir führen Sie sicher durch jeden Schritt.
+Jetzt in nur 3 Schritten starten – wir führen dich sicher durch jeden Schritt.
         </p>
 
   <Link href="/funnel" className="w-full">
@@ -119,31 +119,28 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
 
 /* MAIN COMPONENT – PARALLAX RISE */
 export default function HowItWorks() {
-  const steps = [
-    {
-      step: "Klick 1",
-      title: "Angaben zur Immobilie & Finanzierung",
-      text: "Trage die wichtigsten Informationen zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Bereits nach diesem Schritt siehst du, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen – schnell, einfach und unverbindlich.",
-      image: "/images/Epara.png",
-    },
-    {
-      step: "Klick 2",
-      title: "Dokumente einreichen",
-      text: "Im nächsten Schritt lädst du die erforderlichen Unterlagen hoch (z. B. Lohnausweis, Steuererklärung, Grundbuchauszug). Sobald alle Dokumente vollständig vorliegen, starten wir unseren Prozess und holen die passenden Bankangebote für dich ein.",
-      image: "/images/documents.png",
-    },
-    {
-      step: "Klick 3",
-      title:  "Angebot erhalten & entscheiden",
-      text:"Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine individuellen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt.Mit einem Klick kannst du das gewünschte Angebot akzeptieren oder ablehnen.",
-      image: "/images/486373494.png",
-    },
-    {
-      title: "Gratulation – Deine Hypothek ist bereit",
-      text: " Nach deiner Auswahl übernehmen wir den Rest: Wir koordinieren die nächsten Schritte mit der Bank und begleiten dich bis zum Abschluss.",
-      highlightBox: true,
-    },
-  ];
+const steps = [
+  {
+    step: "Schritt 1",
+    title: "Angaben eingeben",
+    text: "Erfasse die wichtigsten Informationen zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Schon nach diesem Schritt siehst du, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen – schnell, einfach und unverbindlich.",
+    image: "/images/Epara.png",
+  },
+  {
+    step: "Schritt 2",
+    title: "Dokumente einreichen",
+    text: "Lade die benötigten Unterlagen hoch (z. B. Lohnausweis, Steuererklärung, Grundbuchauszug). Sobald alles vollständig ist, starten wir den Prozess und holen die besten Bankenangebote für dich ein.",
+    image: "/images/Epara.png", // vendose fotografin e duhur
+  },
+  {
+    step: "Schritt 3",
+    title: "Angebot erhalten & entscheiden",
+    text: "Innerhalb von 48 Stunden nach Eingang aller Dokumente erhältst du deine persönliche Offerte. Mit einem Klick kannst du das gewünschte Angebot annehmen.",
+    image: "/images/Epara.png", // vendose fotografin e duhur
+  },
+];
+
+
 
   return (
 <section

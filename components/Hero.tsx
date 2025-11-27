@@ -47,7 +47,7 @@ export default function Hero() {
         >
           Erhalte dein persönliches Hypothekarangebot online <br/> – <strong>schnell, sicher
           und transparent. </strong><br/>Vergleiche verschiedene Optionen, berechne deine
-          monatlichen Kosten<br/>  und starte deinen Finanzierungsprozess - alles nur in drei Schritten<br/> Zuerst vergleichen - dann vertrauen
+          monatlichen Kosten<br/>  und starte deinen Finanzierungsprozess - alles nur in drei Schritten<br/> Zuerst vergleichen - dann entscheiden
         </p>
 
         {/* ✅ CTA Button */}

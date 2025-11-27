@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="flex items-end gap-[173px]">
           <h2 className="text-[40px] font-[400] leading-[110%] tracking-[-0.4px]">
              Zuerst vergleichen -<br />
-            Dann vertrauen.
+            Dann entscheiden.
           </h2>
 
           {/* INPUT */}
@@ -54,7 +54,7 @@ export default function Footer() {
         <div className="flex flex-col gap-[24px]">
           <Link href="/" className="hover:underline">Home Page</Link>
           <Link href="/hypotheken" className="hover:underline">
-            Hypotheken<br />leicht gemacht
+            Hypotheken  leicht gemacht
           </Link>
           <Link href="/documents" className="hover:underline">Dokumente</Link>
           <Link href="/mezzanine" className="hover:underline">Mezzanine-Finanzierung</Link>
