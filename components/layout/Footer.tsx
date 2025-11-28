@@ -64,7 +64,7 @@ export default function Footer() {
         <div className="flex flex-col gap-[24px]">
           <Link href="/about" className="hover:underline">Über uns</Link>
           <Link href="/contact" className="hover:underline">Kontaktiere uns</Link>
-          <Link href="/partner" className="hover:underline">Werde HYPOTEQ Partner</Link>
+          <Link href="/partner" className="hover:underline">HYPOTEQ Partner werden</Link>
           <Link href="/impressum" className="hover:underline">Impressum & Datenschutz</Link>
         </div>
 
