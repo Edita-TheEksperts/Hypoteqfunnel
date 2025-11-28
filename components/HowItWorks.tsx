@@ -82,6 +82,7 @@ const Step: React.FC<StepProps> = ({ step, title, text, image, highlightBox }) =
           "
         >
 Jetzt in nur 3 Schritten starten – wir führen dich sicher durch jeden Schritt.
+
         </p>
 
   <Link href="/funnel" className="w-full">
@@ -140,8 +141,8 @@ const steps = [
     image: "/images/486373494.png", // vendose fotografin e duhur
   },
       {
-      title: "Gratulation – Deine Hypothek ist bereit",
-      text: " Nach deiner Auswahl übernehmen wir den Rest: Wir koordinieren die nächsten Schritte mit der Bank und begleiten dich bis zum Abschluss.",
+      title: "Gratulation – deine Hypothek ist bereit",
+      text: " Nach deiner Auswahl übernehmen wir die Koordination mit der Bank und begleiten dich bis zum Abschluss.",
       highlightBox: true,
     },
   ];

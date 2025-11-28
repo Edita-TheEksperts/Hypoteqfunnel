@@ -124,18 +124,17 @@ Unsere DNA - Wir vereinfachen den Hypothekenprozess in der Schweiz – digital, 
         >
           <div className="max-w-[536px]">
             <h2 className="text-[28px] md:text-[36px] font-medium leading-[140%] tracking-[-0.36px] mb-[16px] md:mb-[24px]">
-              Neue Hypothek
+             Neu Geschrieben
             </h2>
 <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro">
-  Starte mit einer kurzen, unverbindlichen Anfrage – online oder per Call.
+Der erste Schritt ist einfach. Starte mit einer kurzen, unverbindlichen Anfrage.
+
   <br />
-  Sag uns einfach, worum es geht: Immobilie, Budget, Einkommen, Zeitplan.
+Um zu starten brauchen wir Angaben zur  Immobilie, Budget, Einkommen und deinen Zeitplan. 
   <br />
-  Wir hören zu, klären deine Ziele und erfassen nur, was wirklich nötig ist.
+Keine Gebühren. Kein Druck.
   <br />
-  Keine Gebühren. Kein Druck. Nur ein klarer erster Schritt.
-  <br />
-  Oder du lädst alle Unterlagen direkt hoch und startest deine Anfrage sofort.
+Du kannst alles direkt bei uns hochladen, und deine Hypothekenanfrage starten oder wir helfen dir telefonisch weiter. 
 </p>
 
 

@@ -36,7 +36,7 @@
                     </h2>
 
                     <p className="text-[#132219] leading-[32px]" style={{ fontSize: "20px", fontFamily: "SF Pro Display" }}>
-                       Marko Circelli, Davide Iuorno, Fisnik Salihu
+                       Marco Circelli, Davide Iuorno, Fisnik Salihu
                     </p>
                 </div>
 

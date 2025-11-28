@@ -22,7 +22,7 @@ const [residenceType, setResidenceType] = useState<"haupt" | "zweit">("haupt");
 
 const [loanType, setLoanType] = useState<"purchase" | "refinancing" | null>("purchase");
 
-  const [interestOption, setInterestOption] = useState("10Y 1.40%");
+  const [interestOption, setInterestOption] = useState("SARON 0.85%");
   const params =
     residenceType === "haupt"
       ? {
@@ -163,7 +163,7 @@ const [openDropdown, setOpenDropdown] = useState(false);
 </div>
 
 {/* INPUT BLOCK — spacing 28px uniform */}
-<div className="flex flex-col gap-[28px] mt-[16px]">
+<div className="flex flex-col gap-[10px] mt-[-6px]">
 
   {/* Toggle buttons */}
   <div className="flex gap-[12px]">
@@ -242,8 +242,81 @@ const [openDropdown, setOpenDropdown] = useState(false);
     max={500000}
     minRequired={minIncomeRequired}
   />
+{/* === INTEREST DROPDOWN WITH LABEL === */}
+<div className="flex flex-col gap-[6px] mt-[10px] w-full">
 
+  {/* LABEL ABOVE DROPDOWN */}
+  <label className="text-[16px] font-medium text-[#132219]">
+    Zins-Laufzeit wählen:
+  </label>
+
+  <div className="relative w-full mt-[4px]">
+    <button
+      onClick={() => setOpenDropdown((prev) => !prev)}
+      className="
+        w-full h-[40px] 
+        bg-white 
+        border border-[#132219] 
+        rounded-[50px]
+        flex items-center justify-between
+        px-[16px]
+        text-[16px] font-medium
+      "
+    >
+      <span className="text-[#132219]">{interestOption}</span>
+
+      {/* Arrow icon */}
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 20 20"
+        fill="none"
+        className={`transition-transform duration-300 ${
+          openDropdown ? "rotate-180" : "rotate-0"
+        }`}
+      >
+        <path
+          d="M5 7L10 12L15 7"
+          stroke="#132219"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+
+    {openDropdown && (
+      <div
+        className="
+          absolute left-0 top-[45px] w-full 
+          bg-white border border-[#132219]
+          rounded-[10px]
+          shadow-lg z-10
+          py-2
+        "
+      >
+        {interestOptions.map((option) => (
+          <button
+            key={option}
+            className="
+              w-full text-left px-4 py-2 
+              text-[16px] text-[#132219] 
+              hover:bg-[#F4F4F4]
+            "
+            onClick={() => {
+              setInterestOption(option);
+              setOpenDropdown(false);
+            }}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
 </div>
+</div>
+
 
 
    
@@ -331,75 +404,6 @@ const [openDropdown, setOpenDropdown] = useState(false);
 
   </div>
 
- <div className="relative w-full mt-[16px]">
-  <button
-    onClick={() => setOpenDropdown((prev) => !prev)}
-    className="
-      w-full h-[40px] 
-      bg-white 
-      border border-[#132219] 
-      rounded-[50px]
-      flex items-center justify-between
-      px-[16px]
-      text-[16px] font-medium
-    "
-    style={{
-      paddingTop: "16.346px",
-      paddingBottom: "17.056px"
-    }}
-  >
-    <span className="text-[#132219]">{interestOption}</span>
-
-    {/* Arrow icon */}
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`transition-transform duration-300 ${
-        openDropdown ? "rotate-180" : "rotate-0"
-      }`}
-    >
-      <path
-        d="M5 7L10 12L15 7"
-        stroke="#132219"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  </button>
-
-  {openDropdown && (
-    <div
-      className="
-        absolute left-0 top-[45px] w-full 
-        bg-white border border-[#132219]
-        rounded-[10px]
-        shadow-lg z-10
-        py-2
-      "
-    >
-      {interestOptions.map((option) => (
-        <button
-          key={option}
-          className="
-            w-full text-left px-4 py-2 
-            text-[16px] text-[#132219] 
-            hover:bg-[#F4F4F4]
-          "
-          onClick={() => {
-            setInterestOption(option);
-            setOpenDropdown(false);
-          }}
-        >
-          {option}
-        </button>
-      ))}
-    </div>
-  )}
-</div>
 
 
 

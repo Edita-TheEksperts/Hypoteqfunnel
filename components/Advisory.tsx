@@ -95,17 +95,6 @@ export default function Advisory() {
     </a>
   </div>
 
-  {/* RRESHTI 2 – butoni i tretë */}
-  <div className="flex justify-start sm:justify-start">
-    <a
-      href="#beispiele"
-      className="border border-[#132219] rounded-full px-[20px] sm:px-[24px] py-[6px] sm:py-[8px]
-        text-[18px] sm:text-[20px] font-[600] text-[#132219]
-        bg-transparent hover:bg-[#CAF476]/50 transition-all"
-    >
-      Beispielfälle
-    </a>
-  </div>
 
 </div>
 

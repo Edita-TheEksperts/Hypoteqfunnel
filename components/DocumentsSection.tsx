@@ -49,11 +49,12 @@ type SectionProps = {
     </p>
 
     <div className="flex items-center gap-[16px]">
-      <img
-        src={flagIcons[index] || "/images/united-kingdom.png"}
-        alt="language flag"
-        className="w-[20px] h-[20px]"
-      />
+<img
+  src={doc.flag || flagIcons[index] || "/images/united-kingdom.png"}
+  alt="language flag"
+  className="w-[20px] h-[20px]"
+/>
+
       <img
         src="/images/documents.svg"
         alt="document icon"
@@ -100,6 +101,8 @@ type SectionProps = {
     title="Auskunftsermächtigung"
     docs={[
       { label: "Auskunftsermächtigung ", file: "/documents/Auskunftsermaechtigung-1.pdf" },
+     { label: " Pouvoir d’information ", file: "/documents/20250711_HYPOTEQ-Pouvoir-dinformation-1-1.pdf" },
+      { label: "Procura per informazioni", file: "/documents/20250711_HYPOTEQ-Procura-per-informazioni-1.pdf" },
       { label: "Autorisation d’information ", file: "/documents/HYPOTEQ-Pouvoir-dinformation-1-1.pdf" },
     ]}
   />
@@ -126,9 +129,17 @@ type SectionProps = {
           activeCategory === "HYPOTEQ information material") && (
           <Section
             title="HYPOTEQ Informationsmaterial"
-    docs={[
-  { label: 'Flyer "Einfach und schnell zur günstigen Hypothek"', file: "/documents/HYPOTEQ-Flyer.pdf" },
-  { label: 'Broschüre "Die perfekte Finanzierung Ihres Eigenheims"', file: "/documents/HYPOTEQ-Broschuere.pdf" },
+docs={[
+  { 
+    label: 'Flyer "Einfach und schnell zur günstigen Hypothek"', 
+    file: "/documents/HYPOTEQ-Flyer.pdf",
+    flag: "/images/german.png"
+  },
+  { 
+    label: 'Broschüre "Die perfekte Finanzierung Ihres Eigenheims"', 
+    file: "/documents/HYPOTEQ-Broschuere.pdf",
+    flag: "/images/german.png"
+  },
 ]}
 
           />
