@@ -7,20 +7,81 @@ interface TeamMember {
   image?: string;
   bgColor?: string;
   description?: string;
+
+  linkedin?: string;
+  email?: string;
 }
-
 const teamMembers: TeamMember[] = [
-  { name: "Marco Circelli", position: "CEO", image: "/images/Marco.png" },
-  { name: "Davide Iuorno", position: "Deputy CEO", image: "/images/Davide.png" },
-  { name: "Fisnik Salihu", position: "Chief Technology Officer", image: "/images/Fisnik.png" },
-  { name: "Alexander von Arx", position: "Head of Business Development", image: "/images/Alexander.png" },
+  {
+    name: "Marco Circelli",
+    position: "CEO",
+    image: "/images/Marco.png",
+    linkedin: "https://www.linkedin.com/in/marco-circelli-a1b9172/",
+    email: "mailto:marco.circelli@hypoteq.ch",
+  },
 
-  { name: "Claudio Schneider", position: "Präsident des Verwaltungsrates", image: "/images/Claudio.png" },
-  { name: "Christian Neff", position: "Verwaltungsrat", image: "/images/Christian.png" },
-  { name: "Cyril Kägi", position: "Initiant und Beirat", image: "/images/Cyril.png" },
+  {
+    name: "Davide Iuorno",
+    position: "Deputy CEO",
+    image: "/images/Davide.png",
+    linkedin: "https://www.linkedin.com/in/davide-iuorno/",
+    email: "mailto:davide.iuorno@hypoteq.ch",
+  },
 
-  { name: "Christian Wyss", position: "Beirat & Sales Coach", image: "/images/ChrsitianW.png" },
-  { name: "Markus Abeler", position: "Consultant", image: "/images/Markus.png" },
+  {
+    name: "Fisnik Salihu",
+    position: "Chief Technology Officer",
+    image: "/images/Fisnik.png",
+    linkedin: "https://www.linkedin.com/in/fisnik-salihu/",
+    email: "mailto:fisnik.salihu@hypoteq.ch",
+  },
+
+  {
+    name: "Alexander von Arx",
+    position: "Head of Business Development",
+    image: "/images/Alexander.png",
+    linkedin: "https://www.linkedin.com/in/alexander-von-arx-66a416326/",
+    email: "mailto:alexander.vonarx@hypoteq.ch",
+  },
+
+  {
+    name: "Claudio Schneider",
+    position: "Präsident des Verwaltungsrates",
+    image: "/images/Claudio.png",
+    linkedin: "https://www.linkedin.com/in/schneider-claudio/",
+  },
+
+  {
+    name: "Christian Neff",
+    position: "Verwaltungsrat",
+    image: "/images/Christian.png",
+    linkedin: "https://www.linkedin.com/in/christianneff/",
+    email: "mailto:christian.neff@hypoteq.ch",
+  },
+
+  {
+    name: "Cyril Kägi",
+    position: "Initiant und Beirat",
+    image: "/images/Cyril.png",
+    linkedin: "https://www.linkedin.com/in/cyril-k%C3%A4gi-273a1965/",
+    email: "mailto:cyril.kaegi@hypoteq.ch",
+  },
+
+  {
+    name: "Christian Wyss",
+    position: "Beirat & Sales Coach",
+    image: "/images/ChrsitianW.png",
+    linkedin: "https://www.linkedin.com/in/wyssch/",
+    email: "mailto:christian.wyss@hypoteq.ch",
+  },
+
+  {
+    name: "Markus Abeler",
+    position: "Consultant",
+    image: "/images/Markus.png",
+    linkedin: "https://www.linkedin.com/in/abelermarkus/",
+    email: "mailto:markus.abeler@hypoteq.ch",
+  },
 
   {
     name: "HYPOTEQ",
@@ -30,19 +91,16 @@ const teamMembers: TeamMember[] = [
   },
 ];
 
+
 const TeamSection: React.FC = () => {
   return (
     <section className="w-full flex flex-col items-center py-[120px] bg-white font-sfpro">
-
-      {/* Container with left/right spacing */}
       <div className="w-full max-w-[1579px] px-[20px] lg:px-[116px] mx-auto">
 
-        {/* Title */}
         <h2 className="text-[40px] font-medium text-[#132219] mb-[60px]">
           Management Team
         </h2>
 
-        {/* Grid */}
         <div
           className="
             grid grid-cols-4 gap-x-[40px] gap-y-[80px]
@@ -58,7 +116,6 @@ const TeamSection: React.FC = () => {
               className="flex flex-col items-start w-[304px] max-lg:w-[260px] max-md:w-full"
             >
               {member.bgColor ? (
-                /* Green box */
                 <div
                   className="flex flex-col justify-between w-[970px] h-[283px] rounded-[10px]"
                   style={{
@@ -70,30 +127,28 @@ const TeamSection: React.FC = () => {
                     {member.description}
                   </p>
 
-          <a
-  href="https://www.linkedin.com/company/hypoteq-ag/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="
-    inline-block
-    w-fit
-    border border-[#132219] rounded-[58px] 
-    bg-[#CAF476] text-[#132219]
-    transition-all duration-300
-    hover:bg-[#dffb9b]
-  "
-  style={{
-    fontSize: "20px",
-    lineHeight: "120%",
-    padding: "8px 24px",
-  }}
->
-  Bestes Angebot finden
-</a>
-
+                  <a
+                    href="https://www.linkedin.com/company/hypoteq-ag/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      inline-block
+                      w-fit
+                      border border-[#132219] rounded-[58px] 
+                      bg-[#CAF476] text-[#132219]
+                      transition-all duration-300
+                      hover:bg-[#dffb9b]
+                    "
+                    style={{
+                      fontSize: "20px",
+                      lineHeight: "120%",
+                      padding: "8px 24px",
+                    }}
+                  >
+                    Bestes Angebot finden
+                  </a>
                 </div>
               ) : (
-                /* Image box */
                 <div
                   className="rounded-[10px] overflow-hidden w-[304px] h-[283px]"
                   style={{
@@ -104,61 +159,97 @@ const TeamSection: React.FC = () => {
                 ></div>
               )}
 
-        {/* Text + Social icons */}
-{!member.bgColor && (
-  <div className="mt-4 w-full flex flex-col gap-[10px]">
+              {!member.bgColor && (
+                <div className="mt-4 w-full flex flex-col gap-[10px]">
 
-    {/* Row 1: Name + LinkedIn */}
-    <div className="flex items-center justify-between w-full">
-      <h3 className="text-[#132219] text-[20px] font-semibold leading-[24px] 
-                     border border-black rounded-[42px] px-[12px] py-[4px]">
-        {member.name}
-      </h3>
+                  {/* Name + LinkedIn */}
+                  <div className="flex items-center justify-between w-full">
+                    <h3
+                      className="text-[#132219] text-[20px] font-semibold leading-[24px] 
+                                 border border-black rounded-[42px] px-[12px] py-[4px]"
+                    >
+                      {member.name}
+                    </h3>
 
-      {/* LinkedIn */}
-      <button
-        className="
-          flex justify-center items-center
-          w-[42px] h-[42px]
-          rounded-full border border-black
-          bg-white hover:bg-gray-100 transition
-        "
-      >
-        <img
-          src="/images/linkedin.svg"
-          alt="LinkedIn"
-          className="w-[18px] h-[18px]"
-        />
-      </button>
-    </div>
+                    {member.linkedin ? (
+                      <a
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="
+                          flex justify-center items-center
+                          w-[42px] h-[42px]
+                          rounded-full border border-black
+                          bg-white hover:bg-gray-100 transition
+                        "
+                      >
+                        <img
+                          src="/images/linkedin.svg"
+                          alt="LinkedIn"
+                          className="w-[18px] h-[18px]"
+                        />
+                      </a>
+                    ) : (
+                      <div
+                        className="
+                          flex justify-center items-center
+                          w-[42px] h-[42px]
+                          rounded-full border border-black opacity-40
+                        "
+                      >
+                        <img
+                          src="/images/linkedin.svg"
+                          alt="LinkedIn"
+                          className="w-[18px] h-[18px]"
+                        />
+                      </div>
+                    )}
+                  </div>
 
-    {/* Row 2: Position + Email */}
-    <div className="flex items-center justify-between w-full">
-      <p className="text-[#132219] text-[16px] font-light leading-[22px] 
-                    border border-black rounded-[42px] px-[12px] py-[4px]">
-        {member.position}
-      </p>
+                  {/* Position + Email */}
+                  <div className="flex items-center justify-between w-full">
+                    <p
+                      className="text-[#132219] text-[16px] font-light leading-[22px] 
+                                border border-black rounded-[42px] px-[12px] py-[4px]"
+                    >
+                      {member.position}
+                    </p>
 
-      {/* Email */}
-      <button
-        className="
-          flex justify-center items-center
-          w-[42px] h-[42px]
-          rounded-full border border-black
-          bg-white hover:bg-gray-100 transition
-        "
-      >
-        <img
-          src="/images/email.svg"
-          alt="Email"
-          className="w-[18px] h-[18px]"
-        />
-      </button>
-    </div>
+                    {member.email ? (
+                      <a
+                        href={member.email}
+                        className="
+                          flex justify-center items-center
+                          w-[42px] h-[42px]
+                          rounded-full border border-black
+                          bg-white hover:bg-gray-100 transition
+                        "
+                      >
+                        <img
+                          src="/images/email.svg"
+                          alt="Email"
+                          className="w-[18px] h-[18px]"
+                        />
+                      </a>
+                    ) : (
+                      <div
+                        className="
+                          flex justify-center items-center
+                          w-[42px] h-[42px]
+                          rounded-full border border-black opacity-40
+                        "
+                      >
+                        <img
+                          src="/images/email.svg"
+                          alt="Email"
+                          className="w-[18px] h-[18px]"
+                        />
+                      </div>
+                    )}
+                  </div>
 
-  </div>
-)}
-
+                </div>
+              )}
             </div>
           ))}
         </div>

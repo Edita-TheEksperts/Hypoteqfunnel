@@ -41,31 +41,31 @@ export default function Mezzanine() {
            pt-[120px] md:pt-[180px] gap-[10px] text-[#132219]"
         >
           <div className="flex flex-col max-w-[692px]">
-            <h2
-              className="text-[36px] sm:text-[42px] md:text-[72px] leading-[110%] font-[500] tracking-[-0.72px]"
-              style={{ fontFamily: '"SF Pro Display", sans-serif' }}
-            >
-              Mezzanine <br />
-              Finanzierung
-            </h2>
+ <h2
+  className="text-[36px] sm:text-[42px] md:text-[72px] leading-[110%] font-[500] tracking-[-0.72px]"
+  style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+>
+  Mezzanine <br />
+  Finanzierung
+</h2>
 
-            <p
-              className="mt-[20px] sm:mt-[24px] text-[18px] sm:text-[20px] md:text-[24px] leading-[140%] font-[400]"
-              style={{ fontFamily: '"SF Pro Display", sans-serif' }}
-            >
-              Kapital mit Flexibilität
-            </p>
+<p
+  className="mt-[20px] sm:mt-[24px] text-[18px] sm:text-[20px] md:text-[24px] leading-[140%] font-[400]"
+  style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+>
+  Kapital mit Flexibilität.
+</p>
 
-            <p
-              className="mt-[20px] sm:mt-[28px] text-[18px] sm:text-[20px] md:text-[24px] leading-[150%] font-[400]"
-              style={{ fontFamily: '"SF Pro Display", sans-serif' }}
-            >
-              Wenn klassische Bankfinanzierungen an ihre Grenzen stossen, sorgt
-              Mezzanine-Kapital für den nötigen Spielraum. Ob bei Neubauprojekten,
-              Akquisitionen oder Wachstumsschritten – diese Finanzierungsschicht
-              schliesst die Lücke zwischen Eigenkapital und Fremdfinanzierung,
-              ohne Anteile abzugeben.
-            </p>
+<p
+  className="mt-[20px] sm:mt-[28px] text-[18px] sm:text-[20px] md:text-[24px] leading-[150%] font-[400]"
+  style={{ fontFamily: '"SF Pro Display", sans-serif' }}
+>
+  Wenn eine klassische Bankfinanzierung nicht ausreicht, schafft Mezzanine-Kapital zusätzlichen Spielraum.
+  Ob Neubauprojekt, Akquisition oder Wachstumsschritt – diese Finanzierungsschicht schliesst die Lücke
+  zwischen Eigenkapital und Fremdkapital, ohne dass du Anteile abgeben musst. <br/>
+  Flexibel, ergänzend und genau dort einsetzbar, wo klassische Finanzierungsmodelle an ihre Grenzen kommen.
+</p>
+
 
             <div className="flex flex-col gap-[16px] sm:gap-[24px] mt-[40px] sm:mt-[60px] md:mt-[80px]">
               <div className="flex flex-wrap gap-[8px] sm:gap-[10px]">

@@ -6,8 +6,10 @@ export default function DocumentsSection() {
 
 type DocItem = {
   label: string;
-  file?: string; // optional, sepse seksionet e tjera ende janë string-e
+  file?: string;
+  flag?: string;   
 };
+
 
 type SectionProps = {
   title: string;
