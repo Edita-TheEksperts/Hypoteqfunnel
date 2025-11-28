@@ -84,10 +84,10 @@ type SectionProps = {
 <Section
   title="Hypotheken Checkliste für ein Eigenheim"
   docs={[
-    { label: "Checkliste für selbstbewohntes Wohneigentum", file: "/documents/d1.pdf" },
-    { label: "Liste de contrôle pour les logements en propriété occupés par leur propriétaire", file: "/documents/d2.pdf" },
-    { label: "Lista di controllo per le abitazioni occupate dai proprietari", file: "/documents/d3.pdf" },
-    { label: "Checklist for owner-occupied property", file: "/documents/d4.pdf" },
+    { label: "Checkliste für selbstbewohntes Wohneigentum", file: "/documents/checkliste_selbst_bewohntes_wohneigentum.pdf" },
+    { label: "Liste de contrôle pour les logements en propriété occupés par leur propriétaire", file: "/documents/Liste-de-controle-pour-les-logements-en-propriete-occupes-par-leur-proprietaire.pdf" },
+    { label: "Lista di controllo per le abitazioni occupate dai proprietari", file: "/documents/Lista-di-controllo-per-immobili-residenziali-occupati-dal-proprietario.pdf" },
+    { label: "Checklist for owner-occupied property", file: "/documents/Checklist-for-owner-occupied-property.pdf" },
   ]}
 />
 
@@ -99,8 +99,8 @@ type SectionProps = {
   <Section
     title="Auskunftsermächtigung"
     docs={[
-      { label: "Auskunftsermächtigung ", file: "/documents/d5.pdf" },
-      { label: "Autorisation d’information ", file: "/documents/d6.pdf" },
+      { label: "Auskunftsermächtigung ", file: "/documents/Auskunftsermaechtigung-1.pdf" },
+      { label: "Autorisation d’information ", file: "/documents/HYPOTEQ-Pouvoir-dinformation-1-1.pdf" },
     ]}
   />
 )}
@@ -112,10 +112,10 @@ type SectionProps = {
   <Section
     title="Hypotheken Checkliste für ein Renditeobjekt"
     docs={[
-      { label: "Checkliste für Renditeobjekte", file: "/documents/d7.pdf" },
-      { label: "Liste de contrôle pour les immeubles à rendement", file: "/documents/d8.pdf" }, 
-      { label: "Lista di controllo per immobili a reddito", file: "/documents/d9.pdf" },
-      { label: "Checklist for investment properties", file: "/documents/d10.pdf" },
+      { label: "Checkliste für Renditeobjekte", file: "/documents/Checkliste-fuer-Renditeobjekte.pdf" },
+      { label: "Liste de contrôle pour les immeubles à rendement", file: "/documents/Liste-de-controle-pour-les-immeubles-a-rendement.pdf" }, 
+      { label: "Lista di controllo per immobili a reddito", file: "/documents/Lista-di-controllo-per-immobili-a-reddito.pdf" },
+      { label: "Checklist for investment properties", file: "/documents/Checklist-for-investment-properties.pdf" },
     ]}
   />
 )}
@@ -127,8 +127,8 @@ type SectionProps = {
           <Section
             title="HYPOTEQ Informationsmaterial"
     docs={[
-  { label: 'Flyer "Einfach und schnell zur günstigen Hypothek"', file: "/documents/d11.pdf" },
-  { label: 'Broschüre "Die perfekte Finanzierung Ihres Eigenheims"', file: "/documents/d12.pdf" },
+  { label: 'Flyer "Einfach und schnell zur günstigen Hypothek"', file: "/documents/HYPOTEQ-Flyer.pdf" },
+  { label: 'Broschüre "Die perfekte Finanzierung Ihres Eigenheims"', file: "/documents/HYPOTEQ-Broschuere.pdf" },
 ]}
 
           />
