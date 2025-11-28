@@ -9,12 +9,7 @@ const jobs = [
     description:
       "Tauche ein in die Welt von FinTech, Projekten und Chaos mit System. Du unterstützt unser Team, bringst Struktur in Prozesse und lernst, wie Digitalisierung wirklich funktioniert.",
   },
-  {
-    title: "Full Stack Developer",
-    subtext: "Vollzeit, Zürich oder Remote\nStart Up",
-    description:
-      "Werde Teil unseres Tech-Teams und gestalte mit uns die Zukunft der digitalen Hypothek. Du entwickelst, automatisierst und machst komplexe Dinge einfach – mit Code, Kreativität und Kaffee.",
-  },
+
 ];
 
 const JoinOurTeam: React.FC = () => {

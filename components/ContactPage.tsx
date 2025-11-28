@@ -25,14 +25,14 @@ export default function ContactPage() {
           <p className="text-[20px] leading-[140%] font-[400]">
             Hast du Fragen zur Immobilienfinanzierung oder möchtest du Teil unseres Partnernetzwerks werden?
             <br />
-            In unseren{" "}
-            <Link
-              href="/faq"
-              className="font-medium underline underline-offset-[2px] decoration-solid hover:text-[#CAF476] transition-colors duration-200"
-            >
-              FAQ
-            </Link>{" "}
-            findest du Antworten zu den wichtigsten Themen – von Voraussetzungen und Dokumenten bis zu Abläufen und Provisionen.
+    In unseren{" "}
+<Link
+  href="/faq"
+  className="font-medium underline underline-offset-[2px] decoration-solid hover:text-[#CAF476] transition-colors duration-200"
+>
+  FAQ
+</Link>{" "}
+findest du Antworten zu den wichtigsten Themen.
 
           </p>
 

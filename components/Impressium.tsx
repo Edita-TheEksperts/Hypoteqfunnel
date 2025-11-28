@@ -36,7 +36,7 @@
                     </h2>
 
                     <p className="text-[#132219] leading-[32px]" style={{ fontSize: "20px", fontFamily: "SF Pro Display" }}>
-                        Christian Neff, Davide Iuorno, Markus Abeler
+                       Marko Circelli, Davide Iuorno, Fisnik Salihu
                     </p>
                 </div>
 

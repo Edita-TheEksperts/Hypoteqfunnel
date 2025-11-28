@@ -16,12 +16,15 @@ export default function HypoZinsSection() {
             >
            Deine Hypothek berechnen?
             </h2>
-            <p
-              className="mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#132219] font-[500] text-[16px] sm:text-[20px] md:text-[24px] leading-[150%]"
-              style={{ fontFamily: "SF Pro Display" }}
-            >
-          Bist du immer noch unsicher und willst wissen, was drin liegt? Dann füll einfach kurz das Formular aus und wir melden uns.
-            </p>
+  <p
+  className="mt-[16px] sm:mt-[20px] md:mt-[24px] text-[#132219] font-[500] text-[16px] sm:text-[20px] md:text-[24px] leading-[150%]"
+  style={{ fontFamily: "SF Pro Display" }}
+>
+  Bist du unsicher, was möglich ist?
+  <br />
+  Füll einfach kurz das Formular aus – wir melden uns und zeigen dir, welche Optionen realistisch sind.
+</p>
+
           </div>
 
           {/* Right Side Form */}

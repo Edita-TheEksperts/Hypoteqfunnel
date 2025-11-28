@@ -72,25 +72,43 @@ export default function Advisory() {
 
           {/* BUTTONS */}
           <div className="flex flex-col mt-[48px] sm:mt-[80px] gap-[16px] sm:gap-[24px]">
-            <div className="flex flex-wrap gap-[12px] sm:gap-[24px]">
-              <a
-                href="#expectations"
-                className="border border-[#132219] rounded-full px-[20px] sm:px-[24px] py-[6px] sm:py-[8px] 
-                text-[18px] sm:text-[20px] font-[600] text-[#132219] 
-                bg-transparent hover:bg-[#CAF476]/50 transition-all"
-              >
-                Finanzierung im Ruhestand
-              </a>
+       <div className="flex flex-col gap-[16px]">
+  
+  {/* RRESHTI 1 – dy butonat */}
+  <div className="flex flex-wrap gap-[12px] sm:gap-[24px]">
+    <a
+      href="#expectations"
+      className="border border-[#132219] rounded-full px-[20px] sm:px-[24px] py-[6px] sm:py-[8px]
+        text-[18px] sm:text-[20px] font-[600] text-[#132219]
+        bg-transparent hover:bg-[#CAF476]/50 transition-all"
+    >
+    Advisory Beispiele
+    </a>
 
-              <a
-                href="#benefits"
-                className="border border-[#132219] rounded-full px-[20px] sm:px-[24px] py-[6px] sm:py-[8px]
-                text-[18px] sm:text-[20px] font-[600] text-[#132219]
-                bg-transparent hover:bg-[#CAF476]/50 transition-all"
-              >
-                Wie läuft’s ab?
-              </a>
-            </div>
+    <a
+      href="#benefits"
+      className="border border-[#132219] rounded-full px-[20px] sm:px-[24px] py-[6px] sm:py-[8px]
+        text-[18px] sm:text-[20px] font-[600] text-[#132219]
+        bg-transparent hover:bg-[#CAF476]/50 transition-all"
+    >
+      Wie läuft’s ab?
+    </a>
+  </div>
+
+  {/* RRESHTI 2 – butoni i tretë */}
+  <div className="flex justify-start sm:justify-start">
+    <a
+      href="#beispiele"
+      className="border border-[#132219] rounded-full px-[20px] sm:px-[24px] py-[6px] sm:py-[8px]
+        text-[18px] sm:text-[20px] font-[600] text-[#132219]
+        bg-transparent hover:bg-[#CAF476]/50 transition-all"
+    >
+      Beispielfälle
+    </a>
+  </div>
+
+</div>
+
           </div>
         </div>
       </section>
@@ -201,14 +219,7 @@ export default function Advisory() {
           ))}
         </div>
 
-        <p
-          className="w-full sm:w-[1272px] text-[20px] sm:text-[32px] font-[300] leading-[140%] text-[#CAF476] mt-[32px] sm:mt-[48px]"
-          style={{ fontFamily: '"SF Pro Display", sans-serif' }}
-        >
-          Der Advisory-Service ist kostenpflichtig – du profitierst von tiefem
-          Marktwissen, individueller Betreuung und Lösungen, die wirklich
-          funktionieren.
-        </p>
+
       </section>
 
       <div className="mb-[200px] sm:mb-[180px]">

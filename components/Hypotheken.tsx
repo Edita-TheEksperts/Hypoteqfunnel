@@ -126,15 +126,18 @@ Unsere DNA - Wir vereinfachen den Hypothekenprozess in der Schweiz – digital, 
             <h2 className="text-[28px] md:text-[36px] font-medium leading-[140%] tracking-[-0.36px] mb-[16px] md:mb-[24px]">
               Neue Hypothek
             </h2>
-<p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
->
- Der erste Schritt ist einfach. Starte mit einer kurzen, unverbindlichen Anfrage.
+<p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro">
+  Starte mit einer kurzen, unverbindlichen Anfrage – online oder per Call.
   <br />
-Um zu starten brauchen wir Angaben zur  Immobilie, Budget, Einkommen und deinen Zeitplan. 
-Keine Gebühren. Kein Druck.
+  Sag uns einfach, worum es geht: Immobilie, Budget, Einkommen, Zeitplan.
   <br />
-Du kannst alles direkt bei uns hochladen, und deine Hypothekenanfrage starten oder wir helfen dir telefonisch weiter. 
+  Wir hören zu, klären deine Ziele und erfassen nur, was wirklich nötig ist.
+  <br />
+  Keine Gebühren. Kein Druck. Nur ein klarer erster Schritt.
+  <br />
+  Oder du lädst alle Unterlagen direkt hoch und startest deine Anfrage sofort.
 </p>
+
 
           </div>
 
@@ -163,14 +166,10 @@ Du kannst alles direkt bei uns hochladen, und deine Hypothekenanfrage starten od
             <h2 className="text-[28px] md:text-[36px] font-medium leading-[140%] tracking-[-0.36px] mb-[16px] md:mb-[24px]">
               Refinanzierung
             </h2>
-            <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro"
->
-              Du hast schon eine Hypothek? Wir prüfen Tragbarkeit, Bonität &
-              Co. – und zeigen dir, ob es bessere Optionen gibt. Unser
-              Vergleichstool checkt Offerten aus unserem Netzwerk und stellt dir
-              transparente Szenarien zusammen. <br />
-              Zinssätze, Laufzeiten, Bedingungen – alles vergleichbar.
-            </p>
+      <p className="text-[#132219] text-[18px] md:text-[24px] font-normal leading-[140%] tracking-[-0.24px] font-sfpro">
+  Wir prüfen Tragbarkeit, Bonität und Rahmenbedingungen – und zeigen dir, ob es bessere Optionen gibt.
+</p>
+
           </div>
 
           <div className="w-full md:w-[537px] h-[300px] md:h-[443px] rounded-[10px] overflow-hidden flex items-center justify-center bg-[#F8F8F8] order-1 md:order-2">

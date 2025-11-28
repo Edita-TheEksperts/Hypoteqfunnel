@@ -24,15 +24,17 @@ const [active, setActive] = useState("");
   };
 
   return (
-    <section className="relative w-full overflow-x-hidden font-sfpro h-auto sm:h-[957px]">
+<section className="relative w-full overflow-x-hidden font-sfpro min-h-screen">
       {/* Background */}
       <div
         className="absolute inset-0 bg-no-repeat bg-cover -z-10"
-        style={{
-          backgroundImage: "url('/images/8329269237.png')",
-          backgroundPosition: "center top",
-          backgroundSize: "cover",
-        }}
+  style={{
+  backgroundImage: "url('/images/8329269237.png')",
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+}}
+
       ></div>
 
       {/* Content */}

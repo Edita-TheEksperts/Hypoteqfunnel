@@ -130,28 +130,51 @@ const StatsSection: React.FC = () => {
               max-md:grid-cols-1 max-md:gap-y-[60px]
             "
           >
-            {[
-              {
-                icon: "/images/mission.svg",
-                title: "Unsere Mission",
-                desc: "Hypotheken sollen nicht kompliziert sein. Unser Ziel: dir einfache Tools und transparente Prozesse an die Hand zu geben, damit du schnell, selbstbestimmt und mit gutem Gefühl zur passenden Finanzierung findest – in drei klaren Schritten.",
-              },
-              {
-                icon: "/images/32.svg",
-                title: "Unsere Vision",
-                desc: "Wir schaffen eine Plattform, auf der Technologie auf Vertrauen trifft. Klarheit statt Bürokratie. Effizienz statt Wartezeiten. Entscheidungen, die für alle Beteiligten im Hypomarkt einen echten Unterschied machen.",
-              },
-              {
-                icon: "/images/Values.svg",
-                title: "Unsere Werte",
-                desc: "Wir glauben an Offenheit, Verlässlichkeit und Partnerschaft auf Augenhöhe. Ob im Team oder mit unseren Kund:innen – wir handeln transparent, denken langfristig und lernen jeden Tag dazu.",
-              },
-              {
-                icon: "/images/Group.svg",
-                title: "Unser Antrieb",
-                desc: "Wir bringen Menschen, Partner und Prozesse zusammen – nicht weil wir müssen, sondern weil wir es besser machen wollen. Mit einfachen digitalen Lösungen, persönlichem Support und einem klaren Ziel: Hypotheken einfacher, fairer und smarter machen.",
-              },
-            ].map((item, idx) => (
+            {
+            [
+  {
+    icon: "/images/mission.svg",
+    title: "Unsere Mission",
+    desc: `
+      Wir machen den Weg zur passenden Hypothek einfach, effizient und verständlich.
+      Mit intuitiven Tools, einem breiten Partnernetzwerk und persönlicher Beratung
+      helfen wir dir, Angebote zu vergleichen, passende Lösungen zu finden und 
+      fundierte Entscheidungen zu treffen.
+    `,
+  },
+  {
+    icon: "/images/32.svg",
+    title: "Unsere Vision",
+    desc: `
+      Wir schaffen eine Plattform, auf der Technologie auf Vertrauen trifft.
+      Klarheit statt Bürokratie. Effizienz statt Wartezeiten. Entscheidungen, 
+      die für alle Beteiligten im Hypomarkt einen echten Unterschied machen.
+    `,
+  },
+  {
+    icon: "/images/Values.svg",
+    title: "Unsere Werte",
+    desc: `
+      Wir stehen für Offenheit, Verlässlichkeit und Partnerschaft auf Augenhöhe.
+      Wir handeln transparent, denken langfristig und entwickeln uns jeden Tag 
+      weiter – im Team und gemeinsam mit unseren Kund:innen.
+    `,
+  },
+  {
+    icon: "/images/Group.svg",
+    title: "Unser Antrieb",
+    desc: `
+      Wir bringen Menschen, Partner und Prozesse zusammen, um Hypotheken 
+      einfacher, fairer und smarter zu machen.
+
+      Mit digitalen Lösungen, persönlichem Support und einem klaren Ziel:
+      dir den besten Weg zur passenden Finanzierung zu bieten.
+    `,
+  },
+]
+
+            
+            .map((item, idx) => (
               <div key={idx} className="flex flex-col gap-[28px] relative pl-[42px]">
                 <img
                   src={item.icon}

@@ -4,10 +4,16 @@ import { useState } from "react";
 export default function DocumentsSection() {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  type SectionProps = {
-    title: string;
-    docs: string[];
-  };
+type DocItem = {
+  label: string;
+  file?: string; // optional, sepse seksionet e tjera ende janë string-e
+};
+
+type SectionProps = {
+  title: string;
+  docs: DocItem[];
+};
+
 
   const Section = ({ title, docs }: SectionProps) => {
     const flagIcons = [
@@ -28,29 +34,35 @@ export default function DocumentsSection() {
 
         {/* RIGHT SIDE - DOCUMENTS */}
         <div className="w-full lg:w-[55%] flex flex-col gap-[16px] sm:gap-[20px] md:gap-[22px]">
-          {docs.map((doc, index) => (
-            <div
-              key={index}
-              className="flex justify-between items-center w-full border border-[#132219] rounded-[50px] px-[16px] sm:px-[20px] md:px-[24px] py-[8px] sm:py-[10px] cursor-pointer hover:bg-[#132219]/5 transition"
-            >
-              <p className="text-[14px] sm:text-[15px] md:text-[16px] font-medium text-[#132219] leading-tight">
-                {doc}
-              </p>
+{docs.map((doc, index) => (
+  <a
+    key={index}
+    href={doc.file}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex justify-between items-center w-full border border-[#132219] rounded-[50px]
+               px-[16px] sm:px-[20px] md:px-[24px] py-[8px] sm:py-[10px]
+               cursor-pointer hover:bg-[#132219]/5 transition"
+  >
+    <p className="text-[14px] sm:text-[15px] md:text-[16px] font-medium text-[#132219] leading-tight">
+      {doc.label}
+    </p>
 
-              <div className="flex items-center gap-[16px]">
-                <img
-                  src={flagIcons[index] || "/images/united-kingdom.png"}
-                  alt="language flag"
-                  className="w-[20px] h-[20px] object-contain"
-                />
-                <img
-                  src="/images/documents.svg"
-                  alt="document icon"
-                  className="w-[18px] sm:w-[20px] h-[18px] sm:h-[20px]"
-                />
-              </div>
-            </div>
-          ))}
+    <div className="flex items-center gap-[16px]">
+      <img
+        src={flagIcons[index] || "/images/united-kingdom.png"}
+        alt="language flag"
+        className="w-[20px] h-[20px]"
+      />
+      <img
+        src="/images/documents.svg"
+        alt="document icon"
+        className="w-[18px] sm:w-[20px]"
+      />
+    </div>
+  </a>
+))}
+
         </div>
       </div>
     );
@@ -69,54 +81,56 @@ export default function DocumentsSection() {
         {/* ===== MORTGAGE CHECKLIST FOR A HOME ===== */}
         {(activeCategory === "All" ||
           activeCategory === "Mortgage checklist for a home") && (
-          <Section
-            title="Hypotheken Checkliste für ein Eigenheim"
-            docs={[
-              "Checkliste für selbstbewohntes Wohneigentum",
-              "Liste de contrôle pour les logements en propriété occupés par leur propriétaire",
-              "Lista di controllo per le abitazioni occupate dai proprietari",
-              "Checklist for owner-occupied property",
-            ]}
-          />
+<Section
+  title="Hypotheken Checkliste für ein Eigenheim"
+  docs={[
+    { label: "Checkliste für selbstbewohntes Wohneigentum", file: "/documents/d1.pdf" },
+    { label: "Liste de contrôle pour les logements en propriété occupés par leur propriétaire", file: "/documents/d2.pdf" },
+    { label: "Lista di controllo per le abitazioni occupate dai proprietari", file: "/documents/d3.pdf" },
+    { label: "Checklist for owner-occupied property", file: "/documents/d4.pdf" },
+  ]}
+/>
+
         )}
 
-        {/* ===== AUTHORIZATION TO PROVIDE INFORMATION ===== */}
-        {(activeCategory === "All" ||
-          activeCategory === "Authorization to provide information") && (
-          <Section
-            title="Auskunftsermächtigung"
-            docs={[
-              "Checkliste für selbstbewohntes Wohneigentum",
-              "Checkliste für selbstbewohntes Wohneigentum",
-              "Lista di controllo per le abitazioni occupate dai proprietari",
-              "Authorisation for information",
-            ]}
-          />
-        )}
+{/* ===== AUTHORIZATION TO PROVIDE INFORMATION ===== */}
+{(activeCategory === "All" ||
+  activeCategory === "Authorization to provide information") && (
+  <Section
+    title="Auskunftsermächtigung"
+    docs={[
+      { label: "Auskunftsermächtigung ", file: "/documents/d5.pdf" },
+      { label: "Autorisation d’information ", file: "/documents/d6.pdf" },
+    ]}
+  />
+)}
 
-        {/* ===== MORTGAGE CHECKLIST FOR A RETURN PROPERTY ===== */}
-        {(activeCategory === "All" ||
-          activeCategory === "Mortgage checklist for a return property") && (
-          <Section
-            title="Hypotheken Checkliste für ein Renditeobjekt"
-            docs={[
-              "Checkliste für Renditeobjekte",
-              "Liste de contrôle pour les immeubles à rendement",
-              "Lista di controllo per immobili a reddito",
-              "Checklist for investment properties",
-            ]}
-          />
-        )}
+
+{/* ===== MORTGAGE CHECKLIST FOR A RETURN PROPERTY ===== */}
+{(activeCategory === "All" ||
+  activeCategory === "Mortgage checklist for a return property") && (
+  <Section
+    title="Hypotheken Checkliste für ein Renditeobjekt"
+    docs={[
+      { label: "Checkliste für Renditeobjekte", file: "/documents/d7.pdf" },
+      { label: "Liste de contrôle pour les immeubles à rendement", file: "/documents/d8.pdf" }, 
+      { label: "Lista di controllo per immobili a reddito", file: "/documents/d9.pdf" },
+      { label: "Checklist for investment properties", file: "/documents/d10.pdf" },
+    ]}
+  />
+)}
+
 
         {/* ===== HYPOTEQ INFORMATION MATERIAL ===== */}
         {(activeCategory === "All" ||
           activeCategory === "HYPOTEQ information material") && (
           <Section
             title="HYPOTEQ Informationsmaterial"
-            docs={[
-              'Flyer "Einfach und schnell zur günstigen Hypothek"',
-              'Broschüre "Die perfekte Finanzierung Ihres Eigenheims"',
-            ]}
+    docs={[
+  { label: 'Flyer "Einfach und schnell zur günstigen Hypothek"', file: "/documents/d11.pdf" },
+  { label: 'Broschüre "Die perfekte Finanzierung Ihres Eigenheims"', file: "/documents/d12.pdf" },
+]}
+
           />
         )}
       </div>
