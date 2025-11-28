@@ -23,7 +23,7 @@ export default function Footer() {
         {/* TITLE + INPUT */}
         <div className="flex items-end gap-[173px]">
           <h2 className="text-[40px] font-[400] leading-[110%] tracking-[-0.4px]">
-             Zuerst vergleichen -<br />
+             Zuerst vergleichen.<br />
             Dann entscheiden.
           </h2>
 

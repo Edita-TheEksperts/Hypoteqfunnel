@@ -123,7 +123,8 @@ const steps = [
   {
     step: "Schritt 1",
     title: "Angaben eingeben",
-    text: "Erfasse die wichtigsten Informationen zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Schon nach diesem Schritt siehst du, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen – schnell, einfach und unverbindlich.",
+    text: 
+    "Gib die wichtigsten Angaben zu deiner Immobilie, deinem Einkommen und deinen Eigenmitteln ein. Danach siehst du sofort, ob Tragbarkeit und Eigenmittel für eine Finanzierung ausreichen. Schnell einfach und unverbindlich. ",
     image: "/images/Epara.png",
   },
   {
@@ -135,7 +136,7 @@ const steps = [
   {
     step: "Schritt 3",
     title: "Angebot erhalten & entscheiden",
-    text: "Innerhalb von 48 Stunden nach Eingang aller Dokumente erhältst du deine persönliche Offerte. Mit einem Klick kannst du das gewünschte Angebot annehmen.",
+    text: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine persönlichen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt. Mit einem Klick kannst du das gewünschte Angebot annehmen oder ablehnen.",
     image: "/images/Epara.png", // vendose fotografin e duhur
   },
 ];
