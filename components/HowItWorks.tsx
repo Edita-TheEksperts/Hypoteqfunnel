@@ -131,16 +131,20 @@ const steps = [
     step: "Schritt 2",
     title: "Dokumente einreichen",
     text: "Lade die benötigten Unterlagen hoch (z. B. Lohnausweis, Steuererklärung, Grundbuchauszug). Sobald alles vollständig ist, starten wir den Prozess und holen die besten Bankenangebote für dich ein.",
-    image: "/images/Epara.png", // vendose fotografin e duhur
+    image: "/images/documents.png", // vendose fotografin e duhur
   },
   {
     step: "Schritt 3",
     title: "Angebot erhalten & entscheiden",
     text: "Innerhalb von 48–72 Stunden nach Eingang aller Dokumente erhältst du deine persönlichen Offerten – transparent, vergleichbar und persönlich auf dein Profil abgestimmt. Mit einem Klick kannst du das gewünschte Angebot annehmen oder ablehnen.",
-    image: "/images/Epara.png", // vendose fotografin e duhur
+    image: "/images/486373494.png", // vendose fotografin e duhur
   },
-];
-
+      {
+      title: "Gratulation – Deine Hypothek ist bereit",
+      text: " Nach deiner Auswahl übernehmen wir den Rest: Wir koordinieren die nächsten Schritte mit der Bank und begleiten dich bis zum Abschluss.",
+      highlightBox: true,
+    },
+  ];
 
 
   return (
